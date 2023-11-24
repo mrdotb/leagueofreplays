@@ -1,5 +1,9 @@
 import Config
 
+# Ash config
+config :lor,
+  ash_apis: []
+
 # Configure your database
 config :lor, Lor.Repo,
   username: "postgres",

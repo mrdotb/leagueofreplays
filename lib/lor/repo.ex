@@ -1,5 +1,8 @@
 defmodule Lor.Repo do
-  use Ecto.Repo,
-    otp_app: :lor,
-    adapter: Ecto.Adapters.Postgres
+  use AshPostgres.Repo, otp_app: :lor
+
+  # Installs Postgres extensions that ash commonly uses
+  def installed_extensions do
+    ["uuid-ossp", "citext"]
+  end
 end
