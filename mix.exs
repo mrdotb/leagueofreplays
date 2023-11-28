@@ -19,7 +19,7 @@ defmodule Lor.MixProject do
   def application do
     [
       mod: {Lor.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :observer, :wx]
     ]
   end
 
@@ -35,11 +35,13 @@ defmodule Lor.MixProject do
       {:ash, "~> 2.17"},
       {:ash_phoenix, "~> 1.2"},
       {:ash_postgres, "~> 1.3"},
+      {:aws, "~> 0.13.0"},
       {:dns_cluster, "~> 0.1.1"},
       {:ecto_sql, "~> 3.10"},
       {:finch, "~> 0.13"},
       {:floki, ">= 0.30.0"},
       {:gettext, "~> 0.20"},
+      {:hackney, "~> 1.18"},
       {:jason, "~> 1.2"},
       {:phoenix, "~> 1.7.10"},
       {:phoenix_ecto, "~> 4.4"},
@@ -47,9 +49,11 @@ defmodule Lor.MixProject do
       {:phoenix_live_view, "~> 0.20.1"},
       {:plug_cowboy, "~> 2.5"},
       {:postgrex, ">= 0.0.0"},
+      {:reactor, "~> 0.4.1"},
       {:swoosh, "~> 1.3"},
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 1.0"},
+      {:tesla, "~> 1.8"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:phoenix_live_dashboard, "~> 0.8.2"},
       {:esbuild, "~> 0.8", runtime: Mix.env() == :dev},
