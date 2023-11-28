@@ -1,5 +1,9 @@
 import Config
 
+# Ash
+config :ash, :disable_async?, true
+config :ash, :missed_notifications, :ignore
+
 # Configure your database
 #
 # The MIX_TEST_PARTITION environment variable can be used

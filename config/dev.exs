@@ -1,9 +1,5 @@
 import Config
 
-# Ash config
-config :lor,
-  ash_apis: []
-
 # Configure your database
 config :lor, Lor.Repo,
   username: "postgres",
@@ -84,3 +80,7 @@ config :phoenix_live_view, :debug_heex_annotations, true
 
 # Disable swoosh api client as it is only required for production adapters.
 config :swoosh, :api_client, false
+
+if File.exists?(Path.expand("dev.local.exs", __DIR__)) do
+  import_config "dev.local.exs"
+end
