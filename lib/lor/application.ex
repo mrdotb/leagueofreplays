@@ -12,8 +12,9 @@ defmodule Lor.Application do
       Lor.Repo,
       {DNSCluster, query: Application.get_env(:lor, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: Lor.PubSub},
-      # Start the Finch HTTP client for sending emails
+      # Start the Finch HTTP client
       {Finch, name: Lor.Finch},
+      Lor.Lol.RestClients,
       # Start a worker by calling: Lor.Worker.start_link(arg)
       # {Lor.Worker, arg},
       # Start to serve requests, typically the last entry
