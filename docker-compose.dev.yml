@@ -18,7 +18,7 @@ services:
       - "9000:9000"
       - "9090:9090"
     volumes:
-      - minio_storage:/data
+      - s3_lor:/data
     environment:
       MINIO_ROOT_USER: root
       MINIO_ROOT_PASSWORD: toortoor
@@ -29,4 +29,4 @@ services:
 volumes:
   db_lor:
     driver: local
-  minio_storage: {}
+  s3_lor: {}
