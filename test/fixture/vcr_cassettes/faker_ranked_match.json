@@ -1,0 +1,716 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "X-Riot-Token": "***"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "https://asia.api.riotgames.com/lol/match/v5/matches/KR_6821747606"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"metadata\":{\"dataVersion\":\"2\",\"matchId\":\"KR_6821747606\",\"participants\":[\"hvpWpBln-tjhGxKS5PYjpXkg1jXjrGiL8mlb1OFFri97w81yimUBJ3mvZBOg8Sa1TdWtie3D57Nu-A\",\"yn74SdbComHDaatgPGOO9jHUVhQV1HpjVIugJY6WzpocV8L4SD6WGBcj8q8I_a4f5I39Z4UB4b8b3A\",\"NNxw8e9ckZtqiBQuLairWLpiPYhqtzlcv7gtrS0leRDDtq4YhXR36i61l3FJwE53May4DCldXrq3YA\",\"Xig5rQ8ODD1ani6JUrWbuHoXezEx6nv9c42AmaUuhjvLcJl1nSQHGDRhom7In6omL8i9NQUGI8dAcA\",\"mBq93Q8iAeaHnPaYwYef1oAZd3qckehwyZ87E9sW4d74eQDW94xkKbtgkaUlqf2qoGP59oqngAxhdg\",\"dxE1zp2WMia0O8t68wqqi0N_Bli7vSF1mzeeOt_V_2jGR8ekpMfbaOycg3FQL1km_PVCXMwq7T7d8Q\",\"rZUJ8lDHsWoJKIJ8iVwYzMhtihquSwKfYEak1isL7VlJzHfN9VsGvnTKSe4tKCQTjZ3h0me5mi5LAg\",\"fXnqmVygh1QRoqabrnWqLt4wK48J4CYi9SV5xYP03m2S8_qLjrS8IJkBh8R-bDs384lPsj_nDyk_wQ\",\"chEXyW-b9kgkRYA90y-gXBlaetGrIfzrtqwi7wJkS3-Ep4uRu56xydQmWGyogwEkZKuIZZ8OukJW1w\",\"NYU30XhltfGhBdyPgrw3IrpO-qQ7zsRU23nC2p8BzbFsA4FFmdhk_mGUlVLlVmsDkXc5g6m3hgiKdg\"]},\"info\":{\"gameCreation\":1701189790865,\"gameDuration\":1386,\"gameEndTimestamp\":1701191191032,\"gameId\":6821747606,\"gameMode\":\"CLASSIC\",\"gameName\":\"teambuilder-match-6821747606\",\"gameStartTimestamp\":1701189804789,\"gameType\":\"MATCHED_GAME\",\"gameVersion\":\"13.23.544.5515\",\"mapId\":11,\"participants\":[{\"allInPings\":0,\"assistMePings\":3,\"assists\":1,\"baitPings\":0,\"baronKills\":0,\"basicPings\":0,\"bountyLevel\":0,\"challenges\":{\"12AssistStreakCount\":0,\"abilityUses\":145,\"acesBefore15Minutes\":0,\"alliedJungleMonsterKills\":2,\"baronTakedowns\":0,\"blastConeOppositeOpponentCount\":0,\"bountyGold\":0,\"buffsStolen\":0,\"completeSupportQuestInTime\":0,\"controlWardsPlaced\":1,\"damagePerMinute\":310.51167122979786,\"damageTakenOnTeamPercentage\":0.27334262906286244,\"dancedWithRiftHerald\":0,\"deathsByEnemyChamps\":3,\"dodgeSkillShotsSmallWindow\":4,\"doubleAces\":0,\"dragonTakedowns\":0,\"earlyLaningPhaseGoldExpAdvantage\":0,\"effectiveHealAndShielding\":0,\"elderDragonKillsWithOpposingSoul\":0,\"elderDragonMultikills\":0,\"enemyChampionImmobilizations\":9,\"enemyJungleMonsterKills\":0,\"epicMonsterKillsNearEnemyJungler\":0,\"epicMonsterKillsWithin30SecondsOfSpawn\":0,\"epicMonsterSteals\":0,\"epicMonsterStolenWithoutSmite\":0,\"firstTurretKilled\":0,\"flawlessAces\":0,\"fullTeamTakedown\":0,\"gameLength\":1386.4208446999999,\"getTakedownsInAllLanesEarlyJungleAsLaner\":0,\"goldPerMinute\":296.1053016977912,\"hadOpenNexus\":0,\"immobilizeAndKillWithAlly\":1,\"initialBuffCount\":0,\"initialCrabCount\":0,\"jungleCsBefore10Minutes\":0,\"junglerTakedownsNearDamagedEpicMonster\":0,\"kTurretsDestroyedBeforePlatesFall\":0,\"kda\":0.3333333333333333,\"killAfterHiddenWithAlly\":0,\"killParticipation\":0.2,\"killedChampTookFullTeamDamageSurvived\":0,\"killingSprees\":0,\"killsNearEnemyTurret\":0,\"killsOnOtherLanesEarlyJungleAsLaner\":0,\"killsOnRecentlyHealedByAramPack\":0,\"killsUnderOwnTurret\":0,\"killsWithHelpFromEpicMonster\":0,\"knockEnemyIntoTeamAndKill\":0,\"landSkillShotsEarlyGame\":0,\"laneMinionsFirst10Minutes\":72,\"laningPhaseGoldExpAdvantage\":0,\"legendaryCount\":0,\"lostAnInhibitor\":0,\"maxCsAdvantageOnLaneOpponent\":0,\"maxKillDeficit\":0,\"maxLevelLeadLaneOpponent\":0,\"mejaisFullStackInTime\":0,\"moreEnemyJungleThanOpponent\":0,\"multiKillOneSpell\":0,\"multiTurretRiftHeraldCount\":0,\"multikills\":0,\"multikillsAfterAggressiveFlash\":0,\"mythicItemUsed\":6632,\"outerTurretExecutesBefore10Minutes\":0,\"outnumberedKills\":0,\"outnumberedNexusKill\":0,\"perfectDragonSoulsTaken\":0,\"perfectGame\":0,\"pickKillWithAlly\":1,\"playedChampSelectPosition\":1,\"poroExplosions\":0,\"quickCleanse\":0,\"quickFirstTurret\":0,\"quickSoloKills\":0,\"riftHeraldTakedowns\":0,\"saveAllyFromDeath\":0,\"scuttleCrabKills\":0,\"skillshotsDodged\":29,\"skillshotsHit\":0,\"snowballsHit\":0,\"soloBaronKills\":0,\"soloKills\":0,\"stealthWardsPlaced\":2,\"survivedSingleDigitHpCount\":1,\"survivedThreeImmobilizesInFight\":4,\"takedownOnFirstTurret\":0,\"takedowns\":1,\"takedownsAfterGainingLevelAdvantage\":0,\"takedownsBeforeJungleMinionSpawn\":0,\"takedownsFirstXMinutes\":0,\"takedownsInAlcove\":0,\"takedownsInEnemyFountain\":0,\"teamBaronKills\":0,\"teamDamagePercentage\":0.2051880646285931,\"teamElderDragonKills\":0,\"teamRiftHeraldKills\":0,\"tookLargeDamageSurvived\":0,\"turretPlatesTaken\":0,\"turretTakedowns\":0,\"turretsTakenWithRiftHerald\":0,\"twentyMinionsIn3SecondsCount\":0,\"twoWardsOneSweeperCount\":0,\"unseenRecalls\":0,\"visionScoreAdvantageLaneOpponent\":-0.6944700479507446,\"visionScorePerMinute\":0.256016659020779,\"wardTakedowns\":2,\"wardTakedownsBefore20M\":2,\"wardsGuarded\":0},\"champExperience\":10109,\"champLevel\":13,\"championId\":24,\"championName\":\"Jax\",\"championTransform\":0,\"commandPings\":8,\"consumablesPurchased\":3,\"damageDealtToBuildings\":0,\"damageDealtToObjectives\":1130,\"damageDealtToTurrets\":0,\"damageSelfMitigated\":14428,\"dangerPings\":0,\"deaths\":3,\"detectorWardsPlaced\":1,\"doubleKills\":0,\"dragonKills\":0,\"eligibleForProgression\":true,\"enemyMissingPings\":5,\"enemyVisionPings\":3,\"firstBloodAssist\":false,\"firstBloodKill\":false,\"firstTowerAssist\":false,\"firstTowerKill\":false,\"gameEndedInEarlySurrender\":false,\"gameEndedInSurrender\":false,\"getBackPings\":0,\"goldEarned\":6842,\"goldSpent\":6675,\"holdPings\":0,\"individualPosition\":\"TOP\",\"inhibitorKills\":0,\"inhibitorTakedowns\":0,\"inhibitorsLost\":2,\"item0\":6632,\"item1\":3067,\"item2\":0,\"item3\":1036,\"item4\":1036,\"item5\":3047,\"item6\":3340,\"itemsPurchased\":17,\"killingSprees\":0,\"kills\":0,\"lane\":\"TOP\",\"largestCriticalStrike\":0,\"largestKillingSpree\":0,\"largestMultiKill\":0,\"longestTimeSpentLiving\":543,\"magicDamageDealt\":21414,\"magicDamageDealtToChampions\":3812,\"magicDamageTaken\":6989,\"missions\":{\"playerScore0\":0,\"playerScore1\":0,\"playerScore10\":0,\"playerScore11\":0,\"playerScore2\":0,\"playerScore3\":0,\"playerScore4\":0,\"playerScore5\":0,\"playerScore6\":0,\"playerScore7\":0,\"playerScore8\":0,\"playerScore9\":0},\"needVisionPings\":0,\"neutralMinionsKilled\":4,\"nexusKills\":0,\"nexusLost\":1,\"nexusTakedowns\":0,\"objectivesStolen\":0,\"objectivesStolenAssists\":0,\"onMyWayPings\":13,\"participantId\":1,\"pentaKills\":0,\"perks\":{\"statPerks\":{\"defense\":5002,\"flex\":5008,\"offense\":5005},\"styles\":[{\"description\":\"primaryStyle\",\"selections\":[{\"perk\":8437,\"var1\":544,\"var2\":328,\"var3\":0},{\"perk\":8446,\"var1\":0,\"var2\":0,\"var3\":0},{\"perk\":8444,\"var1\":1288,\"var2\":0,\"var3\":0},{\"perk\":8242,\"var1\":106,\"var2\":0,\"var3\":0}],\"style\":8400},{\"description\":\"subStyle\",\"selections\":[{\"perk\":8345,\"var1\":3,\"var2\":0,\"var3\":0},{\"perk\":8347,\"var1\":0,\"var2\":0,\"var3\":0}],\"style\":8300}]},\"physicalDamageDealt\":56613,\"physicalDamageDealtToChampions\":3362,\"physicalDamageTaken\":13941,\"placement\":0,\"playerAugment1\":0,\"playerAugment2\":0,\"playerAugment3\":0,\"playerAugment4\":0,\"playerScore0\":0,\"playerScore1\":0,\"playerScore10\":0,\"playerScore11\":0,\"playerScore2\":0,\"playerScore3\":0,\"playerScore4\":0,\"playerScore5\":0,\"playerScore6\":0,\"playerScore7\":0,\"playerScore8\":0,\"playerScore9\":0,\"playerSubteamId\":0,\"profileIcon\":5990,\"pushPings\":0,\"puuid\":\"hvpWpBln-tjhGxKS5PYjpXkg1jXjrGiL8mlb1OFFri97w81yimUBJ3mvZBOg8Sa1TdWtie3D57Nu-A\",\"quadraKills\":0,\"riotIdGameName\":\"Ego Battle\",\"riotIdTagline\":\"KR1\",\"role\":\"SOLO\",\"sightWardsBoughtInGame\":0,\"spell1Casts\":26,\"spell2Casts\":80,\"spell3Casts\":34,\"spell4Casts\":5,\"subteamPlacement\":0,\"summoner1Casts\":3,\"summoner1Id\":4,\"summoner2Casts\":3,\"summoner2Id\":12,\"summonerId\":\"L0U00Di1pYVSV2ZtxlD5w2jkzFlXeYu7PsLmr7vZT92E3Q0\",\"summonerLevel\":905,\"summonerName\":\"Ego Battle\",\"teamEarlySurrendered\":false,\"teamId\":100,\"teamPosition\":\"TOP\",\"timeCCingOthers\":8,\"timePlayed\":1386,\"totalAllyJungleMinionsKilled\":2,\"totalDamageDealt\":78027,\"totalDamageDealtToChampions\":7174,\"totalDamageShieldedOnTeammates\":0,\"totalDamageTaken\":21452,\"totalEnemyJungleMinionsKilled\":0,\"totalHeal\":2985,\"totalHealsOnTeammates\":0,\"totalMinionsKilled\":167,\"totalTimeCCDealt\":52,\"totalTimeSpentDead\":86,\"totalUnitsHealed\":1,\"tripleKills\":0,\"trueDamageDealt\":0,\"trueDamageDealtToChampions\":0,\"trueDamageTaken\":521,\"turretKills\":0,\"turretTakedowns\":0,\"turretsLost\":10,\"unrealKills\":0,\"visionClearedPings\":0,\"visionScore\":5,\"visionWardsBoughtInGame\":1,\"wardsKilled\":2,\"wardsPlaced\":3,\"win\":false},{\"allInPings\":0,\"assistMePings\":0,\"assists\":1,\"baitPings\":0,\"baronKills\":0,\"basicPings\":0,\"bountyLevel\":0,\"challenges\":{\"12AssistStreakCount\":0,\"abilityUses\":119,\"acesBefore15Minutes\":0,\"alliedJungleMonsterKills\":42,\"baronTakedowns\":0,\"blastConeOppositeOpponentCount\":0,\"bountyGold\":150,\"buffsStolen\":1,\"completeSupportQuestInTime\":0,\"controlWardTimeCoverageInRiverOrEnemyHalf\":0.6670184609782792,\"controlWardsPlaced\":3,\"damagePerMinute\":389.06869532495426,\"damageTakenOnTeamPercentage\":0.2817090842810488,\"dancedWithRiftHerald\":0,\"deathsByEnemyChamps\":6,\"dodgeSkillShotsSmallWindow\":0,\"doubleAces\":0,\"dragonTakedowns\":0,\"earlyLaningPhaseGoldExpAdvantage\":1,\"effectiveHealAndShielding\":0,\"elderDragonKillsWithOpposingSoul\":0,\"elderDragonMultikills\":0,\"enemyChampionImmobilizations\":0,\"enemyJungleMonsterKills\":15,\"epicMonsterKillsNearEnemyJungler\":0,\"epicMonsterKillsWithin30SecondsOfSpawn\":0,\"epicMonsterSteals\":0,\"epicMonsterStolenWithoutSmite\":0,\"firstTurretKilled\":0,\"flawlessAces\":0,\"fullTeamTakedown\":0,\"gameLength\":1386.4208446999999,\"goldPerMinute\":310.9817370015773,\"hadOpenNexus\":0,\"highestWardKills\":1,\"immobilizeAndKillWithAlly\":0,\"initialBuffCount\":3,\"initialCrabCount\":2,\"jungleCsBefore10Minutes\":48.00000002980232,\"junglerKillsEarlyJungle\":0,\"junglerTakedownsNearDamagedEpicMonster\":0,\"kTurretsDestroyedBeforePlatesFall\":0,\"kda\":0.5,\"killAfterHiddenWithAlly\":1,\"killParticipation\":0.6,\"killedChampTookFullTeamDamageSurvived\":0,\"killingSprees\":0,\"killsNearEnemyTurret\":1,\"killsOnLanersEarlyJungleAsJungler\":1,\"killsOnRecentlyHealedByAramPack\":0,\"killsUnderOwnTurret\":1,\"killsWithHelpFromEpicMonster\":0,\"knockEnemyIntoTeamAndKill\":0,\"landSkillShotsEarlyGame\":4,\"laneMinionsFirst10Minutes\":1,\"laningPhaseGoldExpAdvantage\":0,\"legendaryCount\":0,\"lostAnInhibitor\":0,\"maxCsAdvantageOnLaneOpponent\":32.400000005960464,\"maxKillDeficit\":0,\"maxLevelLeadLaneOpponent\":1,\"mejaisFullStackInTime\":0,\"moreEnemyJungleThanOpponent\":-30.500000059604645,\"multiKillOneSpell\":0,\"multiTurretRiftHeraldCount\":0,\"multikills\":0,\"multikillsAfterAggressiveFlash\":0,\"mythicItemUsed\":3142,\"outerTurretExecutesBefore10Minutes\":0,\"outnumberedKills\":0,\"outnumberedNexusKill\":0,\"perfectDragonSoulsTaken\":0,\"perfectGame\":0,\"pickKillWithAlly\":2,\"playedChampSelectPosition\":1,\"poroExplosions\":0,\"quickCleanse\":0,\"quickFirstTurret\":0,\"quickSoloKills\":0,\"riftHeraldTakedowns\":0,\"saveAllyFromDeath\":0,\"scuttleCrabKills\":3,\"skillshotsDodged\":13,\"skillshotsHit\":22,\"snowballsHit\":0,\"soloBaronKills\":0,\"soloKills\":1,\"stealthWardsPlaced\":2,\"survivedSingleDigitHpCount\":0,\"survivedThreeImmobilizesInFight\":0,\"takedownOnFirstTurret\":0,\"takedowns\":3,\"takedownsAfterGainingLevelAdvantage\":0,\"takedownsBeforeJungleMinionSpawn\":0,\"takedownsFirstXMinutes\":2,\"takedownsInAlcove\":0,\"takedownsInEnemyFountain\":0,\"teamBaronKills\":0,\"teamDamagePercentage\":0.25709904006222783,\"teamElderDragonKills\":0,\"teamRiftHeraldKills\":0,\"tookLargeDamageSurvived\":0,\"turretPlatesTaken\":0,\"turretTakedowns\":0,\"turretsTakenWithRiftHerald\":0,\"twentyMinionsIn3SecondsCount\":0,\"twoWardsOneSweeperCount\":0,\"unseenRecalls\":0,\"visionScoreAdvantageLaneOpponent\":0.32811665534973145,\"visionScorePerMinute\":1.0143355898210866,\"wardTakedowns\":7,\"wardTakedownsBefore20M\":7,\"wardsGuarded\":1},\"champExperience\":7631,\"champLevel\":11,\"championId\":104,\"championName\":\"Graves\",\"championTransform\":0,\"commandPings\":5,\"consumablesPurchased\":4,\"damageDealtToBuildings\":0,\"damageDealtToObjectives\":11133,\"damageDealtToTurrets\":0,\"damageSelfMitigated\":12263,\"dangerPings\":0,\"deaths\":6,\"detectorWardsPlaced\":3,\"doubleKills\":0,\"dragonKills\":0,\"eligibleForProgression\":true,\"enemyMissingPings\":2,\"enemyVisionPings\":2,\"firstBloodAssist\":true,\"firstBloodKill\":false,\"firstTowerAssist\":false,\"firstTowerKill\":false,\"gameEndedInEarlySurrender\":false,\"gameEndedInSurrender\":false,\"getBackPings\":2,\"goldEarned\":7185,\"goldSpent\":6425,\"holdPings\":0,\"individualPosition\":\"JUNGLE\",\"inhibitorKills\":0,\"inhibitorTakedowns\":0,\"inhibitorsLost\":2,\"item0\":3142,\"item1\":3133,\"item2\":3067,\"item3\":2422,\"item4\":1036,\"item5\":1036,\"item6\":3364,\"itemsPurchased\":16,\"killingSprees\":0,\"kills\":2,\"lane\":\"JUNGLE\",\"largestCriticalStrike\":0,\"largestKillingSpree\":0,\"largestMultiKill\":1,\"longestTimeSpentLiving\":558,\"magicDamageDealt\":1320,\"magicDamageDealtToChampions\":312,\"magicDamageTaken\":7547,\"missions\":{\"playerScore0\":0,\"playerScore1\":0,\"playerScore10\":0,\"playerScore11\":0,\"playerScore2\":0,\"playerScore3\":0,\"playerScore4\":0,\"playerScore5\":0,\"playerScore6\":0,\"playerScore7\":0,\"playerScore8\":0,\"playerScore9\":0},\"needVisionPings\":0,\"neutralMinionsKilled\":118,\"nexusKills\":0,\"nexusLost\":1,\"nexusTakedowns\":0,\"objectivesStolen\":0,\"objectivesStolenAssists\":0,\"onMyWayPings\":4,\"participantId\":2,\"pentaKills\":0,\"perks\":{\"statPerks\":{\"defense\":5003,\"flex\":5008,\"offense\":5005},\"styles\":[{\"description\":\"primaryStyle\",\"selections\":[{\"perk\":8021,\"var1\":2425,\"var2\":1747,\"var3\":0},{\"perk\":9111,\"var1\":148,\"var2\":60,\"var3\":0},{\"perk\":9104,\"var1\":16,\"var2\":0,\"var3\":0},{\"perk\":8014,\"var1\":174,\"var2\":0,\"var3\":0}],\"style\":8000},{\"description\":\"subStyle\",\"selections\":[{\"perk\":8304,\"var1\":10,\"var2\":3,\"var3\":0},{\"perk\":8347,\"var1\":0,\"var2\":0,\"var3\":0}],\"style\":8300}]},\"physicalDamageDealt\":111106,\"physicalDamageDealtToChampions\":7870,\"physicalDamageTaken\":13362,\"placement\":0,\"playerAugment1\":0,\"playerAugment2\":0,\"playerAugment3\":0,\"playerAugment4\":0,\"playerScore0\":0,\"playerScore1\":0,\"playerScore10\":0,\"playerScore11\":0,\"playerScore2\":0,\"playerScore3\":0,\"playerScore4\":0,\"playerScore5\":0,\"playerScore6\":0,\"playerScore7\":0,\"playerScore8\":0,\"playerScore9\":0,\"playerSubteamId\":0,\"profileIcon\":5494,\"pushPings\":0,\"puuid\":\"yn74SdbComHDaatgPGOO9jHUVhQV1HpjVIugJY6WzpocV8L4SD6WGBcj8q8I_a4f5I39Z4UB4b8b3A\",\"quadraKills\":0,\"riotIdGameName\":\"Pungyeon\",\"riotIdTagline\":\"0622\",\"role\":\"NONE\",\"sightWardsBoughtInGame\":0,\"spell1Casts\":66,\"spell2Casts\":13,\"spell3Casts\":34,\"spell4Casts\":6,\"subteamPlacement\":0,\"summoner1Casts\":16,\"summoner1Id\":11,\"summoner2Casts\":3,\"summoner2Id\":4,\"summonerId\":\"lyhxo5MPDttwI1LZsh7Ty28A4hTInFojXAgbUonux42OIR6ruBQ_8qyJQw\",\"summonerLevel\":379,\"summonerName\":\"Pungyeonn\",\"teamEarlySurrendered\":false,\"teamId\":100,\"teamPosition\":\"JUNGLE\",\"timeCCingOthers\":11,\"timePlayed\":1386,\"totalAllyJungleMinionsKilled\":85,\"totalDamageDealt\":136611,\"totalDamageDealtToChampions\":8990,\"totalDamageShieldedOnTeammates\":0,\"totalDamageTaken\":22108,\"totalEnemyJungleMinionsKilled\":14,\"totalHeal\":8802,\"totalHealsOnTeammates\":0,\"totalMinionsKilled\":15,\"totalTimeCCDealt\":443,\"totalTimeSpentDead\":137,\"totalUnitsHealed\":1,\"tripleKills\":0,\"trueDamageDealt\":24185,\"trueDamageDealtToChampions\":806,\"trueDamageTaken\":1198,\"turretKills\":0,\"turretTakedowns\":0,\"turretsLost\":10,\"unrealKills\":0,\"visionClearedPings\":0,\"visionScore\":23,\"visionWardsBoughtInGame\":3,\"wardsKilled\":7,\"wardsPlaced\":5,\"win\":false},{\"allInPings\":0,\"assistMePings\":0,\"assists\":2,\"baitPings\":0,\"baronKills\":0,\"basicPings\":0,\"bountyLevel\":1,\"challenges\":{\"12AssistStreakCount\":0,\"abilityUses\":276,\"acesBefore15Minutes\":0,\"alliedJungleMonsterKills\":0,\"baronTakedowns\":0,\"blastConeOppositeOpponentCount\":0,\"bountyGold\":0,\"buffsStolen\":0,\"completeSupportQuestInTime\":0,\"controlWardsPlaced\":1,\"damagePerMinute\":343.29451670290877,\"damageTakenOnTeamPercentage\":0.15650394212397964,\"dancedWithRiftHerald\":0,\"deathsByEnemyChamps\":3,\"dodgeSkillShotsSmallWindow\":0,\"doubleAces\":0,\"dragonTakedowns\":0,\"earlyLaningPhaseGoldExpAdvantage\":0,\"effectiveHealAndShielding\":0,\"elderDragonKillsWithOpposingSoul\":0,\"elderDragonMultikills\":0,\"enemyChampionImmobilizations\":17,\"enemyJungleMonsterKills\":0,\"epicMonsterKillsNearEnemyJungler\":0,\"epicMonsterKillsWithin30SecondsOfSpawn\":0,\"epicMonsterSteals\":0,\"epicMonsterStolenWithoutSmite\":0,\"firstTurretKilled\":0,\"flawlessAces\":0,\"fullTeamTakedown\":0,\"gameLength\":1386.4208446999999,\"getTakedownsInAllLanesEarlyJungleAsLaner\":0,\"goldPerMinute\":331.8087675581779,\"hadOpenNexus\":0,\"immobilizeAndKillWithAlly\":2,\"initialBuffCount\":0,\"initialCrabCount\":0,\"jungleCsBefore10Minutes\":0,\"junglerTakedownsNearDamagedEpicMonster\":0,\"kTurretsDestroyedBeforePlatesFall\":0,\"kda\":1,\"killAfterHiddenWithAlly\":0,\"killParticipation\":0.6,\"killedChampTookFullTeamDamageSurvived\":0,\"killingSprees\":0,\"killsNearEnemyTurret\":0,\"killsOnOtherLanesEarlyJungleAsLaner\":0,\"killsOnRecentlyHealedByAramPack\":0,\"killsUnderOwnTurret\":0,\"killsWithHelpFromEpicMonster\":0,\"knockEnemyIntoTeamAndKill\":0,\"landSkillShotsEarlyGame\":6,\"laneMinionsFirst10Minutes\":63,\"laningPhaseGoldExpAdvantage\":0,\"legendaryCount\":0,\"lostAnInhibitor\":0,\"maxCsAdvantageOnLaneOpponent\":2,\"maxKillDeficit\":0,\"maxLevelLeadLaneOpponent\":0,\"mejaisFullStackInTime\":0,\"moreEnemyJungleThanOpponent\":0,\"multiKillOneSpell\":0,\"multiTurretRiftHeraldCount\":0,\"multikills\":0,\"multikillsAfterAggressiveFlash\":0,\"mythicItemUsed\":6656,\"outerTurretExecutesBefore10Minutes\":0,\"outnumberedKills\":0,\"outnumberedNexusKill\":0,\"perfectDragonSoulsTaken\":0,\"perfectGame\":0,\"pickKillWithAlly\":3,\"playedChampSelectPosition\":1,\"poroExplosions\":0,\"quickCleanse\":0,\"quickFirstTurret\":0,\"quickSoloKills\":0,\"riftHeraldTakedowns\":0,\"saveAllyFromDeath\":0,\"scuttleCrabKills\":0,\"skillshotsDodged\":13,\"skillshotsHit\":24,\"snowballsHit\":0,\"soloBaronKills\":0,\"soloKills\":0,\"stealthWardsPlaced\":7,\"survivedSingleDigitHpCount\":1,\"survivedThreeImmobilizesInFight\":2,\"takedownOnFirstTurret\":0,\"takedowns\":3,\"takedownsAfterGainingLevelAdvantage\":0,\"takedownsBeforeJungleMinionSpawn\":0,\"takedownsFirstXMinutes\":2,\"takedownsInAlcove\":0,\"takedownsInEnemyFountain\":0,\"teamBaronKills\":0,\"teamDamagePercentage\":0.22685117503279986,\"teamElderDragonKills\":0,\"teamRiftHeraldKills\":0,\"tookLargeDamageSurvived\":0,\"turretPlatesTaken\":0,\"turretTakedowns\":0,\"turretsTakenWithRiftHerald\":0,\"twentyMinionsIn3SecondsCount\":0,\"twoWardsOneSweeperCount\":0,\"unseenRecalls\":0,\"visionScoreAdvantageLaneOpponent\":-0.1570565104484558,\"visionScorePerMinute\":0.6926080782226346,\"wardTakedowns\":2,\"wardTakedownsBefore20M\":2,\"wardsGuarded\":0},\"champExperience\":10445,\"champLevel\":13,\"championId\":4,\"championName\":\"TwistedFate\",\"championTransform\":0,\"commandPings\":1,\"consumablesPurchased\":5,\"damageDealtToBuildings\":0,\"damageDealtToObjectives\":8849,\"damageDealtToTurrets\":0,\"damageSelfMitigated\":5656,\"dangerPings\":0,\"deaths\":3,\"detectorWardsPlaced\":1,\"doubleKills\":0,\"dragonKills\":0,\"eligibleForProgression\":true,\"enemyMissingPings\":1,\"enemyVisionPings\":0,\"firstBloodAssist\":true,\"firstBloodKill\":false,\"firstTowerAssist\":false,\"firstTowerKill\":false,\"gameEndedInEarlySurrender\":false,\"gameEndedInSurrender\":false,\"getBackPings\":2,\"goldEarned\":7667,\"goldSpent\":7500,\"holdPings\":0,\"individualPosition\":\"MIDDLE\",\"inhibitorKills\":0,\"inhibitorTakedowns\":0,\"inhibitorsLost\":2,\"item0\":3100,\"item1\":6656,\"item2\":3009,\"item3\":0,\"item4\":0,\"item5\":0,\"item6\":3340,\"itemsPurchased\":21,\"killingSprees\":0,\"kills\":1,\"lane\":\"MIDDLE\",\"largestCriticalStrike\":0,\"largestKillingSpree\":0,\"largestMultiKill\":1,\"longestTimeSpentLiving\":472,\"magicDamageDealt\":80924,\"magicDamageDealtToChampions\":6647,\"magicDamageTaken\":2525,\"missions\":{\"playerScore0\":0,\"playerScore1\":0,\"playerScore10\":0,\"playerScore11\":0,\"playerScore2\":0,\"playerScore3\":0,\"playerScore4\":0,\"playerScore5\":0,\"playerScore6\":0,\"playerScore7\":0,\"playerScore8\":0,\"playerScore9\":0},\"needVisionPings\":0,\"neutralMinionsKilled\":0,\"nexusKills\":0,\"nexusLost\":1,\"nexusTakedowns\":0,\"objectivesStolen\":0,\"objectivesStolenAssists\":0,\"onMyWayPings\":3,\"participantId\":3,\"pentaKills\":0,\"perks\":{\"statPerks\":{\"defense\":5002,\"flex\":5008,\"offense\":5005},\"styles\":[{\"description\":\"primaryStyle\",\"selections\":[{\"perk\":8229,\"var1\":853,\"var2\":0,\"var3\":0},{\"perk\":8226,\"var1\":250,\"var2\":507,\"var3\":0},{\"perk\":8233,\"var1\":14,\"var2\":50,\"var3\":0},{\"perk\":8237,\"var1\":430,\"var2\":0,\"var3\":0}],\"style\":8200},{\"description\":\"subStyle\",\"selections\":[{\"perk\":8316,\"var1\":3461,\"var2\":0,\"var3\":0},{\"perk\":8347,\"var1\":0,\"var2\":0,\"var3\":0}],\"style\":8300}]},\"physicalDamageDealt\":10167,\"physicalDamageDealtToChampions\":823,\"physicalDamageTaken\":8437,\"placement\":0,\"playerAugment1\":0,\"playerAugment2\":0,\"playerAugment3\":0,\"playerAugment4\":0,\"playerScore0\":0,\"playerScore1\":0,\"playerScore10\":0,\"playerScore11\":0,\"playerScore2\":0,\"playerScore3\":0,\"playerScore4\":0,\"playerScore5\":0,\"playerScore6\":0,\"playerScore7\":0,\"playerScore8\":0,\"playerScore9\":0,\"playerSubteamId\":0,\"profileIcon\":6298,\"pushPings\":0,\"puuid\":\"NNxw8e9ckZtqiBQuLairWLpiPYhqtzlcv7gtrS0leRDDtq4YhXR36i61l3FJwE53May4DCldXrq3YA\",\"quadraKills\":0,\"riotIdGameName\":\"Claudia Salas X\",\"riotIdTagline\":\"KR1\",\"role\":\"CARRY\",\"sightWardsBoughtInGame\":0,\"spell1Casts\":88,\"spell2Casts\":150,\"spell3Casts\":32,\"spell4Casts\":6,\"subteamPlacement\":0,\"summoner1Casts\":3,\"summoner1Id\":4,\"summoner2Casts\":4,\"summoner2Id\":14,\"summonerId\":\"Hm8xEY22sq817oDj0d8O0NuWNddzjsedtV5mKbhC9XF6YGZkqAClSWoMdQ\",\"summonerLevel\":115,\"summonerName\":\"Claudia Salas X\",\"teamEarlySurrendered\":false,\"teamId\":100,\"teamPosition\":\"MIDDLE\",\"timeCCingOthers\":19,\"timePlayed\":1386,\"totalAllyJungleMinionsKilled\":0,\"totalDamageDealt\":98999,\"totalDamageDealtToChampions\":7932,\"totalDamageShieldedOnTeammates\":0,\"totalDamageTaken\":12282,\"totalEnemyJungleMinionsKilled\":0,\"totalHeal\":296,\"totalHealsOnTeammates\":0,\"totalMinionsKilled\":164,\"totalTimeCCDealt\":124,\"totalTimeSpentDead\":53,\"totalUnitsHealed\":1,\"tripleKills\":0,\"trueDamageDealt\":7907,\"trueDamageDealtToChampions\":461,\"trueDamageTaken\":1319,\"turretKills\":0,\"turretTakedowns\":0,\"turretsLost\":10,\"unrealKills\":0,\"visionClearedPings\":0,\"visionScore\":16,\"visionWardsBoughtInGame\":3,\"wardsKilled\":1,\"wardsPlaced\":8,\"win\":false},{\"allInPings\":0,\"assistMePings\":2,\"assists\":1,\"baitPings\":0,\"baronKills\":0,\"basicPings\":0,\"bountyLevel\":0,\"challenges\":{\"12AssistStreakCount\":0,\"abilityUses\":88,\"acesBefore15Minutes\":0,\"alliedJungleMonsterKills\":0,\"baronTakedowns\":0,\"blastConeOppositeOpponentCount\":0,\"bountyGold\":0,\"buffsStolen\":0,\"completeSupportQuestInTime\":0,\"controlWardsPlaced\":0,\"damagePerMinute\":369.37183009413826,\"damageTakenOnTeamPercentage\":0.1868880390201636,\"dancedWithRiftHerald\":0,\"deathsByEnemyChamps\":6,\"dodgeSkillShotsSmallWindow\":1,\"doubleAces\":0,\"dragonTakedowns\":0,\"earlyLaningPhaseGoldExpAdvantage\":0,\"effectiveHealAndShielding\":0,\"elderDragonKillsWithOpposingSoul\":0,\"elderDragonMultikills\":0,\"enemyChampionImmobilizations\":0,\"enemyJungleMonsterKills\":0,\"epicMonsterKillsNearEnemyJungler\":0,\"epicMonsterKillsWithin30SecondsOfSpawn\":0,\"epicMonsterSteals\":0,\"epicMonsterStolenWithoutSmite\":0,\"firstTurretKilled\":0,\"flawlessAces\":0,\"fullTeamTakedown\":0,\"gameLength\":1386.4208446999999,\"getTakedownsInAllLanesEarlyJungleAsLaner\":0,\"goldPerMinute\":282.3432677698798,\"hadOpenNexus\":0,\"immobilizeAndKillWithAlly\":0,\"initialBuffCount\":0,\"initialCrabCount\":0,\"jungleCsBefore10Minutes\":0,\"junglerTakedownsNearDamagedEpicMonster\":0,\"kTurretsDestroyedBeforePlatesFall\":0,\"kda\":0.16666666666666666,\"killAfterHiddenWithAlly\":0,\"killParticipation\":0.2,\"killedChampTookFullTeamDamageSurvived\":0,\"killingSprees\":0,\"killsNearEnemyTurret\":0,\"killsOnOtherLanesEarlyJungleAsLaner\":0,\"killsOnRecentlyHealedByAramPack\":0,\"killsUnderOwnTurret\":0,\"killsWithHelpFromEpicMonster\":0,\"knockEnemyIntoTeamAndKill\":0,\"landSkillShotsEarlyGame\":3,\"laneMinionsFirst10Minutes\":51,\"laningPhaseGoldExpAdvantage\":0,\"legendaryCount\":0,\"lostAnInhibitor\":0,\"maxCsAdvantageOnLaneOpponent\":6,\"maxKillDeficit\":0,\"maxLevelLeadLaneOpponent\":1,\"mejaisFullStackInTime\":0,\"moreEnemyJungleThanOpponent\":0,\"multiKillOneSpell\":0,\"multiTurretRiftHeraldCount\":0,\"multikills\":0,\"multikillsAfterAggressiveFlash\":0,\"outerTurretExecutesBefore10Minutes\":0,\"outnumberedKills\":0,\"outnumberedNexusKill\":0,\"perfectDragonSoulsTaken\":0,\"perfectGame\":0,\"pickKillWithAlly\":1,\"playedChampSelectPosition\":1,\"poroExplosions\":0,\"quickCleanse\":0,\"quickFirstTurret\":0,\"quickSoloKills\":0,\"riftHeraldTakedowns\":0,\"saveAllyFromDeath\":0,\"scuttleCrabKills\":0,\"skillshotsDodged\":24,\"skillshotsHit\":7,\"snowballsHit\":0,\"soloBaronKills\":0,\"soloKills\":0,\"stealthWardsPlaced\":3,\"survivedSingleDigitHpCount\":0,\"survivedThreeImmobilizesInFight\":0,\"takedownOnFirstTurret\":0,\"takedowns\":1,\"takedownsAfterGainingLevelAdvantage\":0,\"takedownsBeforeJungleMinionSpawn\":0,\"takedownsFirstXMinutes\":1,\"takedownsInAlcove\":0,\"takedownsInEnemyFountain\":0,\"teamBaronKills\":0,\"teamDamagePercentage\":0.2440832276776094,\"teamElderDragonKills\":0,\"teamRiftHeraldKills\":0,\"tookLargeDamageSurvived\":0,\"turretPlatesTaken\":0,\"turretTakedowns\":0,\"turretsTakenWithRiftHerald\":0,\"twentyMinionsIn3SecondsCount\":0,\"twoWardsOneSweeperCount\":0,\"unseenRecalls\":0,\"visionScoreAdvantageLaneOpponent\":-0.7047520875930786,\"visionScorePerMinute\":0.2710009588810794,\"wardTakedowns\":2,\"wardTakedownsBefore20M\":1,\"wardsGuarded\":0},\"champExperience\":7269,\"champLevel\":10,\"championId\":236,\"championName\":\"Lucian\",\"championTransform\":0,\"commandPings\":12,\"consumablesPurchased\":1,\"damageDealtToBuildings\":429,\"damageDealtToObjectives\":429,\"damageDealtToTurrets\":429,\"damageSelfMitigated\":6166,\"dangerPings\":0,\"deaths\":6,\"detectorWardsPlaced\":0,\"doubleKills\":0,\"dragonKills\":0,\"eligibleForProgression\":true,\"enemyMissingPings\":16,\"enemyVisionPings\":0,\"firstBloodAssist\":false,\"firstBloodKill\":false,\"firstTowerAssist\":false,\"firstTowerKill\":false,\"gameEndedInEarlySurrender\":false,\"gameEndedInSurrender\":false,\"getBackPings\":6,\"goldEarned\":6524,\"goldSpent\":6250,\"holdPings\":0,\"individualPosition\":\"BOTTOM\",\"inhibitorKills\":0,\"inhibitorTakedowns\":0,\"inhibitorsLost\":2,\"item0\":1055,\"item1\":3095,\"item2\":1036,\"item3\":1038,\"item4\":3086,\"item5\":2422,\"item6\":3363,\"itemsPurchased\":15,\"killingSprees\":0,\"kills\":0,\"lane\":\"BOTTOM\",\"largestCriticalStrike\":354,\"largestKillingSpree\":0,\"largestMultiKill\":0,\"longestTimeSpentLiving\":374,\"magicDamageDealt\":8458,\"magicDamageDealtToChampions\":2042,\"magicDamageTaken\":6691,\"missions\":{\"playerScore0\":0,\"playerScore1\":0,\"playerScore10\":0,\"playerScore11\":0,\"playerScore2\":0,\"playerScore3\":0,\"playerScore4\":0,\"playerScore5\":0,\"playerScore6\":0,\"playerScore7\":0,\"playerScore8\":0,\"playerScore9\":0},\"needVisionPings\":0,\"neutralMinionsKilled\":0,\"nexusKills\":0,\"nexusLost\":1,\"nexusTakedowns\":0,\"objectivesStolen\":0,\"objectivesStolenAssists\":0,\"onMyWayPings\":6,\"participantId\":4,\"pentaKills\":0,\"perks\":{\"statPerks\":{\"defense\":5002,\"flex\":5008,\"offense\":5005},\"styles\":[{\"description\":\"primaryStyle\",\"selections\":[{\"perk\":8005,\"var1\":624,\"var2\":464,\"var3\":160},{\"perk\":8009,\"var1\":321,\"var2\":0,\"var3\":0},{\"perk\":9104,\"var1\":0,\"var2\":0,\"var3\":0},{\"perk\":8014,\"var1\":140,\"var2\":0,\"var3\":0}],\"style\":8000},{\"description\":\"subStyle\",\"selections\":[{\"perk\":8304,\"var1\":11,\"var2\":1,\"var3\":5},{\"perk\":8345,\"var1\":3,\"var2\":0,\"var3\":0}],\"style\":8300}]},\"physicalDamageDealt\":66690,\"physicalDamageDealtToChampions\":5902,\"physicalDamageTaken\":5678,\"placement\":0,\"playerAugment1\":0,\"playerAugment2\":0,\"playerAugment3\":0,\"playerAugment4\":0,\"playerScore0\":0,\"playerScore1\":0,\"playerScore10\":0,\"playerScore11\":0,\"playerScore2\":0,\"playerScore3\":0,\"playerScore4\":0,\"playerScore5\":0,\"playerScore6\":0,\"playerScore7\":0,\"playerScore8\":0,\"playerScore9\":0,\"playerSubteamId\":0,\"profileIcon\":4568,\"pushPings\":0,\"puuid\":\"Xig5rQ8ODD1ani6JUrWbuHoXezEx6nv9c42AmaUuhjvLcJl1nSQHGDRhom7In6omL8i9NQUGI8dAcA\",\"quadraKills\":0,\"riotIdGameName\":\"슈퍼빅고수\",\"riotIdTagline\":\"KR1\",\"role\":\"SOLO\",\"sightWardsBoughtInGame\":0,\"spell1Casts\":33,\"spell2Casts\":27,\"spell3Casts\":24,\"spell4Casts\":4,\"subteamPlacement\":0,\"summoner1Casts\":4,\"summoner1Id\":14,\"summoner2Casts\":3,\"summoner2Id\":4,\"summonerId\":\"fzkt3fVy0UQWkUfB05OlySX3TrUVIOi31jWeSYHEfb00NXE\",\"summonerLevel\":338,\"summonerName\":\"슈퍼빅고수\",\"teamEarlySurrendered\":false,\"teamId\":100,\"teamPosition\":\"BOTTOM\",\"timeCCingOthers\":0,\"timePlayed\":1386,\"totalAllyJungleMinionsKilled\":0,\"totalDamageDealt\":85190,\"totalDamageDealtToChampions\":8535,\"totalDamageShieldedOnTeammates\":0,\"totalDamageTaken\":14667,\"totalEnemyJungleMinionsKilled\":0,\"totalHeal\":1602,\"totalHealsOnTeammates\":0,\"totalMinionsKilled\":153,\"totalTimeCCDealt\":0,\"totalTimeSpentDead\":88,\"totalUnitsHealed\":1,\"tripleKills\":0,\"trueDamageDealt\":10040,\"trueDamageDealtToChampions\":590,\"trueDamageTaken\":2297,\"turretKills\":0,\"turretTakedowns\":0,\"turretsLost\":10,\"unrealKills\":0,\"visionClearedPings\":0,\"visionScore\":6,\"visionWardsBoughtInGame\":0,\"wardsKilled\":2,\"wardsPlaced\":3,\"win\":false},{\"allInPings\":0,\"assistMePings\":1,\"assists\":2,\"baitPings\":0,\"baronKills\":0,\"basicPings\":0,\"bountyLevel\":2,\"challenges\":{\"12AssistStreakCount\":0,\"abilityUses\":106,\"acesBefore15Minutes\":0,\"alliedJungleMonsterKills\":0,\"baronTakedowns\":0,\"blastConeOppositeOpponentCount\":0,\"bountyGold\":0,\"buffsStolen\":0,\"completeSupportQuestInTime\":0,\"controlWardTimeCoverageInRiverOrEnemyHalf\":0.46043542531858755,\"controlWardsPlaced\":4,\"damagePerMinute\":101.05607934157203,\"damageTakenOnTeamPercentage\":0.10155630551194553,\"dancedWithRiftHerald\":0,\"deathsByEnemyChamps\":0,\"dodgeSkillShotsSmallWindow\":0,\"doubleAces\":0,\"dragonTakedowns\":0,\"earlyLaningPhaseGoldExpAdvantage\":0,\"effectiveHealAndShielding\":5560.35595703125,\"elderDragonKillsWithOpposingSoul\":0,\"elderDragonMultikills\":0,\"enemyChampionImmobilizations\":12,\"enemyJungleMonsterKills\":0,\"epicMonsterKillsNearEnemyJungler\":0,\"epicMonsterKillsWithin30SecondsOfSpawn\":0,\"epicMonsterSteals\":0,\"epicMonsterStolenWithoutSmite\":0,\"firstTurretKilled\":0,\"flawlessAces\":0,\"fullTeamTakedown\":0,\"gameLength\":1386.4208446999999,\"getTakedownsInAllLanesEarlyJungleAsLaner\":0,\"goldPerMinute\":223.3455652728798,\"hadOpenNexus\":0,\"immobilizeAndKillWithAlly\":0,\"initialBuffCount\":0,\"initialCrabCount\":0,\"jungleCsBefore10Minutes\":0,\"junglerTakedownsNearDamagedEpicMonster\":0,\"kTurretsDestroyedBeforePlatesFall\":0,\"kda\":4,\"killAfterHiddenWithAlly\":1,\"killParticipation\":0.8,\"killedChampTookFullTeamDamageSurvived\":0,\"killingSprees\":0,\"killsNearEnemyTurret\":1,\"killsOnOtherLanesEarlyJungleAsLaner\":1,\"killsOnRecentlyHealedByAramPack\":0,\"killsUnderOwnTurret\":1,\"killsWithHelpFromEpicMonster\":0,\"knockEnemyIntoTeamAndKill\":0,\"landSkillShotsEarlyGame\":2,\"laneMinionsFirst10Minutes\":4,\"laningPhaseGoldExpAdvantage\":0,\"legendaryCount\":0,\"lostAnInhibitor\":0,\"maxCsAdvantageOnLaneOpponent\":2,\"maxKillDeficit\":0,\"maxLevelLeadLaneOpponent\":1,\"mejaisFullStackInTime\":0,\"moreEnemyJungleThanOpponent\":0,\"multiKillOneSpell\":0,\"multiTurretRiftHeraldCount\":0,\"multikills\":0,\"multikillsAfterAggressiveFlash\":0,\"mythicItemUsed\":2065,\"outerTurretExecutesBefore10Minutes\":0,\"outnumberedKills\":0,\"outnumberedNexusKill\":0,\"perfectDragonSoulsTaken\":0,\"perfectGame\":0,\"pickKillWithAlly\":4,\"playedChampSelectPosition\":1,\"poroExplosions\":0,\"quickCleanse\":0,\"quickFirstTurret\":0,\"quickSoloKills\":0,\"riftHeraldTakedowns\":0,\"saveAllyFromDeath\":6,\"scuttleCrabKills\":0,\"skillshotsDodged\":17,\"skillshotsHit\":7,\"snowballsHit\":0,\"soloBaronKills\":0,\"soloKills\":0,\"stealthWardsPlaced\":17,\"survivedSingleDigitHpCount\":0,\"survivedThreeImmobilizesInFight\":0,\"takedownOnFirstTurret\":0,\"takedowns\":4,\"takedownsAfterGainingLevelAdvantage\":0,\"takedownsBeforeJungleMinionSpawn\":0,\"takedownsFirstXMinutes\":3,\"takedownsInAlcove\":0,\"takedownsInEnemyFountain\":0,\"teamBaronKills\":0,\"teamDamagePercentage\":0.06677849259876985,\"teamElderDragonKills\":0,\"teamRiftHeraldKills\":0,\"tookLargeDamageSurvived\":0,\"turretPlatesTaken\":0,\"turretTakedowns\":0,\"turretsTakenWithRiftHerald\":0,\"twentyMinionsIn3SecondsCount\":0,\"twoWardsOneSweeperCount\":0,\"unseenRecalls\":0,\"visionScoreAdvantageLaneOpponent\":-0.2828180193901062,\"visionScorePerMinute\":1.8719974469944447,\"wardTakedowns\":3,\"wardTakedownsBefore20M\":3,\"wardsGuarded\":0},\"champExperience\":5515,\"champLevel\":9,\"championId\":902,\"championName\":\"Milio\",\"championTransform\":0,\"commandPings\":18,\"consumablesPurchased\":9,\"damageDealtToBuildings\":0,\"damageDealtToObjectives\":0,\"damageDealtToTurrets\":0,\"damageSelfMitigated\":3807,\"dangerPings\":0,\"deaths\":0,\"detectorWardsPlaced\":4,\"doubleKills\":0,\"dragonKills\":0,\"eligibleForProgression\":true,\"enemyMissingPings\":11,\"enemyVisionPings\":0,\"firstBloodAssist\":false,\"firstBloodKill\":true,\"firstTowerAssist\":false,\"firstTowerKill\":false,\"gameEndedInEarlySurrender\":false,\"gameEndedInSurrender\":false,\"getBackPings\":7,\"goldEarned\":5160,\"goldSpent\":4500,\"holdPings\":0,\"individualPosition\":\"UTILITY\",\"inhibitorKills\":0,\"inhibitorTakedowns\":0,\"inhibitorsLost\":2,\"item0\":2065,\"item1\":2055,\"item2\":3851,\"item3\":1004,\"item4\":0,\"item5\":3158,\"item6\":3364,\"itemsPurchased\":18,\"killingSprees\":1,\"kills\":2,\"lane\":\"MIDDLE\",\"largestCriticalStrike\":0,\"largestKillingSpree\":2,\"largestMultiKill\":1,\"longestTimeSpentLiving\":0,\"magicDamageDealt\":3432,\"magicDamageDealtToChampions\":1441,\"magicDamageTaken\":4871,\"missions\":{\"playerScore0\":0,\"playerScore1\":0,\"playerScore10\":0,\"playerScore11\":0,\"playerScore2\":0,\"playerScore3\":0,\"playerScore4\":0,\"playerScore5\":0,\"playerScore6\":0,\"playerScore7\":0,\"playerScore8\":0,\"playerScore9\":0},\"needVisionPings\":0,\"neutralMinionsKilled\":0,\"nexusKills\":0,\"nexusLost\":1,\"nexusTakedowns\":0,\"objectivesStolen\":0,\"objectivesStolenAssists\":0,\"onMyWayPings\":0,\"participantId\":5,\"pentaKills\":0,\"perks\":{\"statPerks\":{\"defense\":5002,\"flex\":5008,\"offense\":5008},\"styles\":[{\"description\":\"primaryStyle\",\"selections\":[{\"perk\":8214,\"var1\":228,\"var2\":1150,\"var3\":0},{\"perk\":8226,\"var1\":150,\"var2\":0,\"var3\":0},{\"perk\":8210,\"var1\":0,\"var2\":0,\"var3\":0},{\"perk\":8237,\"var1\":105,\"var2\":0,\"var3\":0}],\"style\":8200},{\"description\":\"subStyle\",\"selections\":[{\"perk\":8345,\"var1\":3,\"var2\":0,\"var3\":0},{\"perk\":8347,\"var1\":0,\"var2\":0,\"var3\":0}],\"style\":8300}]},\"physicalDamageDealt\":2192,\"physicalDamageDealtToChampions\":894,\"physicalDamageTaken\":2782,\"placement\":0,\"playerAugment1\":0,\"playerAugment2\":0,\"playerAugment3\":0,\"playerAugment4\":0,\"playerScore0\":0,\"playerScore1\":0,\"playerScore10\":0,\"playerScore11\":0,\"playerScore2\":0,\"playerScore3\":0,\"playerScore4\":0,\"playerScore5\":0,\"playerScore6\":0,\"playerScore7\":0,\"playerScore8\":0,\"playerScore9\":0,\"playerSubteamId\":0,\"profileIcon\":5736,\"pushPings\":0,\"puuid\":\"mBq93Q8iAeaHnPaYwYef1oAZd3qckehwyZ87E9sW4d74eQDW94xkKbtgkaUlqf2qoGP59oqngAxhdg\",\"quadraKills\":0,\"riotIdGameName\":\"카르마 룰루\",\"riotIdTagline\":\"KR1\",\"role\":\"SUPPORT\",\"sightWardsBoughtInGame\":0,\"spell1Casts\":19,\"spell2Casts\":14,\"spell3Casts\":69,\"spell4Casts\":4,\"subteamPlacement\":0,\"summoner1Casts\":5,\"summoner1Id\":7,\"summoner2Casts\":3,\"summoner2Id\":4,\"summonerId\":\"QZpErGac-dZzRRJ1xZZXOzHPB0HuQYpwUP95CTlumiLxosOoGQjZY1byFw\",\"summonerLevel\":206,\"summonerName\":\"카르마 룰루\",\"teamEarlySurrendered\":false,\"teamId\":100,\"teamPosition\":\"UTILITY\",\"timeCCingOthers\":6,\"timePlayed\":1386,\"totalAllyJungleMinionsKilled\":0,\"totalDamageDealt\":5624,\"totalDamageDealtToChampions\":2335,\"totalDamageShieldedOnTeammates\":3402,\"totalDamageTaken\":7970,\"totalEnemyJungleMinionsKilled\":0,\"totalHeal\":3881,\"totalHealsOnTeammates\":2158,\"totalMinionsKilled\":7,\"totalTimeCCDealt\":56,\"totalTimeSpentDead\":0,\"totalUnitsHealed\":5,\"tripleKills\":0,\"trueDamageDealt\":0,\"trueDamageDealtToChampions\":0,\"trueDamageTaken\":316,\"turretKills\":0,\"turretTakedowns\":0,\"turretsLost\":10,\"unrealKills\":0,\"visionClearedPings\":0,\"visionScore\":43,\"visionWardsBoughtInGame\":6,\"wardsKilled\":3,\"wardsPlaced\":22,\"win\":false},{\"allInPings\":0,\"assistMePings\":0,\"assists\":4,\"baitPings\":0,\"baronKills\":0,\"basicPings\":0,\"bountyLevel\":2,\"challenges\":{\"12AssistStreakCount\":0,\"abilityUses\":158,\"acesBefore15Minutes\":0,\"alliedJungleMonsterKills\":6,\"baronBuffGoldAdvantageOverThreshold\":1,\"baronTakedowns\":0,\"blastConeOppositeOpponentCount\":0,\"bountyGold\":0,\"buffsStolen\":0,\"completeSupportQuestInTime\":0,\"controlWardTimeCoverageInRiverOrEnemyHalf\":0.7378615249551866,\"controlWardsPlaced\":2,\"damagePerMinute\":784.7262145610757,\"damageTakenOnTeamPercentage\":0.1892234674186571,\"dancedWithRiftHerald\":0,\"deathsByEnemyChamps\":0,\"dodgeSkillShotsSmallWindow\":0,\"doubleAces\":0,\"dragonTakedowns\":1,\"earliestBaron\":1236.0080051999998,\"earliestDragonTakedown\":1137.8499216999999,\"earlyLaningPhaseGoldExpAdvantage\":0,\"effectiveHealAndShielding\":0,\"elderDragonKillsWithOpposingSoul\":0,\"elderDragonMultikills\":0,\"enemyChampionImmobilizations\":30,\"enemyJungleMonsterKills\":0,\"epicMonsterKillsNearEnemyJungler\":0,\"epicMonsterKillsWithin30SecondsOfSpawn\":0,\"epicMonsterSteals\":0,\"epicMonsterStolenWithoutSmite\":0,\"firstTurretKilled\":1,\"firstTurretKilledTime\":706.6010053,\"flawlessAces\":0,\"fullTeamTakedown\":0,\"gameLength\":1386.4208446999999,\"getTakedownsInAllLanesEarlyJungleAsLaner\":0,\"goldPerMinute\":445.6271273207366,\"hadOpenNexus\":0,\"highestChampionDamage\":1,\"immobilizeAndKillWithAlly\":2,\"initialBuffCount\":0,\"initialCrabCount\":0,\"jungleCsBefore10Minutes\":0,\"junglerTakedownsNearDamagedEpicMonster\":0,\"kTurretsDestroyedBeforePlatesFall\":0,\"kda\":6,\"killAfterHiddenWithAlly\":0,\"killParticipation\":0.3333333333333333,\"killedChampTookFullTeamDamageSurvived\":0,\"killingSprees\":0,\"killsNearEnemyTurret\":1,\"killsOnOtherLanesEarlyJungleAsLaner\":0,\"killsOnRecentlyHealedByAramPack\":0,\"killsUnderOwnTurret\":0,\"killsWithHelpFromEpicMonster\":0,\"knockEnemyIntoTeamAndKill\":4,\"landSkillShotsEarlyGame\":0,\"laneMinionsFirst10Minutes\":85,\"laningPhaseGoldExpAdvantage\":1,\"legendaryCount\":0,\"lostAnInhibitor\":0,\"maxCsAdvantageOnLaneOpponent\":58.00000002980232,\"maxKillDeficit\":1,\"maxLevelLeadLaneOpponent\":3,\"mejaisFullStackInTime\":0,\"moreEnemyJungleThanOpponent\":0,\"multiKillOneSpell\":0,\"multiTurretRiftHeraldCount\":0,\"multikills\":0,\"multikillsAfterAggressiveFlash\":0,\"mythicItemUsed\":6632,\"outerTurretExecutesBefore10Minutes\":0,\"outnumberedKills\":0,\"outnumberedNexusKill\":0,\"perfectDragonSoulsTaken\":0,\"perfectGame\":0,\"pickKillWithAlly\":4,\"playedChampSelectPosition\":1,\"poroExplosions\":0,\"quickCleanse\":0,\"quickFirstTurret\":0,\"quickSoloKills\":0,\"riftHeraldTakedowns\":0,\"saveAllyFromDeath\":0,\"scuttleCrabKills\":0,\"skillshotsDodged\":9,\"skillshotsHit\":1,\"snowballsHit\":0,\"soloBaronKills\":0,\"soloKills\":2,\"stealthWardsPlaced\":6,\"survivedSingleDigitHpCount\":0,\"survivedThreeImmobilizesInFight\":2,\"takedownOnFirstTurret\":0,\"takedowns\":6,\"takedownsAfterGainingLevelAdvantage\":0,\"takedownsBeforeJungleMinionSpawn\":0,\"takedownsFirstXMinutes\":1,\"takedownsInAlcove\":0,\"takedownsInEnemyFountain\":0,\"teamBaronKills\":1,\"teamDamagePercentage\":0.2799558137593576,\"teamElderDragonKills\":0,\"teamRiftHeraldKills\":2,\"teleportTakedowns\":1,\"tookLargeDamageSurvived\":0,\"turretPlatesTaken\":2,\"turretTakedowns\":3,\"turretsTakenWithRiftHerald\":5,\"twentyMinionsIn3SecondsCount\":0,\"twoWardsOneSweeperCount\":0,\"unseenRecalls\":0,\"visionScoreAdvantageLaneOpponent\":2.2730014324188232,\"visionScorePerMinute\":0.8379428872818816,\"wardTakedowns\":0,\"wardTakedownsBefore20M\":0,\"wardsGuarded\":0},\"champExperience\":14383,\"champLevel\":15,\"championId\":78,\"championName\":\"Poppy\",\"championTransform\":0,\"commandPings\":5,\"consumablesPurchased\":4,\"damageDealtToBuildings\":3092,\"damageDealtToObjectives\":4914,\"damageDealtToTurrets\":3092,\"damageSelfMitigated\":20715,\"dangerPings\":0,\"deaths\":0,\"detectorWardsPlaced\":2,\"doubleKills\":0,\"dragonKills\":0,\"eligibleForProgression\":true,\"enemyMissingPings\":11,\"enemyVisionPings\":3,\"firstBloodAssist\":false,\"firstBloodKill\":false,\"firstTowerAssist\":false,\"firstTowerKill\":false,\"gameEndedInEarlySurrender\":false,\"gameEndedInSurrender\":false,\"getBackPings\":7,\"goldEarned\":10297,\"goldSpent\":9750,\"holdPings\":0,\"individualPosition\":\"TOP\",\"inhibitorKills\":0,\"inhibitorTakedowns\":1,\"inhibitorsLost\":0,\"item0\":1054,\"item1\":6632,\"item2\":3075,\"item3\":6660,\"item4\":1031,\"item5\":3047,\"item6\":3364,\"itemsPurchased\":16,\"killingSprees\":1,\"kills\":2,\"lane\":\"TOP\",\"largestCriticalStrike\":29,\"largestKillingSpree\":2,\"largestMultiKill\":1,\"longestTimeSpentLiving\":0,\"magicDamageDealt\":25062,\"magicDamageDealtToChampions\":4721,\"magicDamageTaken\":3536,\"missions\":{\"playerScore0\":0,\"playerScore1\":0,\"playerScore10\":0,\"playerScore11\":0,\"playerScore2\":0,\"playerScore3\":0,\"playerScore4\":0,\"playerScore5\":0,\"playerScore6\":0,\"playerScore7\":0,\"playerScore8\":0,\"playerScore9\":0},\"needVisionPings\":0,\"neutralMinionsKilled\":4,\"nexusKills\":0,\"nexusLost\":0,\"nexusTakedowns\":0,\"objectivesStolen\":0,\"objectivesStolenAssists\":0,\"onMyWayPings\":10,\"participantId\":6,\"pentaKills\":0,\"perks\":{\"statPerks\":{\"defense\":5002,\"flex\":5008,\"offense\":5008},\"styles\":[{\"description\":\"primaryStyle\",\"selections\":[{\"perk\":8437,\"var1\":960,\"var2\":532,\"var3\":0},{\"perk\":8401,\"var1\":221,\"var2\":0,\"var3\":0},{\"perk\":8473,\"var1\":711,\"var2\":0,\"var3\":0},{\"perk\":8242,\"var1\":20,\"var2\":0,\"var3\":0}],\"style\":8400},{\"description\":\"subStyle\",\"selections\":[{\"perk\":8226,\"var1\":250,\"var2\":521,\"var3\":0},{\"perk\":8237,\"var1\":538,\"var2\":0,\"var3\":0}],\"style\":8200}]},\"physicalDamageDealt\":111081,\"physicalDamageDealtToChampions\":13411,\"physicalDamageTaken\":9642,\"placement\":0,\"playerAugment1\":0,\"playerAugment2\":0,\"playerAugment3\":0,\"playerAugment4\":0,\"playerScore0\":0,\"playerScore1\":0,\"playerScore10\":0,\"playerScore11\":0,\"playerScore2\":0,\"playerScore3\":0,\"playerScore4\":0,\"playerScore5\":0,\"playerScore6\":0,\"playerScore7\":0,\"playerScore8\":0,\"playerScore9\":0,\"playerSubteamId\":0,\"profileIcon\":3890,\"pushPings\":0,\"puuid\":\"dxE1zp2WMia0O8t68wqqi0N_Bli7vSF1mzeeOt_V_2jGR8ekpMfbaOycg3FQL1km_PVCXMwq7T7d8Q\",\"quadraKills\":0,\"riotIdGameName\":\"DK Thanatos\",\"riotIdTagline\":\"KR1\",\"role\":\"SOLO\",\"sightWardsBoughtInGame\":0,\"spell1Casts\":94,\"spell2Casts\":31,\"spell3Casts\":26,\"spell4Casts\":7,\"subteamPlacement\":0,\"summoner1Casts\":4,\"summoner1Id\":12,\"summoner2Casts\":4,\"summoner2Id\":4,\"summonerId\":\"5PEc6foJd7SKUl4mAlI8lXe6t7Wb6cy0AJAfAd6tUzvCFnFu\",\"summonerLevel\":366,\"summonerName\":\"DK Thanatos\",\"teamEarlySurrendered\":false,\"teamId\":200,\"teamPosition\":\"TOP\",\"timeCCingOthers\":25,\"timePlayed\":1386,\"totalAllyJungleMinionsKilled\":4,\"totalDamageDealt\":136143,\"totalDamageDealtToChampions\":18132,\"totalDamageShieldedOnTeammates\":0,\"totalDamageTaken\":13296,\"totalEnemyJungleMinionsKilled\":0,\"totalHeal\":2684,\"totalHealsOnTeammates\":0,\"totalMinionsKilled\":225,\"totalTimeCCDealt\":520,\"totalTimeSpentDead\":0,\"totalUnitsHealed\":1,\"tripleKills\":0,\"trueDamageDealt\":0,\"trueDamageDealtToChampions\":0,\"trueDamageTaken\":117,\"turretKills\":1,\"turretTakedowns\":3,\"turretsLost\":0,\"unrealKills\":0,\"visionClearedPings\":0,\"visionScore\":19,\"visionWardsBoughtInGame\":2,\"wardsKilled\":0,\"wardsPlaced\":8,\"win\":true},{\"allInPings\":0,\"assistMePings\":0,\"assists\":3,\"baitPings\":0,\"baronKills\":1,\"basicPings\":0,\"bountyLevel\":2,\"challenges\":{\"12AssistStreakCount\":0,\"abilityUses\":857,\"acesBefore15Minutes\":0,\"alliedJungleMonsterKills\":44,\"baronBuffGoldAdvantageOverThreshold\":1,\"baronTakedowns\":1,\"blastConeOppositeOpponentCount\":0,\"bountyGold\":0,\"buffsStolen\":0,\"completeSupportQuestInTime\":0,\"controlWardTimeCoverageInRiverOrEnemyHalf\":0.7454902888622156,\"controlWardsPlaced\":2,\"damagePerMinute\":224.86283488606512,\"damageTakenOnTeamPercentage\":0.3231159738215923,\"dancedWithRiftHerald\":0,\"deathsByEnemyChamps\":1,\"dodgeSkillShotsSmallWindow\":0,\"doubleAces\":0,\"dragonTakedowns\":2,\"earliestBaron\":1236.0080051999998,\"earliestDragonTakedown\":743.1937694999999,\"earlyLaningPhaseGoldExpAdvantage\":0,\"effectiveHealAndShielding\":931.806396484375,\"elderDragonKillsWithOpposingSoul\":0,\"elderDragonMultikills\":0,\"enemyChampionImmobilizations\":0,\"enemyJungleMonsterKills\":9,\"epicMonsterKillsNearEnemyJungler\":1,\"epicMonsterKillsWithin30SecondsOfSpawn\":0,\"epicMonsterSteals\":1,\"epicMonsterStolenWithoutSmite\":0,\"firstTurretKilled\":1,\"firstTurretKilledTime\":706.6010053,\"flawlessAces\":0,\"fullTeamTakedown\":0,\"gameLength\":1386.4208446999999,\"goldPerMinute\":377.1384281503222,\"hadOpenNexus\":0,\"immobilizeAndKillWithAlly\":0,\"initialBuffCount\":1,\"initialCrabCount\":0,\"jungleCsBefore10Minutes\":52.00000008940697,\"junglerKillsEarlyJungle\":0,\"junglerTakedownsNearDamagedEpicMonster\":0,\"kTurretsDestroyedBeforePlatesFall\":0,\"kda\":7,\"killAfterHiddenWithAlly\":1,\"killParticipation\":0.3888888888888889,\"killedChampTookFullTeamDamageSurvived\":0,\"killingSprees\":0,\"killsNearEnemyTurret\":1,\"killsOnLanersEarlyJungleAsJungler\":1,\"killsOnRecentlyHealedByAramPack\":0,\"killsUnderOwnTurret\":1,\"killsWithHelpFromEpicMonster\":0,\"knockEnemyIntoTeamAndKill\":0,\"landSkillShotsEarlyGame\":7,\"laneMinionsFirst10Minutes\":3,\"laningPhaseGoldExpAdvantage\":0,\"legendaryCount\":0,\"lostAnInhibitor\":0,\"maxCsAdvantageOnLaneOpponent\":6.000000059604645,\"maxKillDeficit\":1,\"maxLevelLeadLaneOpponent\":2,\"mejaisFullStackInTime\":0,\"moreEnemyJungleThanOpponent\":-30.5,\"multiKillOneSpell\":0,\"multiTurretRiftHeraldCount\":0,\"multikills\":0,\"multikillsAfterAggressiveFlash\":0,\"mythicItemUsed\":4636,\"outerTurretExecutesBefore10Minutes\":0,\"outnumberedKills\":0,\"outnumberedNexusKill\":0,\"perfectDragonSoulsTaken\":0,\"perfectGame\":0,\"pickKillWithAlly\":6,\"playedChampSelectPosition\":1,\"poroExplosions\":0,\"quickCleanse\":0,\"quickFirstTurret\":0,\"quickSoloKills\":0,\"riftHeraldTakedowns\":2,\"saveAllyFromDeath\":0,\"scuttleCrabKills\":2,\"skillshotsDodged\":13,\"skillshotsHit\":10,\"snowballsHit\":0,\"soloBaronKills\":0,\"soloKills\":1,\"stealthWardsPlaced\":4,\"survivedSingleDigitHpCount\":0,\"survivedThreeImmobilizesInFight\":0,\"takedownOnFirstTurret\":0,\"takedowns\":7,\"takedownsAfterGainingLevelAdvantage\":0,\"takedownsBeforeJungleMinionSpawn\":0,\"takedownsFirstXMinutes\":2,\"takedownsInAlcove\":0,\"takedownsInEnemyFountain\":0,\"teamBaronKills\":1,\"teamDamagePercentage\":0.08022117364841118,\"teamElderDragonKills\":0,\"teamRiftHeraldKills\":2,\"tookLargeDamageSurvived\":0,\"turretPlatesTaken\":2,\"turretTakedowns\":4,\"turretsTakenWithRiftHerald\":5,\"twentyMinionsIn3SecondsCount\":0,\"twoWardsOneSweeperCount\":0,\"unseenRecalls\":0,\"visionScoreAdvantageLaneOpponent\":-0.2470541000366211,\"visionScorePerMinute\":0.7637398315493571,\"wardTakedowns\":3,\"wardTakedownsBefore20M\":3,\"wardsGuarded\":1},\"champExperience\":9709,\"champLevel\":12,\"championId\":76,\"championName\":\"Nidalee\",\"championTransform\":0,\"commandPings\":9,\"consumablesPurchased\":3,\"damageDealtToBuildings\":2121,\"damageDealtToObjectives\":26052,\"damageDealtToTurrets\":2121,\"damageSelfMitigated\":11969,\"dangerPings\":0,\"deaths\":1,\"detectorWardsPlaced\":2,\"doubleKills\":0,\"dragonKills\":2,\"eligibleForProgression\":true,\"enemyMissingPings\":12,\"enemyVisionPings\":0,\"firstBloodAssist\":false,\"firstBloodKill\":false,\"firstTowerAssist\":false,\"firstTowerKill\":false,\"gameEndedInEarlySurrender\":false,\"gameEndedInSurrender\":false,\"getBackPings\":2,\"goldEarned\":8714,\"goldSpent\":7235,\"holdPings\":0,\"individualPosition\":\"JUNGLE\",\"inhibitorKills\":0,\"inhibitorTakedowns\":1,\"inhibitorsLost\":0,\"item0\":2421,\"item1\":1052,\"item2\":3108,\"item3\":4636,\"item4\":1082,\"item5\":3158,\"item6\":3364,\"itemsPurchased\":15,\"killingSprees\":2,\"kills\":4,\"lane\":\"JUNGLE\",\"largestCriticalStrike\":0,\"largestKillingSpree\":2,\"largestMultiKill\":1,\"longestTimeSpentLiving\":903,\"magicDamageDealt\":94058,\"magicDamageDealtToChampions\":4143,\"magicDamageTaken\":4414,\"missions\":{\"playerScore0\":0,\"playerScore1\":0,\"playerScore10\":0,\"playerScore11\":0,\"playerScore2\":0,\"playerScore3\":0,\"playerScore4\":0,\"playerScore5\":0,\"playerScore6\":0,\"playerScore7\":0,\"playerScore8\":0,\"playerScore9\":0},\"needVisionPings\":0,\"neutralMinionsKilled\":108,\"nexusKills\":0,\"nexusLost\":0,\"nexusTakedowns\":0,\"objectivesStolen\":1,\"objectivesStolenAssists\":0,\"onMyWayPings\":14,\"participantId\":7,\"pentaKills\":0,\"perks\":{\"statPerks\":{\"defense\":5002,\"flex\":5008,\"offense\":5005},\"styles\":[{\"description\":\"primaryStyle\",\"selections\":[{\"perk\":8010,\"var1\":0,\"var2\":0,\"var3\":0},{\"perk\":9111,\"var1\":417,\"var2\":140,\"var3\":0},{\"perk\":9105,\"var1\":15,\"var2\":50,\"var3\":0},{\"perk\":8014,\"var1\":109,\"var2\":0,\"var3\":0}],\"style\":8000},{\"description\":\"subStyle\",\"selections\":[{\"perk\":8210,\"var1\":0,\"var2\":0,\"var3\":0},{\"perk\":8232,\"var1\":4,\"var2\":30,\"var3\":0}],\"style\":8200}]},\"physicalDamageDealt\":18325,\"physicalDamageDealtToChampions\":645,\"physicalDamageTaken\":18200,\"placement\":0,\"playerAugment1\":0,\"playerAugment2\":0,\"playerAugment3\":0,\"playerAugment4\":0,\"playerScore0\":0,\"playerScore1\":0,\"playerScore10\":0,\"playerScore11\":0,\"playerScore2\":0,\"playerScore3\":0,\"playerScore4\":0,\"playerScore5\":0,\"playerScore6\":0,\"playerScore7\":0,\"playerScore8\":0,\"playerScore9\":0,\"playerSubteamId\":0,\"profileIcon\":6285,\"pushPings\":0,\"puuid\":\"rZUJ8lDHsWoJKIJ8iVwYzMhtihquSwKfYEak1isL7VlJzHfN9VsGvnTKSe4tKCQTjZ3h0me5mi5LAg\",\"quadraKills\":0,\"riotIdGameName\":\"turr2t\",\"riotIdTagline\":\"KOR\",\"role\":\"NONE\",\"sightWardsBoughtInGame\":0,\"spell1Casts\":230,\"spell2Casts\":233,\"spell3Casts\":167,\"spell4Casts\":227,\"subteamPlacement\":0,\"summoner1Casts\":12,\"summoner1Id\":11,\"summoner2Casts\":2,\"summoner2Id\":4,\"summonerId\":\"6xtFB_EHZgMlCbiTEbUAogSREoGAb8O7FZtHIXDjNPTYuMG4_4IkqD8moQ\",\"summonerLevel\":202,\"summonerName\":\"dui bu qi\",\"teamEarlySurrendered\":false,\"teamId\":200,\"teamPosition\":\"JUNGLE\",\"timeCCingOthers\":3,\"timePlayed\":1386,\"totalAllyJungleMinionsKilled\":73,\"totalDamageDealt\":143999,\"totalDamageDealtToChampions\":5195,\"totalDamageShieldedOnTeammates\":0,\"totalDamageTaken\":22704,\"totalEnemyJungleMinionsKilled\":6,\"totalHeal\":16202,\"totalHealsOnTeammates\":931,\"totalMinionsKilled\":11,\"totalTimeCCDealt\":70,\"totalTimeSpentDead\":21,\"totalUnitsHealed\":4,\"tripleKills\":0,\"trueDamageDealt\":31616,\"trueDamageDealtToChampions\":407,\"trueDamageTaken\":90,\"turretKills\":3,\"turretTakedowns\":4,\"turretsLost\":0,\"unrealKills\":0,\"visionClearedPings\":0,\"visionScore\":17,\"visionWardsBoughtInGame\":2,\"wardsKilled\":3,\"wardsPlaced\":6,\"win\":true},{\"allInPings\":0,\"assistMePings\":8,\"assists\":1,\"baitPings\":0,\"baronKills\":0,\"basicPings\":0,\"bountyLevel\":8,\"challenges\":{\"12AssistStreakCount\":0,\"abilityUses\":418,\"acesBefore15Minutes\":0,\"alliedJungleMonsterKills\":7,\"baronBuffGoldAdvantageOverThreshold\":1,\"baronTakedowns\":1,\"blastConeOppositeOpponentCount\":0,\"bountyGold\":0,\"buffsStolen\":0,\"completeSupportQuestInTime\":0,\"controlWardTimeCoverageInRiverOrEnemyHalf\":0.4465949041858055,\"controlWardsPlaced\":3,\"damagePerMinute\":652.2762818020332,\"damageTakenOnTeamPercentage\":0.22243899927938793,\"dancedWithRiftHerald\":0,\"deathsByEnemyChamps\":1,\"dodgeSkillShotsSmallWindow\":0,\"doubleAces\":0,\"dragonTakedowns\":1,\"earliestBaron\":1236.0080051999998,\"earliestDragonTakedown\":743.1937694999999,\"earlyLaningPhaseGoldExpAdvantage\":0,\"effectiveHealAndShielding\":0,\"elderDragonKillsWithOpposingSoul\":0,\"elderDragonMultikills\":0,\"enemyChampionImmobilizations\":25,\"enemyJungleMonsterKills\":2,\"epicMonsterKillsNearEnemyJungler\":0,\"epicMonsterKillsWithin30SecondsOfSpawn\":0,\"epicMonsterSteals\":0,\"epicMonsterStolenWithoutSmite\":0,\"fastestLegendary\":1379.4406956999999,\"firstTurretKilled\":1,\"firstTurretKilledTime\":706.6010053,\"flawlessAces\":0,\"fullTeamTakedown\":0,\"gameLength\":1386.4208446999999,\"getTakedownsInAllLanesEarlyJungleAsLaner\":0,\"goldPerMinute\":485.6203950301513,\"hadOpenNexus\":0,\"immobilizeAndKillWithAlly\":1,\"initialBuffCount\":0,\"initialCrabCount\":0,\"jungleCsBefore10Minutes\":0,\"junglerTakedownsNearDamagedEpicMonster\":1,\"kTurretsDestroyedBeforePlatesFall\":0,\"kda\":9,\"killAfterHiddenWithAlly\":0,\"killParticipation\":0.5,\"killedChampTookFullTeamDamageSurvived\":0,\"killingSprees\":1,\"killsNearEnemyTurret\":4,\"killsOnOtherLanesEarlyJungleAsLaner\":0,\"killsOnRecentlyHealedByAramPack\":0,\"killsUnderOwnTurret\":0,\"killsWithHelpFromEpicMonster\":0,\"knockEnemyIntoTeamAndKill\":0,\"landSkillShotsEarlyGame\":0,\"laneMinionsFirst10Minutes\":89,\"laningPhaseGoldExpAdvantage\":1,\"legendaryCount\":1,\"lostAnInhibitor\":0,\"maxCsAdvantageOnLaneOpponent\":51,\"maxKillDeficit\":1,\"maxLevelLeadLaneOpponent\":3,\"mejaisFullStackInTime\":0,\"moreEnemyJungleThanOpponent\":0,\"multiKillOneSpell\":0,\"multiTurretRiftHeraldCount\":0,\"multikills\":0,\"multikillsAfterAggressiveFlash\":0,\"outerTurretExecutesBefore10Minutes\":0,\"outnumberedKills\":0,\"outnumberedNexusKill\":0,\"perfectDragonSoulsTaken\":0,\"perfectGame\":0,\"pickKillWithAlly\":5,\"playedChampSelectPosition\":1,\"poroExplosions\":0,\"quickCleanse\":0,\"quickFirstTurret\":0,\"quickSoloKills\":0,\"riftHeraldTakedowns\":2,\"saveAllyFromDeath\":0,\"scuttleCrabKills\":2,\"skillshotsDodged\":34,\"skillshotsHit\":4,\"snowballsHit\":0,\"soloBaronKills\":0,\"soloKills\":4,\"stealthWardsPlaced\":5,\"survivedSingleDigitHpCount\":0,\"survivedThreeImmobilizesInFight\":0,\"takedownOnFirstTurret\":0,\"takedowns\":9,\"takedownsAfterGainingLevelAdvantage\":0,\"takedownsBeforeJungleMinionSpawn\":0,\"takedownsFirstXMinutes\":4,\"takedownsInAlcove\":0,\"takedownsInEnemyFountain\":0,\"teamBaronKills\":1,\"teamDamagePercentage\":0.2327035007616707,\"teamElderDragonKills\":0,\"teamRiftHeraldKills\":2,\"tookLargeDamageSurvived\":0,\"turretPlatesTaken\":4,\"turretTakedowns\":3,\"turretsTakenWithRiftHerald\":5,\"twentyMinionsIn3SecondsCount\":0,\"twoWardsOneSweeperCount\":0,\"unseenRecalls\":0,\"visionScoreAdvantageLaneOpponent\":0.18631911277770996,\"visionScorePerMinute\":0.8216542042662898,\"wardTakedowns\":1,\"wardTakedownsBefore20M\":1,\"wardsGuarded\":0},\"champExperience\":13950,\"champLevel\":15,\"championId\":777,\"championName\":\"Yone\",\"championTransform\":0,\"commandPings\":5,\"consumablesPurchased\":5,\"damageDealtToBuildings\":3653,\"damageDealtToObjectives\":15079,\"damageDealtToTurrets\":3653,\"damageSelfMitigated\":15936,\"dangerPings\":0,\"deaths\":1,\"detectorWardsPlaced\":3,\"doubleKills\":0,\"dragonKills\":0,\"eligibleForProgression\":true,\"enemyMissingPings\":11,\"enemyVisionPings\":1,\"firstBloodAssist\":false,\"firstBloodKill\":false,\"firstTowerAssist\":false,\"firstTowerKill\":false,\"gameEndedInEarlySurrender\":false,\"gameEndedInSurrender\":false,\"getBackPings\":9,\"goldEarned\":11221,\"goldSpent\":10225,\"holdPings\":0,\"individualPosition\":\"MIDDLE\",\"inhibitorKills\":1,\"inhibitorTakedowns\":2,\"inhibitorsLost\":0,\"item0\":3181,\"item1\":3006,\"item2\":2055,\"item3\":6672,\"item4\":1038,\"item5\":1037,\"item6\":3364,\"itemsPurchased\":23,\"killingSprees\":1,\"kills\":8,\"lane\":\"MIDDLE\",\"largestCriticalStrike\":507,\"largestKillingSpree\":8,\"largestMultiKill\":1,\"longestTimeSpentLiving\":238,\"magicDamageDealt\":18853,\"magicDamageDealtToChampions\":3131,\"magicDamageTaken\":3241,\"missions\":{\"playerScore0\":0,\"playerScore1\":0,\"playerScore10\":0,\"playerScore11\":0,\"playerScore2\":0,\"playerScore3\":0,\"playerScore4\":0,\"playerScore5\":0,\"playerScore6\":0,\"playerScore7\":0,\"playerScore8\":0,\"playerScore9\":0},\"needVisionPings\":0,\"neutralMinionsKilled\":24,\"nexusKills\":0,\"nexusLost\":0,\"nexusTakedowns\":0,\"objectivesStolen\":0,\"objectivesStolenAssists\":1,\"onMyWayPings\":18,\"participantId\":8,\"pentaKills\":0,\"perks\":{\"statPerks\":{\"defense\":5003,\"flex\":5008,\"offense\":5005},\"styles\":[{\"description\":\"primaryStyle\",\"selections\":[{\"perk\":8008,\"var1\":23,\"var2\":0,\"var3\":0},{\"perk\":9111,\"var1\":865,\"var2\":180,\"var3\":0},{\"perk\":9104,\"var1\":12,\"var2\":20,\"var3\":0},{\"perk\":8299,\"var1\":248,\"var2\":0,\"var3\":0}],\"style\":8000},{\"description\":\"subStyle\",\"selections\":[{\"perk\":8444,\"var1\":788,\"var2\":0,\"var3\":0},{\"perk\":8242,\"var1\":37,\"var2\":0,\"var3\":0}],\"style\":8400}]},\"physicalDamageDealt\":129731,\"physicalDamageDealtToChampions\":9933,\"physicalDamageTaken\":11462,\"placement\":0,\"playerAugment1\":0,\"playerAugment2\":0,\"playerAugment3\":0,\"playerAugment4\":0,\"playerScore0\":0,\"playerScore1\":0,\"playerScore10\":0,\"playerScore11\":0,\"playerScore2\":0,\"playerScore3\":0,\"playerScore4\":0,\"playerScore5\":0,\"playerScore6\":0,\"playerScore7\":0,\"playerScore8\":0,\"playerScore9\":0,\"playerSubteamId\":0,\"profileIcon\":6,\"pushPings\":0,\"puuid\":\"fXnqmVygh1QRoqabrnWqLt4wK48J4CYi9SV5xYP03m2S8_qLjrS8IJkBh8R-bDs384lPsj_nDyk_wQ\",\"quadraKills\":0,\"riotIdGameName\":\"Hide on bush\",\"riotIdTagline\":\"KR1\",\"role\":\"SOLO\",\"sightWardsBoughtInGame\":0,\"spell1Casts\":264,\"spell2Casts\":81,\"spell3Casts\":66,\"spell4Casts\":7,\"subteamPlacement\":0,\"summoner1Casts\":4,\"summoner1Id\":12,\"summoner2Casts\":2,\"summoner2Id\":4,\"summonerId\":\"wEforVjuWrBVgKjNF6SMGy5XhzUhzWnY5RONhg5tzMMeTw\",\"summonerLevel\":724,\"summonerName\":\"Hide on bush\",\"teamEarlySurrendered\":false,\"teamId\":200,\"teamPosition\":\"MIDDLE\",\"timeCCingOthers\":14,\"timePlayed\":1386,\"totalAllyJungleMinionsKilled\":9,\"totalDamageDealt\":153766,\"totalDamageDealtToChampions\":15072,\"totalDamageShieldedOnTeammates\":0,\"totalDamageTaken\":15630,\"totalEnemyJungleMinionsKilled\":2,\"totalHeal\":1926,\"totalHealsOnTeammates\":0,\"totalMinionsKilled\":185,\"totalTimeCCDealt\":147,\"totalTimeSpentDead\":8,\"totalUnitsHealed\":1,\"tripleKills\":0,\"trueDamageDealt\":5181,\"trueDamageDealtToChampions\":2006,\"trueDamageTaken\":926,\"turretKills\":0,\"turretTakedowns\":3,\"turretsLost\":0,\"unrealKills\":0,\"visionClearedPings\":0,\"visionScore\":18,\"visionWardsBoughtInGame\":4,\"wardsKilled\":1,\"wardsPlaced\":8,\"win\":true},{\"allInPings\":0,\"assistMePings\":6,\"assists\":3,\"baitPings\":0,\"baronKills\":0,\"basicPings\":0,\"bountyLevel\":4,\"challenges\":{\"12AssistStreakCount\":0,\"abilityUses\":307,\"acesBefore15Minutes\":0,\"alliedJungleMonsterKills\":1,\"baronBuffGoldAdvantageOverThreshold\":1,\"baronTakedowns\":1,\"blastConeOppositeOpponentCount\":0,\"bountyGold\":0,\"buffsStolen\":0,\"completeSupportQuestInTime\":0,\"controlWardTimeCoverageInRiverOrEnemyHalf\":0.20977059152838337,\"controlWardsPlaced\":2,\"damagePerMinute\":535.4722172477447,\"damageTakenOnTeamPercentage\":0.15620187861682786,\"dancedWithRiftHerald\":0,\"deathsByEnemyChamps\":1,\"dodgeSkillShotsSmallWindow\":0,\"doubleAces\":0,\"dragonTakedowns\":0,\"earliestBaron\":1236.0080051999998,\"earlyLaningPhaseGoldExpAdvantage\":1,\"effectiveHealAndShielding\":199.310546875,\"elderDragonKillsWithOpposingSoul\":0,\"elderDragonMultikills\":0,\"enemyChampionImmobilizations\":0,\"enemyJungleMonsterKills\":3,\"epicMonsterKillsNearEnemyJungler\":0,\"epicMonsterKillsWithin30SecondsOfSpawn\":0,\"epicMonsterSteals\":0,\"epicMonsterStolenWithoutSmite\":0,\"firstTurretKilled\":1,\"firstTurretKilledTime\":706.6010053,\"flawlessAces\":0,\"fullTeamTakedown\":0,\"gameLength\":1386.4208446999999,\"getTakedownsInAllLanesEarlyJungleAsLaner\":0,\"goldPerMinute\":490.605775886132,\"hadOpenNexus\":0,\"immobilizeAndKillWithAlly\":0,\"initialBuffCount\":0,\"initialCrabCount\":0,\"jungleCsBefore10Minutes\":0,\"junglerTakedownsNearDamagedEpicMonster\":0,\"kTurretsDestroyedBeforePlatesFall\":2,\"kda\":7,\"killAfterHiddenWithAlly\":0,\"killParticipation\":0.3888888888888889,\"killedChampTookFullTeamDamageSurvived\":0,\"killingSprees\":1,\"killsNearEnemyTurret\":2,\"killsOnOtherLanesEarlyJungleAsLaner\":0,\"killsOnRecentlyHealedByAramPack\":0,\"killsUnderOwnTurret\":0,\"killsWithHelpFromEpicMonster\":0,\"knockEnemyIntoTeamAndKill\":0,\"landSkillShotsEarlyGame\":9,\"laneMinionsFirst10Minutes\":77,\"laningPhaseGoldExpAdvantage\":0,\"legendaryCount\":0,\"lostAnInhibitor\":0,\"maxCsAdvantageOnLaneOpponent\":56.30000001192093,\"maxKillDeficit\":1,\"maxLevelLeadLaneOpponent\":3,\"mejaisFullStackInTime\":0,\"moreEnemyJungleThanOpponent\":0,\"multiKillOneSpell\":0,\"multiTurretRiftHeraldCount\":0,\"multikills\":0,\"multikillsAfterAggressiveFlash\":0,\"mythicItemUsed\":3078,\"outerTurretExecutesBefore10Minutes\":0,\"outnumberedKills\":0,\"outnumberedNexusKill\":0,\"perfectDragonSoulsTaken\":0,\"perfectGame\":0,\"pickKillWithAlly\":7,\"playedChampSelectPosition\":1,\"poroExplosions\":0,\"quickCleanse\":0,\"quickFirstTurret\":0,\"quickSoloKills\":0,\"riftHeraldTakedowns\":1,\"saveAllyFromDeath\":0,\"scuttleCrabKills\":0,\"skillshotsDodged\":7,\"skillshotsHit\":47,\"snowballsHit\":0,\"soloBaronKills\":0,\"soloKills\":0,\"stealthWardsPlaced\":5,\"survivedSingleDigitHpCount\":0,\"survivedThreeImmobilizesInFight\":0,\"takedownOnFirstTurret\":1,\"takedowns\":7,\"takedownsAfterGainingLevelAdvantage\":0,\"takedownsBeforeJungleMinionSpawn\":0,\"takedownsFirstXMinutes\":3,\"takedownsInAlcove\":0,\"takedownsInEnemyFountain\":1,\"teamBaronKills\":1,\"teamDamagePercentage\":0.1910329456866289,\"teamElderDragonKills\":0,\"teamRiftHeraldKills\":2,\"tookLargeDamageSurvived\":0,\"turretPlatesTaken\":6,\"turretTakedowns\":6,\"turretsTakenWithRiftHerald\":5,\"twentyMinionsIn3SecondsCount\":0,\"twoWardsOneSweeperCount\":0,\"unseenRecalls\":0,\"visionScoreAdvantageLaneOpponent\":2.386983633041382,\"visionScorePerMinute\":0.9178758271200059,\"wardTakedowns\":6,\"wardTakedownsBefore20M\":6,\"wardsGuarded\":0},\"champExperience\":10290,\"champLevel\":13,\"championId\":81,\"championName\":\"Ezreal\",\"championTransform\":0,\"commandPings\":7,\"consumablesPurchased\":3,\"damageDealtToBuildings\":9500,\"damageDealtToObjectives\":21975,\"damageDealtToTurrets\":9500,\"damageSelfMitigated\":5104,\"dangerPings\":0,\"deaths\":1,\"detectorWardsPlaced\":2,\"doubleKills\":0,\"dragonKills\":0,\"eligibleForProgression\":true,\"enemyMissingPings\":4,\"enemyVisionPings\":0,\"firstBloodAssist\":false,\"firstBloodKill\":false,\"firstTowerAssist\":false,\"firstTowerKill\":true,\"gameEndedInEarlySurrender\":false,\"gameEndedInSurrender\":false,\"getBackPings\":6,\"goldEarned\":11336,\"goldSpent\":8633,\"holdPings\":0,\"individualPosition\":\"BOTTOM\",\"inhibitorKills\":0,\"inhibitorTakedowns\":1,\"inhibitorsLost\":0,\"item0\":3042,\"item1\":3078,\"item2\":3133,\"item3\":3158,\"item4\":1055,\"item5\":0,\"item6\":3363,\"itemsPurchased\":19,\"killingSprees\":1,\"kills\":4,\"lane\":\"BOTTOM\",\"largestCriticalStrike\":0,\"largestKillingSpree\":4,\"largestMultiKill\":1,\"longestTimeSpentLiving\":831,\"magicDamageDealt\":16705,\"magicDamageDealtToChampions\":4773,\"magicDamageTaken\":3005,\"missions\":{\"playerScore0\":0,\"playerScore1\":0,\"playerScore10\":0,\"playerScore11\":0,\"playerScore2\":0,\"playerScore3\":0,\"playerScore4\":0,\"playerScore5\":0,\"playerScore6\":0,\"playerScore7\":0,\"playerScore8\":0,\"playerScore9\":0},\"needVisionPings\":0,\"neutralMinionsKilled\":9,\"nexusKills\":1,\"nexusLost\":0,\"nexusTakedowns\":1,\"objectivesStolen\":0,\"objectivesStolenAssists\":0,\"onMyWayPings\":11,\"participantId\":9,\"pentaKills\":0,\"perks\":{\"statPerks\":{\"defense\":5002,\"flex\":5008,\"offense\":5005},\"styles\":[{\"description\":\"primaryStyle\",\"selections\":[{\"perk\":8005,\"var1\":472,\"var2\":365,\"var3\":106},{\"perk\":8009,\"var1\":1921,\"var2\":0,\"var3\":0},{\"perk\":9103,\"var1\":20,\"var2\":40,\"var3\":0},{\"perk\":8014,\"var1\":201,\"var2\":0,\"var3\":0}],\"style\":8000},{\"description\":\"subStyle\",\"selections\":[{\"perk\":8345,\"var1\":3,\"var2\":0,\"var3\":0},{\"perk\":8304,\"var1\":10,\"var2\":3,\"var3\":0}],\"style\":8300}]},\"physicalDamageDealt\":115902,\"physicalDamageDealtToChampions\":7599,\"physicalDamageTaken\":7308,\"placement\":0,\"playerAugment1\":0,\"playerAugment2\":0,\"playerAugment3\":0,\"playerAugment4\":0,\"playerScore0\":0,\"playerScore1\":0,\"playerScore10\":0,\"playerScore11\":0,\"playerScore2\":0,\"playerScore3\":0,\"playerScore4\":0,\"playerScore5\":0,\"playerScore6\":0,\"playerScore7\":0,\"playerScore8\":0,\"playerScore9\":0,\"playerSubteamId\":0,\"profileIcon\":5314,\"pushPings\":0,\"puuid\":\"chEXyW-b9kgkRYA90y-gXBlaetGrIfzrtqwi7wJkS3-Ep4uRu56xydQmWGyogwEkZKuIZZ8OukJW1w\",\"quadraKills\":0,\"riotIdGameName\":\"Viper\",\"riotIdTagline\":\"G168\",\"role\":\"CARRY\",\"sightWardsBoughtInGame\":0,\"spell1Casts\":226,\"spell2Casts\":42,\"spell3Casts\":30,\"spell4Casts\":9,\"subteamPlacement\":0,\"summoner1Casts\":3,\"summoner1Id\":7,\"summoner2Casts\":3,\"summoner2Id\":4,\"summonerId\":\"LCtDync8gOpFoDt6w0I4ylBamWXmp7Mvr0lIYo86jQfdCDtLktmEo2bKTg\",\"summonerLevel\":120,\"summonerName\":\"최기명\",\"teamEarlySurrendered\":false,\"teamId\":200,\"teamPosition\":\"BOTTOM\",\"timeCCingOthers\":0,\"timePlayed\":1386,\"totalAllyJungleMinionsKilled\":4,\"totalDamageDealt\":140803,\"totalDamageDealtToChampions\":12373,\"totalDamageShieldedOnTeammates\":0,\"totalDamageTaken\":10975,\"totalEnemyJungleMinionsKilled\":1,\"totalHeal\":4645,\"totalHealsOnTeammates\":199,\"totalMinionsKilled\":200,\"totalTimeCCDealt\":31,\"totalTimeSpentDead\":12,\"totalUnitsHealed\":2,\"tripleKills\":0,\"trueDamageDealt\":8195,\"trueDamageDealtToChampions\":0,\"trueDamageTaken\":661,\"turretKills\":5,\"turretTakedowns\":6,\"turretsLost\":0,\"unrealKills\":0,\"visionClearedPings\":0,\"visionScore\":21,\"visionWardsBoughtInGame\":2,\"wardsKilled\":6,\"wardsPlaced\":9,\"win\":true},{\"allInPings\":2,\"assistMePings\":6,\"assists\":8,\"baitPings\":0,\"baronKills\":0,\"basicPings\":0,\"bountyLevel\":0,\"challenges\":{\"12AssistStreakCount\":0,\"abilityUses\":205,\"acesBefore15Minutes\":0,\"alliedJungleMonsterKills\":0,\"baronBuffGoldAdvantageOverThreshold\":1,\"baronTakedowns\":1,\"blastConeOppositeOpponentCount\":0,\"bountyGold\":0,\"buffsStolen\":0,\"completeSupportQuestInTime\":1,\"controlWardTimeCoverageInRiverOrEnemyHalf\":0.45905119714044357,\"controlWardsPlaced\":5,\"damagePerMinute\":605.6984164414807,\"damageTakenOnTeamPercentage\":0.10901968086353483,\"dancedWithRiftHerald\":0,\"deathsByEnemyChamps\":2,\"dodgeSkillShotsSmallWindow\":0,\"doubleAces\":0,\"dragonTakedowns\":0,\"earliestBaron\":1236.0080051999998,\"earlyLaningPhaseGoldExpAdvantage\":0,\"effectiveHealAndShielding\":0,\"elderDragonKillsWithOpposingSoul\":0,\"elderDragonMultikills\":0,\"enemyChampionImmobilizations\":8,\"enemyJungleMonsterKills\":0,\"epicMonsterKillsNearEnemyJungler\":0,\"epicMonsterKillsWithin30SecondsOfSpawn\":0,\"epicMonsterSteals\":0,\"epicMonsterStolenWithoutSmite\":0,\"fasterSupportQuestCompletion\":1,\"firstTurretKilled\":1,\"firstTurretKilledTime\":706.6010053,\"flawlessAces\":0,\"fullTeamTakedown\":0,\"gameLength\":1386.4208446999999,\"getTakedownsInAllLanesEarlyJungleAsLaner\":0,\"goldPerMinute\":300.7965348557198,\"hadOpenNexus\":0,\"immobilizeAndKillWithAlly\":5,\"initialBuffCount\":0,\"initialCrabCount\":0,\"jungleCsBefore10Minutes\":0,\"junglerTakedownsNearDamagedEpicMonster\":0,\"kTurretsDestroyedBeforePlatesFall\":0,\"kda\":4,\"killAfterHiddenWithAlly\":1,\"killParticipation\":0.4444444444444444,\"killedChampTookFullTeamDamageSurvived\":0,\"killingSprees\":0,\"killsNearEnemyTurret\":0,\"killsOnOtherLanesEarlyJungleAsLaner\":0,\"killsOnRecentlyHealedByAramPack\":0,\"killsUnderOwnTurret\":0,\"killsWithHelpFromEpicMonster\":0,\"knockEnemyIntoTeamAndKill\":5,\"landSkillShotsEarlyGame\":21,\"laneMinionsFirst10Minutes\":6,\"laningPhaseGoldExpAdvantage\":0,\"legendaryCount\":0,\"lostAnInhibitor\":0,\"maxCsAdvantageOnLaneOpponent\":18,\"maxKillDeficit\":1,\"maxLevelLeadLaneOpponent\":2,\"mejaisFullStackInTime\":0,\"moreEnemyJungleThanOpponent\":0,\"multiKillOneSpell\":0,\"multiTurretRiftHeraldCount\":0,\"multikills\":0,\"multikillsAfterAggressiveFlash\":0,\"outerTurretExecutesBefore10Minutes\":0,\"outnumberedKills\":0,\"outnumberedNexusKill\":0,\"perfectDragonSoulsTaken\":0,\"perfectGame\":0,\"pickKillWithAlly\":8,\"playedChampSelectPosition\":1,\"poroExplosions\":0,\"quickCleanse\":0,\"quickFirstTurret\":0,\"quickSoloKills\":0,\"riftHeraldTakedowns\":1,\"saveAllyFromDeath\":0,\"scuttleCrabKills\":0,\"skillshotsDodged\":7,\"skillshotsHit\":48,\"snowballsHit\":0,\"soloBaronKills\":0,\"soloKills\":0,\"stealthWardsPlaced\":21,\"survivedSingleDigitHpCount\":0,\"survivedThreeImmobilizesInFight\":0,\"takedownOnFirstTurret\":0,\"takedowns\":8,\"takedownsAfterGainingLevelAdvantage\":0,\"takedownsBeforeJungleMinionSpawn\":0,\"takedownsFirstXMinutes\":3,\"takedownsInAlcove\":0,\"takedownsInEnemyFountain\":0,\"teamBaronKills\":1,\"teamDamagePercentage\":0.21608656614393165,\"teamElderDragonKills\":0,\"teamRiftHeraldKills\":2,\"tookLargeDamageSurvived\":0,\"turretPlatesTaken\":4,\"turretTakedowns\":4,\"turretsTakenWithRiftHerald\":5,\"twentyMinionsIn3SecondsCount\":0,\"twoWardsOneSweeperCount\":0,\"unseenRecalls\":0,\"visionScoreAdvantageLaneOpponent\":0.3943462371826172,\"visionScorePerMinute\":2.610212649025103,\"wardTakedowns\":5,\"wardTakedownsBefore20M\":4,\"wardsGuarded\":0},\"champExperience\":7706,\"champLevel\":11,\"championId\":161,\"championName\":\"Velkoz\",\"championTransform\":0,\"commandPings\":0,\"consumablesPurchased\":8,\"damageDealtToBuildings\":1838,\"damageDealtToObjectives\":4607,\"damageDealtToTurrets\":1838,\"damageSelfMitigated\":3879,\"dangerPings\":0,\"deaths\":2,\"detectorWardsPlaced\":5,\"doubleKills\":0,\"dragonKills\":0,\"eligibleForProgression\":true,\"enemyMissingPings\":2,\"enemyVisionPings\":3,\"firstBloodAssist\":false,\"firstBloodKill\":false,\"firstTowerAssist\":false,\"firstTowerKill\":false,\"gameEndedInEarlySurrender\":false,\"gameEndedInSurrender\":false,\"getBackPings\":0,\"goldEarned\":6950,\"goldSpent\":6125,\"holdPings\":0,\"individualPosition\":\"UTILITY\",\"inhibitorKills\":1,\"inhibitorTakedowns\":1,\"inhibitorsLost\":0,\"item0\":3853,\"item1\":0,\"item2\":2420,\"item3\":3020,\"item4\":6653,\"item5\":0,\"item6\":3364,\"itemsPurchased\":20,\"killingSprees\":0,\"kills\":0,\"lane\":\"BOTTOM\",\"largestCriticalStrike\":0,\"largestKillingSpree\":0,\"largestMultiKill\":0,\"longestTimeSpentLiving\":979,\"magicDamageDealt\":32470,\"magicDamageDealtToChampions\":10144,\"magicDamageTaken\":3457,\"missions\":{\"playerScore0\":0,\"playerScore1\":0,\"playerScore10\":0,\"playerScore11\":0,\"playerScore2\":0,\"playerScore3\":0,\"playerScore4\":0,\"playerScore5\":0,\"playerScore6\":0,\"playerScore7\":0,\"playerScore8\":0,\"playerScore9\":0},\"needVisionPings\":0,\"neutralMinionsKilled\":0,\"nexusKills\":0,\"nexusLost\":0,\"nexusTakedowns\":1,\"objectivesStolen\":0,\"objectivesStolenAssists\":0,\"onMyWayPings\":27,\"participantId\":10,\"pentaKills\":0,\"perks\":{\"statPerks\":{\"defense\":5002,\"flex\":5008,\"offense\":5008},\"styles\":[{\"description\":\"primaryStyle\",\"selections\":[{\"perk\":8229,\"var1\":1100,\"var2\":0,\"var3\":0},{\"perk\":8226,\"var1\":250,\"var2\":493,\"var3\":0},{\"perk\":8210,\"var1\":3,\"var2\":0,\"var3\":0},{\"perk\":8237,\"var1\":532,\"var2\":0,\"var3\":0}],\"style\":8200},{\"description\":\"subStyle\",\"selections\":[{\"perk\":8345,\"var1\":3,\"var2\":0,\"var3\":0},{\"perk\":8347,\"var1\":0,\"var2\":0,\"var3\":0}],\"style\":8300}]},\"physicalDamageDealt\":2209,\"physicalDamageDealtToChampions\":611,\"physicalDamageTaken\":4141,\"placement\":0,\"playerAugment1\":0,\"playerAugment2\":0,\"playerAugment3\":0,\"playerAugment4\":0,\"playerScore0\":0,\"playerScore1\":0,\"playerScore10\":0,\"playerScore11\":0,\"playerScore2\":0,\"playerScore3\":0,\"playerScore4\":0,\"playerScore5\":0,\"playerScore6\":0,\"playerScore7\":0,\"playerScore8\":0,\"playerScore9\":0,\"playerSubteamId\":0,\"profileIcon\":6298,\"pushPings\":0,\"puuid\":\"NYU30XhltfGhBdyPgrw3IrpO-qQ7zsRU23nC2p8BzbFsA4FFmdhk_mGUlVLlVmsDkXc5g6m3hgiKdg\",\"quadraKills\":0,\"riotIdGameName\":\"jhqdyqkd\",\"riotIdTagline\":\"KR1\",\"role\":\"SUPPORT\",\"sightWardsBoughtInGame\":0,\"spell1Casts\":111,\"spell2Casts\":61,\"spell3Casts\":28,\"spell4Casts\":5,\"subteamPlacement\":0,\"summoner1Casts\":4,\"summoner1Id\":21,\"summoner2Casts\":1,\"summoner2Id\":4,\"summonerId\":\"-N1xG2IEIA3Z5PBj7PkqXqY9nypb2tP22OgDWqSvIAejZbgnFRkBfAJGxg\",\"summonerLevel\":122,\"summonerName\":\"jhqdyqkd\",\"teamEarlySurrendered\":false,\"teamId\":200,\"teamPosition\":\"UTILITY\",\"timeCCingOthers\":17,\"timePlayed\":1386,\"totalAllyJungleMinionsKilled\":0,\"totalDamageDealt\":40397,\"totalDamageDealtToChampions\":13995,\"totalDamageShieldedOnTeammates\":0,\"totalDamageTaken\":7660,\"totalEnemyJungleMinionsKilled\":0,\"totalHeal\":376,\"totalHealsOnTeammates\":0,\"totalMinionsKilled\":25,\"totalTimeCCDealt\":141,\"totalTimeSpentDead\":8,\"totalUnitsHealed\":1,\"tripleKills\":0,\"trueDamageDealt\":5717,\"trueDamageDealtToChampions\":3239,\"trueDamageTaken\":62,\"turretKills\":1,\"turretTakedowns\":4,\"turretsLost\":0,\"unrealKills\":0,\"visionClearedPings\":0,\"visionScore\":60,\"visionWardsBoughtInGame\":5,\"wardsKilled\":5,\"wardsPlaced\":27,\"win\":true}],\"platformId\":\"KR\",\"queueId\":420,\"teams\":[{\"bans\":[{\"championId\":235,\"pickTurn\":1},{\"championId\":497,\"pickTurn\":2},{\"championId\":85,\"pickTurn\":3},{\"championId\":-1,\"pickTurn\":4},{\"championId\":517,\"pickTurn\":5}],\"objectives\":{\"baron\":{\"first\":false,\"kills\":0},\"champion\":{\"first\":true,\"kills\":5},\"dragon\":{\"first\":false,\"kills\":0},\"horde\":{\"first\":false,\"kills\":0},\"inhibitor\":{\"first\":false,\"kills\":0},\"riftHerald\":{\"first\":false,\"kills\":0},\"tower\":{\"first\":false,\"kills\":0}},\"teamId\":100,\"win\":false},{\"bans\":[{\"championId\":429,\"pickTurn\":6},{\"championId\":68,\"pickTurn\":7},{\"championId\":-1,\"pickTurn\":8},{\"championId\":-1,\"pickTurn\":9},{\"championId\":35,\"pickTurn\":10}],\"objectives\":{\"baron\":{\"first\":true,\"kills\":1},\"champion\":{\"first\":false,\"kills\":18},\"dragon\":{\"first\":true,\"kills\":2},\"horde\":{\"first\":false,\"kills\":0},\"inhibitor\":{\"first\":true,\"kills\":2},\"riftHerald\":{\"first\":true,\"kills\":2},\"tower\":{\"first\":true,\"kills\":10}},\"teamId\":200,\"win\":true}],\"tournamentCode\":\"\"}}",
+      "headers": {
+        "date": "Tue, 28 Nov 2023 17:33:23 GMT",
+        "content-type": "application/json;charset=utf-8",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "vary": "Accept-Encoding",
+        "x-app-rate-limit": "20:1,100:120",
+        "x-app-rate-limit-count": "1:1,1:120",
+        "x-method-rate-limit": "2000:10",
+        "x-method-rate-limit-count": "1:10",
+        "x-riot-edge-trace-id": "238d86fa-9620-4045-a1b7-6b906c706ca8",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, PUT, DELETE, POST, OPTIONS",
+        "access-control-allow-headers": "DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range",
+        "access-control-expose-headers": "Content-Length,Content-Range"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "X-Riot-Token": "***"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/hvpWpBln-tjhGxKS5PYjpXkg1jXjrGiL8mlb1OFFri97w81yimUBJ3mvZBOg8Sa1TdWtie3D57Nu-A"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"id\":\"L0U00Di1pYVSV2ZtxlD5w2jkzFlXeYu7PsLmr7vZT92E3Q0\",\"accountId\":\"d0CTK755ivCsBCFEBfkuW1Rud6yDsO1swSAiQt2qou5aTYo\",\"puuid\":\"hvpWpBln-tjhGxKS5PYjpXkg1jXjrGiL8mlb1OFFri97w81yimUBJ3mvZBOg8Sa1TdWtie3D57Nu-A\",\"name\":\"Ego Battle\",\"profileIconId\":5990,\"revisionDate\":1701191201693,\"summonerLevel\":905}",
+      "headers": {
+        "date": "Tue, 28 Nov 2023 17:33:25 GMT",
+        "content-type": "application/json;charset=utf-8",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "vary": "Accept-Encoding",
+        "x-app-rate-limit": "20:1,100:120",
+        "x-app-rate-limit-count": "1:1,1:120",
+        "x-method-rate-limit": "2000:60",
+        "x-method-rate-limit-count": "1:60",
+        "x-riot-edge-trace-id": "94acff49-77a2-4a20-acde-b0b93a428d56",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, PUT, DELETE, POST, OPTIONS",
+        "access-control-allow-headers": "DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range",
+        "access-control-expose-headers": "Content-Length,Content-Range"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "X-Riot-Token": "***"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "https://asia.api.riotgames.com/riot/account/v1/accounts/by-puuid/hvpWpBln-tjhGxKS5PYjpXkg1jXjrGiL8mlb1OFFri97w81yimUBJ3mvZBOg8Sa1TdWtie3D57Nu-A"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"puuid\":\"hvpWpBln-tjhGxKS5PYjpXkg1jXjrGiL8mlb1OFFri97w81yimUBJ3mvZBOg8Sa1TdWtie3D57Nu-A\",\"gameName\":\"Ego Battle\",\"tagLine\":\"KR1\"}",
+      "headers": {
+        "date": "Tue, 28 Nov 2023 17:33:25 GMT",
+        "content-type": "application/json;charset=utf-8",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "access-control-allow-headers": "Content-Type",
+        "access-control-allow-methods": "GET, POST, DELETE, PUT",
+        "access-control-allow-origin": "*",
+        "vary": "Accept-Encoding",
+        "x-app-rate-limit": "20:1,100:120",
+        "x-app-rate-limit-count": "1:1,2:120",
+        "x-method-rate-limit": "1000:60",
+        "x-method-rate-limit-count": "1:60",
+        "x-riot-edge-trace-id": "244f7844-2503-4c12-9234-ee38d6d5cc74",
+        "access-control-expose-headers": "Content-Length,Content-Range"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "X-Riot-Token": "***"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/yn74SdbComHDaatgPGOO9jHUVhQV1HpjVIugJY6WzpocV8L4SD6WGBcj8q8I_a4f5I39Z4UB4b8b3A"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"id\":\"lyhxo5MPDttwI1LZsh7Ty28A4hTInFojXAgbUonux42OIR6ruBQ_8qyJQw\",\"accountId\":\"MygJ4Rpl3g13YjB4PnL3BLb7PEayJLOo5hKH3kmRk8GbNF8jcOGcaupw\",\"puuid\":\"yn74SdbComHDaatgPGOO9jHUVhQV1HpjVIugJY6WzpocV8L4SD6WGBcj8q8I_a4f5I39Z4UB4b8b3A\",\"name\":\"Pungyeonn\",\"profileIconId\":5494,\"revisionDate\":1701192489176,\"summonerLevel\":379}",
+      "headers": {
+        "date": "Tue, 28 Nov 2023 17:33:25 GMT",
+        "content-type": "application/json;charset=utf-8",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "vary": "Accept-Encoding",
+        "x-app-rate-limit": "20:1,100:120",
+        "x-app-rate-limit-count": "2:1,2:120",
+        "x-method-rate-limit": "2000:60",
+        "x-method-rate-limit-count": "2:60",
+        "x-riot-edge-trace-id": "060d1984-f2ba-4f1f-9fea-26e905103994",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, PUT, DELETE, POST, OPTIONS",
+        "access-control-allow-headers": "DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range",
+        "access-control-expose-headers": "Content-Length,Content-Range"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "X-Riot-Token": "***"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "https://asia.api.riotgames.com/riot/account/v1/accounts/by-puuid/yn74SdbComHDaatgPGOO9jHUVhQV1HpjVIugJY6WzpocV8L4SD6WGBcj8q8I_a4f5I39Z4UB4b8b3A"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"puuid\":\"yn74SdbComHDaatgPGOO9jHUVhQV1HpjVIugJY6WzpocV8L4SD6WGBcj8q8I_a4f5I39Z4UB4b8b3A\",\"gameName\":\"Pungyeon\",\"tagLine\":\"0622\"}",
+      "headers": {
+        "date": "Tue, 28 Nov 2023 17:33:25 GMT",
+        "content-type": "application/json;charset=utf-8",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "access-control-allow-headers": "Content-Type",
+        "access-control-allow-methods": "GET, POST, DELETE, PUT",
+        "access-control-allow-origin": "*",
+        "vary": "Accept-Encoding",
+        "x-app-rate-limit": "20:1,100:120",
+        "x-app-rate-limit-count": "2:1,3:120",
+        "x-method-rate-limit": "1000:60",
+        "x-method-rate-limit-count": "2:60",
+        "x-riot-edge-trace-id": "a738dd79-8b67-44c0-9097-7ca1a2406675",
+        "access-control-expose-headers": "Content-Length,Content-Range"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "X-Riot-Token": "***"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/NNxw8e9ckZtqiBQuLairWLpiPYhqtzlcv7gtrS0leRDDtq4YhXR36i61l3FJwE53May4DCldXrq3YA"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"id\":\"Hm8xEY22sq817oDj0d8O0NuWNddzjsedtV5mKbhC9XF6YGZkqAClSWoMdQ\",\"accountId\":\"vmuWwEmtu-VFE30pJgvWzQIt9ah8v_b7P0WW68u9HQAYJOz12k7xoYZD\",\"puuid\":\"NNxw8e9ckZtqiBQuLairWLpiPYhqtzlcv7gtrS0leRDDtq4YhXR36i61l3FJwE53May4DCldXrq3YA\",\"name\":\"Claudia Salas X\",\"profileIconId\":6298,\"revisionDate\":1701191201693,\"summonerLevel\":115}",
+      "headers": {
+        "date": "Tue, 28 Nov 2023 17:33:26 GMT",
+        "content-type": "application/json;charset=utf-8",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "vary": "Accept-Encoding",
+        "x-app-rate-limit": "20:1,100:120",
+        "x-app-rate-limit-count": "1:1,3:120",
+        "x-method-rate-limit": "2000:60",
+        "x-method-rate-limit-count": "3:60",
+        "x-riot-edge-trace-id": "e2d67699-67ef-40f0-a2c7-331147f9b998",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, PUT, DELETE, POST, OPTIONS",
+        "access-control-allow-headers": "DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range",
+        "access-control-expose-headers": "Content-Length,Content-Range"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "X-Riot-Token": "***"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "https://asia.api.riotgames.com/riot/account/v1/accounts/by-puuid/NNxw8e9ckZtqiBQuLairWLpiPYhqtzlcv7gtrS0leRDDtq4YhXR36i61l3FJwE53May4DCldXrq3YA"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"puuid\":\"NNxw8e9ckZtqiBQuLairWLpiPYhqtzlcv7gtrS0leRDDtq4YhXR36i61l3FJwE53May4DCldXrq3YA\",\"gameName\":\"Claudia Salas X\",\"tagLine\":\"KR1\"}",
+      "headers": {
+        "date": "Tue, 28 Nov 2023 17:33:26 GMT",
+        "content-type": "application/json;charset=utf-8",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "access-control-allow-headers": "Content-Type",
+        "access-control-allow-methods": "GET, POST, DELETE, PUT",
+        "access-control-allow-origin": "*",
+        "vary": "Accept-Encoding",
+        "x-app-rate-limit": "20:1,100:120",
+        "x-app-rate-limit-count": "1:1,4:120",
+        "x-method-rate-limit": "1000:60",
+        "x-method-rate-limit-count": "3:60",
+        "x-riot-edge-trace-id": "851d7002-afdd-40d0-a218-45941b350fea",
+        "access-control-expose-headers": "Content-Length,Content-Range"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "X-Riot-Token": "***"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/Xig5rQ8ODD1ani6JUrWbuHoXezEx6nv9c42AmaUuhjvLcJl1nSQHGDRhom7In6omL8i9NQUGI8dAcA"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"id\":\"fzkt3fVy0UQWkUfB05OlySX3TrUVIOi31jWeSYHEfb00NXE\",\"accountId\":\"BHKCqiBisPZYMXul4Y2EtUJ2Lb9MXRDul1h9eHA8QVhRbI03H4hQbPzy\",\"puuid\":\"Xig5rQ8ODD1ani6JUrWbuHoXezEx6nv9c42AmaUuhjvLcJl1nSQHGDRhom7In6omL8i9NQUGI8dAcA\",\"name\":\"슈퍼빅고수\",\"profileIconId\":4568,\"revisionDate\":1701192509829,\"summonerLevel\":338}",
+      "headers": {
+        "date": "Tue, 28 Nov 2023 17:33:26 GMT",
+        "content-type": "application/json;charset=utf-8",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "vary": "Accept-Encoding",
+        "x-app-rate-limit": "20:1,100:120",
+        "x-app-rate-limit-count": "2:1,4:120",
+        "x-method-rate-limit": "2000:60",
+        "x-method-rate-limit-count": "4:60",
+        "x-riot-edge-trace-id": "4cc97410-0cd1-4600-ae97-ae6f72e0cb14",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, PUT, DELETE, POST, OPTIONS",
+        "access-control-allow-headers": "DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range",
+        "access-control-expose-headers": "Content-Length,Content-Range"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "X-Riot-Token": "***"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "https://asia.api.riotgames.com/riot/account/v1/accounts/by-puuid/Xig5rQ8ODD1ani6JUrWbuHoXezEx6nv9c42AmaUuhjvLcJl1nSQHGDRhom7In6omL8i9NQUGI8dAcA"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"puuid\":\"Xig5rQ8ODD1ani6JUrWbuHoXezEx6nv9c42AmaUuhjvLcJl1nSQHGDRhom7In6omL8i9NQUGI8dAcA\",\"gameName\":\"슈퍼빅고수\",\"tagLine\":\"KR1\"}",
+      "headers": {
+        "date": "Tue, 28 Nov 2023 17:33:27 GMT",
+        "content-type": "application/json;charset=utf-8",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "access-control-allow-headers": "Content-Type",
+        "access-control-allow-methods": "GET, POST, DELETE, PUT",
+        "access-control-allow-origin": "*",
+        "vary": "Accept-Encoding",
+        "x-app-rate-limit": "20:1,100:120",
+        "x-app-rate-limit-count": "2:1,5:120",
+        "x-method-rate-limit": "1000:60",
+        "x-method-rate-limit-count": "4:60",
+        "x-riot-edge-trace-id": "0272838b-c712-499c-96f7-36fa6a5480ea",
+        "access-control-expose-headers": "Content-Length,Content-Range"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "X-Riot-Token": "***"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/mBq93Q8iAeaHnPaYwYef1oAZd3qckehwyZ87E9sW4d74eQDW94xkKbtgkaUlqf2qoGP59oqngAxhdg"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"id\":\"QZpErGac-dZzRRJ1xZZXOzHPB0HuQYpwUP95CTlumiLxosOoGQjZY1byFw\",\"accountId\":\"q5yNwbV8RYqUe3YqZJz-F-U-Pr0zth2mnjxAktVXLSXOljRxTgmJWsCh\",\"puuid\":\"mBq93Q8iAeaHnPaYwYef1oAZd3qckehwyZ87E9sW4d74eQDW94xkKbtgkaUlqf2qoGP59oqngAxhdg\",\"name\":\"카르마 룰루\",\"profileIconId\":5736,\"revisionDate\":1701191201693,\"summonerLevel\":206}",
+      "headers": {
+        "date": "Tue, 28 Nov 2023 17:33:27 GMT",
+        "content-type": "application/json;charset=utf-8",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "vary": "Accept-Encoding",
+        "x-app-rate-limit": "20:1,100:120",
+        "x-app-rate-limit-count": "1:1,5:120",
+        "x-method-rate-limit": "2000:60",
+        "x-method-rate-limit-count": "5:60",
+        "x-riot-edge-trace-id": "1be3781a-8944-4ac6-8374-87990883cbd4",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, PUT, DELETE, POST, OPTIONS",
+        "access-control-allow-headers": "DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range",
+        "access-control-expose-headers": "Content-Length,Content-Range"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "X-Riot-Token": "***"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "https://asia.api.riotgames.com/riot/account/v1/accounts/by-puuid/mBq93Q8iAeaHnPaYwYef1oAZd3qckehwyZ87E9sW4d74eQDW94xkKbtgkaUlqf2qoGP59oqngAxhdg"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"puuid\":\"mBq93Q8iAeaHnPaYwYef1oAZd3qckehwyZ87E9sW4d74eQDW94xkKbtgkaUlqf2qoGP59oqngAxhdg\",\"gameName\":\"카르마 룰루\",\"tagLine\":\"KR1\"}",
+      "headers": {
+        "date": "Tue, 28 Nov 2023 17:33:27 GMT",
+        "content-type": "application/json;charset=utf-8",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "access-control-allow-headers": "Content-Type",
+        "access-control-allow-methods": "GET, POST, DELETE, PUT",
+        "access-control-allow-origin": "*",
+        "vary": "Accept-Encoding",
+        "x-app-rate-limit": "20:1,100:120",
+        "x-app-rate-limit-count": "1:1,6:120",
+        "x-method-rate-limit": "1000:60",
+        "x-method-rate-limit-count": "5:60",
+        "x-riot-edge-trace-id": "b36ad4d4-cccb-463b-81a8-a0c65f95c76c",
+        "access-control-expose-headers": "Content-Length,Content-Range"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "X-Riot-Token": "***"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/dxE1zp2WMia0O8t68wqqi0N_Bli7vSF1mzeeOt_V_2jGR8ekpMfbaOycg3FQL1km_PVCXMwq7T7d8Q"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"id\":\"5PEc6foJd7SKUl4mAlI8lXe6t7Wb6cy0AJAfAd6tUzvCFnFu\",\"accountId\":\"4Af179gPXeHes_0AvwIdEoDxfYTe8Sr0BDfAolIDFRE6FoDFhuwKnou4\",\"puuid\":\"dxE1zp2WMia0O8t68wqqi0N_Bli7vSF1mzeeOt_V_2jGR8ekpMfbaOycg3FQL1km_PVCXMwq7T7d8Q\",\"name\":\"DK Thanatos\",\"profileIconId\":3890,\"revisionDate\":1701192489176,\"summonerLevel\":366}",
+      "headers": {
+        "date": "Tue, 28 Nov 2023 17:33:27 GMT",
+        "content-type": "application/json;charset=utf-8",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "vary": "Accept-Encoding",
+        "x-app-rate-limit": "20:1,100:120",
+        "x-app-rate-limit-count": "2:1,6:120",
+        "x-method-rate-limit": "2000:60",
+        "x-method-rate-limit-count": "6:60",
+        "x-riot-edge-trace-id": "4839cb35-e260-49d4-8541-8bbf4f0390b1",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, PUT, DELETE, POST, OPTIONS",
+        "access-control-allow-headers": "DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range",
+        "access-control-expose-headers": "Content-Length,Content-Range"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "X-Riot-Token": "***"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "https://asia.api.riotgames.com/riot/account/v1/accounts/by-puuid/dxE1zp2WMia0O8t68wqqi0N_Bli7vSF1mzeeOt_V_2jGR8ekpMfbaOycg3FQL1km_PVCXMwq7T7d8Q"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"puuid\":\"dxE1zp2WMia0O8t68wqqi0N_Bli7vSF1mzeeOt_V_2jGR8ekpMfbaOycg3FQL1km_PVCXMwq7T7d8Q\",\"gameName\":\"DK Thanatos\",\"tagLine\":\"KR1\"}",
+      "headers": {
+        "date": "Tue, 28 Nov 2023 17:33:28 GMT",
+        "content-type": "application/json;charset=utf-8",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "access-control-allow-headers": "Content-Type",
+        "access-control-allow-methods": "GET, POST, DELETE, PUT",
+        "access-control-allow-origin": "*",
+        "vary": "Accept-Encoding",
+        "x-app-rate-limit": "20:1,100:120",
+        "x-app-rate-limit-count": "2:1,7:120",
+        "x-method-rate-limit": "1000:60",
+        "x-method-rate-limit-count": "6:60",
+        "x-riot-edge-trace-id": "e4ab23be-3aa1-427a-b1b9-30013856951a",
+        "access-control-expose-headers": "Content-Length,Content-Range"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "X-Riot-Token": "***"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/rZUJ8lDHsWoJKIJ8iVwYzMhtihquSwKfYEak1isL7VlJzHfN9VsGvnTKSe4tKCQTjZ3h0me5mi5LAg"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"id\":\"6xtFB_EHZgMlCbiTEbUAogSREoGAb8O7FZtHIXDjNPTYuMG4_4IkqD8moQ\",\"accountId\":\"HpPNYPh9mUXFiz5uxr8k8rJO2aVo6Rb6hKa1VtbQvLj0QOykE3PtlwYE\",\"puuid\":\"rZUJ8lDHsWoJKIJ8iVwYzMhtihquSwKfYEak1isL7VlJzHfN9VsGvnTKSe4tKCQTjZ3h0me5mi5LAg\",\"name\":\"dui bu qi\",\"profileIconId\":6285,\"revisionDate\":1701191201693,\"summonerLevel\":202}",
+      "headers": {
+        "date": "Tue, 28 Nov 2023 17:33:28 GMT",
+        "content-type": "application/json;charset=utf-8",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "vary": "Accept-Encoding",
+        "x-app-rate-limit": "20:1,100:120",
+        "x-app-rate-limit-count": "1:1,7:120",
+        "x-method-rate-limit": "2000:60",
+        "x-method-rate-limit-count": "7:60",
+        "x-riot-edge-trace-id": "f991f560-c3f6-41aa-9f27-20a1aaff10be",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, PUT, DELETE, POST, OPTIONS",
+        "access-control-allow-headers": "DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range",
+        "access-control-expose-headers": "Content-Length,Content-Range"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "X-Riot-Token": "***"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "https://asia.api.riotgames.com/riot/account/v1/accounts/by-puuid/rZUJ8lDHsWoJKIJ8iVwYzMhtihquSwKfYEak1isL7VlJzHfN9VsGvnTKSe4tKCQTjZ3h0me5mi5LAg"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"puuid\":\"rZUJ8lDHsWoJKIJ8iVwYzMhtihquSwKfYEak1isL7VlJzHfN9VsGvnTKSe4tKCQTjZ3h0me5mi5LAg\",\"gameName\":\"turr2t\",\"tagLine\":\"KOR\"}",
+      "headers": {
+        "date": "Tue, 28 Nov 2023 17:33:28 GMT",
+        "content-type": "application/json;charset=utf-8",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "access-control-allow-headers": "Content-Type",
+        "access-control-allow-methods": "GET, POST, DELETE, PUT",
+        "access-control-allow-origin": "*",
+        "vary": "Accept-Encoding",
+        "x-app-rate-limit": "20:1,100:120",
+        "x-app-rate-limit-count": "1:1,8:120",
+        "x-method-rate-limit": "1000:60",
+        "x-method-rate-limit-count": "7:60",
+        "x-riot-edge-trace-id": "1a0556f2-4429-4d79-a2e1-c4d53cc29694",
+        "access-control-expose-headers": "Content-Length,Content-Range"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "X-Riot-Token": "***"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/fXnqmVygh1QRoqabrnWqLt4wK48J4CYi9SV5xYP03m2S8_qLjrS8IJkBh8R-bDs384lPsj_nDyk_wQ"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"id\":\"wEforVjuWrBVgKjNF6SMGy5XhzUhzWnY5RONhg5tzMMeTw\",\"accountId\":\"uFlm7Az57s0zXnS5X008h40_VUQoKzuMGyyoMa97mIvE\",\"puuid\":\"fXnqmVygh1QRoqabrnWqLt4wK48J4CYi9SV5xYP03m2S8_qLjrS8IJkBh8R-bDs384lPsj_nDyk_wQ\",\"name\":\"Hide on bush\",\"profileIconId\":6,\"revisionDate\":1701191201693,\"summonerLevel\":724}",
+      "headers": {
+        "date": "Tue, 28 Nov 2023 17:33:29 GMT",
+        "content-type": "application/json;charset=utf-8",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "vary": "Accept-Encoding",
+        "x-app-rate-limit": "20:1,100:120",
+        "x-app-rate-limit-count": "2:1,8:120",
+        "x-method-rate-limit": "2000:60",
+        "x-method-rate-limit-count": "8:60",
+        "x-riot-edge-trace-id": "98d9b245-5213-4998-9080-258ac87d03fa",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, PUT, DELETE, POST, OPTIONS",
+        "access-control-allow-headers": "DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range",
+        "access-control-expose-headers": "Content-Length,Content-Range"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "X-Riot-Token": "***"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "https://asia.api.riotgames.com/riot/account/v1/accounts/by-puuid/fXnqmVygh1QRoqabrnWqLt4wK48J4CYi9SV5xYP03m2S8_qLjrS8IJkBh8R-bDs384lPsj_nDyk_wQ"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"puuid\":\"fXnqmVygh1QRoqabrnWqLt4wK48J4CYi9SV5xYP03m2S8_qLjrS8IJkBh8R-bDs384lPsj_nDyk_wQ\",\"gameName\":\"Hide on bush\",\"tagLine\":\"KR1\"}",
+      "headers": {
+        "date": "Tue, 28 Nov 2023 17:33:29 GMT",
+        "content-type": "application/json;charset=utf-8",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "access-control-allow-headers": "Content-Type",
+        "access-control-allow-methods": "GET, POST, DELETE, PUT",
+        "access-control-allow-origin": "*",
+        "vary": "Accept-Encoding",
+        "x-app-rate-limit": "20:1,100:120",
+        "x-app-rate-limit-count": "2:1,9:120",
+        "x-method-rate-limit": "1000:60",
+        "x-method-rate-limit-count": "8:60",
+        "x-riot-edge-trace-id": "6f2684e5-8abc-40ed-9c6c-092fc0647c26",
+        "access-control-expose-headers": "Content-Length,Content-Range"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "X-Riot-Token": "***"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/chEXyW-b9kgkRYA90y-gXBlaetGrIfzrtqwi7wJkS3-Ep4uRu56xydQmWGyogwEkZKuIZZ8OukJW1w"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"id\":\"LCtDync8gOpFoDt6w0I4ylBamWXmp7Mvr0lIYo86jQfdCDtLktmEo2bKTg\",\"accountId\":\"PBh9d1fd4OihABmDd5Kxzbh_OSNVfh1R5oKSkrQf_s_SDrhQmbEpG8YY\",\"puuid\":\"chEXyW-b9kgkRYA90y-gXBlaetGrIfzrtqwi7wJkS3-Ep4uRu56xydQmWGyogwEkZKuIZZ8OukJW1w\",\"name\":\"최기명\",\"profileIconId\":5314,\"revisionDate\":1701191201693,\"summonerLevel\":120}",
+      "headers": {
+        "date": "Tue, 28 Nov 2023 17:33:29 GMT",
+        "content-type": "application/json;charset=utf-8",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "vary": "Accept-Encoding",
+        "x-app-rate-limit": "20:1,100:120",
+        "x-app-rate-limit-count": "1:1,9:120",
+        "x-method-rate-limit": "2000:60",
+        "x-method-rate-limit-count": "9:60",
+        "x-riot-edge-trace-id": "6203677f-f48f-4f0c-98aa-0a9b2b787925",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, PUT, DELETE, POST, OPTIONS",
+        "access-control-allow-headers": "DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range",
+        "access-control-expose-headers": "Content-Length,Content-Range"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "X-Riot-Token": "***"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "https://asia.api.riotgames.com/riot/account/v1/accounts/by-puuid/chEXyW-b9kgkRYA90y-gXBlaetGrIfzrtqwi7wJkS3-Ep4uRu56xydQmWGyogwEkZKuIZZ8OukJW1w"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"puuid\":\"chEXyW-b9kgkRYA90y-gXBlaetGrIfzrtqwi7wJkS3-Ep4uRu56xydQmWGyogwEkZKuIZZ8OukJW1w\",\"gameName\":\"Viper\",\"tagLine\":\"G168\"}",
+      "headers": {
+        "date": "Tue, 28 Nov 2023 17:33:30 GMT",
+        "content-type": "application/json;charset=utf-8",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "access-control-allow-headers": "Content-Type",
+        "access-control-allow-methods": "GET, POST, DELETE, PUT",
+        "access-control-allow-origin": "*",
+        "vary": "Accept-Encoding",
+        "x-app-rate-limit": "20:1,100:120",
+        "x-app-rate-limit-count": "1:1,10:120",
+        "x-method-rate-limit": "1000:60",
+        "x-method-rate-limit-count": "9:60",
+        "x-riot-edge-trace-id": "4ad40714-6280-4a78-a175-ee48ed7fe6da",
+        "access-control-expose-headers": "Content-Length,Content-Range"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "X-Riot-Token": "***"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/NYU30XhltfGhBdyPgrw3IrpO-qQ7zsRU23nC2p8BzbFsA4FFmdhk_mGUlVLlVmsDkXc5g6m3hgiKdg"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"id\":\"-N1xG2IEIA3Z5PBj7PkqXqY9nypb2tP22OgDWqSvIAejZbgnFRkBfAJGxg\",\"accountId\":\"8yLh8PECU8Z-gutg3nAThN2WUEqelyiFLQ3sld_Nlq_uRyNVSvhh6Yws\",\"puuid\":\"NYU30XhltfGhBdyPgrw3IrpO-qQ7zsRU23nC2p8BzbFsA4FFmdhk_mGUlVLlVmsDkXc5g6m3hgiKdg\",\"name\":\"jhqdyqkd\",\"profileIconId\":6298,\"revisionDate\":1701191201693,\"summonerLevel\":122}",
+      "headers": {
+        "date": "Tue, 28 Nov 2023 17:33:30 GMT",
+        "content-type": "application/json;charset=utf-8",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "vary": "Accept-Encoding",
+        "x-app-rate-limit": "20:1,100:120",
+        "x-app-rate-limit-count": "2:1,10:120",
+        "x-method-rate-limit": "2000:60",
+        "x-method-rate-limit-count": "10:60",
+        "x-riot-edge-trace-id": "b5cc2eb4-1fef-4122-9b3e-2fe0f0a5bb5f",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, PUT, DELETE, POST, OPTIONS",
+        "access-control-allow-headers": "DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range",
+        "access-control-expose-headers": "Content-Length,Content-Range"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "X-Riot-Token": "***"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "https://asia.api.riotgames.com/riot/account/v1/accounts/by-puuid/NYU30XhltfGhBdyPgrw3IrpO-qQ7zsRU23nC2p8BzbFsA4FFmdhk_mGUlVLlVmsDkXc5g6m3hgiKdg"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"puuid\":\"NYU30XhltfGhBdyPgrw3IrpO-qQ7zsRU23nC2p8BzbFsA4FFmdhk_mGUlVLlVmsDkXc5g6m3hgiKdg\",\"gameName\":\"jhqdyqkd\",\"tagLine\":\"KR1\"}",
+      "headers": {
+        "date": "Tue, 28 Nov 2023 17:33:30 GMT",
+        "content-type": "application/json;charset=utf-8",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "access-control-allow-headers": "Content-Type",
+        "access-control-allow-methods": "GET, POST, DELETE, PUT",
+        "access-control-allow-origin": "*",
+        "vary": "Accept-Encoding",
+        "x-app-rate-limit": "20:1,100:120",
+        "x-app-rate-limit-count": "2:1,11:120",
+        "x-method-rate-limit": "1000:60",
+        "x-method-rate-limit-count": "10:60",
+        "x-riot-edge-trace-id": "39b54c57-a409-4c7c-a4e3-b6c2814de67f",
+        "access-control-expose-headers": "Content-Length,Content-Range"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

@@ -8,6 +8,16 @@
 import Config
 
 config :lor,
+  ash_apis: [
+    Lor.Lol,
+    Lor.S3
+  ]
+
+config :tesla, :adapter, {Tesla.Adapter.Finch, name: Lor.Finch}
+
+config :lor, Lor.S3.Api, Lor.S3.Minio
+
+config :lor,
   ecto_repos: [Lor.Repo],
   generators: [timestamp_type: :utc_datetime]
 

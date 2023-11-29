@@ -4,6 +4,18 @@ import Config
 config :ash, :disable_async?, true
 config :ash, :missed_notifications, :ignore
 
+# S3
+config :lor, Lor.S3.Api, Lor.S3Dummy
+
+# Exvcr
+config :exvcr,
+  vcr_cassette_library_dir: "test/fixture/vcr_cassettes",
+  custom_cassette_library_dir: "test/fixture/custom_cassettes",
+  filter_sensitive_data: [],
+  filter_url_params: false,
+  filter_request_headers: ["X-Riot-Token"],
+  response_headers_blacklist: []
+
 # Configure your database
 #
 # The MIX_TEST_PARTITION environment variable can be used
@@ -35,3 +47,7 @@ config :logger, level: :warning
 
 # Initialize plugs at runtime for faster test compilation
 config :phoenix, :plug_init_mode, :runtime
+
+if File.exists?(Path.expand("dev.local.exs", __DIR__)) do
+  import_config "test.local.exs"
+end
