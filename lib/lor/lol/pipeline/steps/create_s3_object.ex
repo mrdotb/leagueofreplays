@@ -37,10 +37,9 @@ defmodule Lor.Lol.CreateS3Object do
 
   @impl true
   def undo(s3_object, _arguments, _context, _options) do
-    # TODO implement delete remote s3 object
-    case Lor.S3.Object.destroy(s3_object) do
-      {:ok, _} -> :ok
-      {:error, reason} -> {:error, reason}
+    with {:ok, _response} <- Lor.S3.Api.delete_object(s3_object.bucket, s3_object.key),
+         {:ok, _s3_object} <- Lor.S3.Object.destroy(s3_object) do
+      :ok
     end
   end
 end
