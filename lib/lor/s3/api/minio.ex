@@ -21,18 +21,20 @@ defmodule Lor.S3.Minio do
     %{client | proto: proto, port: port, endpoint: endpoint}
   end
 
+  defp process_response({:ok, _body, response}) do
+    {:ok, response}
+  end
+
+  defp process_response({:error, error}) do
+    Logger.error("Minio error: #{inspect(error)}")
+    {:error, error}
+  end
+
   @impl true
   def get_object(bucket, key) do
-    client = create_client()
-
-    case AWS.S3.get_object(client, bucket, key) do
-      {:ok, _body, response} ->
-        {:ok, response}
-
-      {:error, error} ->
-        Logger.error("Minio error: #{inspect(error)}")
-        {:error, error}
-    end
+    create_client()
+    |> AWS.S3.get_object(bucket, key)
+    |> process_response()
   end
 
   defp build_object_input(input) do
@@ -45,16 +47,10 @@ defmodule Lor.S3.Minio do
 
   @impl true
   def put_object(bucket, key, input) do
-    client = create_client()
     input = build_object_input(input)
 
-    case AWS.S3.put_object(client, bucket, key, input) do
-      {:ok, _body, response} ->
-        {:ok, response}
-
-      {:error, error} ->
-        Logger.error("Minio error: #{inspect(error)}")
-        {:error, error}
-    end
+    create_client()
+    |> AWS.S3.put_object(bucket, key, input)
+    |> process_response()
   end
 end
