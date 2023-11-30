@@ -53,4 +53,11 @@ defmodule Lor.S3.Minio do
     |> AWS.S3.put_object(bucket, key, input)
     |> process_response()
   end
+
+  @impl true
+  def delete_object(bucket, key, input) do
+    create_client()
+    |> AWS.S3.delete_object(bucket, key, input)
+    |> process_response()
+  end
 end

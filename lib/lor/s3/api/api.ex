@@ -13,4 +13,8 @@ defmodule Lor.S3.Api do
   @impl true
   def put_object(bucket, key, input),
     do: @api.put_object(bucket, key, input)
+
+  @impl true
+  def delete_object(bucket, key, input \\ %{}),
+    do: @api.delete_object(bucket, key, input)
 end

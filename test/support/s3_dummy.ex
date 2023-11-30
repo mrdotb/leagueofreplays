@@ -6,11 +6,16 @@ defmodule Lor.S3Dummy do
 
   @impl true
   def get_object(_bucket, _key) do
-    {:ok, nil}
+    {:ok, %{}}
   end
 
   @impl true
   def put_object(_bucket, _key, _input) do
-    {:ok, nil}
+    {:ok, %{}}
+  end
+
+  @impl true
+  def delete_object(_bucket, _key, _input) do
+    {:ok, %{}}
   end
 end
