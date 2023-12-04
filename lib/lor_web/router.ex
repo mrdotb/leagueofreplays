@@ -14,10 +14,18 @@ defmodule LorWeb.Router do
     plug :accepts, ["json"]
   end
 
+  import AshAdmin.Router
+
   scope "/", LorWeb do
     pipe_through :browser
 
     get "/", PageController, :home
+  end
+
+  scope "/" do
+    pipe_through :browser
+
+    ash_admin("/admin")
   end
 
   # Other scopes may use custom stacks.
@@ -32,12 +40,12 @@ defmodule LorWeb.Router do
     # If your application does not have an admins-only section yet,
     # you can use Plug.BasicAuth to set up some basic authentication
     # as long as you are also using SSL (which you should anyway).
-    import Phoenix.LiveDashboard.Router
+    # import Phoenix.LiveDashboard.Router
 
     scope "/dev" do
       pipe_through :browser
 
-      live_dashboard "/dashboard", metrics: LorWeb.Telemetry
+      # live_dashboard "/dashboard", metrics: LorWeb.Telemetry
       forward "/mailbox", Plug.Swoosh.MailboxPreview
     end
   end

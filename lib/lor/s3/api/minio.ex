@@ -60,4 +60,16 @@ defmodule Lor.S3.Minio do
     |> AWS.S3.delete_object(bucket, key, input)
     |> process_response()
   end
+
+  @impl true
+  def url(bucket, key) do
+    config = get_config()
+
+    to_string(%URI{
+      host: config[:endpoint],
+      scheme: config[:proto],
+      port: config[:port],
+      path: "/#{bucket}/#{key}"
+    })
+  end
 end

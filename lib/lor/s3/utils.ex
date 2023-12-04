@@ -1,6 +1,6 @@
 defmodule Lor.S3.Utils do
   @moduledoc """
-  Utils function to work with files
+  Utils function to work with s3
   """
 
   def hash_bin_md5(body) do
@@ -15,5 +15,14 @@ defmodule Lor.S3.Utils do
   def file_size!(file_path) do
     bin = File.read!(file_path)
     byte_size(bin)
+  end
+
+  def extract_content_type(headers) do
+    {_key, content_type} =
+      Enum.find(headers, fn {key, _value} ->
+        key == "content-type"
+      end)
+
+    content_type
   end
 end

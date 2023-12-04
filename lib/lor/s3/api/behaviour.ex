@@ -17,4 +17,9 @@ defmodule Lor.S3.Behaviour do
               key :: binary(),
               input :: map()
             ) :: {:ok, map()} | {:error, {atom(), map()}}
+
+  @callback url(
+              bucket :: binary(),
+              key :: binary()
+            ) :: binary()
 end

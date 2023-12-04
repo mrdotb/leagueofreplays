@@ -39,6 +39,7 @@ defmodule Lor.MixProject do
   defp deps do
     [
       {:ash, "~> 2.17"},
+      {:ash_admin, "~> 0.10.0"},
       {:ash_phoenix, "~> 1.2"},
       {:ash_postgres, "~> 1.3"},
       {:aws, "~> 0.13.0"},

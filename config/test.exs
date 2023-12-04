@@ -9,6 +9,7 @@ config :lor, Lor.S3.Api, Lor.S3Dummy
 
 # Exvcr
 config :exvcr,
+  global_mock: true,
   vcr_cassette_library_dir: "test/fixture/vcr_cassettes",
   custom_cassette_library_dir: "test/fixture/custom_cassettes",
   filter_sensitive_data: [],

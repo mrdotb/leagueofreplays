@@ -1,4 +1,4 @@
-defmodule Lor.S3 do
+defmodule Lor.Pros do
   use Ash.Api,
     extensions: [AshAdmin.Api]
 
@@ -7,6 +7,7 @@ defmodule Lor.S3 do
   end
 
   resources do
-    resource Lor.S3.Object
+    resource Lor.Pros.Team
+    resource Lor.Pros.Player
   end
 end

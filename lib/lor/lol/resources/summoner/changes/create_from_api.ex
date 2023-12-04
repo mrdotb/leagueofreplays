@@ -7,8 +7,10 @@ defmodule Lor.Lol.Summoner.Changes.CreateFromApi do
   def change(changeset, _, _) do
     summoner_data = Ash.Changeset.get_argument(changeset, :summoner_data)
     account_data = Ash.Changeset.get_argument(changeset, :account_data)
+    player_id = Ash.Changeset.get_argument(changeset, :player_id)
 
     params = %{
+      player_id: player_id,
       riot_id: to_riot_id(account_data),
       name: summoner_data["name"],
       account_id: summoner_data["accountId"],

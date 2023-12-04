@@ -17,4 +17,8 @@ defmodule Lor.S3.Api do
   @impl true
   def delete_object(bucket, key, input \\ %{}),
     do: @api.delete_object(bucket, key, input)
+
+  @impl true
+  def url(bucket, key),
+    do: @api.url(bucket, key)
 end

@@ -10,6 +10,7 @@ import Config
 config :lor,
   ash_apis: [
     Lor.Lol,
+    Lor.Pros,
     Lor.S3
   ]
 

@@ -18,4 +18,9 @@ defmodule Lor.S3Dummy do
   def delete_object(_bucket, _key, _input) do
     {:ok, %{}}
   end
+
+  @impl true
+  def url(_bucket, _key) do
+    ""
+  end
 end

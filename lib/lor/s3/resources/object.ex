@@ -12,10 +12,11 @@ defmodule Lor.S3.Object do
     define_for Lor.S3
     define :create
     define :destroy
+    define :read_all, action: :read
   end
 
   actions do
-    defaults [:create, :destroy]
+    defaults [:read, :create, :destroy]
   end
 
   attributes do

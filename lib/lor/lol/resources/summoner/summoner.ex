@@ -17,10 +17,11 @@ defmodule Lor.Lol.Summoner do
 
   code_interface do
     define_for Lor.Lol
-    define :create_from_api, args: [:platform_id, :summoner_data, :account_data]
+    define :create_from_api, args: [:platform_id, :summoner_data, :account_data, :player_id]
     define :read_all, action: :read
 
     define :by_puuids, args: [:puuids]
+    define :by_names_and_platform_id, args: [:names, :platform_id]
   end
 
   actions do
@@ -34,6 +35,18 @@ defmodule Lor.Lol.Summoner do
       filter expr(puuid in ^arg(:puuids))
     end
 
+    read :by_names_and_platform_id do
+      argument :names, {:array, :string} do
+        allow_nil? false
+      end
+
+      argument :platform_id, Lor.Lol.PlatformIds do
+        allow_nil? false
+      end
+
+      filter expr(name in ^arg(:names) and platform_id == ^arg(:platform_id))
+    end
+
     create :create_from_api do
       accept [:platform_id]
 
@@ -44,6 +57,8 @@ defmodule Lor.Lol.Summoner do
       argument :account_data, :map do
         allow_nil? false
       end
+
+      argument :player_id, :uuid
 
       change Lor.Lol.Summoner.Changes.CreateFromApi
     end
@@ -104,5 +119,13 @@ defmodule Lor.Lol.Summoner do
 
     create_timestamp :inserted_at
     update_timestamp :updated_at
+  end
+
+  relationships do
+    belongs_to :player, Lor.Pros.Player do
+      api Lor.Pros
+      attribute_type :uuid
+      attribute_writable? true
+    end
   end
 end

@@ -16,3 +16,9 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
   * Docs: https://hexdocs.pm/phoenix
   * Forum: https://elixirforum.com/c/phoenix-forum
   * Source: https://github.com/phoenixframework/phoenix
+
+# Testing
+Remove large binary from vcr_cassettes using jq
+```
+cat test/fixture/vcr_cassettes/ugg.json | jq '.[] |= (if .response.binary == true then .response.body = "g20AAAAA" else . end)'
+```

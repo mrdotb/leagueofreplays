@@ -1,6 +1,6 @@
 defmodule Lor.Lol.Match do
   @moduledoc """
-  The model aggregate match metadata and info
+  This model aggregate match metadata and info
   https://developer.riotgames.com/apis#match-v5/GET_getMatch
   """
   use Ash.Resource,

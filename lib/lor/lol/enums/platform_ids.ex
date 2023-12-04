@@ -34,6 +34,7 @@ defmodule Lor.Lol.PlatformIds do
     th2: :ASIA,
     vn2: :ASIA,
     eun1: :EUROPE,
+    euw1: :EUROPE,
     eu1: :EUROPE,
     tr1: :EUROPE,
     ru: :EUROPE,
@@ -41,4 +42,5 @@ defmodule Lor.Lol.PlatformIds do
   }
 
   def get_region(platform_id), do: Map.get(@platform_ids_routing_map, platform_id)
+  def fetch_region!(platform_id), do: Map.fetch!(@platform_ids_routing_map, platform_id)
 end

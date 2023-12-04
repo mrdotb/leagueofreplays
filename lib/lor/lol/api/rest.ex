@@ -144,7 +144,7 @@ defmodule Lor.Lol.Rest do
   @doc """
   Given a platform_id client and a summoner_name get summoner_data
   ## Example
-    iex> RiotApi.fetch_summoner_by_name(client, "godindatzotak")
+    iex> RiotApi.fetch_summoner_by_name(:euw1, "godindatzotak")
     {:ok,
      %{
        "accountId" => "5H_Q0vPz0WFtt1mzOKicsavLEuYjLSDG-gNsKVBO4FjQBg",
@@ -161,7 +161,9 @@ defmodule Lor.Lol.Rest do
     query = URI.encode_www_form(summoner_name)
     path = "/lol/summoner/v4/summoners/by-name/#{query}"
 
-    case Tesla.get!(client, path) do
+    res = Tesla.get!(client, path)
+
+    case res do
       %{status: 200, body: summoner_data} ->
         {:ok, summoner_data}
 
