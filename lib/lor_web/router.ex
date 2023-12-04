@@ -19,7 +19,7 @@ defmodule LorWeb.Router do
   scope "/", LorWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
+    live "/", ActiveGameLive.Index, :index
   end
 
   scope "/" do

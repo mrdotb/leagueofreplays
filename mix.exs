@@ -50,6 +50,7 @@ defmodule Lor.MixProject do
       {:gettext, "~> 0.20"},
       {:hackney, "~> 1.18"},
       {:jason, "~> 1.2"},
+      {:petal_components, "~> 1.6"},
       {:phoenix, "~> 1.7.10"},
       {:phoenix_ecto, "~> 4.4"},
       {:phoenix_html, "~> 3.3"},

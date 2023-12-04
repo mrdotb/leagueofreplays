@@ -85,7 +85,11 @@ defmodule LorWeb do
       import Phoenix.HTML
       # Core UI components and translation
       import LorWeb.CoreComponents
+      import LorWeb.LayoutComponents
       import LorWeb.Gettext
+
+      # Handy alias to PetalComponents
+      alias LorWeb.PetalComponents, as: PC
 
       # Shortcut for generating JS commands
       alias Phoenix.LiveView.JS
