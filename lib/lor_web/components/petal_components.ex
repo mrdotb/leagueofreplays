@@ -38,4 +38,5 @@ defmodule LorWeb.PetalComponents do
   defdelegate prose(assigns), to: PetalComponents.Typography
   defdelegate ol(assigns), to: PetalComponents.Typography
   defdelegate ul(assigns), to: PetalComponents.Typography
+  defdelegate vertical_menu(assigns), to: PetalComponents.Menu
 end

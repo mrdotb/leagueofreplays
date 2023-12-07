@@ -30,9 +30,9 @@ defmodule LorWeb.LayoutComponents do
             <div class="grow">
               <div class="flex items-center">
                 <.link navigate={~p"/"}>
-                  <div class="hidden lg:flex items-center">
+                  <div class="flex items-center">
                     <img class="h-16" src={~p"/images/logo.svg"} />
-                    <h1 class="ml-2 font-bold text-3xl">LOR</h1>
+                    <h1 class="hidden lg:inline ml-2 font-bold text-3xl">LOR</h1>
                   </div>
                 </.link>
               </div>

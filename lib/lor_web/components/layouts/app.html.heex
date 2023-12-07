@@ -1,9 +1,39 @@
 <.flash_group flash={@flash} />
 <.skeleton>
   <:sidebar_block>
-    <ul>
-      <li>test</li>
-    </ul>
+    <div class="w-full">
+      <PC.vertical_menu
+        current_page={:home}
+        menu_items={[
+          %{
+            name: :active_game,
+            label: "Live Game",
+            path: ~p"/",
+            icon: :play
+          },
+          %{
+            name: :data,
+            label: "Data",
+            path: ~p"/",
+            icon: :circle_stack,
+            menu_items: [
+              %{
+                name: :data,
+                label: "Archived",
+                path: ~p"/",
+                icon: :archive_box
+              },
+              %{
+                name: :data,
+                label: "Downloads",
+                path: ~p"/",
+                icon: :arrow_down_on_square_stack
+              }
+            ]
+          }
+        ]}
+      />
+    </div>
   </:sidebar_block>
   <%= @inner_content %>
 </.skeleton>
