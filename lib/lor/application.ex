@@ -14,9 +14,11 @@ defmodule Lor.Application do
       {Phoenix.PubSub, name: Lor.PubSub},
       # Start the Finch HTTP client
       {Finch, name: Lor.Finch},
-      Lor.Lol.RestClients,
-      # Start a worker by calling: Lor.Worker.start_link(arg)
-      # {Lor.Worker, arg},
+      # Start our HTTP clients
+      Lor.Lol.Rest.Supervisor,
+      Lor.Lol.ObserverClients,
+      # Start Replays
+      # Lor.Replays.Supervisor,
       # Start to serve requests, typically the last entry
       LorWeb.Endpoint
     ]

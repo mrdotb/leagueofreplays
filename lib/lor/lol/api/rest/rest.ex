@@ -20,19 +20,7 @@ defmodule Lor.Lol.Rest do
   """
   def new(region_or_platform_id) do
     middlewares = [
-      # this will make the request retry automatically when we hit the rate limit
-      # and get a 429 status or the riot api return a 500 status
-      {Tesla.Middleware.Retry,
-       [
-         delay: 10_000,
-         max_retries: 20,
-         max_delay: 60_000,
-         should_retry: fn
-           {:ok, %{status: status}} when status in [429, 503] -> true
-           {:ok, _} -> false
-           {:error, _} -> true
-         end
-       ]},
+      {Lor.Lol.Rest.RetryQueueMiddleware, region_or_platform_id},
       # pass the riot token in header
       {Tesla.Middleware.Headers, [{"X-Riot-Token", token()}]},
       # set the BaseUrl depending what region endpoint we want to call
