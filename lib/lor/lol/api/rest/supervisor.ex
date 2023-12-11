@@ -12,21 +12,19 @@ defmodule Lor.Lol.Rest.Supervisor do
     children =
       [
         {Registry, keys: :unique, name: Lor.Lol.Rest.Registry},
-        Lor.Lol.RestClients
-      ] ++ queues()
+      ] ++ rest()
 
     Supervisor.init(children, strategy: :one_for_one)
   end
 
-  defp queues do
+  defp rest do
     platform_ids = Lor.Lol.PlatformIds.values()
     regions = Lor.Lol.Regions.values()
-
     routes = platform_ids ++ regions
 
     for route <- routes do
-      name = {:via, Registry, {Lor.Lol.Rest.Registry, "queue:#{to_string(route)}"}}
-      Supervisor.child_spec({Lor.Lol.Rest.Queue, name}, id: name)
+      name = {:via, Registry, {Lor.Lol.Rest.Registry, "client:#{to_string(route)}"}}
+      Supervisor.child_spec({Lor.Lol.Rest, {route, name}}, id: name)
     end
   end
 end
