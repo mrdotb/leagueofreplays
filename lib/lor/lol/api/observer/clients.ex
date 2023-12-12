@@ -1,6 +1,6 @@
 defmodule Lor.Lol.Observer.Clients do
   @moduledoc """
-  A GenServer that wrap all clients for each region to respect the rate limit.
+  A GenServer that wrap all clients for each region.
   """
 
   use GenServer

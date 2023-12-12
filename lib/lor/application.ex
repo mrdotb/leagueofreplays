@@ -16,9 +16,9 @@ defmodule Lor.Application do
       {Finch, name: Lor.Finch},
       # Start our HTTP clients
       Lor.Lol.Rest.Supervisor,
-      Lor.Lol.ObserverClients,
+      Lor.Lol.Observer.Clients,
       # Start Replays
-      # Lor.Replays.Supervisor,
+      Lor.Replays.Supervisor,
       # Start to serve requests, typically the last entry
       LorWeb.Endpoint
     ]
