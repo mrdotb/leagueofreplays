@@ -262,4 +262,17 @@ defmodule Lor.Lol.Rest.Client do
         {:error, :unknow_error}
     end
   end
+
+  def fetch_featured_game(client) do
+    path = "/lol/spectator/v4/featured-games"
+
+    case Tesla.get!(client, path) do
+      %{status: 200, body: body} ->
+        {:ok, body}
+
+      other ->
+        Logger.error(other)
+        {:error, :unknow_error}
+    end
+  end
 end

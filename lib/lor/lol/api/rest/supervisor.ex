@@ -11,7 +11,7 @@ defmodule Lor.Lol.Rest.Supervisor do
   def init(_args) do
     children =
       [
-        {Registry, keys: :unique, name: Lor.Lol.Rest.Registry},
+        {Registry, keys: :unique, name: Lor.Lol.Rest.Registry}
       ] ++ rest()
 
     Supervisor.init(children, strategy: :one_for_one)

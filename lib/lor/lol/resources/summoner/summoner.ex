@@ -22,6 +22,7 @@ defmodule Lor.Lol.Summoner do
 
     define :by_puuids, args: [:puuids]
     define :by_names_and_platform_id, args: [:names, :platform_id]
+    define :by_platform_id, args: [:platform_id]
   end
 
   actions do
@@ -45,6 +46,14 @@ defmodule Lor.Lol.Summoner do
       end
 
       filter expr(name in ^arg(:names) and platform_id == ^arg(:platform_id))
+    end
+
+    read :by_platform_id do
+      argument :platform_id, Lor.Lol.PlatformIds do
+        allow_nil? false
+      end
+
+      filter expr(platform_id == ^arg(:platform_id))
     end
 
     create :create_from_api do
