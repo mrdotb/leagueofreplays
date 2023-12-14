@@ -13,10 +13,27 @@ defmodule Lor.S3.Object do
     define :create
     define :destroy
     define :read_all, action: :read
+    define :upload, args: [:body, :set_url?]
   end
 
   actions do
     defaults [:read, :create, :destroy]
+
+    create :upload do
+      accept [:bucket, :key, :file_name, :content_type, :metadata]
+
+      argument :body, :binary do
+        allow_nil? false
+        description "The binary to upload on s3"
+      end
+
+      argument :set_url?, :boolean do
+        allow_nil? false
+        description "Set a public url for this object"
+      end
+
+      change Lor.S3.Object.Changes.Upload
+    end
   end
 
   attributes do

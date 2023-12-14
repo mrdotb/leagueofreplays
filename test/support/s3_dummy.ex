@@ -10,6 +10,10 @@ defmodule Lor.S3Dummy do
   end
 
   @impl true
+  def put_object("error", _key, _input) do
+    {:error, {:unexpected_response, "dummy error"}}
+  end
+
   def put_object(_bucket, _key, _input) do
     {:ok, %{}}
   end
@@ -20,7 +24,7 @@ defmodule Lor.S3Dummy do
   end
 
   @impl true
-  def url(_bucket, _key) do
-    ""
+  def url(bucket, key) do
+    "http://#{bucket}/#{key}"
   end
 end
