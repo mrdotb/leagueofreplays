@@ -17,7 +17,7 @@ defmodule Lor.S3.Object do
   end
 
   actions do
-    defaults [:read, :create, :destroy]
+    defaults [:read, :create]
 
     create :upload do
       accept [:bucket, :key, :file_name, :content_type, :metadata]
@@ -33,6 +33,12 @@ defmodule Lor.S3.Object do
       end
 
       change Lor.S3.Object.Changes.Upload
+    end
+
+    destroy :destroy do
+      primary? true
+
+      change Lor.S3.Object.Changes.Destroy
     end
   end
 
