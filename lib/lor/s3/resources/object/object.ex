@@ -10,14 +10,13 @@ defmodule Lor.S3.Object do
 
   code_interface do
     define_for Lor.S3
-    define :create
-    define :destroy
     define :read_all, action: :read
+    define :destroy
     define :upload, args: [:body, :set_url?]
   end
 
   actions do
-    defaults [:read, :create]
+    defaults [:read]
 
     create :upload do
       accept [:bucket, :key, :file_name, :content_type, :metadata]

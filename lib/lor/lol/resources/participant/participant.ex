@@ -2,8 +2,6 @@ defmodule Lor.Lol.Participant do
   use Ash.Resource,
     data_layer: AshPostgres.DataLayer
 
-  require Logger
-
   postgres do
     table "lol_participants"
 

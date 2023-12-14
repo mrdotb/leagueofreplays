@@ -42,28 +42,14 @@ defmodule Lor.Pros.CreateTeamsStep do
     bucket = "pictures"
     file_name = Path.basename(response.url)
     key = "team/#{file_name}"
-    md5 = Lor.S3.Utils.hash_bin_md5(response.body)
-    content_type = Lor.S3.Utils.extract_content_type(response.headers)
-    url = Lor.S3.Api.url(bucket, key)
 
-    input = %{
-      body: response.body,
-      content_type: content_type,
-      md5: md5
-    }
-
-    object_params = %{
+    params = %{
       bucket: bucket,
       key: key,
-      url: url,
-      file_name: file_name,
-      content_type: content_type,
-      md5: md5,
-      size: byte_size(response.body)
+      content_type: Lor.S3.Utils.extract_content_type(response.headers),
+      file_name: Path.basename(response.url)
     }
 
-    with {:ok, _response} <- Lor.S3.Api.put_object(bucket, key, input) do
-      Lor.S3.Object.create(object_params)
-    end
+    Lor.S3.Object.upload(response.body, true, params)
   end
 end

@@ -38,7 +38,7 @@ defmodule Lor.S3.ObjectTest do
 
   test "destroy object success", %{body: body, params: params} do
     object = Lor.S3.Object.upload!(body, false, params)
-    {:ok, _} = Lor.S3.Object.destroy(object)
+    :ok = Lor.S3.Object.destroy(object)
   end
 
   test "destroy object failure", %{body: body, params: params} do
