@@ -54,8 +54,8 @@ defmodule Lor.Lol.Rest do
     GenServer.call(pid, {:fetch_account_by_puuid, puuid}, @timeout)
   end
 
-  def fetch_featured_game(region) do
-    pid = get_pid(region)
+  def fetch_featured_game(platform_id) do
+    pid = get_pid(platform_id)
     GenServer.call(pid, :fetch_featured_game, @timeout)
   end
 

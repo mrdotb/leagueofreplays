@@ -142,7 +142,7 @@ defmodule Lor.Lol.Rest.Client do
   @doc """
   Given a platform_id client and a summoner_name get summoner_data
   ## Example
-    iex> RiotApi.fetch_summoner_by_name(:euw1, "godindatzotak")
+    iex> RiotApi.fetch_summoner_by_name(client, "godindatzotak")
     {:ok,
      %{
        "accountId" => "5H_Q0vPz0WFtt1mzOKicsavLEuYjLSDG-gNsKVBO4FjQBg",
@@ -176,7 +176,7 @@ defmodule Lor.Lol.Rest.Client do
   @doc """
   Given a platform_id client and a puuid get summoner_data
   ## Example
-    iex> RiotApi.fetch_summoner_by_puuid("euw1", "8tjefad_ZLY2X8UbmwYlR1PBtaRgJBxcOcvFZ8tMy6f4bw56fMaIvLoqA87DK3yzqihZs7L-VQCdBw")
+    iex> RiotApi.fetch_summoner_by_puuid(client, "8tjefad_ZLY2X8UbmwYlR1PBtaRgJBxcOcvFZ8tMy6f4bw56fMaIvLoqA87DK3yzqihZs7L-VQCdBw")
     {:ok,
      %{
        "accountId" => "5H_Q0vPz0WFtt1mzOKicsavLEuYjLSDG-gNsKVBO4FjQBg",
@@ -205,7 +205,7 @@ defmodule Lor.Lol.Rest.Client do
   end
 
   @doc """
-  Given a platform_id and a encrypted_summoner_id return
+  Given a platform_id client and a encrypted_summoner_id return
   the league data.
   """
   def fetch_league(client, encrypted_summoner_id) do
@@ -245,7 +245,7 @@ defmodule Lor.Lol.Rest.Client do
   end
 
   @doc """
-  Given a region and a puuid fetch the account with gameName and tagLine.
+  Given a client and a puuid fetch the account with gameName and tagLine.
   """
   def fetch_account_by_puuid(client, puuid) do
     path = "/riot/account/v1/accounts/by-puuid/#{puuid}"
@@ -263,6 +263,9 @@ defmodule Lor.Lol.Rest.Client do
     end
   end
 
+  @doc """
+  Given a platform_id client get the featured game we can spectate.
+  """
   def fetch_featured_game(client) do
     path = "/lol/spectator/v4/featured-games"
 
