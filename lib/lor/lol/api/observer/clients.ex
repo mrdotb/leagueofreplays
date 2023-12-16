@@ -28,7 +28,7 @@ defmodule Lor.Lol.Observer.Clients do
     state =
       for platform_id <- platform_ids, reduce: state do
         acc ->
-          client = Lor.Lol.Observer.new(platform_id)
+          client = Lor.Lol.Observer.Client.new(platform_id)
           Map.put(acc, platform_id, client)
       end
 
