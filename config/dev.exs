@@ -29,6 +29,10 @@ config :lor, LorWeb.Endpoint,
     tailwind: {Tailwind, :install_and_run, [:default, ~w(--watch)]}
   ]
 
+config :lor, LorSpectator.Endpoint,
+  http: [ip: {127, 0, 0, 1}, port: 3000],
+  check_origin: false
+
 # ## SSL Support
 #
 # In order to use HTTPS in development, a self-signed

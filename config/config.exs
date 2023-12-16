@@ -7,6 +7,8 @@
 # General application configuration
 import Config
 
+config :lor, :replays, active: false
+
 config :lor,
   ash_apis: [
     Lor.Lol,
@@ -22,7 +24,7 @@ config :lor,
   ecto_repos: [Lor.Repo],
   generators: [timestamp_type: :utc_datetime]
 
-# Configures the endpoint
+# Configures the web endpoint
 config :lor, LorWeb.Endpoint,
   url: [host: "localhost"],
   adapter: Phoenix.Endpoint.Cowboy2Adapter,
@@ -32,6 +34,14 @@ config :lor, LorWeb.Endpoint,
   ],
   pubsub_server: Lor.PubSub,
   live_view: [signing_salt: "0uxjtFvk"]
+
+config :lor, LorSpectator.Cache,
+  backend: :ets,
+  gc_interval: :timer.minutes(20),
+  max_size: 1_000_000,
+  allocated_memory: 2_000_000_000,
+  gc_cleanup_min_timeout: :timer.seconds(10),
+  gc_cleanup_max_timeout: :timer.minutes(10)
 
 # Configures the mailer
 #

@@ -30,12 +30,18 @@ config :lor, Lor.Repo,
   pool: Ecto.Adapters.SQL.Sandbox,
   pool_size: 10
 
-# We don't run a server during test. If one is required,
+# We don't run a web server during test. If one is required,
 # you can enable the server option below.
 config :lor, LorWeb.Endpoint,
   http: [ip: {127, 0, 0, 1}, port: 4002],
   secret_key_base: "GtthBFVizZooSFwIFEZorc2xOinl4FsosfC10PnPdkL8GXQhHpK2IeeNTV2dlAA1",
   server: false
+
+config :lor, LorSpectator.Endpoint,
+  http: [ip: {127, 0, 0, 1}, port: 4003],
+  server: false
+
+config :lor, :replays, active: false
 
 # In test we don't send emails.
 config :lor, Lor.Mailer, adapter: Swoosh.Adapters.Test
