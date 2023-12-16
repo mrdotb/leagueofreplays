@@ -1,0 +1,23 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": [],
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "http://replays.leagueofgraphs.com/observer-mode/rest/consumer/getGameMetaData/EUW1-12345689/6720928471/1/token"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"gameServerAddress\":\"\",\"port\":0,\"encryptionKey\":\"lmmwcqeQfVEGpRtMHLd5634xeIlAtpL4\",\"chunkTimeInterval\":30000,\"startTime\":\"Dec 15, 2023 1:47:53 PM\",\"gameEnded\":false,\"gameKey\":{\"gameId\":6720928471,\"platformId\":\"EUW1\"},\"lastChunkId\":3,\"lastKeyFrameId\":1,\"endStartupChunkId\":1,\"delayTime\":180000,\"pendingAvailableChunkInfo\":[{\"chunkId\":1,\"duration\":0,\"receivedTime\":\"Dec 15, 2023 1:47:58 PM\"},{\"chunkId\":2,\"duration\":25087,\"receivedTime\":\"Dec 15, 2023 1:48:23 PM\"},{\"chunkId\":3,\"duration\":30003,\"receivedTime\":\"Dec 15, 2023 1:48:53 PM\"}],\"pendingAvailableKeyFrameInfo\":[{\"keyFrameId\":1,\"receivedTime\":\"Dec 15, 2023 1:48:53 PM\",\"nextChunkId\":3}],\"keyFrameTimeInterval\":60000000,\"decodedEncryptionKey\":\"\",\"startGameChunkId\":2,\"gameLength\":0,\"clientAddedLag\":0,\"clientBackFetchingEnabled\":false,\"clientBackFetchingFreq\":1000,\"interestScore\":3226,\"featuredGame\":false,\"endGameChunkId\":-1,\"endGameKeyFrameId\":-1}",
+      "headers": {
+        "date": "Sat, 16 Dec 2023 16:26:56 GMT",
+        "content-length": "905",
+        "content-type": "application/octet-stream"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

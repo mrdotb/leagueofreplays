@@ -18,9 +18,11 @@ defmodule Lor.Application do
       Lor.Lol.Rest.Supervisor,
       Lor.Lol.Observer.Clients,
       # Start Replays
-      Lor.Replays.Supervisor,
+      Lor.Lol.Replays.Supervisor,
       # Start to serve requests, typically the last entry
-      LorWeb.Endpoint
+      LorWeb.Endpoint,
+      # Start Spectator endpoint
+      LorSpectator.Supervisor
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
