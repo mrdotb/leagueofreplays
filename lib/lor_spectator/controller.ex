@@ -3,27 +3,14 @@ defmodule LorSpectator.Controller do
 
   import Plug.Conn
 
-  @doc """
-  Split the platform_id and the session id
-  """
-  def action(conn, _) do
-    if action_name(conn) == :version do
-      apply(__MODULE__, :version, [conn, conn.params])
-    else
-      {platform_id, session_id} = split_platform_id_and_session_id(conn.params["platform_id"])
-      params = Map.merge(conn.params, %{"platform_id" => platform_id, "session_id" => session_id})
-      apply(__MODULE__, action_name(conn), [conn, params])
-    end
+  def action(%{private: %{phoenix_action: action}} = conn, _)
+      when action in ~w(get_game_meta_data get_last_chunk_info get_game_data_chunk get_key_frame)a do
+    params = LorSpectator.Helpers.add_session_params!(conn.params)
+    apply(__MODULE__, action_name(conn), [conn, params])
   end
 
-  defp split_platform_id_and_session_id(string) do
-    case String.split(string, "-", part: 2) do
-      [platform_id, session_id] ->
-        {platform_id, session_id}
-
-      _ ->
-        {nil, nil}
-    end
+  def action(conn, _) do
+    apply(__MODULE__, :version, [conn, conn.params])
   end
 
   def version(conn, _params) do
@@ -32,25 +19,54 @@ defmodule LorSpectator.Controller do
     |> send_resp(200, "2.0.0")
   end
 
-  def get_game_meta_data(conn, _params) do
-    json(conn, %{})
+  def get_game_meta_data(conn, params) do
+    types = [platform_id: {:string, required: true}, game_id: {:string, required: true}]
+    args = Lor.Validation.normalize!(params, types)
+    replay = Lor.Lol.Replay.by_game_id_and_platform_id!(args.platform_id, args.game_id)
+    json(conn, replay.game_meta_data)
   end
 
-  def get_last_chunk_info(conn, _params) do
-    conn
-    |> put_resp_content_type("text/plain")
-    |> send_resp(200, "2.0.0")
+  def get_last_chunk_info(conn, params) do
+    types = [
+      platform_id: {:string, required: true},
+      game_id: {:string, required: true},
+      session_id: {:string, required: true}
+    ]
+
+    args = Lor.Validation.normalize!(params, types)
+    replay = Lor.Lol.Replay.by_game_id_and_platform_id!(args.platform_id, args.game_id)
+
+    response =
+      LorSpectator.Helpers.get_last_chunk_info(
+        replay,
+        args.game_id,
+        args.session_id
+      )
+
+    json(conn, response)
   end
 
-  def get_game_data_chunk(conn, _params) do
-    conn
-    |> put_resp_content_type("text/plain")
-    |> send_resp(200, "2.0.0")
+  def get_game_data_chunk(conn, params) do
+    types = [
+      platform_id: {:string, required: true},
+      game_id: {:string, required: true},
+      chunk_id: {:integer, required: true}
+    ]
+
+    args = Lor.Validation.normalize!(params, types)
+    url = LorSpectator.Helpers.get_chunk_url(args)
+    redirect(conn, external: url)
   end
 
-  def get_key_frame(conn, _params) do
-    conn
-    |> put_resp_content_type("text/plain")
-    |> send_resp(200, "2.0.0")
+  def get_key_frame(conn, params) do
+    types = [
+      platform_id: {:string, required: true},
+      game_id: {:string, required: true},
+      key_frame_id: {:integer, required: true}
+    ]
+
+    args = Lor.Validation.normalize!(params, types)
+    url = LorSpectator.Helpers.get_key_frame_url(args)
+    redirect(conn, external: url)
   end
 end

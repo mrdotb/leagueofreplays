@@ -7,6 +7,11 @@ config :ash, :missed_notifications, :ignore
 # S3
 config :lor, Lor.S3.Api, Lor.S3Dummy
 
+config :lor, :s3,
+  replay: [
+    url: ""
+  ]
+
 # Exvcr
 config :exvcr,
   global_mock: true,
@@ -39,8 +44,11 @@ config :lor, LorWeb.Endpoint,
 
 config :lor, LorSpectator.Endpoint,
   http: [ip: {127, 0, 0, 1}, port: 4003],
-  server: false
+  debug_errors: false,
+  server: false,
+  url: [scheme: "http", host: "localhost", port: 4003, path: "/"]
 
+# Replays schedulers
 config :lor, :replays, active: false
 
 # In test we don't send emails.

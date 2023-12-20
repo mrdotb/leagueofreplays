@@ -28,6 +28,8 @@ defmodule Lor.Lol.Replays.Manager do
     id = get_id(active_game)
 
     {:ok, platform_id} = Lor.Lol.PlatformIds.match(active_game["platformId"])
+    game_id = active_game["gameId"]
+    encryption_key = active_game["observers"]["encryptionKey"]
 
     state =
       if not Map.has_key?(state, id) do
@@ -35,7 +37,8 @@ defmodule Lor.Lol.Replays.Manager do
           id: id,
           manager_pid: self(),
           platform_id: platform_id,
-          active_game: active_game
+          game_id: game_id,
+          encryption_key: encryption_key
         }
 
         {:ok, pid} = Lor.Lol.Replays.WorkerSupervisor.add(args)

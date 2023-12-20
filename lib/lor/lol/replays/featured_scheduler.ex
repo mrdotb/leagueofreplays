@@ -22,7 +22,7 @@ defmodule Lor.Lol.Replays.FeaturedScheduler do
 
   @impl true
   def init(platform_id) do
-    Logger.debug("Start FeaturedScheduler platform_id #{inspect(platform_id)}")
+    Logger.info("Start FeaturedScheduler platform_id #{inspect(platform_id)}")
     state = %__MODULE__{platform_id: platform_id}
     {:ok, state, {:continue, :start}}
   end
@@ -43,7 +43,7 @@ defmodule Lor.Lol.Replays.FeaturedScheduler do
 
         for game <- game_list,
             game["gameStartTime"] != 0,
-            Lor.TimeHelpers.started_less_than_m_ago?(game["gameStartTime"], 10) do
+            Lor.TimeHelpers.started_less_than_m_ago?(game["gameStartTime"], 5) do
           Lor.Lol.Replays.Manager.add(game)
         end
 

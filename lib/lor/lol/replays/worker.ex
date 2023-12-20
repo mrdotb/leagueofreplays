@@ -7,10 +7,11 @@ defmodule Lor.Lol.Replays.Worker do
   require Logger
 
   defstruct ~w(
-    id manager_pid platform_id active_game game_id
-    replay_id
-    metadata client version current_chunk_id chunk_infos
+    id manager_pid platform_id game_id replay_id
+    encryption_key replay
+    client version current_chunk_id last_chunk_info
     chunk_statuses key_frame_statuses tasks
+    error
   )a
 
   def start_link(args, opts \\ []) do
@@ -27,10 +28,9 @@ defmodule Lor.Lol.Replays.Worker do
       id: args.id,
       manager_pid: args.manager_pid,
       platform_id: args.platform_id,
-      active_game: args.active_game,
-      game_id: args.active_game["gameId"],
+      game_id: args.game_id,
+      encryption_key: args.encryption_key,
       current_chunk_id: 1,
-      chunk_infos: [],
       chunk_statuses: %{},
       key_frame_statuses: %{},
       tasks: MapSet.new()
@@ -42,44 +42,25 @@ defmodule Lor.Lol.Replays.Worker do
     {:ok, state, {:continue, :start}}
   end
 
-  # Give up after 10 retry
-  defp fetch_game_meta_data(platform_id, game_id, retry_count \\ 0)
-
-  defp fetch_game_meta_data(_, _, 10) do
-    {:error, :game_meta_data}
-  end
-
-  defp fetch_game_meta_data(platform_id, game_id, retry_count) do
-    Logger.debug("fetch_game_meta_data #{retry_count}")
-
-    case Lor.Lol.Observer.fetch_game_meta_data(platform_id, game_id) do
-      {:ok, metadata} ->
-        {:ok, metadata}
-
-      {:error, _} ->
-        sleeping_time = min(5000, 1000 * Bitwise.bsl(1, retry_count))
-        :timer.sleep(sleeping_time)
-        fetch_game_meta_data(platform_id, game_id, retry_count + 1)
-    end
-  end
-
   @impl true
   def handle_continue(:start, state) do
     params = %{
       game_id: state.game_id,
       platform_id: state.platform_id,
-      encryption_key: state.active_game["observers"]["encryptionKey"]
+      encryption_key: state.encryption_key
     }
 
     with {:ok, version} <- Lor.Lol.Observer.fetch_api_version(state.platform_id),
-         {:ok, metadata} <- fetch_game_meta_data(state.platform_id, state.game_id),
-         {:ok, replay} <- Lor.Lol.Replay.create(Map.put(params, :metadata, metadata)) do
+         {:ok, metadata} <-
+           Lor.Lol.Observer.fetch_game_meta_data(state.platform_id, state.game_id),
+         {:ok, replay} <- Lor.Lol.Replay.create(Map.put(params, :game_meta_data, metadata)) do
       send(self(), :record_media_data)
-      state = %{state | version: version, metadata: metadata, replay_id: replay.id}
+      state = %{state | version: version, replay: replay, replay_id: replay.id}
       {:noreply, state}
     else
       {:error, error} ->
         Logger.error("Could not start the replay worker error #{inspect(error)}")
+        state = %{state | error: error}
         {:stop, :normal, state}
     end
   end
@@ -93,16 +74,17 @@ defmodule Lor.Lol.Replays.Worker do
         handle_chunk_info(chunk_info, state)
 
       {:error, :not_found} ->
+        state = %{state | error: :not_found}
         {:stop, :normal, state}
     end
   end
 
   def handle_info({:process_previous_media_data, chunk_id, key_frame_id}, state) do
-    for chunk_id <- 1..(chunk_id - 1) do
+    for chunk_id <- 1..(chunk_id - 1), chunk_id > 0 do
       send(self(), {:fetch_and_store_game_data_chunk, chunk_id})
     end
 
-    for key_frame_id <- 1..(key_frame_id - 1) do
+    for key_frame_id <- 1..(key_frame_id - 1), key_frame_id > 0 do
       send(self(), {:fetch_and_store_key_frame, key_frame_id})
     end
 
@@ -225,6 +207,36 @@ defmodule Lor.Lol.Replays.Worker do
     end
   end
 
+  @impl true
+  def terminate(:normal, %{error: nil} = state) do
+    Logger.info("Replays worker normal terminate state: #{inspect(state, pretty: true)}")
+
+    params = %{
+      first_chunk_id: get_first_chunk_id(state.chunk_statuses),
+      last_chunk_id: get_last_chunk_id(state.chunk_statuses),
+      first_key_frame_id: get_first_key_frame_id(state.key_frame_statuses),
+      last_key_frame_id: get_last_key_frame_id(state.key_frame_statuses)
+    }
+
+    Lor.Lol.Replay.finish(state.replay, params)
+
+    Process.send(state.manager_pid, {:terminating, state}, [])
+
+    # Gracefully stop the GenServer process
+    :normal
+  end
+
+  def terminate(:normal, %{error: error} = state) do
+    Logger.info(
+      "Replays worker error terminate error: #{inspect(error)} state: #{inspect(state, pretty: true)}"
+    )
+
+    Process.send(state.manager_pid, {:terminating, state}, [])
+
+    # Gracefully stop the GenServer process
+    :normal
+  end
+
   defp handle_chunk_info(%{"chunkId" => 0, "keyFrameId" => 0}, state) do
     Logger.debug("Game not started yet retry in 20 sec...")
     Process.send_after(self(), :record_media_data, 20_000)
@@ -256,7 +268,7 @@ defmodule Lor.Lol.Replays.Worker do
 
   defp handle_last_chunk(chunk_info, state) do
     Logger.debug("Received last chunk info terminating...")
-    new_state = %{state | chunk_infos: [chunk_info | state.chunk_infos]}
+    new_state = %{state | last_chunk_info: chunk_info}
 
     if record_completed?(state) do
       {:stop, :normal, new_state}
@@ -274,7 +286,7 @@ defmodule Lor.Lol.Replays.Worker do
     state = %{
       state
       | current_chunk_id: chunk_id + 1,
-        chunk_infos: [chunk_info | state.chunk_infos]
+        last_chunk_info: chunk_info
     }
 
     {:noreply, state}
@@ -282,28 +294,54 @@ defmodule Lor.Lol.Replays.Worker do
 
   defp record_completed?(
          %{
-           current_chunk_id: current_chunk_id,
-           chunk_infos: [last_chunk_infos | _],
+           last_chunk_info: last_chunk_info,
            chunk_statuses: chunk_statuses,
            key_frame_statuses: key_frame_statuses
          } = state
        ) do
-    no_task? = MapSet.size(state.tasks) == 0
-    last_chunk_infos? = current_chunk_id == last_chunk_infos["endGameChunkId"]
+    no_tasks? = MapSet.size(state.tasks) == 0
+    last_chunk_info? = last_chunk_info["chunkId"] == last_chunk_info["endGameChunkId"]
     chunk_statuses? = Enum.all?(chunk_statuses, &(&1 != :processing))
-    key_frames_statuses? = Enum.all?(key_frame_statuses, &(&1 != :processing))
+    key_frame_statuses? = Enum.all?(key_frame_statuses, &(&1 != :processing))
 
-    no_task? and last_chunk_infos? and chunk_statuses? and key_frames_statuses?
+    no_tasks? and last_chunk_info? and chunk_statuses? and key_frame_statuses?
   end
 
   defp record_completed?(_), do: false
 
-  @impl true
-  def terminate(reason, state) do
-    Logger.info("Replays worker terminate reason: #{inspect(reason)} state: #{inspect(state)}")
-    Process.send(state.manager_pid, {:terminating, state}, [])
+  defp get_first_chunk_id(chunk_statuses) do
+    chunk_statuses
+    |> Enum.filter(fn {id, status} ->
+      status == :downloaded and id != 1
+    end)
+    |> Enum.map(fn {id, _} -> id end)
+    |> Enum.min()
+  end
 
-    # Gracefully stop the GenServer process
-    :normal
+  defp get_last_chunk_id(chunk_statuses) do
+    chunk_statuses
+    |> Enum.filter(fn {_id, status} ->
+      status == :downloaded
+    end)
+    |> Enum.map(fn {id, _} -> id end)
+    |> Enum.max()
+  end
+
+  defp get_first_key_frame_id(key_frame_statuses) do
+    key_frame_statuses
+    |> Enum.filter(fn {_id, status} ->
+      status == :downloaded
+    end)
+    |> Enum.map(fn {id, _} -> id end)
+    |> Enum.min()
+  end
+
+  defp get_last_key_frame_id(key_frame_statuses) do
+    key_frame_statuses
+    |> Enum.filter(fn {_id, status} ->
+      status == :downloaded
+    end)
+    |> Enum.map(fn {id, _} -> id end)
+    |> Enum.max()
   end
 end

@@ -20,7 +20,6 @@ defmodule Lor.Lol.Rest.Client do
   """
   def new(region_or_platform_id) do
     middlewares = [
-      # {Lor.Lol.Rest.RetryQueueMiddleware, region_or_platform_id},
       # this will make the request retry automatically when we hit the rate limit
       # and get a 429 status or the riot api return a 500 status
       {Tesla.Middleware.Retry,
