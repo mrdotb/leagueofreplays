@@ -24,6 +24,8 @@ defmodule Lor.DataCase do
       import Ecto.Changeset
       import Ecto.Query
       import Lor.DataCase
+
+      use Oban.Testing, repo: Lor.Repo
     end
   end
 
