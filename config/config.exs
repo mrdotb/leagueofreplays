@@ -18,6 +18,11 @@ config :tesla, :adapter, {Tesla.Adapter.Finch, name: Lor.Finch}
 
 config :lor, Lor.S3.Api, Lor.S3.Minio
 
+config :lor, Oban,
+  repo: Lor.Repo,
+  plugins: [Oban.Plugins.Pruner],
+  queues: [default: 10]
+
 config :lor,
   ecto_repos: [Lor.Repo],
   generators: [timestamp_type: :utc_datetime]

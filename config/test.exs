@@ -7,6 +7,8 @@ config :ash, :missed_notifications, :ignore
 # S3
 config :lor, Lor.S3.Api, Lor.S3Dummy
 
+config :lor, Oban, testing: :inline
+
 config :lor, :s3,
   replay: [
     url: ""
