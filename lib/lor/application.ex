@@ -14,9 +14,13 @@ defmodule Lor.Application do
       {Phoenix.PubSub, name: Lor.PubSub},
       # Start the Finch HTTP client
       {Finch, name: Lor.Finch},
+      # Ddragon
+      Lor.Lol.Ddragon.Supervisor,
       # Start our HTTP clients
       Lor.Lol.Rest.Supervisor,
       Lor.Lol.Observer.Clients,
+      # Oban
+      {Oban, AshOban.config([Lor.Lol], Application.fetch_env!(:lor, Oban))},
       # Start Replays
       Lor.Lol.Replays.Supervisor,
       # Start to serve requests, typically the last entry
