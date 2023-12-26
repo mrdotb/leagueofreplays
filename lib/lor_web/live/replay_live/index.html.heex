@@ -1,0 +1,24 @@
+<PC.h2>Replays</PC.h2>
+
+<div class="flex flex-col">
+  <div class="max-w-4xl flex flex-col items-center space-y-1">
+    <div class="border-l-8 border-transparent w-full grid-participants-header px-1 py-2 text-sm">
+      <div class="[grid-area:creation]"></div>
+      <div class="[grid-area:player]">Player</div>
+      <div class="[grid-area:versus] flex justify-center">Matchup</div>
+      <div class="[grid-area:kda] flex justify-center">KDA</div>
+      <div class="[grid-area:summoners] flex justify-center">Summoners</div>
+      <div class="[grid-area:build] flex md:hidden lg:flex justify-center">Build</div>
+      <div class="[grid-area:ellipsis] hidden lg:flex"></div>
+    </div>
+
+    <div id="participants" phx-update="stream" class="w-full space-y-1">
+      <.live_component
+        :for={{id, participant} <- @streams.participants}
+        module={LorWeb.ReplayLive.MatchCardComponent}
+        id={id}
+        participant={participant}
+      />
+    </div>
+  </div>
+</div>

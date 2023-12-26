@@ -609,6 +609,15 @@ defmodule LorWeb.CoreComponents do
     """
   end
 
+  attr :id, :string, required: true
+  attr :datetime, :string, required: true
+
+  def time_ago(assigns) do
+    ~H"""
+    <time id={@id} phx-hook="TimeAgoHook" datetime={@datetime}></time>
+    """
+  end
+
   ## JS Commands
 
   def show(js \\ %JS{}, selector) do

@@ -1,0 +1,44 @@
+<div class="border-l-8 w-full bg-white text-gray-800 rounded-lg overflow-hidden hover:bg-gray-50 dark:bg-gray-900 dark:text-gray-200 dark:hover:bg-gray-800">
+  <div class="grid-participants px-1 border border-gray-200 py-2 w-full dark:border-gray-700 rounded-r-lg">
+    <div class="[grid-area:creation] flex items-center justify-center">
+      <.time_ago id={@participant.id} datetime={@participant.match.game_start} />
+    </div>
+
+    <div class="[grid-area:player] flex items-center">
+      <PC.avatar size="md" src={@participant.summoner.player.picture.url} />
+      <.link><%= @participant.summoner.player.official_name %></.link>
+    </div>
+
+    <div class="[grid-area:versus] flex items-center space-x-1 justify-center">
+      <LOLC.champion size="sm" game_version="12.12.1" champion_key={@participant.champion_id} />
+      <span class="text-xs">vs</span>
+      <LOLC.champion
+        size="sm"
+        game_version="12.12.1"
+        champion_key={@participant.opponent_participant.champion_id}
+      />
+    </div>
+
+    <div class="[grid-area:kda] flex items-center justify-center">
+      <span class=""><%= @participant.kills %></span>
+      / <span class=""><%= @participant.deaths %></span>
+      / <span class=""><%= @participant.assists %></span>
+    </div>
+
+    <div class="[grid-area:summoners] flex items-center space-x-1 justify-center">
+      <LOLC.summoner
+        :for={summoner_key <- @participant.summoners}
+        game_version="12.12.1"
+        summoner_key={summoner_key}
+      />
+    </div>
+
+    <div class="[grid-area:build] flex md:hidden lg:flex items-center justify-center space-x-0.5">
+      <LOLC.item :for={item_key <- @participant.items} game_version="12.12.1" item_key={item_key} />
+    </div>
+
+    <div class="[grid-area:ellipsis] hidden lg:flex items-center">
+      <.icon name="hero-ellipsis-horizontal" class="w-6 h-6" />
+    </div>
+  </div>
+</div>

@@ -20,6 +20,7 @@ defmodule LorWeb.Router do
     pipe_through :browser
 
     live "/", ActiveGameLive.Index, :index
+    live "/replays", ReplayLive.Index, :index
     get "/script/spectate", ScriptController, :spectate
   end
 

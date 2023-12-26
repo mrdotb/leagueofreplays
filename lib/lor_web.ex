@@ -91,6 +91,9 @@ defmodule LorWeb do
       # Handy alias to PetalComponents
       alias LorWeb.PetalComponents, as: PC
 
+      # Handy alias to LolComponents
+      alias LorWeb.LolComponents, as: LOLC
+
       # Shortcut for generating JS commands
       alias Phoenix.LiveView.JS
 

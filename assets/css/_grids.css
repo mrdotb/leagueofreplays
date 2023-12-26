@@ -1,0 +1,93 @@
+/* Custom grids */
+
+.grid-participants-header {
+  display: none;
+}
+
+.grid-participants {
+  display: grid;
+  grid-gap: 12px 0px;
+  grid-template-rows: auto auto;
+  grid-template-columns: 20% 20% 60%;
+  grid-template-areas:
+  "player kda versus"
+  "creation summoners build";
+}
+
+.grid-team-participants {
+  display: grid;
+  grid-gap: 3px 0px;
+  grid-template-rows: auto auto;
+  grid-template-columns: 60% 20% 20%;
+  grid-template-areas:
+  "summoner-champion kda summoners"
+  "build . gold";
+}
+
+@media (min-width: theme('screens.md')) {
+  .grid-participants-header {
+    display: grid;
+    grid-gap: 0px;
+    grid-template-columns: 18% 28% 21% 16% 16%;
+    grid-template-areas: "creation player versus kda summoners";
+  }
+  .grid-participants {
+    grid-gap: 0px;
+    grid-template-columns: 18% 28% 21% 16% 16%;
+    grid-template-areas: "creation player versus kda summoners";
+  }
+  .grid-team-participants-header {
+    display: grid;
+    grid-template-columns: 25% 11% 12% 12% 40%;
+  }
+  .grid-team-participants {
+    grid-gap: 0px;
+    grid-template-columns: 25% 11% 12% 12% 40%;
+    grid-template-areas: "summoner-champion summoners kda gold build ";
+  }
+}
+
+@media (min-width: theme('screens.lg')) {
+  .grid-participants-header {
+    display: grid;
+    grid-gap: 0px;
+    grid-template-columns: 11% 17% 12% 10% 10% 35% 4%;
+    grid-template-areas: "creation player versus kda summoners build ellipsis";
+  }
+  .grid-participants {
+    grid-gap: 0px;
+    grid-template-columns: 11% 17% 12% 10% 10% 35% 4%;
+    grid-template-areas: "creation player versus kda summoners build ellipsis";
+  }
+  .grid-team-participants-header {
+    display: grid;
+    grid-template-columns: 25% 11% 12% 12% 40%;
+  }
+  .grid-team-participants {
+    grid-gap: 0px;
+    grid-template-columns: 25% 11% 12% 12% 40%;
+    grid-template-areas: "summoner-champion summoners kda gold build ";
+  }
+}
+
+/* @media (min-width: theme('screens.sm')) { */
+/*   .grid-participants-header { */
+/*     display: grid; */
+/*     grid-gap: 0px; */
+/*     grid-template-columns: 11% 17% 12% 10% 10% 35% 4%; */
+/*   } */
+/*   .grid-team-participants-header { */
+/*     display: grid; */
+/*     grid-template-columns: 25% 11% 12% 12% 40%; */
+/*   } */
+/*   .grid-participants { */
+/*     grid-gap: 0px; */
+/*     grid-template-columns: 11% 17% 12% 10% 10% 35% 4%; */
+/*     grid-template-areas: "creation player versus kda summoners build ellipsis"; */
+/*   } */
+/*   .grid-team-participants { */
+/*     grid-gap: 0px; */
+/*     grid-template-columns: 25% 11% 12% 12% 40%; */
+/*     grid-template-areas: "summoner-champion summoners kda gold build "; */
+/*   } */
+/* } */

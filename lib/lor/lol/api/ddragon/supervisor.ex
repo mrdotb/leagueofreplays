@@ -11,14 +11,22 @@ defmodule Lor.Lol.Ddragon.Supervisor do
   end
 
   def init(_args) do
-    children = [
+    config = Application.fetch_env!(:lor, :ddragon)
+
+    children = cache_child(config.cache)
+
+    Supervisor.init(children, strategy: :one_for_one)
+  end
+
+  defp cache_child(%{active?: false}), do: []
+
+  defp cache_child(%{active?: true}) do
+    [
       {Cachex,
        name: Lor.Lol.Ddragon,
        warmers: [
          warmer(module: Lor.Lol.Ddragon.Warmer, state: nil, async: true)
        ]}
     ]
-
-    Supervisor.init(children, strategy: :one_for_one)
   end
 end
