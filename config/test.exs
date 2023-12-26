@@ -4,10 +4,32 @@ import Config
 config :ash, :disable_async?, true
 config :ash, :missed_notifications, :ignore
 
+# Replay schedulers
+config :lor,
+  replay_schedulers: %{
+    featured: %{
+      active?: false,
+      platform_ids: []
+    },
+    pro: %{
+      active?: false,
+      platform_ids: []
+    }
+  }
+
+# Ddragon
+config :lor,
+  ddragon: %{
+    cache: %{
+      active?: false
+    }
+  }
+
 # S3
 config :lor, Lor.S3.Api, Lor.S3Dummy
 
-config :lor, Oban, testing: :inline
+# Oban
+config :lor, Oban, testing: :manual
 
 config :lor, :s3,
   replay: [

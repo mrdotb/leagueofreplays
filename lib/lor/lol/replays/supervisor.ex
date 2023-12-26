@@ -9,28 +9,23 @@ defmodule Lor.Lol.Replays.Supervisor do
   end
 
   def init(_args) do
+    config = Application.fetch_env!(:lor, :replay_schedulers)
+
     children =
-      if replays_active?() do
-        [
-          {Registry, keys: :unique, name: Lor.Lol.Replays.Registry},
-          Lor.Lol.Replays.Manager,
-          Lor.Lol.Replays.WorkerSupervisor,
-          {Task.Supervisor, name: Lor.Lol.Replays.TaskSupervisor, strategy: :one_for_one}
-        ] ++ featured_schedulers() ++ pro_schedulers()
-      else
-        []
-      end
+      [
+        {Registry, keys: :unique, name: Lor.Lol.Replays.Registry},
+        Lor.Lol.Replays.Manager,
+        Lor.Lol.Replays.WorkerSupervisor,
+        {Task.Supervisor, name: Lor.Lol.Replays.TaskSupervisor, strategy: :one_for_one}
+      ] ++ featured_schedulers(config.featured) ++ pro_schedulers(config.pro)
 
     Supervisor.init(children, strategy: :one_for_one)
   end
 
-  defp replays_active? do
-    config = Application.get_env(:lor, :replays)
-    Keyword.get(config, :active)
-  end
+  defp featured_schedulers(%{active?: false}), do: []
 
-  defp featured_schedulers do
-    for platform_id <- Lor.Lol.PlatformIds.values() do
+  defp featured_schedulers(%{active?: true, platform_ids: platform_ids}) do
+    for platform_id <- platform_ids do
       name =
         {:via, Registry,
          {Lor.Lol.Replays.Registry, "featured_scheduler:#{to_string(platform_id)}"}}
@@ -39,7 +34,14 @@ defmodule Lor.Lol.Replays.Supervisor do
     end
   end
 
-  defp pro_schedulers do
-    []
+  defp pro_schedulers(%{active?: false}), do: []
+
+  defp pro_schedulers(%{active?: true, platform_ids: platform_ids}) do
+    for platform_id <- platform_ids do
+      name =
+        {:via, Registry, {Lor.Lol.Replays.Registry, "pro_scheduler:#{to_string(platform_id)}"}}
+
+      Supervisor.child_spec({Lor.Lol.Replays.ProScheduler, {platform_id, name}}, id: name)
+    end
   end
 end

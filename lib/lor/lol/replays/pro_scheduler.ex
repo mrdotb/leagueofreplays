@@ -12,8 +12,8 @@ defmodule Lor.Lol.Replays.ProScheduler do
   # Public API
 
   @doc "Start the Scheduler"
-  def start_link([platform_id]) do
-    GenServer.start_link(__MODULE__, platform_id, name: platform_id)
+  def start_link({platform_id, name}) do
+    GenServer.start_link(__MODULE__, platform_id, name: name)
   end
 
   # Callbacks
@@ -29,7 +29,7 @@ defmodule Lor.Lol.Replays.ProScheduler do
 
   @impl GenServer
   def handle_continue(:fetch_summoners, state) do
-    summoners = Lor.Lol.Summoner.by_platform_id!(state.platform_id)
+    summoners = Lor.Lol.Summoner.list_pro_by_platform_id!(state.platform_id)
     send(self(), :fetch_active_games)
     {:noreply, %{state | summoners: summoners}}
   end
@@ -42,8 +42,8 @@ defmodule Lor.Lol.Replays.ProScheduler do
                state.platform_id,
                summoner.encrypted_id
              ),
-           game["gameStartTime"] != 0,
-           Lor.TimeHelpers.started_less_than_m_ago?(game["gameStartTime"], 10) do
+           true <- game["gameStartTime"] != 0,
+           true <- Lor.TimeHelpers.started_less_than_m_ago?(game["gameStartTime"], 5) do
         Lor.Lol.Replays.Manager.add(game)
       end
     end

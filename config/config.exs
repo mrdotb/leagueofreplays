@@ -14,6 +14,27 @@ config :lor,
     Lor.S3
   ]
 
+# Replay schedulers
+config :lor,
+  replay_schedulers: %{
+    featured: %{
+      active?: false,
+      platform_ids: []
+    },
+    pro: %{
+      active?: false,
+      platform_ids: []
+    }
+  }
+
+# Ddragon
+config :lor,
+  ddragon: %{
+    cache: %{
+      active?: true
+    }
+  }
+
 config :tesla, :adapter, {Tesla.Adapter.Finch, name: Lor.Finch}
 
 config :lor, Lor.S3.Api, Lor.S3.Minio

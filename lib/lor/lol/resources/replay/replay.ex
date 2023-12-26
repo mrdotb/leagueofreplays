@@ -24,8 +24,11 @@ defmodule Lor.Lol.Replay do
     define :create
     define :finish, action: :finish
     define :error, action: :error
+    define :update_with_match, action: :update_with_match, args: [:match_id]
 
-    define :by_game_id_and_platform_id,
+    define :get_by_id, action: :by_id, args: [:id]
+
+    define :get_by_game_id_and_platform_id,
       action: :by_game_id_and_platform_id,
       args: [:platform_id, :game_id]
   end
@@ -33,11 +36,19 @@ defmodule Lor.Lol.Replay do
   actions do
     defaults [:read, :create, :destroy]
 
+    read :by_id do
+      get? true
+
+      argument :id, :uuid, allow_nil?: false
+
+      filter expr(id == ^arg(:id))
+    end
+
     read :by_game_id_and_platform_id do
       get? true
 
       argument :platform_id, Lor.Lol.PlatformIds, allow_nil?: false
-      argument :game_id, :string, allow_nil?: false
+      argument :game_id, :integer, allow_nil?: false
 
       prepare Lor.Lol.Replay.Preparations.FilterByGameIdAndPlatformId
     end
@@ -46,10 +57,16 @@ defmodule Lor.Lol.Replay do
       accept [:first_chunk_id, :last_chunk_id, :first_key_frame_id, :last_key_frame_id]
 
       change transition_state(:finished)
+      change Lor.Lol.Replay.Changes.CreateMatchJob
     end
 
     update :error do
       change transition_state(:errored)
+    end
+
+    update :update_with_match do
+      argument :match_id, :uuid, allow_nil?: false
+      change manage_relationship(:match_id, :match, type: :append)
     end
   end
 
@@ -94,5 +111,11 @@ defmodule Lor.Lol.Replay do
   relationships do
     has_many :key_frames, Lor.Lol.KeyFrame
     has_many :chunks, Lor.Lol.Chunk
+
+    belongs_to :match, Lor.Lol.Match do
+      attribute_type :uuid
+      allow_nil? true
+      attribute_writable? true
+    end
   end
 end

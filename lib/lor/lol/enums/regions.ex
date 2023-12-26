@@ -7,9 +7,9 @@ defmodule Lor.Lol.Regions do
 
   @regions_routing_map %{
     :AMERICAS => ~w(na1 br1 la1 la2)a,
-    :ASIA => ~w(kr jp1 tw2 th2 vn2)a,
+    :ASIA => ~w(kr jp1)a,
     :EUROPE => ~w(eun1 eu1 tr1 ru)a,
-    :SEA => ~w(oc1)a
+    :SEA => ~w(oc1 tw2 th2 vn2)a
   }
 
   def get_platform_ids(region), do: Map.get(@regions_routing_map, region)

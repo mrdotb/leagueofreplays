@@ -6,6 +6,11 @@ defmodule Lor.Lol.Participant do
     table "lol_participants"
 
     repo Lor.Repo
+
+    references do
+      reference :match, on_delete: :delete
+      reference :opponent_participant, on_delete: :delete
+    end
   end
 
   code_interface do
@@ -13,10 +18,22 @@ defmodule Lor.Lol.Participant do
     define :create_from_api, args: [:match_id, :participant_data]
     define :update_opponent_participant, args: [:participants, :participant]
     define :read_all, action: :read
+    define :list_replays, action: :list_replays, args: [:filter]
   end
 
   actions do
     defaults [:read]
+
+    read :list_replays do
+      argument :filter, :map, allow_nil?: true
+
+      pagination do
+        keyset? true
+        default_limit 5
+      end
+
+      prepare Lor.Lol.Participant.Preparations.FilterSortReplay
+    end
 
     create :create_from_api do
       accept [:match_id]

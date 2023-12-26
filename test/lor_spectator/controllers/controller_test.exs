@@ -54,13 +54,13 @@ defmodule LorSpectator.ControllerTest do
     assert json_response(conn, 200) ==
              %{
                "availableSince" => 30000,
-               "chunkId" => 2,
+               "chunkId" => nil,
                "duration" => 30000,
                "endGameChunkId" => 0,
                "endStartupChunkId" => 1,
-               "keyFrameId" => 1,
+               "keyFrameId" => nil,
                "nextAvailableChunk" => 10000,
-               "nextChunkId" => 2,
+               "nextChunkId" => nil,
                "startGameChunkId" => 2
              }
   end

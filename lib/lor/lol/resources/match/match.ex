@@ -50,7 +50,13 @@ defmodule Lor.Lol.Match do
       description "Match data version"
     end
 
-    attribute :match_id, :string, allow_nil?: false
+    attribute :game_id, :integer, allow_nil?: false
+    attribute :platform_id, Lor.Lol.PlatformIds, allow_nil?: false
+
+    attribute :match_id, :string do
+      allow_nil? false
+      description "platform_id + game_id ex: KR_6821747606"
+    end
 
     attribute :participant_puuids, {:array, :string} do
       allow_nil? false
@@ -79,17 +85,21 @@ defmodule Lor.Lol.Match do
       description "Unix timestamp for when match ends on the game server."
     end
 
-    attribute :game_id, :integer, allow_nil?: false
     attribute :game_mode, Lor.Lol.GameModes, allow_nil?: false
     attribute :game_name, :string, allow_nil?: false
     attribute :game_type, :string, allow_nil?: false
     attribute :game_version, :string, allow_nil?: false
     attribute :map_id, :integer, allow_nil?: false
     attribute :queue_id, :integer, allow_nil?: false
-    attribute :platform_id, Lor.Lol.PlatformIds, allow_nil?: false
 
     create_timestamp :inserted_at
     update_timestamp :updated_at
+  end
+
+  calculations do
+    calculate :game_start,
+              :datetime,
+              {Lor.Lol.Match.Calculations.UnixMilliToDateTime, key: :game_start_timestamp}
   end
 
   relationships do
@@ -100,5 +110,7 @@ defmodule Lor.Lol.Match do
       attribute_type :uuid
       attribute_writable? true
     end
+
+    has_one :replay, Lor.Lol.Replay
   end
 end

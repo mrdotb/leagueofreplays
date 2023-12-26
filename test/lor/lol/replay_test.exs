@@ -29,14 +29,23 @@ defmodule Lor.Lol.ReplayTest do
     end
   end
 
-  test "get_game_meta_data success", %{params: params} do
+  test "get_by_game_id_and_platform_id success", %{params: params} do
     Lor.Lol.Replay.create!(params)
-    Lor.Lol.Replay.get_game_meta_data!("euw1", "6720928471")
+    Lor.Lol.Replay.get_by_game_id_and_platform_id!("euw1", "6720928471")
   end
 
-  test "get_game_meta_data failure" do
+  test "get_by_game_id_and_platform_id failure" do
     assert_raise Ash.Error.Query.NotFound, ~r/record not found/, fn ->
-      Lor.Lol.Replay.get_game_meta_data!("euw1", "12345789")
+      Lor.Lol.Replay.get_by_game_id_and_platform_id!("euw1", "12345789")
     end
+  end
+
+  test "replay finish should enqueue a match job", %{params: params} do
+    replay = Lor.Lol.Replay.create!(params)
+    params = %{first_chunk_id: 0, last_chunk_id: 0, first_key_frame_id: 0, last_key_frame_id: 0}
+
+    replay = Lor.Lol.Replay.finish!(replay, params)
+
+    assert_enqueued(worker: Lor.Lol.MatchWorker, args: %{replay_id: replay.id}, queue: :default)
   end
 end

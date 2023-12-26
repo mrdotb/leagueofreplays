@@ -23,8 +23,8 @@ defmodule Lor.Lol.Ddragon.Warmer do
   defp get_champion_keys do
     with {:ok, %{body: versions}} <- Lor.Lol.Ddragon.Client.fetch_versions(),
          last_game_version <- List.first(versions),
-         {:ok, %{body: champions_response}} <- Lor.Lol.Ddragon.Client.fetch_champions(last_game_version) do
-
+         {:ok, %{body: champions_response}} <-
+           Lor.Lol.Ddragon.Client.fetch_champions(last_game_version) do
       champions_img_list = get_champions_img_list(champions_response)
       champions_search_map = get_champions_search_map(champions_response)
 
@@ -38,7 +38,7 @@ defmodule Lor.Lol.Ddragon.Warmer do
     |> Enum.map(fn {_champion_id, data} ->
       key = String.to_integer(data["key"])
       value = data["image"]["full"]
-      {key, value}
+      {{:champion, key}, value}
     end)
   end
 
@@ -56,7 +56,8 @@ defmodule Lor.Lol.Ddragon.Warmer do
   defp get_summoner_keys do
     with {:ok, %{body: versions}} <- Lor.Lol.Ddragon.Client.fetch_versions(),
          last_game_version <- List.first(versions),
-         {:ok, %{body: summoners_response}} <- Lor.Lol.Ddragon.Client.fetch_summoners(last_game_version) do
+         {:ok, %{body: summoners_response}} <-
+           Lor.Lol.Ddragon.Client.fetch_summoners(last_game_version) do
       get_summoners_img_list(summoners_response)
     end
   end
@@ -67,7 +68,7 @@ defmodule Lor.Lol.Ddragon.Warmer do
     |> Enum.map(fn {_summoner_id, data} ->
       key = String.to_integer(data["key"])
       value = data["image"]["full"]
-      {key, value}
+      {{:summoner, key}, value}
     end)
   end
 end

@@ -22,7 +22,7 @@ defmodule LorSpectator.Controller do
   def get_game_meta_data(conn, params) do
     types = [platform_id: {:string, required: true}, game_id: {:string, required: true}]
     args = Lor.Validation.normalize!(params, types)
-    replay = Lor.Lol.Replay.by_game_id_and_platform_id!(args.platform_id, args.game_id)
+    replay = Lor.Lol.Replay.get_by_game_id_and_platform_id!(args.platform_id, args.game_id)
     json(conn, replay.game_meta_data)
   end
 
@@ -34,7 +34,7 @@ defmodule LorSpectator.Controller do
     ]
 
     args = Lor.Validation.normalize!(params, types)
-    replay = Lor.Lol.Replay.by_game_id_and_platform_id!(args.platform_id, args.game_id)
+    replay = Lor.Lol.Replay.get_by_game_id_and_platform_id!(args.platform_id, args.game_id)
 
     response =
       LorSpectator.Helpers.get_last_chunk_info(

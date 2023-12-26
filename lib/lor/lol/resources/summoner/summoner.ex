@@ -23,6 +23,7 @@ defmodule Lor.Lol.Summoner do
     define :by_puuids, args: [:puuids]
     define :by_names_and_platform_id, args: [:names, :platform_id]
     define :by_platform_id, args: [:platform_id]
+    define :list_pro_by_platform_id, action: :pro_by_platform_id, args: [:platform_id]
   end
 
   actions do
@@ -54,6 +55,14 @@ defmodule Lor.Lol.Summoner do
       end
 
       filter expr(platform_id == ^arg(:platform_id))
+    end
+
+    read :pro_by_platform_id do
+      argument :platform_id, Lor.Lol.PlatformIds do
+        allow_nil? false
+      end
+
+      filter expr(platform_id == ^arg(:platform_id) and not is_nil(player_id))
     end
 
     create :create_from_api do
@@ -117,7 +126,7 @@ defmodule Lor.Lol.Summoner do
     end
 
     attribute :name, :string do
-      allow_nil? false
+      allow_nil? true
       description "Current name of the summoner"
     end
 
