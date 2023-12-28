@@ -19,12 +19,20 @@ defmodule Lor.Lol.Match do
 
   code_interface do
     define_for Lor.Lol
-    define :create_from_api, args: [:match_data, :s3_object_id]
     define :read_all, action: :read
+    define :get, action: :by_id, args: [:id]
+    define :create_from_api, args: [:match_data, :s3_object_id]
   end
 
   actions do
     defaults [:read]
+
+    read :by_id do
+      get? true
+      argument :id, :uuid, allow_nil?: false
+
+      filter expr(id == ^arg(:id))
+    end
 
     create :create_from_api do
       accept []

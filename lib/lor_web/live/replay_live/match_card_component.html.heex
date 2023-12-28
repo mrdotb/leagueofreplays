@@ -1,44 +1,119 @@
-<div class="border-l-8 w-full bg-white text-gray-800 rounded-lg overflow-hidden hover:bg-gray-50 dark:bg-gray-900 dark:text-gray-200 dark:hover:bg-gray-800">
-  <div class="grid-participants px-1 border border-gray-200 py-2 w-full dark:border-gray-700 rounded-r-lg">
-    <div class="[grid-area:creation] flex items-center justify-center">
+<div class={[
+  "border-l-8 border border-gray-200 w-full bg-white text-gray-800 rounded-lg overflow-hidden dark:bg-gray-800 dark:text-gray-300 dark:border-gray-700",
+  if(true,
+    do: "border-l-blue-400 dark:border-l-blue-400",
+    else: "border-l-red-400 dark:border-l-red-400"
+  )
+]}>
+  <div
+    role="button"
+    tabIndex="0"
+    phx-click={JS.push("load-match") |> JS.toggle(to: "#match-participant-#{@participant.id}")}
+    phx-target={@myself}
+    class="grid-participants px-1 py-2 w-full hover:bg-gray-50 dark:hover:bg-gray-900"
+  >
+    <div class="[grid-area:creation] flex items-center justify-center ">
       <.time_ago id={@participant.id} datetime={@participant.match.game_start} />
     </div>
 
-    <div class="[grid-area:player] flex items-center">
-      <PC.avatar size="md" src={@participant.summoner.player.picture.url} />
-      <.link><%= @participant.summoner.player.official_name %></.link>
-    </div>
+    <LOLC.player
+      class="[grid-area:player]"
+      src={@participant.summoner.player.picture.url}
+      name={@participant.summoner.player.official_name}
+    />
 
-    <div class="[grid-area:versus] flex items-center space-x-1 justify-center">
-      <LOLC.champion size="sm" game_version="12.12.1" champion_key={@participant.champion_id} />
-      <span class="text-xs">vs</span>
-      <LOLC.champion
-        size="sm"
-        game_version="12.12.1"
-        champion_key={@participant.opponent_participant.champion_id}
-      />
-    </div>
+    <LOLC.versus
+      class="[grid-area:versus]"
+      game_version="12.12.1"
+      champion_key={@participant.champion_id}
+      opponent_champion_key={@participant.opponent_participant.champion_id}
+    />
 
-    <div class="[grid-area:kda] flex items-center justify-center">
-      <span class=""><%= @participant.kills %></span>
-      / <span class=""><%= @participant.deaths %></span>
-      / <span class=""><%= @participant.assists %></span>
-    </div>
+    <LOLC.kda
+      class="[grid-area:kda]"
+      kills={@participant.kills}
+      deaths={@participant.deaths}
+      assists={@participant.assists}
+    />
 
-    <div class="[grid-area:summoners] flex items-center space-x-1 justify-center">
-      <LOLC.summoner
-        :for={summoner_key <- @participant.summoners}
-        game_version="12.12.1"
-        summoner_key={summoner_key}
-      />
-    </div>
+    <LOLC.summoners
+      class="[grid-area:summoners]"
+      game_version="12.12.1"
+      summoners={@participant.summoners}
+    />
 
-    <div class="[grid-area:build] flex md:hidden lg:flex items-center justify-center space-x-0.5">
-      <LOLC.item :for={item_key <- @participant.items} game_version="12.12.1" item_key={item_key} />
-    </div>
+    <LOLC.build
+      class="[grid-area:build] md:hidden lg:flex"
+      game_version="12.12.1"
+      items={@participant.items}
+    />
 
     <div class="[grid-area:ellipsis] hidden lg:flex items-center">
       <.icon name="hero-ellipsis-horizontal" class="w-6 h-6" />
     </div>
+  </div>
+  <div id={"match-participant-#{@participant.id}"} style="display: none">
+    <.async_result :let={match} assign={@match}>
+      <:loading>
+        <div class="py-2 flex justify-center items-center">
+          <PC.spinner size="lg" />
+        </div>
+      </:loading>
+
+      <:failed :let={_reason}>Loading error</:failed>
+
+      <div :if={match}>
+        <%= for {participant, index} <- Enum.with_index(match.participants, 1) do %>
+          <div :if={index in [1, 6]} class="grid-team-participants-header px-1 py-1">
+            <div class="[grid-area:side] flex space-x-1">
+              <div class="text-red-400">Victory</div>
+              <span :if={index == 1}>Blue side</span>
+              <span :if={index == 6}>Red side</span>
+            </div>
+            <div class="[grid-area:summoners]">Summoners</div>
+            <div class="[grid-area:kda] text-center">KDA</div>
+            <div class="[grid-area:gold] text-center">Gold earned</div>
+            <div class="[grid-area:build] text-center">Build</div>
+          </div>
+
+          <div class="grid-team-participants px-1 py-1">
+            <div class="[grid-area:summoner-champion] flex items-center space-x-1">
+              <LOLC.champion game_version="12.12.1" champion_key={participant.champion_id} />
+              <.link :if={participant.summoner.player} class="hover:underline">
+                <%= participant.summoner.player.official_name %>
+              </.link>
+              <span :if={is_nil(participant.summoner.player_id)}>
+                <%= participant.summoner.name %>
+              </span>
+            </div>
+
+            <LOLC.summoners
+              class="[grid-area:summoners]"
+              game_version="12.12.1"
+              summoners={participant.summoners}
+            />
+
+            <LOLC.kda
+              class="[grid-area:kda]"
+              kills={participant.kills}
+              deaths={participant.deaths}
+              assists={participant.assists}
+            />
+
+            <div class="[grid-area:gold] text-center">
+              <span class="text-yellow-600 dark:text-yellow-400">
+                <%= participant.gold_earned %>
+              </span>
+            </div>
+
+            <LOLC.build
+              class="[grid-area:build]"
+              game_version="12.12.1"
+              items={participant.items}
+            />
+          </div>
+        <% end %>
+      </div>
+    </.async_result>
   </div>
 </div>

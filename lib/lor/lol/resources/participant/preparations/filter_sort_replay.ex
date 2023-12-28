@@ -4,7 +4,6 @@ defmodule Lor.Lol.Participant.Preparations.FilterSortReplay do
 
   def prepare(query, _, _) do
     query
-    |> filter_player()
     |> Ash.Query.load([
       :opponent_participant,
       match: [:replay, :game_start],
@@ -15,10 +14,16 @@ defmodule Lor.Lol.Participant.Preparations.FilterSortReplay do
         ]
       ]
     ])
+    |> filter_player()
+    |> filter_replay()
     |> Ash.Query.sort([inserted_at: :desc], prepend?: true)
   end
 
   defp filter_player(query) do
     Ash.Query.filter(query, not is_nil(summoner.player))
+  end
+
+  defp filter_replay(query) do
+    Ash.Query.filter(query, not is_nil(match.replay))
   end
 end

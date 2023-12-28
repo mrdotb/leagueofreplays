@@ -88,6 +88,9 @@ defmodule LorWeb do
       import LorWeb.LayoutComponents
       import LorWeb.Gettext
 
+      # Handy alias to AsyncResult
+      alias Phoenix.LiveView.AsyncResult
+
       # Handy alias to PetalComponents
       alias LorWeb.PetalComponents, as: PC
 

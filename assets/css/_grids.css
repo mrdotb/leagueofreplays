@@ -3,7 +3,6 @@
 .grid-participants-header {
   display: none;
 }
-
 .grid-participants {
   display: grid;
   grid-gap: 12px 0px;
@@ -13,7 +12,6 @@
   "player kda versus"
   "creation summoners build";
 }
-
 .grid-team-participants {
   display: grid;
   grid-gap: 3px 0px;
@@ -62,11 +60,12 @@
   .grid-team-participants-header {
     display: grid;
     grid-template-columns: 25% 11% 12% 12% 40%;
+    grid-template-areas: "side summoners kda gold build";
   }
   .grid-team-participants {
     grid-gap: 0px;
     grid-template-columns: 25% 11% 12% 12% 40%;
-    grid-template-areas: "summoner-champion summoners kda gold build ";
+    grid-template-areas: "summoner-champion summoners kda gold build";
   }
 }
 

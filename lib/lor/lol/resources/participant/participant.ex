@@ -84,6 +84,17 @@ defmodule Lor.Lol.Participant do
     update_timestamp :updated_at
   end
 
+  calculations do
+    calculate :team_position_order,
+              :integer,
+              expr(
+                fragment(
+                  "ARRAY_POSITION(ARRAY['TOP', 'JUNGLE', 'MIDDLE', 'TOP', 'UTILITY'], ?)",
+                  team_position
+                )
+              )
+  end
+
   relationships do
     belongs_to :match, Lor.Lol.Match do
       allow_nil? false
