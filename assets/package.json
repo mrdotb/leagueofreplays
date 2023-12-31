@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "format": "standard --fix",
+    "format-check": "standard"
+  },
+  "devDependencies": {
+    "standard": "^17.1.0"
+  }
+}

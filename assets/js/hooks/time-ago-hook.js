@@ -1,15 +1,15 @@
-import {render, cancel} from "../../vendor/timeago.js"
-const local = "en_short"
+import { render, cancel } from '../../vendor/timeago.js'
+const local = 'en_short'
 
 const TimeAgoHook = {
   deadViewCompatible: true,
-  mounted() {
+  mounted () {
     render(this.el, local)
   },
-  updated() {
+  updated () {
     render(this.el, local)
   },
-  destroyed() {
+  destroyed () {
     cancel(this.el)
   }
 }

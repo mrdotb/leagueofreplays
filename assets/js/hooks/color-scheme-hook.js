@@ -1,16 +1,15 @@
 const ColorSchemeHook = {
   deadViewCompatible: true,
-  mounted() {
-    this.init();
+  mounted () {
+    this.init()
   },
-  updated() {
-    this.init();
+  updated () {
+    this.init()
   },
-  init() {
-    initScheme();
-    this.el.addEventListener("click", window.toggleScheme);
-  },
-};
-
+  init () {
+    window.initScheme()
+    this.el.addEventListener('click', window.toggleScheme)
+  }
+}
 
 export default ColorSchemeHook

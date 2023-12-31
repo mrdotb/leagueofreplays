@@ -87,7 +87,10 @@ defmodule Lor.MixProject do
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
       "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing"],
       "assets.build": ["tailwind default", "esbuild default"],
-      "assets.deploy": ["tailwind default --minify", "esbuild default --minify", "phx.digest"]
+      "assets.deploy": ["tailwind default --minify", "esbuild default --minify", "phx.digest"],
+      "esbuild.meta": ["esbuild default --minify --metafile=meta.json"],
+      "format.all": ["format", "cmd npm run format --prefix ./assets"],
+      "format.check": ["format --check-formatted", "cmd npm run format-check --prefix ./assets"]
     ]
   end
 end

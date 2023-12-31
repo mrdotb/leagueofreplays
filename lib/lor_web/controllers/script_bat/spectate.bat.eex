@@ -125,7 +125,7 @@ exit /b
 
 :notfound
 cls
-echo Cannot find your League of Legends installation. (If the issue persists, contact trebonius@wargraphs.gg)
+echo Cannot find your League of Legends installation. (If the issue persists, contact hello@leagueofreplay.co)
 set /p manualFolder="Please enter your League of Legends installation path: "
 
 call :Trim manualFolder !manualFolder!
