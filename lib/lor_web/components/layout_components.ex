@@ -50,6 +50,14 @@ defmodule LorWeb.LayoutComponents do
                   >
                     <Core.icon name="svg-discord" class="h-5 w-5" />
                   </PC.icon_button>
+                  <PC.icon_button
+                    link_type="a"
+                    target="_blank"
+                    to="https://github.com/mrdotb/leagueofreplays"
+                    class="rounded-lg p-2.5 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
+                  >
+                    <Core.icon name="svg-github" class="h-5 w-5" />
+                  </PC.icon_button>
                 </div>
               </div>
             </nav>
