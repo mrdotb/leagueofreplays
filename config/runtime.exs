@@ -48,7 +48,12 @@ if config_env() == :prod do
       You can generate one by calling: mix phx.gen.secret
       """
 
-  host = System.get_env("PHX_HOST") || "example.com"
+  host =
+    System.get_env("PHX_HOST") ||
+      raise """
+      environment variable PHX_HOST is missing.
+      """
+
   port = String.to_integer(System.get_env("PORT") || "4000")
 
   config :lor, :dns_cluster_query, System.get_env("DNS_CLUSTER_QUERY")
@@ -65,53 +70,68 @@ if config_env() == :prod do
     ],
     secret_key_base: secret_key_base
 
-  # ## SSL Support
-  #
-  # To get SSL working, you will need to add the `https` key
-  # to your endpoint configuration:
-  #
-  #     config :lor, LorWeb.Endpoint,
-  #       https: [
-  #         ...,
-  #         port: 443,
-  #         cipher_suite: :strong,
-  #         keyfile: System.get_env("SOME_APP_SSL_KEY_PATH"),
-  #         certfile: System.get_env("SOME_APP_SSL_CERT_PATH")
-  #       ]
-  #
-  # The `cipher_suite` is set to `:strong` to support only the
-  # latest and more secure SSL ciphers. This means old browsers
-  # and clients may not be supported. You can set it to
-  # `:compatible` for wider support.
-  #
-  # `:keyfile` and `:certfile` expect an absolute path to the key
-  # and cert in disk or a relative path inside priv, for example
-  # "priv/ssl/server.key". For all supported SSL configuration
-  # options, see https://hexdocs.pm/plug/Plug.SSL.html#configure/1
-  #
-  # We also recommend setting `force_ssl` in your endpoint, ensuring
-  # no data is ever sent via http, always redirecting to https:
-  #
-  #     config :lor, LorWeb.Endpoint,
-  #       force_ssl: [hsts: true]
-  #
-  # Check `Plug.SSL` for all available options in `force_ssl`.
+  riot_token =
+    System.get_env("RIOT_TOKEN") ||
+      raise """
+      environment variable RIOT_TOKEN is missing.
+      """
 
-  # ## Configuring the mailer
-  #
-  # In production you need to configure the mailer to use a different adapter.
-  # Also, you may need to configure the Swoosh API client of your choice if you
-  # are not using SMTP. Here is an example of the configuration:
-  #
-  #     config :lor, Lor.Mailer,
-  #       adapter: Swoosh.Adapters.Mailgun,
-  #       api_key: System.get_env("MAILGUN_API_KEY"),
-  #       domain: System.get_env("MAILGUN_DOMAIN")
-  #
-  # For this example you need include a HTTP client required by Swoosh API client.
-  # Swoosh supports Hackney and Finch out of the box:
-  #
-  #     config :swoosh, :api_client, Swoosh.ApiClient.Hackney
-  #
-  # See https://hexdocs.pm/swoosh/Swoosh.html#module-installation for details.
+  config :lor, Lor.Lol.Rest.Client, token: riot_token
+
+  access_key =
+    System.get_env("ACCESS_KEY") ||
+      raise """
+      environment variable ACCESS_KEY is missing.
+      """
+
+  secret_key =
+    System.get_env("SECRET_KEY") ||
+      raise """
+      environment variable SECRET_KEY is missing.
+      """
+
+  s3_endpoint =
+    System.get_env("S3_ENDPOINT") ||
+      raise """
+      environment variable S3_ENDPOINT is missing.
+      """
+
+  config :lor, Lor.S3.Minio,
+    access_key: access_key,
+    secret_key: secret_key,
+    endpoint: s3_endpoint,
+    proto: "https"
+
+  s3_bucket =
+    System.get_env("S3_BUCKET") ||
+      raise """
+      environment variable S3_BUCKET is missing.
+      """
+
+  s3_url =
+    System.get_env("S3_URL") ||
+      raise """
+      environment variable S3_URL is missing.
+      """
+
+  config :lor, :s3,
+    replay: [
+      url: s3_url,
+      bucket: s3_bucket
+    ]
+
+  lor_spectator_host =
+    System.get_env("LOR_SPECTATOR_HOST") ||
+      raise """
+      environment variable LOR_SPECTATOR_HOST is missing.
+      """
+
+  lor_spectator_port =
+    System.get_env("LOR_SPECTATOR_PORT") ||
+      raise """
+      environment variable LOR_SPECTATOR_PORT is missing.
+      """
+
+  config :lor, LorSpectator.Endpoint,
+    url: [scheme: "http", host: lor_spectator_host, port: lor_spectator_port, path: "/"]
 end

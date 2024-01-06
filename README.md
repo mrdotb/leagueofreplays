@@ -1,24 +1,26 @@
 # Lor
 
-To start your Phoenix server:
-
-  * Run `mix setup` to install and setup dependencies
-  * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
-
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
-
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
-
-## Learn more
-
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
-
-# Testing
+## Testing
 Remove large binary from vcr_cassettes using jq
-```
+
+```bash
 cat test/fixture/vcr_cassettes/ugg.json | jq '.[] |= (if .response.binary == true then .response.body = "g20AAAAA" else . end)'
+```
+
+## Prod env
+
+```bash
+PHX_SERVER
+DATABASE_URL
+SECRET_KEY_BASE
+PHX_HOST
+PORT
+RIOT_TOKEN
+ACCESS_KEY
+SECRET_KEY
+S3_ENDPOINT
+S3_BUCKET
+S3_URL
+LOR_SPECTATOR_HOST
+LOR_SPECTATOR_PORT
 ```

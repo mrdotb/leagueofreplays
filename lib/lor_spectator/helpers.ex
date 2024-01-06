@@ -3,8 +3,6 @@ defmodule LorSpectator.Helpers do
   General helpers to work with lor spectator
   """
 
-  @replay_bucket_url Application.compile_env!(:lor, :s3)[:replay][:url]
-
   @doc """
   Given params split the session_id from the platform_id and return a map with
   with the adjusted value
@@ -97,12 +95,17 @@ defmodule LorSpectator.Helpers do
     }
   end
 
+  defp get_replay_bucket_url do
+    config = Application.get_env(:lor, :s3)
+    config[:replay][:url]
+  end
+
   @doc """
   Get chunk url
   """
   def get_chunk_url(%{platform_id: platform_id, game_id: game_id, chunk_id: chunk_id}) do
     platform_id = String.downcase(platform_id)
-    "#{@replay_bucket_url}/#{platform_id}/#{game_id}/game_data_chunks/#{chunk_id}"
+    "#{get_replay_bucket_url()}/#{platform_id}/#{game_id}/game_data_chunks/#{chunk_id}"
   end
 
   @doc """
@@ -110,6 +113,6 @@ defmodule LorSpectator.Helpers do
   """
   def get_key_frame_url(%{platform_id: platform_id, game_id: game_id, key_frame_id: key_frame_id}) do
     platform_id = String.downcase(platform_id)
-    "#{@replay_bucket_url}/#{platform_id}/#{game_id}/key_frames/#{key_frame_id}"
+    "#{get_replay_bucket_url()}/#{platform_id}/#{game_id}/key_frames/#{key_frame_id}"
   end
 end
