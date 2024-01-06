@@ -20,11 +20,11 @@ config :logger, level: :info
 config :lor,
   replay_schedulers: %{
     featured: %{
-      active?: false,
+      active?: true,
       platform_ids: [:kr]
     },
     pro: %{
-      active?: false,
+      active?: true,
       platform_ids: [:kr]
     }
   }
