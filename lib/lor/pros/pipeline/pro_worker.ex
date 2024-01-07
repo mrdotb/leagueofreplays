@@ -1,0 +1,18 @@
+defmodule Lor.Lol.ProWorker do
+  use Oban.Worker
+
+  require Logger
+
+  @impl true
+  def perform(%{args: %{"platform_id" => platform_id}}) do
+    platform_id = String.to_existing_atom(platform_id)
+
+    case Reactor.run(Lor.Pros.UGGReactor, %{platform_id: platform_id}) do
+      {:ok, _result} ->
+        :ok
+
+      {:error, _error} ->
+        :error
+    end
+  end
+end

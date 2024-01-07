@@ -20,6 +20,7 @@ defmodule LorWeb.ReplayLive.Index do
 
   defp apply_action(socket, :index, _params) do
     page = list_participants(socket)
+
     keyset =
       case List.last(page.results) do
         nil ->
