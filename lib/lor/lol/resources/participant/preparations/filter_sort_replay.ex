@@ -6,7 +6,7 @@ defmodule Lor.Lol.Participant.Preparations.FilterSortReplay do
     query
     |> Ash.Query.load([
       :opponent_participant,
-      match: [:replay, :game_start],
+      match: [:replay],
       summoner: [
         player: [
           :picture,

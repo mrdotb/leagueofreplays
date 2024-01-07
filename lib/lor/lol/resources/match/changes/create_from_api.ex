@@ -10,6 +10,7 @@ defmodule Lor.Lol.Match.Changes.CreateFromApi do
     info = match_data["info"]
 
     s3_object_id = Ash.Changeset.get_argument(changeset, :s3_object_id)
+    game_start = get_game_start(info["gameStartTimestamp"])
 
     params = %{
       original_data_id: s3_object_id,
@@ -27,9 +28,16 @@ defmodule Lor.Lol.Match.Changes.CreateFromApi do
       game_version: info["gameVersion"],
       map_id: info["mapId"],
       queue_id: info["queueId"],
-      platform_id: info["platformId"]
+      platform_id: info["platformId"],
+      game_start: game_start
     }
 
     Ash.Changeset.change_attributes(changeset, params)
+  end
+
+  defp get_game_start(game_start_timestamp) do
+    game_start_timestamp
+    |> DateTime.from_unix!(:millisecond)
+    |> DateTime.truncate(:second)
   end
 end

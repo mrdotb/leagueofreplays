@@ -93,6 +93,11 @@ defmodule Lor.Lol.Match do
       description "Unix timestamp for when match ends on the game server."
     end
 
+    attribute :game_start, :datetime do
+      allow_nil? false
+      description "Unix timestamp converted to date type"
+    end
+
     attribute :game_mode, Lor.Lol.GameModes, allow_nil?: false
     attribute :game_name, :string, allow_nil?: false
     attribute :game_type, :string, allow_nil?: false
@@ -102,12 +107,6 @@ defmodule Lor.Lol.Match do
 
     create_timestamp :inserted_at
     update_timestamp :updated_at
-  end
-
-  calculations do
-    calculate :game_start,
-              :datetime,
-              {Lor.Lol.Match.Calculations.UnixMilliToDateTime, key: :game_start_timestamp}
   end
 
   relationships do
