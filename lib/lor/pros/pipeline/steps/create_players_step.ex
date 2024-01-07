@@ -48,7 +48,7 @@ defmodule Lor.Pros.CreatePlayersStep do
   end
 
   defp s3_upload_picture(response) do
-    bucket = "pictures"
+    bucket = Application.get_env(:lor, :s3).buckets.pictures
     file_name = Path.basename(response.url)
     key = "player/#{file_name}"
 

@@ -9,7 +9,7 @@ defmodule Lor.Lol.CreateS3Object do
   def run(arguments, _context, _options) do
     match_data = arguments.match_data
     match_id = match_data["metadata"]["matchId"]
-    bucket = "original"
+    bucket = Application.get_env(:lor, :s3).buckets.original
     key = "matches/#{match_id}.json"
     binary_json = Jason.encode!(match_data)
 

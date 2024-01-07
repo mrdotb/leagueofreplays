@@ -31,10 +31,16 @@ config :lor, Lor.S3.Api, Lor.S3Dummy
 # Oban
 config :lor, Oban, testing: :manual
 
-config :lor, :s3,
+config :lor, :s3, %{
+  buckets: %{
+    pictures: "pictures",
+    replays: "replays",
+    original: "original"
+  },
   replay: [
     url: ""
   ]
+}
 
 # Exvcr
 config :exvcr,

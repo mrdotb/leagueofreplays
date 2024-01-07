@@ -116,6 +116,11 @@ if config_env() == :prod do
       """
 
   config :lor, :s3,
+    buckets: %{
+      pictures: "lor-pictures",
+      replays: "lor-replays",
+      original: "lor-original"
+    },
     replay: [
       url: s3_url,
       bucket: s3_bucket

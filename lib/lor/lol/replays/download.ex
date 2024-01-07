@@ -5,8 +5,6 @@ defmodule Lor.Lol.Replays.Download do
 
   require Logger
 
-  @bucket "replays"
-
   def fetch_and_store_game_data_chunk(%{
         worker_pid: worker_pid,
         platform_id: platform_id,
@@ -15,7 +13,7 @@ defmodule Lor.Lol.Replays.Download do
         chunk_id: chunk_id
       }) do
     params = %{
-      bucket: @bucket,
+      bucket: get_bucket(),
       key: "#{platform_id}/#{game_id}/game_data_chunks/#{chunk_id}",
       content_type: "application/octet-stream",
       file_name: to_string(chunk_id)
@@ -48,7 +46,7 @@ defmodule Lor.Lol.Replays.Download do
         key_frame_id: key_frame_id
       }) do
     params = %{
-      bucket: @bucket,
+      bucket: get_bucket(),
       key: "#{platform_id}/#{game_id}/key_frames/#{key_frame_id}",
       content_type: "application/octet-stream",
       file_name: to_string(key_frame_id)
@@ -70,5 +68,9 @@ defmodule Lor.Lol.Replays.Download do
       {:error, error} ->
         Logger.error("Replay Download fetch_and_store_key_frame error #{inspect(error)}")
     end
+  end
+
+  defp get_bucket do
+    Application.get_env(:lor, :s3).buckets.replays
   end
 end

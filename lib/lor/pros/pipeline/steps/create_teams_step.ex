@@ -39,7 +39,7 @@ defmodule Lor.Pros.CreateTeamsStep do
   end
 
   defp s3_upload_picture(response) do
-    bucket = "pictures"
+    bucket = Application.get_env(:lor, :s3).buckets.pictures
     file_name = Path.basename(response.url)
     key = "team/#{file_name}"
 
