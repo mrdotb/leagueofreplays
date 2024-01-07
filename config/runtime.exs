@@ -100,6 +100,7 @@ if config_env() == :prod do
     access_key: access_key,
     secret_key: secret_key,
     endpoint: s3_endpoint,
+    port: 443,
     proto: "https"
 
   s3_bucket =
