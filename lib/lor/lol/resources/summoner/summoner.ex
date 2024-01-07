@@ -6,6 +6,10 @@ defmodule Lor.Lol.Summoner do
     table "lol_summoners"
 
     repo Lor.Repo
+
+    references do
+      reference :player, on_delete: :nilify
+    end
   end
 
   identities do

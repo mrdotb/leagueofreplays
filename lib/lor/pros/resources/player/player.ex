@@ -11,6 +11,11 @@ defmodule Lor.Pros.Player do
     repo Lor.Repo
 
     migration_types normalized_name: :citext
+
+    references do
+      reference :current_team, on_delete: :nilify
+      reference :picture, on_delete: :delete
+    end
   end
 
   identities do

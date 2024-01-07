@@ -12,6 +12,10 @@ defmodule Lor.Pros.Team do
     repo Lor.Repo
 
     migration_types name: :citext
+
+    references do
+      reference :logo, on_delete: :delete
+    end
   end
 
   identities do
