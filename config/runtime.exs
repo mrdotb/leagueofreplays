@@ -134,4 +134,15 @@ if config_env() == :prod do
 
   config :lor, LorSpectator.Endpoint,
     url: [scheme: "http", host: lor_spectator_host, port: lor_spectator_port, path: "/"]
+
+  admin_dashboard_password =
+    System.get_env("ADMIN_DASHBOARD_PASSWORD") ||
+      raise """
+      environment variable ADMIN_DASHBOARD_PASSWORD is missing.
+      """
+
+  config :lor, :admin_dashboard,
+    enable?: true,
+    username: "admin",
+    password: admin_dashboard_password
 end

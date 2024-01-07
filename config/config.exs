@@ -7,6 +7,8 @@
 # General application configuration
 import Config
 
+config :lor, :admin_dashboard, enable?: false
+
 config :lor,
   ash_apis: [
     Lor.Lol,

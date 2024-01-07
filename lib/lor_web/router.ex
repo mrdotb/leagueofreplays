@@ -14,6 +14,10 @@ defmodule LorWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :protected do
+    plug LorWeb.BasicAuthPlug, :admin_dashboard
+  end
+
   import AshAdmin.Router
 
   scope "/", LorWeb do
@@ -25,7 +29,10 @@ defmodule LorWeb.Router do
   end
 
   scope "/" do
-    pipe_through :browser
+    pipe_through [
+      :browser,
+      :protected
+    ]
 
     ash_admin("/admin")
   end
