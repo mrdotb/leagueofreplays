@@ -115,7 +115,7 @@ if config_env() == :prod do
       environment variable S3_URL is missing.
       """
 
-  config :lor, :s3,
+  config :lor, :s3, %{
     buckets: %{
       pictures: "lor-pictures",
       replays: "lor-replays",
@@ -125,6 +125,7 @@ if config_env() == :prod do
       url: s3_url,
       bucket: s3_bucket
     ]
+  }
 
   lor_spectator_host =
     System.get_env("LOR_SPECTATOR_HOST") ||
