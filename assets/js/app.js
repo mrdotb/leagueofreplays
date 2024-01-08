@@ -13,6 +13,8 @@ events(liveSocket)
 // connect if there are any LiveViews on the page
 liveSocket.connect()
 
+console.log('👋 Hello there ! Watch under the hood https://github.com/mrdotb/leagueofreplays')
+
 // expose liveSocket on window for web console debug logs and latency simulation:
 // >> liveSocket.enableDebug()
 // >> liveSocket.enableLatencySim(1000)  // enabled for duration of browser session
