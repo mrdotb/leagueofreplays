@@ -44,7 +44,8 @@ config :lor, Lor.S3.Api, Lor.S3.Minio
 config :lor, Oban,
   repo: Lor.Repo,
   plugins: [
-    Oban.Plugins.Pruner,
+    {Oban.Plugins.Pruner, max_age: 3600 * 24},
+    {Oban.Plugins.Lifeline, rescue_after: :timer.hours(2)},
     {
       Oban.Plugins.Cron,
       crontab: [
