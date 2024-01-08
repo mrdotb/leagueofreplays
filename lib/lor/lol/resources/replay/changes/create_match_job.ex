@@ -13,8 +13,9 @@ defmodule Lor.Lol.Replay.Changes.CreateMatchJob do
   end
 
   defp handle_after_transaction(_changeset, {:ok, replay} = success_result) do
+    # schedule the job 5 minutes
     %{replay_id: replay.id}
-    |> Lor.Lol.MatchWorker.new()
+    |> Lor.Lol.MatchWorker.new(schedule_in: 60 * 5)
     |> Oban.insert()
 
     success_result
