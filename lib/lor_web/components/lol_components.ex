@@ -26,11 +26,11 @@ defmodule LorWeb.LolComponents do
     """
   end
 
-  attr :game_version, :string, required: true
+  attr :assets_version, :string, required: true
   attr :champion_key, :integer, required: true
 
   def champion(assigns) do
-    img = Lor.Lol.Ddragon.get_champion_image(assigns.game_version, assigns.champion_key)
+    img = Lor.Lol.Ddragon.get_champion_image(assigns.assets_version, assigns.champion_key)
     assigns = assign(assigns, src: img)
 
     ~H"""
@@ -40,11 +40,11 @@ defmodule LorWeb.LolComponents do
     """
   end
 
-  attr :game_version, :string, required: true
+  attr :assets_version, :string, required: true
   attr :summoner_key, :integer, required: true
 
   def summoner(assigns) do
-    img = Lor.Lol.Ddragon.get_summoner_image(assigns.game_version, assigns.summoner_key)
+    img = Lor.Lol.Ddragon.get_summoner_image(assigns.assets_version, assigns.summoner_key)
     assigns = assign(assigns, src: img)
 
     ~H"""
@@ -54,11 +54,11 @@ defmodule LorWeb.LolComponents do
     """
   end
 
-  attr :game_version, :string, required: true
+  attr :assets_version, :string, required: true
   attr :item_key, :integer, required: true
 
   def item(assigns) do
-    img = Lor.Lol.Ddragon.get_item_image(assigns.game_version, assigns.item_key)
+    img = Lor.Lol.Ddragon.get_item_image(assigns.assets_version, assigns.item_key)
     assigns = assign(assigns, src: img)
 
     ~H"""
@@ -68,7 +68,7 @@ defmodule LorWeb.LolComponents do
     """
   end
 
-  attr :game_version, :string, required: true
+  attr :assets_version, :string, required: true
   attr :champion_key, :integer, required: true
   attr :opponent_champion_key, :integer, required: true
   attr :class, :string, default: "", doc: "CSS class"
@@ -79,9 +79,9 @@ defmodule LorWeb.LolComponents do
       "flex items-center space-x-1 justify-center",
       @class
     ]}>
-      <.champion game_version={@game_version} champion_key={@champion_key} />
+      <.champion assets_version={@assets_version} champion_key={@champion_key} />
       <span class="text-xs">vs</span>
-      <.champion game_version={@game_version} champion_key={@opponent_champion_key} />
+      <.champion assets_version={@assets_version} champion_key={@opponent_champion_key} />
     </div>
     """
   end
@@ -104,26 +104,30 @@ defmodule LorWeb.LolComponents do
     """
   end
 
-  attr :game_version, :string, required: true
+  attr :assets_version, :string, required: true
   attr :summoners, :list, required: true
   attr :class, :string, default: "", doc: "CSS class"
 
   def summoners(assigns) do
     ~H"""
     <div class={["flex items-center space-x-1 justify-center", @class]}>
-      <.summoner :for={summoner_key <- @summoners} game_version="12.12.1" summoner_key={summoner_key} />
+      <.summoner
+        :for={summoner_key <- @summoners}
+        assets_version={@assets_version}
+        summoner_key={summoner_key}
+      />
     </div>
     """
   end
 
-  attr :game_version, :string, required: true
+  attr :assets_version, :string, required: true
   attr :items, :list, required: true
   attr :class, :string, default: "", doc: "CSS class"
 
   def build(assigns) do
     ~H"""
     <div class={["flex items-center justify-center space-x-0.5", @class]}>
-      <.item :for={item_key <- @items} game_version="12.12.1" item_key={item_key} />
+      <.item :for={item_key <- @items} assets_version={@assets_version} item_key={item_key} />
     </div>
     """
   end

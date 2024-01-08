@@ -98,10 +98,16 @@ defmodule Lor.Lol.Match do
       description "Unix timestamp converted to date type"
     end
 
+    attribute :game_version, :string, allow_nil?: false
+
+    attribute :assets_version, :string do
+      allow_nil? false
+      description "Game version converted to asset version. ex: 13.24.547.9214 -> 13.24.1"
+    end
+
     attribute :game_mode, Lor.Lol.GameModes, allow_nil?: false
     attribute :game_name, :string, allow_nil?: false
     attribute :game_type, :string, allow_nil?: false
-    attribute :game_version, :string, allow_nil?: false
     attribute :map_id, :integer, allow_nil?: false
     attribute :queue_id, :integer, allow_nil?: false
 

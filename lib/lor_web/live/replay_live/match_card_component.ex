@@ -121,14 +121,16 @@ defmodule LorWeb.ReplayLive.MatchCardComponent do
       </div>
 
       <LOLC.player
+        :if={@participant.summoner.player}
         class="[grid-area:player]"
         src={@participant.summoner.player.picture.url}
         name={@participant.summoner.player.official_name}
       />
 
       <LOLC.versus
+        :if={@participant.opponent_participant}
         class="[grid-area:versus]"
-        game_version="12.12.1"
+        assets_version={@participant.match.assets_version}
         champion_key={@participant.champion_id}
         opponent_champion_key={@participant.opponent_participant.champion_id}
       />
@@ -142,13 +144,13 @@ defmodule LorWeb.ReplayLive.MatchCardComponent do
 
       <LOLC.summoners
         class="[grid-area:summoners]"
-        game_version="12.12.1"
+        assets_version={@participant.match.assets_version}
         summoners={@participant.summoners}
       />
 
       <LOLC.build
         class="[grid-area:build] md:hidden lg:flex"
-        game_version="12.12.1"
+        assets_version={@participant.match.assets_version}
         items={@participant.items}
       />
 
@@ -177,7 +179,10 @@ defmodule LorWeb.ReplayLive.MatchCardComponent do
 
         <div class="grid-team-participants px-1 py-1">
           <div class="[grid-area:summoner-champion] flex items-center space-x-1">
-            <LOLC.champion game_version="12.12.1" champion_key={participant.champion_id} />
+            <LOLC.champion
+              assets_version={@match.assets_version}
+              champion_key={participant.champion_id}
+            />
             <.link :if={participant.summoner.player} class="hover:underline">
               <%= participant.summoner.player.official_name %>
             </.link>
@@ -188,7 +193,7 @@ defmodule LorWeb.ReplayLive.MatchCardComponent do
 
           <LOLC.summoners
             class="[grid-area:summoners]"
-            game_version="12.12.1"
+            assets_version={@match.assets_version}
             summoners={participant.summoners}
           />
 
@@ -205,7 +210,11 @@ defmodule LorWeb.ReplayLive.MatchCardComponent do
             </span>
           </div>
 
-          <LOLC.build class="[grid-area:build]" game_version="12.12.1" items={participant.items} />
+          <LOLC.build
+            class="[grid-area:build]"
+            assets_version={@match.assets_version}
+            items={participant.items}
+          />
         </div>
       <% end %>
     </div>
