@@ -43,7 +43,15 @@ config :lor, Lor.S3.Api, Lor.S3.Minio
 
 config :lor, Oban,
   repo: Lor.Repo,
-  plugins: [Oban.Plugins.Pruner],
+  plugins: [
+    Oban.Plugins.Pruner,
+    {
+      Oban.Plugins.Cron,
+      crontab: [
+        {"@daily", Lor.Lol.ProWorker, args: %{"platform_id" => :kr}}
+      ]
+    }
+  ],
   queues: [default: 10]
 
 config :lor,

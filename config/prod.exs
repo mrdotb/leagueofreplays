@@ -28,17 +28,3 @@ config :lor,
       platform_ids: [:kr]
     }
   }
-
-# Oban
-config :lor, Oban,
-  repo: Lor.Repo,
-  plugins: [
-    Oban.Plugins.Pruner,
-    {
-      Oban.Plugins.Cron,
-      crontab: [
-        {"@daily", Lor.Lol.ProWorker, args: :kr}
-      ]
-    }
-  ],
-  queues: [default: 10]

@@ -5,7 +5,7 @@ defmodule Lor.Lol.ProWorker do
 
   @impl true
   def perform(%{args: %{"platform_id" => platform_id}}) do
-    platform_id = String.to_existing_atom(platform_id)
+    {:ok, platform_id} = Lor.Lol.PlatformIds.match(platform_id)
 
     case Reactor.run(Lor.Pros.UGGReactor, %{platform_id: platform_id}) do
       {:ok, _result} ->
