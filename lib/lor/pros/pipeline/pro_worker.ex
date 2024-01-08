@@ -1,4 +1,4 @@
-defmodule Lor.Lol.ProWorker do
+defmodule Lor.Pros.ProWorker do
   use Oban.Worker
 
   require Logger
