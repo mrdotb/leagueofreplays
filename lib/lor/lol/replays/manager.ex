@@ -18,8 +18,6 @@ defmodule Lor.Lol.Replays.Manager do
 
   @impl GenServer
   def init(_args) do
-    # Todo aggregate
-    # Process.send_after(self(), :fetch_all, @update_interval)
     {:ok, %{}}
   end
 
@@ -42,7 +40,8 @@ defmodule Lor.Lol.Replays.Manager do
         }
 
         {:ok, pid} = Lor.Lol.Replays.WorkerSupervisor.add(args)
-        Map.put(state, id, %{pid: pid, active_game: active_game})
+        Lor.Lol.Replays.ActiveGames.insert(id, active_game)
+        Map.put(state, id, pid)
       else
         state
       end
@@ -53,6 +52,8 @@ defmodule Lor.Lol.Replays.Manager do
   @impl GenServer
   def handle_info({:terminating, ending_state}, state) do
     Logger.info("Manager received terminating ending_state: #{inspect(ending_state)}")
+    state = Map.delete(state, ending_state.id)
+    Lor.Lol.Replays.ActiveGames.delete(ending_state.id)
     {:noreply, state}
   end
 

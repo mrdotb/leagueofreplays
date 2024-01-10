@@ -4,6 +4,11 @@ defmodule LorWeb.ActiveGameLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
+    socket = assign(socket, form: to_form(%{}), active_games: list_active_games())
     {:ok, socket}
+  end
+
+  defp list_active_games do
+    Lor.Lol.Replays.ActiveGames.list()
   end
 end

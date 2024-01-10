@@ -14,6 +14,7 @@ defmodule Lor.Lol.Replays.Supervisor do
     children =
       [
         {Registry, keys: :unique, name: Lor.Lol.Replays.Registry},
+        Lor.Lol.Replays.ActiveGames,
         Lor.Lol.Replays.Manager,
         Lor.Lol.Replays.WorkerSupervisor,
         {Task.Supervisor, name: Lor.Lol.Replays.TaskSupervisor, strategy: :one_for_one}

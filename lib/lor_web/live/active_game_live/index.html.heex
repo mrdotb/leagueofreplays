@@ -1,1 +1,88 @@
 <PC.h2>Live Game</PC.h2>
+
+<div class="rounded-lg bg-white border dark:bg-gray-800 dark:border-gray-700">
+  <.form for={@form} class="p-4 flex space-x-2">
+    <PC.field wrapper_class="!mb-0 flex items-center" field={@form[:live]} type="switch" />
+    <PC.field
+      label_class="hidden"
+      wrapper_class="w-32 !mb-0"
+      field={@form[:platform_id]}
+      type="select"
+      options={[{"🇰🇷 kr", "kr"}, {"🇪🇺 euw1", ""}]}
+    />
+    <PC.field
+      label_class="hidden"
+      wrapper_class="w-32 !mb-0"
+      field={@form[:game_mode]}
+      type="select"
+      options={[{"Aram", "aram"}, {"euw1", ""}]}
+    />
+
+    <PC.button color="gray">Reset</PC.button>
+  </.form>
+</div>
+
+<div class="mt-4 grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
+  <div
+    :for={{id, active_game} <- @active_games}
+    class="rounded-lg bg-white border dark:bg-gray-800 dark:border-gray-700"
+  >
+    <div class="p-4 flex flex-col items-center space-y-2">
+      <LOLC.champion
+        class="w-14 h-14 rounded-lg overflow-hidden"
+        champion_key={List.first(active_game["participants"])["championId"]}
+        assets_version="13.24.1"
+      />
+      <div>
+        <div class="text-center">
+          <span><%= List.first(active_game["participants"])["summonerName"] %></span> #KR1
+        </div>
+        <div class="text-center">Grand Master Lv. 446</div>
+      </div>
+      <div class="w-full flex items-center justify-between">
+        <div class="flex space-x-1">
+          <.icon class="w-6 h-6 text-blue-500" name="hero-video-camera-solid" />
+          <div
+            id={"live-time-#{id}"}
+            phx-hook="LiveTimeHook"
+            data-start={DateTime.from_unix!(active_game["gameStartTime"], :millisecond)}
+          >
+            00:00
+          </div>
+        </div>
+        <div class="font-medium">
+          <%= active_game["gameMode"] %>
+        </div>
+      </div>
+    </div>
+    <div class="border-t border-gray-200 dark:border-gray-700">
+      <div class="px-2 py-4 space-y-4">
+        <div class="flex justify-center space-x-3">
+          <div class="w-12 h-12 bg-gray-900 overflow-hidden rounded-full flex items-end">
+            <img
+              class="-ml-1 w-14 max-w-none"
+              src="https://static.bigbrain.gg/assets/probuildstats/player_images/small_2x/faker.png"
+            />
+          </div>
+          <div>
+            <div class="font-medium uppercase">Faker</div>
+            <div class="flex items-center space-x-1">
+              <div class="w-6 h-6">
+                <img
+                  class="w-full"
+                  src="https://static.bigbrain.gg/assets/probuildstats/team_icons/t1.png"
+                />
+              </div>
+              <div>T1</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex space-x-2">
+          <PC.button class="grow">Spectate</PC.button>
+          <PC.button class="grow" variant="outline">Live Game</PC.button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -13,5 +13,6 @@ defmodule Lor.Lol do
     resource Lor.Lol.Replay
     resource Lor.Lol.Chunk
     resource Lor.Lol.KeyFrame
+    resource Lor.Lol.ActiveGame
   end
 end
