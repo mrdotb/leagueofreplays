@@ -49,7 +49,9 @@ config :lor, Oban,
     {
       Oban.Plugins.Cron,
       crontab: [
-        {"@daily", Lor.Pros.ProWorker, args: %{"platform_id" => :kr}}
+        {"@daily", Lor.Pros.ProWorker, args: %{"platform_id" => :kr}},
+        {"@daily", Lor.Pros.ProWorker, args: %{"platform_id" => :euw1}},
+        {"@daily", Lor.Pros.ProWorker, args: %{"platform_id" => :na1}}
       ]
     }
   ],
