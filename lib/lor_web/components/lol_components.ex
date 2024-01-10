@@ -8,7 +8,7 @@ defmodule LorWeb.LolComponents do
 
   alias LorWeb.PetalComponents, as: PC
 
-  attr :src, :string
+  attr :picture, :map
   attr :class, :string, default: "", doc: "CSS class"
   attr :name, :string, required: true
 
@@ -18,7 +18,11 @@ defmodule LorWeb.LolComponents do
       "flex items-center space-x-2",
       @class
     ]}>
-      <PC.avatar class="bg-gray-100 dark:bg-gray-700" size="md" src={@src} />
+      <PC.avatar
+        class="bg-gray-100 dark:bg-gray-700"
+        size="md"
+        src={if(@picture, do: @picture.url, else: false)}
+      />
       <.link class="hover:underline">
         <%= @name %>
       </.link>
@@ -28,13 +32,14 @@ defmodule LorWeb.LolComponents do
 
   attr :assets_version, :string, required: true
   attr :champion_key, :integer, required: true
+  attr :class, :string, default: "", doc: "CSS class"
 
   def champion(assigns) do
     img = Lor.Lol.Ddragon.get_champion_image(assigns.assets_version, assigns.champion_key)
     assigns = assign(assigns, src: img)
 
     ~H"""
-    <div class="w-8 h-8 rounded-full overflow-hidden">
+    <div class={@class}>
       <img src={@src} class="w-full" />
     </div>
     """
@@ -79,9 +84,17 @@ defmodule LorWeb.LolComponents do
       "flex items-center space-x-1 justify-center",
       @class
     ]}>
-      <.champion assets_version={@assets_version} champion_key={@champion_key} />
+      <.champion
+        class="w-8 h-8 rounded-full overflow-hidden"
+        assets_version={@assets_version}
+        champion_key={@champion_key}
+      />
       <span class="text-xs">vs</span>
-      <.champion assets_version={@assets_version} champion_key={@opponent_champion_key} />
+      <.champion
+        class="w-8 h-8 rounded-full overflow-hidden"
+        assets_version={@assets_version}
+        champion_key={@opponent_champion_key}
+      />
     </div>
     """
   end

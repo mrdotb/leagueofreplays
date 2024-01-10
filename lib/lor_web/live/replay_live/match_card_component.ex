@@ -123,7 +123,7 @@ defmodule LorWeb.ReplayLive.MatchCardComponent do
       <LOLC.player
         :if={@participant.summoner.player}
         class="[grid-area:player]"
-        src={@participant.summoner.player.picture.url}
+        picture={@participant.summoner.player.picture}
         name={@participant.summoner.player.official_name}
       />
 
@@ -180,6 +180,7 @@ defmodule LorWeb.ReplayLive.MatchCardComponent do
         <div class="grid-team-participants px-1 py-1">
           <div class="[grid-area:summoner-champion] flex items-center space-x-1">
             <LOLC.champion
+              class="w-8 h-8 rounded-full overflow-hidden"
               assets_version={@match.assets_version}
               champion_key={participant.champion_id}
             />
