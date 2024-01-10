@@ -41,7 +41,6 @@ defmodule LorWeb.LayoutComponents do
             <nav aria-label="User menu" class="flex items-center">
               <div class="z-10 flex w-full items-center justify-end gap-1 text-violet-500 lg:gap-2">
                 <div class="flex gap-1 md:gap-2">
-                  <.color_scheme_switch id="nav-scheme-switch" />
                   <PC.icon_button
                     link_type="a"
                     target="_blank"
@@ -58,6 +57,7 @@ defmodule LorWeb.LayoutComponents do
                   >
                     <Core.icon name="svg-github" class="h-5 w-5" />
                   </PC.icon_button>
+                  <.color_scheme_switch id="nav-scheme-switch" />
                 </div>
               </div>
             </nav>
