@@ -11,7 +11,7 @@ defmodule Lor.Application do
       LorWeb.Telemetry,
       Lor.Repo,
       {DNSCluster, query: Application.get_env(:lor, :dns_cluster_query) || :ignore},
-      {Phoenix.PubSub, name: Lor.PubSub},
+      {Phoenix.PubSub, name: :lor_pubsub},
       # Start the Finch HTTP client
       {Finch, name: Lor.Finch},
       # Ddragon

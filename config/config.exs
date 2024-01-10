@@ -67,7 +67,7 @@ config :lor, LorWeb.Endpoint,
     formats: [html: LorWeb.ErrorHTML, json: LorWeb.ErrorJSON],
     layout: false
   ],
-  pubsub_server: Lor.PubSub,
+  pubsub_server: :lor_pubsub,
   live_view: [signing_salt: "0uxjtFvk"]
 
 config :lor, LorSpectator.Endpoint,
