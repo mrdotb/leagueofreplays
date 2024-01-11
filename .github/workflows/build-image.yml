@@ -39,6 +39,9 @@ jobs:
         push: true
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
+        permissions:
+          content: read
+          packages: write
         build-args: |
           MIX_ENV=small
           BUILD_METADATA=${{ steps.meta.outputs.json }}
