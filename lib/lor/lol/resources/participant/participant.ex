@@ -29,7 +29,7 @@ defmodule Lor.Lol.Participant do
 
       pagination do
         keyset? true
-        default_limit 5
+        default_limit 50
       end
 
       prepare Lor.Lol.Participant.Preparations.FilterSortReplay
