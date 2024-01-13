@@ -42,8 +42,7 @@ defmodule Lor.Lol.Replays.FeaturedScheduler do
         game_list = response["gameList"]
 
         for game <- game_list,
-            game["gameStartTime"] != 0,
-            Lor.TimeHelpers.started_less_than_m_ago?(game["gameStartTime"], 5) do
+            game["gameMode"] != "TFT" do
           Lor.Lol.Replays.Manager.add(game)
         end
 
