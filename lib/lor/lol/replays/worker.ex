@@ -281,7 +281,13 @@ defmodule Lor.Lol.Replays.Worker do
     chunk_id = chunk_info["chunkId"]
     Logger.debug("Increment current_chunk and wait...")
 
-    Process.send_after(self(), :record_media_data, chunk_info["nextAvailableChunk"])
+    time =
+      if(chunk_info["nextAvailableChunk"] == 0,
+        do: 10_000,
+        else: chunk_info["nextAvailableChunk"]
+      )
+
+    Process.send_after(self(), :record_media_data, time)
 
     state = %{
       state
@@ -312,11 +318,16 @@ defmodule Lor.Lol.Replays.Worker do
   defp get_first_chunk_id(chunk_statuses) do
     chunk_statuses
     |> Enum.filter(fn {id, status} ->
-      status == :downloaded and id != 1
+      # Chunk 1 and 2 can always be downloaded
+      status == :downloaded and id > 2
     end)
     |> Enum.map(fn {id, _} -> id end)
     |> Enum.min()
   end
+
+  def find_first_of_range([last]), do: last
+  def find_first_of_range([a, b | c]) when a - b == 1, do: find_first_of_range([b | c])
+  def find_first_of_range([a, _ | _]), do: a
 
   defp get_last_chunk_id(chunk_statuses) do
     chunk_statuses

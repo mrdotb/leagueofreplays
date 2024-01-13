@@ -1,0 +1,42 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "X-Riot-Token": "***"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "https://euw1.api.riotgames.com/lol/spectator/v4/featured-games"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"gameList\":[],\"clientRefreshInterval\":300}",
+      "headers": {
+        "date": "Wed, 10 Jan 2024 11:30:27 GMT",
+        "content-type": "application/json;charset=utf-8",
+        "transfer-encoding": "chunked",
+        "connection": "keep-alive",
+        "accept-ranges": "bytes",
+        "access-control-allow-origin": "*",
+        "age": "0",
+        "cache-control": "no-cache",
+        "expires": "Thu, 01 Jan 1970 00:00:00 UTC",
+        "pragma": "No-cache",
+        "via": "1.1 varnish",
+        "x-app-rate-limit": "20:1,100:120",
+        "x-app-rate-limit-count": "1:1,1:120",
+        "x-method-rate-limit": "20000:10,1200000:600",
+        "x-method-rate-limit-count": "1:10,1:600",
+        "x-riot-edge-trace-id": "d70b18bd-c35b-43b7-983b-a89c81ef9630",
+        "x-varnish": "2193609080",
+        "access-control-allow-methods": "GET, PUT, DELETE, POST, OPTIONS",
+        "access-control-allow-headers": "DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range",
+        "access-control-expose-headers": "Content-Length,Content-Range"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

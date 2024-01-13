@@ -10,5 +10,6 @@ defmodule LorWeb.ActiveGameLive.Index do
 
   defp list_active_games do
     Lor.Lol.Replays.ActiveGames.list()
+    |> IO.inspect()
   end
 end

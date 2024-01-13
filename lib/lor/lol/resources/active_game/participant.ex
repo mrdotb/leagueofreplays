@@ -9,8 +9,4 @@ defmodule Lor.Lol.ActiveGame.Participant do
     attribute :team_id, :integer
     attribute :champion_id, :integer
   end
-
-  calculations do
-    calculate :summoner, :struct, Lor.Lol.ActiveGame.Calculations.LoadSummoner
-  end
 end

@@ -1,12 +1,17 @@
 defmodule Lor.Lol.ActiveGame do
   use Ash.Resource
 
+  # use Ash.Resource,
+  #   data_layer: Ash.DataLayer.Ets
+
   code_interface do
     define_for Lor.Lol
     define :create_from_api, args: [:active_game]
   end
 
   actions do
+    defaults [:read]
+
     create :create_from_api do
       accept []
 
@@ -30,5 +35,11 @@ defmodule Lor.Lol.ActiveGame do
     end
 
     attribute :participants, {:array, Lor.Lol.ActiveGame.Participant}
+  end
+
+  calculations do
+    calculate :pro_participants,
+              {:array, :struct},
+              Lor.Lol.ActiveGame.Calculations.LoadProParticipants
   end
 end

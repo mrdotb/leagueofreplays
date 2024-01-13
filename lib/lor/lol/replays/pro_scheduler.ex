@@ -42,8 +42,7 @@ defmodule Lor.Lol.Replays.ProScheduler do
                state.platform_id,
                summoner.encrypted_id
              ),
-           true <- game["gameStartTime"] != 0,
-           true <- Lor.TimeHelpers.started_less_than_m_ago?(game["gameStartTime"], 5) do
+           true <- game["gameMode"] != "TFT" do
         Lor.Lol.Replays.Manager.add(game)
       end
     end

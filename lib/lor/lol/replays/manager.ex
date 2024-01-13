@@ -40,6 +40,12 @@ defmodule Lor.Lol.Replays.Manager do
         }
 
         {:ok, pid} = Lor.Lol.Replays.WorkerSupervisor.add(args)
+
+        active_game =
+          active_game
+          |> Lor.Lol.ActiveGame.create_from_api!()
+          |> Lor.Lol.load!([:pro_participants])
+
         Lor.Lol.Replays.ActiveGames.insert(id, active_game)
         Map.put(state, id, pid)
       else
