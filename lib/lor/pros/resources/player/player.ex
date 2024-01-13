@@ -26,6 +26,7 @@ defmodule Lor.Pros.Player do
   code_interface do
     define_for Lor.Pros
 
+    define :list, action: :list, args: [:filter]
     define :create_from_ugg, args: [:player_data, :current_team_id, :picture_id]
     define :by_normalized_names, args: [:normalized_names]
   end
@@ -39,6 +40,18 @@ defmodule Lor.Pros.Player do
       end
 
       filter expr(normalized_name in ^arg(:normalized_names))
+    end
+
+    read :list do
+      argument :filter, :map, allow_nil?: true
+
+      pagination do
+        offset? true
+        countable :by_default
+        max_page_size 50
+      end
+
+      prepare Lor.Pros.Player.Preparations.FilterSortPlayer
     end
 
     create :create_from_ugg do
@@ -65,6 +78,10 @@ defmodule Lor.Pros.Player do
 
     create_timestamp :inserted_at
     update_timestamp :updated_at
+  end
+
+  calculations do
+    calculate :current_team_name, :string, expr(current_team.name)
   end
 
   relationships do

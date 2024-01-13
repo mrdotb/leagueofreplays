@@ -1,0 +1,39 @@
+<PC.h2>Players</PC.h2>
+
+<PC.table>
+  <PC.tr>
+    <PC.th>Name</PC.th>
+    <PC.th>Team</PC.th>
+    <PC.th>Main Role</PC.th>
+    <PC.th>Status</PC.th>
+  </PC.tr>
+
+  <PC.tr :for={player <- @players} id={player.id}>
+    <PC.td>
+      <PC.user_inner_td
+        avatar_assigns={if(player.picture, do: %{src: player.picture.url}, else: nil)}
+        label={player.official_name}
+      />
+    </PC.td>
+    <PC.td>
+      <PC.user_inner_td
+        avatar_assigns={
+          if(player.current_team.logo, do: %{src: player.current_team.logo.url}, else: nil)
+        }
+        label={player.current_team.name}
+      />
+    </PC.td>
+    <PC.td class="whitespace-nowrap"><%= player.main_role %></PC.td>
+    <PC.td>
+      <PC.badge color="success" label="Active" />
+    </PC.td>
+  </PC.tr>
+</PC.table>
+
+<PC.pagination
+  class="mt-2"
+  link_type="live_patch"
+  path={~p"/players?page=:page"}
+  current_page={@active_page}
+  total_pages={@pages}
+/>

@@ -40,5 +40,6 @@ defmodule LorWeb.PetalComponents do
   defdelegate th(assigns), to: PetalComponents.Table
   defdelegate tr(assigns), to: PetalComponents.Table
   defdelegate ul(assigns), to: PetalComponents.Typography
+  defdelegate user_inner_td(assigns), to: PetalComponents.Table
   defdelegate vertical_menu(assigns), to: PetalComponents.Menu
 end

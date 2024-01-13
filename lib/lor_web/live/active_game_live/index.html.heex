@@ -42,13 +42,13 @@
       <div class="w-full flex items-center justify-between">
         <div class="flex space-x-1">
           <.icon class="w-6 h-6 text-blue-500" name="hero-video-camera-solid" />
-          <div
-            id={"live-time-#{id}"}
-            phx-hook="LiveTimeHook"
-            data-start={DateTime.from_unix!(active_game["gameStartTime"], :millisecond)}
-          >
-            00:00
-          </div>
+          <%!-- <div --%>
+          <%!--   id={"live-time-#{id}"} --%>
+          <%!--   phx-hook="LiveTimeHook" --%>
+          <%!--   data-start={DateTime.from_unix!(active_game["gameStartTime"], :millisecond)} --%>
+          <%!-- > --%>
+          <%!--   00:00 --%>
+          <%!-- </div> --%>
         </div>
         <div class="font-medium">
           <%= active_game["gameMode"] %>
