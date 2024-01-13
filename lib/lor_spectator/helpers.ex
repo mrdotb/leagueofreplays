@@ -75,7 +75,7 @@ defmodule LorSpectator.Helpers do
       "keyFrameId" => first_key_frame_id,
       "nextChunkId" => first_chunk_id,
       "endStartupChunkId" => 1,
-      "startGameChunkId" => 2,
+      "startGameChunkId" => first_chunk_id,
       "endGameChunkId" => 0,
       "duration" => 30000
     }

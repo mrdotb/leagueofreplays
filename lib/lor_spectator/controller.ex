@@ -16,7 +16,7 @@ defmodule LorSpectator.Controller do
   def version(conn, _params) do
     conn
     |> put_resp_content_type("text/plain")
-    |> send_resp(200, "2.0.0")
+    |> send_resp(200, "1.0.30")
   end
 
   def get_game_meta_data(conn, params) do
