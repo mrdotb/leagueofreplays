@@ -169,7 +169,11 @@ if config_env() == :prod do
 
   config :lor, LorSpectator.Endpoint,
     server: spectator_server,
-    url: [scheme: "http", host: spectator_host, port: spectator_port, path: "/"]
+    url: [scheme: "http", host: spectator_host, port: 80, path: "/"],
+    http: [
+      ip: {0, 0, 0, 0, 0, 0, 0, 0},
+      port: spectator_port
+    ]
 
   # Schedulers
 
