@@ -1,23 +1,45 @@
 defmodule Lor.Lol.Ddragon.Warmer do
   @moduledoc """
-  Warm the ddragon cache.
+  Warm the ddragon cache at startup and refresh every 24 hours.
   """
-  use Cachex.Warmer
+  use GenServer
 
   require Logger
 
-  @doc """
-  Returns the interval for this warmer.
-  """
-  def interval, do: :timer.hours(24)
+  @interval :timer.hours(24)
 
-  @doc """
-  Executes this cache warmer
-  """
-  def execute(_connection) do
+  # Public API
+
+  @doc "Start the Warmer"
+  def start_link(_opts) do
+    GenServer.start_link(__MODULE__, [], name: __MODULE__)
+  end
+
+  # Callbacks
+
+  @impl true
+  def init(_opts) do
+    Logger.info("Start Ddragon Warmer")
+
+    send(self(), :cache)
+    {:ok, [], {:continue, :start}}
+  end
+
+  @impl true
+  def handle_continue(:start, state) do
+    {:noreply, state}
+  end
+
+  @impl true
+  def handle_info(:cache, state) do
     champion_keys = get_champion_keys()
+    Lor.Lol.Ddragon.Cache.put_all(champion_keys)
+
     summoner_keys = get_summoner_keys()
-    {:ok, champion_keys ++ summoner_keys}
+    Lor.Lol.Ddragon.Cache.put_all(summoner_keys)
+
+    Process.send_after(self(), :cache, @interval)
+    {:noreply, state}
   end
 
   defp get_champion_keys do

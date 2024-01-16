@@ -11,7 +11,7 @@ defmodule LorSpectator.Supervisor do
   def init(_args) do
     children = [
       LorSpectator.Endpoint,
-      {Cachex, name: :lor_spectator_cache}
+      LorSpectator.Sessions
     ]
 
     Supervisor.init(children, strategy: :one_for_one)

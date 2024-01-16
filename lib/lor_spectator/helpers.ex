@@ -43,25 +43,20 @@ defmodule LorSpectator.Helpers do
   end
 
   defp serve_last_chunk_info?(game_id, session_id) do
-    cache_op =
-      Cachex.get_and_update(:lor_spectator_cache, {game_id, session_id}, fn
-        nil ->
-          {:commit, 0, ttl: :timer.minutes(5)}
+    {_, counter} =
+      LorSpectator.Sessions.get_and_update(
+        {game_id, session_id},
+        fn
+          nil ->
+            {nil, 0}
 
-        count ->
-          {:commit, count + 1}
-      end)
+          count ->
+            {count, count + 1}
+        end,
+        ttl: :timer.minutes(5)
+      )
 
-    case cache_op do
-      {:commit, _count, _opts} ->
-        false
-
-      {:commit, count} ->
-        count > 3
-
-      {:ignore, _count} ->
-        false
-    end
+    counter > 3
   end
 
   @doc """

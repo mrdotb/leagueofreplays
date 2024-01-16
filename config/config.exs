@@ -19,6 +19,7 @@ config :lor,
 # Replay schedulers
 config :lor,
   replay_schedulers: %{
+    active?: false,
     featured: %{
       active?: false,
       platform_ids: []
@@ -54,8 +55,7 @@ config :lor, Oban,
         {"@daily", Lor.Pros.ProWorker, args: %{"platform_id" => :na1}}
       ]
     }
-  ],
-  queues: [default: 10]
+  ]
 
 config :lor,
   ecto_repos: [Lor.Repo],
@@ -121,6 +121,11 @@ config :logger, :console,
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
+
+# Nebulex caches
+config :lor, LorSpectator.Sessions,
+  backend: :ets,
+  gc_interval: :timer.hours(1)
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

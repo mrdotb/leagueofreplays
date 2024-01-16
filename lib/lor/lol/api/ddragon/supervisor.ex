@@ -4,8 +4,6 @@ defmodule Lor.Lol.Ddragon.Supervisor do
   """
   use Supervisor
 
-  import Cachex.Spec
-
   def start_link(args) do
     Supervisor.start_link(__MODULE__, args, name: __MODULE__)
   end
@@ -22,11 +20,8 @@ defmodule Lor.Lol.Ddragon.Supervisor do
 
   defp cache_child(%{active?: true}) do
     [
-      {Cachex,
-       name: Lor.Lol.Ddragon,
-       warmers: [
-         warmer(module: Lor.Lol.Ddragon.Warmer, state: nil, async: true)
-       ]}
+      Lor.Lol.Ddragon.Cache,
+      Lor.Lol.Ddragon.Warmer
     ]
   end
 end

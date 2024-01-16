@@ -7,26 +7,21 @@ defmodule Lor.Application do
 
   @impl true
   def start(_type, _args) do
+    # web_server? = Application.fetch_env!(:lor, LorWeb.Endpoint)[:server]
+    # replay_scheduler? = Application.fetch_env!(:lor, :replay_schedulers).active?
+
     children = [
-      LorWeb.Telemetry,
       Lor.Repo,
-      {DNSCluster, query: Application.get_env(:lor, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: :lor_pubsub},
-      # Start the Finch HTTP client
       {Finch, name: Lor.Finch},
-      # Ddragon
+      {Oban, AshOban.config([Lor.Lol, Lor.Pros, Lor.S3], Application.fetch_env!(:lor, Oban))},
+      LorSpectator.Supervisor,
+      LorWeb.Telemetry,
+      LorWeb.Endpoint,
       Lor.Lol.Ddragon.Supervisor,
-      # Start our HTTP clients
       Lor.Lol.Rest.Supervisor,
       Lor.Lol.Observer.Clients,
-      # Oban
-      {Oban, AshOban.config([Lor.Lol], Application.fetch_env!(:lor, Oban))},
-      # Start Replays
-      Lor.Lol.Replays.Supervisor,
-      # Start to serve requests, typically the last entry
-      LorWeb.Endpoint,
-      # Start Spectator endpoint
-      LorSpectator.Supervisor
+      Lor.Lol.Replays.Supervisor
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

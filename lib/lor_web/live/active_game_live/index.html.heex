@@ -23,7 +23,7 @@
 </div>
 
 <div class="mt-4 grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
-  <%= for {game_id, active_game} <- @active_games, {summoner_pro, participant} <- active_game.pro_participants do %>
+  <%= for active_game <- @active_games, {summoner_pro, participant} <- active_game.pro_participants do %>
     <div class="rounded-lg bg-white border dark:bg-gray-800 dark:border-gray-700">
       <div class="p-4 flex flex-col items-center space-y-2">
         <LOLC.champion
@@ -41,7 +41,7 @@
           <div class="flex space-x-1">
             <.icon class="w-6 h-6 text-blue-500" name="hero-video-camera-solid" />
             <div
-              id={"live-time-#{game_id}-#{summoner_pro.puuid}"}
+              id={"live-time-#{active_game.id}-#{summoner_pro.puuid}"}
               phx-hook="LiveTimeHook"
               data-start={active_game.game_start_time}
             >

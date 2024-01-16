@@ -6,13 +6,21 @@ defmodule Lor.Lol.ActiveGame.Changes.CreateFromApi do
 
   def change(changeset, _, _) do
     game_data = Ash.Changeset.get_argument(changeset, :active_game)
-    game_start_time = get_game_start_time(game_data["gameStartTime"])
+    # temporary workaround for missing gameStartTime in featured game
+    game_start_time =
+      if game_data["gameStartTime"] do
+        get_game_start_time(game_data["gameStartTime"])
+      else
+        DateTime.add(DateTime.utc_now(), -game_data["gameLength"], :second)
+      end
+
     encryption_key = game_data["observers"]["encryptionKey"]
     participants = get_participants(game_data["participants"])
 
     params = %{
       id: "#{game_data["platformId"]}-#{game_data["gameId"]}",
       platform_id: game_data["platformId"],
+      game_id: game_data["gameId"],
       game_mode: game_data["gameMode"],
       game_start_time: game_start_time,
       encryption_key: encryption_key,

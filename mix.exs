@@ -26,6 +26,7 @@ defmodule Lor.MixProject do
     [
       mod: {Lor.Application, []},
       extra_applications: [:logger, :runtime_tools]
+      # extra_applications: [:logger, :runtime_tools, :observer, :wx]
     ]
   end
 
@@ -45,14 +46,14 @@ defmodule Lor.MixProject do
       {:ash_postgres, "~> 1.3"},
       {:ash_state_machine, "~> 0.2.2"},
       {:aws, "~> 0.13.0"},
-      {:cachex, "~> 3.6"},
-      {:dns_cluster, "~> 0.1.1"},
       {:ecto_sql, "~> 3.10"},
       {:finch, "~> 0.13"},
       {:floki, ">= 0.30.0"},
       {:gettext, "~> 0.20"},
       {:hackney, "~> 1.18"},
       {:jason, "~> 1.2"},
+      {:libcluster, "~> 3.3"},
+      {:nebulex, "~> 2.5"},
       {:petal_components, "~> 1.6"},
       {:phoenix, "~> 1.7.10"},
       {:phoenix_ecto, "~> 4.4"},

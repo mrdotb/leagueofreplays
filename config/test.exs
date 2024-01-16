@@ -7,6 +7,7 @@ config :ash, :missed_notifications, :ignore
 # Replay schedulers
 config :lor,
   replay_schedulers: %{
+    active?: false,
     featured: %{
       active?: false,
       platform_ids: []
@@ -17,6 +18,12 @@ config :lor,
     }
   }
 
+# S3
+config :lor, Lor.S3.Api, Lor.S3Dummy
+
+# Oban
+config :lor, Oban, testing: :manual
+
 # Ddragon
 config :lor,
   ddragon: %{
@@ -25,21 +32,16 @@ config :lor,
     }
   }
 
-# S3
-config :lor, Lor.S3.Api, Lor.S3Dummy
-
-# Oban
-config :lor, Oban, testing: :manual
-
+# s3
 config :lor, :s3, %{
   buckets: %{
     pictures: "pictures",
     replays: "replays",
     original: "original"
   },
-  replay: [
-    url: ""
-  ]
+  urls: %{
+    replays: ""
+  }
 }
 
 # Exvcr
@@ -79,7 +81,18 @@ config :lor, LorSpectator.Endpoint,
   url: [scheme: "http", host: "localhost", port: 4003, path: "/"]
 
 # Replays schedulers
-config :lor, :replays, active: false
+config :lor,
+  replay_schedulers: %{
+    active?: true,
+    featured: %{
+      active?: false,
+      platform_ids: [:kr]
+    },
+    pro: %{
+      active?: false,
+      platform_ids: [:kr]
+    }
+  }
 
 # In test we don't send emails.
 config :lor, Lor.Mailer, adapter: Swoosh.Adapters.Test

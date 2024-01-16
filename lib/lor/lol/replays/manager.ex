@@ -18,7 +18,29 @@ defmodule Lor.Lol.Replays.Manager do
 
   @impl GenServer
   def init(_args) do
-    {:ok, %{}}
+    {:ok, %{}, {:continue, :restore}}
+  end
+
+  @impl GenServer
+  def handle_continue(:restore, state) do
+    state =
+      %{}
+      |> Lor.Lol.ActiveGame.list!()
+      |> Enum.reduce(state, fn active_game, state ->
+        args = %{
+          id: active_game.id,
+          manager_pid: self(),
+          platform_id: active_game.platform_id,
+          game_id: active_game.game_id,
+          encryption_key: active_game.encryption_key,
+          action: :restore
+        }
+
+        {:ok, pid} = Lor.Lol.Replays.WorkerSupervisor.add(args)
+        Map.put(state, active_game.id, pid)
+      end)
+
+    {:noreply, state}
   end
 
   @impl GenServer
@@ -36,17 +58,13 @@ defmodule Lor.Lol.Replays.Manager do
           manager_pid: self(),
           platform_id: platform_id,
           game_id: game_id,
-          encryption_key: encryption_key
+          encryption_key: encryption_key,
+          action: :start
         }
 
         {:ok, pid} = Lor.Lol.Replays.WorkerSupervisor.add(args)
+        Lor.Lol.ActiveGame.create_from_api!(active_game)
 
-        active_game =
-          active_game
-          |> Lor.Lol.ActiveGame.create_from_api!()
-          |> Lor.Lol.load!([:pro_participants])
-
-        Lor.Lol.Replays.ActiveGames.insert(id, active_game)
         Map.put(state, id, pid)
       else
         state
@@ -59,7 +77,11 @@ defmodule Lor.Lol.Replays.Manager do
   def handle_info({:terminating, ending_state}, state) do
     Logger.info("Manager received terminating ending_state: #{inspect(ending_state)}")
     state = Map.delete(state, ending_state.id)
-    Lor.Lol.Replays.ActiveGames.delete(ending_state.id)
+
+    ending_state.id
+    |> Lor.Lol.ActiveGame.get!()
+    |> Lor.Lol.ActiveGame.destroy!()
+
     {:noreply, state}
   end
 

@@ -9,7 +9,7 @@ defmodule LorWeb.ActiveGameLive.Index do
   end
 
   defp list_active_games do
-    Lor.Lol.Replays.ActiveGames.list()
+    Lor.Lol.ActiveGame.list!(nil)
     |> IO.inspect()
   end
 end

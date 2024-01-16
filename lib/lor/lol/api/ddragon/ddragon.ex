@@ -12,11 +12,11 @@ defmodule Lor.Lol.Ddragon do
     "https://ddragon.leagueoflegends.com/cdn/12.16.1/img/champion/Annie.png"
   """
   def get_champion_image(game_version, champion_key) do
-    case Cachex.get(__MODULE__, {:champion, champion_key}) do
-      {:ok, champion_img} ->
+    case Lor.Lol.Ddragon.Cache.get({:champion, champion_key}) do
+      champion_img when is_binary(champion_img) ->
         "#{@ddragon_cdn}/#{game_version}/img/champion/#{champion_img}"
 
-      {:error, _} ->
+      nil ->
         nil
     end
   end
@@ -28,11 +28,11 @@ defmodule Lor.Lol.Ddragon do
     "https://ddragon.leagueoflegends.com/cdn/12.16.1/img/item/1038.png"
   """
   def get_summoner_image(game_version, summoner_key) do
-    case Cachex.get(__MODULE__, {:summoner, summoner_key}) do
-      {:ok, summoner_img} ->
+    case Lor.Lol.Ddragon.Cache.get({:summoner, summoner_key}) do
+      summoner_img when is_nil(summoner_img) ->
         "#{@ddragon_cdn}/#{game_version}/img/spell/#{summoner_img}"
 
-      {:error, _} ->
+      nil ->
         nil
     end
   end
@@ -64,11 +64,11 @@ defmodule Lor.Lol.Ddragon do
     }
   """
   def get_champion_search_map do
-    case Cachex.get(__MODULE__, :champions_search_map) do
-      {:ok, search_map} ->
+    case Lor.Lol.Ddragon.Cache.get(:champions_search_map) do
+      search_map when is_map(search_map) ->
         search_map
 
-      {:error, _} ->
+      nil ->
         %{}
     end
   end

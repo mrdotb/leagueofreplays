@@ -10,6 +10,8 @@ config :lor, Lor.Repo,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
+config :lor, Oban, queues: [default: 10]
+
 # For development, we disable any cache and enable
 # debugging and code reloading.
 #
@@ -17,8 +19,7 @@ config :lor, Lor.Repo,
 # watchers to your application. For example, we can use it
 # to bundle .js and .css sources.
 config :lor, LorWeb.Endpoint,
-  # Binding to loopback ipv4 address prevents access from other machines.
-  # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
+  server: true,
   http: [ip: {0, 0, 0, 0}, port: 4000],
   check_origin: false,
   code_reloader: true,
@@ -30,7 +31,7 @@ config :lor, LorWeb.Endpoint,
   ]
 
 config :lor, LorSpectator.Endpoint,
-  # http: [ip: {127, 0, 0, 1}, port: 3000],
+  server: true,
   http: [ip: {0, 0, 0, 0}, port: 3000],
   check_origin: false,
   debug_errors: false

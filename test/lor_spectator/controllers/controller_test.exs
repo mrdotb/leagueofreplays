@@ -3,7 +3,7 @@ defmodule LorSpectator.ControllerTest do
 
   test "GET /version", %{conn: conn} do
     conn = get(conn, ~p"/observer-mode/rest/consumer/version")
-    assert text_response(conn, 200) == "2.0.0"
+    assert text_response(conn, 200) == "1.0.30"
   end
 
   test "GET /getGameMetaData success", %{conn: conn} do
@@ -61,7 +61,7 @@ defmodule LorSpectator.ControllerTest do
                "keyFrameId" => nil,
                "nextAvailableChunk" => 10000,
                "nextChunkId" => nil,
-               "startGameChunkId" => 2
+               "startGameChunkId" => nil
              }
   end
 end

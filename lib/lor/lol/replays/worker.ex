@@ -39,7 +39,7 @@ defmodule Lor.Lol.Replays.Worker do
     # Makes the process call terminate/2 upon exit.
     Process.flag(:trap_exit, true)
 
-    {:ok, state, {:continue, :start}}
+    {:ok, state, {:continue, args.action}}
   end
 
   @impl true
@@ -56,6 +56,36 @@ defmodule Lor.Lol.Replays.Worker do
          {:ok, replay} <- Lor.Lol.Replay.create(Map.put(params, :game_meta_data, metadata)) do
       send(self(), :record_media_data)
       state = %{state | version: version, replay: replay, replay_id: replay.id}
+      {:noreply, state}
+    else
+      {:error, error} ->
+        Logger.error("Could not start the replay worker error #{inspect(error)}")
+        state = %{state | error: error}
+        {:stop, :normal, state}
+    end
+  end
+
+  def handle_continue(:restore, state) do
+    with {:ok, version} <- Lor.Lol.Observer.fetch_api_version(state.platform_id),
+         {:ok, replay} <-
+           Lor.Lol.Replay.get_by_game_id_and_platform_id(
+             to_string(state.platform_id),
+             to_string(state.game_id)
+           ),
+         {:ok, replay_loaded} <- Lor.Lol.load(replay, [:key_frames, :chunks]) do
+      send(self(), :record_media_data)
+      chunk_statuses = restore_chunk_statuses(replay_loaded.chunks)
+      key_frame_statuses = restore_key_frame_statuses(replay_loaded.key_frames)
+
+      state = %{
+        state
+        | version: version,
+          replay: replay,
+          replay_id: replay.id,
+          chunk_statuses: chunk_statuses,
+          key_frame_statuses: key_frame_statuses
+      }
+
       {:noreply, state}
     else
       {:error, error} ->
@@ -207,6 +237,11 @@ defmodule Lor.Lol.Replays.Worker do
     end
   end
 
+  # handle EXIT process than come from ash query
+  def handle_info({:EXIT, _ref, :normal}, state) do
+    {:noreply, state}
+  end
+
   @impl true
   def terminate(:normal, %{error: nil} = state) do
     Logger.info("Replays worker normal terminate state: #{inspect(state, pretty: true)}")
@@ -325,10 +360,6 @@ defmodule Lor.Lol.Replays.Worker do
     |> Enum.min()
   end
 
-  def find_first_of_range([last]), do: last
-  def find_first_of_range([a, b | c]) when a - b == 1, do: find_first_of_range([b | c])
-  def find_first_of_range([a, _ | _]), do: a
-
   defp get_last_chunk_id(chunk_statuses) do
     chunk_statuses
     |> Enum.filter(fn {_id, status} ->
@@ -354,5 +385,17 @@ defmodule Lor.Lol.Replays.Worker do
     end)
     |> Enum.map(fn {id, _} -> id end)
     |> Enum.max()
+  end
+
+  defp restore_chunk_statuses(chunks) do
+    Enum.reduce(chunks, %{}, fn chunk, acc ->
+      Map.put(acc, chunk.number, :downloaded)
+    end)
+  end
+
+  defp restore_key_frame_statuses(key_frames) do
+    Enum.reduce(key_frames, %{}, fn key_frame, acc ->
+      Map.put(acc, key_frame.number, :downloaded)
+    end)
   end
 end

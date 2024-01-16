@@ -15,16 +15,3 @@ config :swoosh, local: false
 
 # Do not print debug messages in production
 config :logger, level: :info
-
-# replays schedulers
-config :lor,
-  replay_schedulers: %{
-    featured: %{
-      active?: false,
-      platform_ids: [:kr]
-    },
-    pro: %{
-      active?: true,
-      platform_ids: [:kr]
-    }
-  }
