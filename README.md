@@ -11,7 +11,7 @@
 | Variable Name      | Description                                         | Required | Default Value |
 |--------------------|-----------------------------------------------------|----------|---------------|
 | `DATABASE_URL`     | URL to the PostgreSQL database                      | Yes      |               |
-| `ECTO_IPV6`        | If database host is IPv6                            | Yes      |               |
+| `ECTO_IPV6`        | If database host is IPv6                            | No       |               |
 | `POOL_SIZE`        | PostgreSQL pool size                                | No       | 10            |
 | `RIOT_TOKEN`       | Token to access Riot API                            | Yes      |               |
 | `S3_ACCESS_KEY`    | S3 access key                                       | Yes      |               |

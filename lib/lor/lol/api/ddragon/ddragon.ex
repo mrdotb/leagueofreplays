@@ -29,7 +29,7 @@ defmodule Lor.Lol.Ddragon do
   """
   def get_summoner_image(game_version, summoner_key) do
     case Lor.Lol.Ddragon.Cache.get({:summoner, summoner_key}) do
-      summoner_img when is_nil(summoner_img) ->
+      summoner_img when is_binary(summoner_img) ->
         "#{@ddragon_cdn}/#{game_version}/img/spell/#{summoner_img}"
 
       nil ->
