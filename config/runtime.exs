@@ -188,8 +188,8 @@ if config_env() == :prod do
   pro_scheduler? = if System.get_env("PRO_SCHEDULER") in ~w(true 1), do: true, else: false
 
   config :lor,
-    active?: scheduler?,
     replay_schedulers: %{
+      active?: scheduler?,
       featured: %{
         active?: false,
         platform_ids: [:kr]
