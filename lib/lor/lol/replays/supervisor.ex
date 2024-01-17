@@ -12,14 +12,21 @@ defmodule Lor.Lol.Replays.Supervisor do
     config = Application.fetch_env!(:lor, :replay_schedulers)
 
     children =
-      [
-        {Registry, keys: :unique, name: Lor.Lol.Replays.Registry},
-        Lor.Lol.Replays.WorkerSupervisor,
-        Lor.Lol.Replays.Manager,
-        {Task.Supervisor, name: Lor.Lol.Replays.TaskSupervisor, strategy: :one_for_one}
-      ] ++ featured_schedulers(config.featured) ++ pro_schedulers(config.pro)
+      schedulers(config) ++
+        featured_schedulers(config.featured) ++ pro_schedulers(config.pro)
 
     Supervisor.init(children, strategy: :one_for_one)
+  end
+
+  defp schedulers(%{active?: false}), do: []
+
+  defp schedulers(%{active?: true}) do
+    [
+      {Registry, keys: :unique, name: Lor.Lol.Replays.Registry},
+      Lor.Lol.Replays.WorkerSupervisor,
+      Lor.Lol.Replays.Manager,
+      {Task.Supervisor, name: Lor.Lol.Replays.TaskSupervisor, strategy: :one_for_one}
+    ]
   end
 
   defp featured_schedulers(%{active?: false}), do: []
