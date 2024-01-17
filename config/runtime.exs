@@ -102,7 +102,7 @@ if config_env() == :prod do
         erlang_nodes_in_k8s: [
           strategy: Elixir.Cluster.Strategy.Kubernetes,
           config: [
-            mode: :ip,
+            mode: :dns,
             kubernetes_node_basename: node_basename,
             kubernetes_selector: selector,
             kubernetes_namespace: namespace,
