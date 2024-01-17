@@ -10,6 +10,5 @@ defmodule LorWeb.ActiveGameLive.Index do
 
   defp list_active_games do
     Lor.Lol.ActiveGame.list!(nil)
-    |> IO.inspect()
   end
 end

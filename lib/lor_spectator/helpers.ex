@@ -92,7 +92,7 @@ defmodule LorSpectator.Helpers do
 
   defp get_replay_bucket_url do
     config = Application.get_env(:lor, :s3)
-    config[:replay][:url]
+    config.urls.replays
   end
 
   @doc """
