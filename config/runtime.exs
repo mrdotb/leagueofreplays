@@ -151,6 +151,13 @@ if config_env() == :prod do
     username: "admin",
     password: admin_password
 
+  ddragon_cache? = if System.get_env("DDRAGON_CACHE") in ~w(true 1), do: true, else: false
+
+  config :lor,
+    ddragon: %{
+      cache: %{active?: ddragon_cache?}
+    }
+
   # Spectator server
 
   spectator_server = if System.get_env("SPECTATOR_SERVER") in ~w(true 1), do: true, else: false

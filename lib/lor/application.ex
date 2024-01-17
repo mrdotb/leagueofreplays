@@ -7,9 +7,6 @@ defmodule Lor.Application do
 
   @impl true
   def start(_type, _args) do
-    # web_server? = Application.fetch_env!(:lor, LorWeb.Endpoint)[:server]
-    # replay_scheduler? = Application.fetch_env!(:lor, :replay_schedulers).active?
-
     children = [
       Lor.Repo,
       {Phoenix.PubSub, name: :lor_pubsub},
@@ -21,7 +18,9 @@ defmodule Lor.Application do
       Lor.Lol.Ddragon.Supervisor,
       Lor.Lol.Rest.Supervisor,
       Lor.Lol.Observer.Clients,
-      Lor.Lol.Replays.Supervisor
+      Lor.Lol.Replays.Supervisor,
+      {Cluster.Supervisor,
+       [Application.fetch_env!(:libcluster, :topologies), [name: Lor.ClusterSupervisor]]}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

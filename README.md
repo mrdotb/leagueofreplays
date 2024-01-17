@@ -35,6 +35,7 @@
 | `SCHEDULER`        | Scheduler enabled?                                  | No       | false         |
 | `PRO_SCHEDULER`    | Pro scheduler enabled?                              | No       | false         |
 | `OBAN_QUEUE`       | Oban queue enabled?                                 | No       | false         |
+| `DDRAGON_CACHE`    | Ddragon cache enabled?                              | No       | false         |
 
 ## Testing
 

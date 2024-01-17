@@ -127,6 +127,21 @@ config :lor, LorSpectator.Sessions,
   backend: :ets,
   gc_interval: :timer.hours(1)
 
+config :lor, Lor.Lol.Ddragon.Cache,
+  backend: :ets,
+  gc_interval: :timer.hours(1)
+
+# libcluster
+config :libcluster,
+  topologies: [
+    api: [
+      strategy: Cluster.Strategy.Epmd,
+      config: [
+        hosts: []
+      ]
+    ]
+  ]
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{config_env()}.exs"
