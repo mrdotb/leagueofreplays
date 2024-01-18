@@ -12,13 +12,32 @@
       <div class="[grid-area:ellipsis] hidden lg:flex"></div>
     </div>
 
-    <div id="participants" phx-update="stream" class="w-full space-y-1">
+    <div id="participants" class="w-full space-y-1">
       <.live_component
-        :for={{id, participant} <- @streams.participants}
+        :for={participant <- @participants}
         module={LorWeb.ReplayLive.MatchCardComponent}
-        id={id}
+        id={participant.id}
         participant={participant}
       />
     </div>
   </div>
+</div>
+<div class="flex mt-2">
+  <PC.button
+    :if={@prev_page}
+    class="pc-pagination__item__previous"
+    link_type="live_patch"
+    to={~p"/replays?before=#{@prev_page}"}
+  >
+    <.icon class="pagination__item__previous__chevron" name="hero-chevron-left" />
+  </PC.button>
+
+  <PC.button
+    :if={@next_page}
+    class="pc-pagination__item__next"
+    link_type="live_patch"
+    to={~p"/replays?after=#{@next_page}"}
+  >
+    <.icon class="pagination__item__next__chevron" name="hero-chevron-right" />
+  </PC.button>
 </div>

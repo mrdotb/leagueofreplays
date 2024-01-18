@@ -6,9 +6,12 @@ defmodule LorWeb.ReplayLive.Index do
   def mount(_params, _session, socket) do
     socket =
       socket
-      |> assign(after: nil)
-      |> stream_configure(:participants, dom_id: &"participant-#{&1.id}")
-      |> stream(:participants, [])
+      |> assign(:page_after, nil)
+      |> assign(:page_before, nil)
+      |> assign(:page_limit, 10)
+      |> assign(:next_page, nil)
+      |> assign(:prev_page, nil)
+      |> assign(:participants, [])
 
     {:ok, socket}
   end
@@ -18,28 +21,72 @@ defmodule LorWeb.ReplayLive.Index do
     {:noreply, apply_action(socket, socket.assigns.live_action, params)}
   end
 
-  defp apply_action(socket, :index, _params) do
+  defp apply_action(socket, :index, params) do
+    socket =
+      socket
+      |> assign_page_after(params)
+      |> assign_page_before(params)
+
     page = list_participants(socket)
 
-    keyset =
-      case List.last(page.results) do
-        nil ->
-          nil
-
-        last_record ->
-          last_record.__metadata__.keyset
-      end
-
     socket
-    |> assign(after: keyset)
-    |> stream(:participants, page.results)
+    |> assign_next_page(page)
+    |> assign_prev_page(page)
+    |> assign(:participants, page.results)
   end
 
-  defp list_participants(%{assigns: %{after: nil}}) do
-    Lor.Lol.Participant.list_replays!(%{})
+  defp assign_next_page(socket, page) do
+    case List.last(page.results) do
+      last_record when is_struct(last_record) ->
+        keyset = last_record.__metadata__.keyset
+        assign(socket, next_page: keyset)
+
+      nil ->
+        socket
+    end
   end
 
-  defp list_participants(%{assigns: %{after: keyset}}) do
-    Lor.Lol.Participant.list_replays!(%{}, page: [after: keyset])
+  defp assign_prev_page(socket, page) do
+    case List.first(page.results) do
+      first_record when is_struct(first_record) ->
+        keyset = first_record.__metadata__.keyset
+        assign(socket, prev_page: keyset)
+
+      nil ->
+        socket
+    end
+  end
+
+  defp assign_page_after(socket, %{"after" => page_after}) do
+    socket
+    |> assign(:page_after, page_after)
+    |> assign(:page_before, nil)
+  end
+
+  defp assign_page_after(socket, _), do: socket
+
+  defp assign_page_before(socket, %{"before" => page_before}) do
+    socket
+    |> assign(:page_after, nil)
+    |> assign(:page_before, page_before)
+  end
+
+  defp assign_page_before(socket, _), do: socket
+
+  defp list_participants(%{assigns: %{page_limit: page_limit, page_after: nil, page_before: nil}}) do
+    page = [limit: page_limit]
+    Lor.Lol.Participant.list_replays!(%{}, page: page)
+  end
+
+  defp list_participants(%{assigns: %{page_limit: page_limit, page_after: page_after}})
+       when is_binary(page_after) do
+    page = [limit: page_limit, after: page_after]
+    Lor.Lol.Participant.list_replays!(%{}, page: page)
+  end
+
+  defp list_participants(%{assigns: %{page_limit: page_limit, page_before: page_before}})
+       when is_binary(page_before) do
+    page = [limit: page_limit, before: page_before]
+    Lor.Lol.Participant.list_replays!(%{}, page: page)
   end
 end
