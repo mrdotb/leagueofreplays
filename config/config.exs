@@ -123,13 +123,9 @@ config :logger, :console,
 config :phoenix, :json_library, Jason
 
 # Nebulex caches
-config :lor, LorSpectator.Sessions,
-  backend: :ets,
-  gc_interval: :timer.hours(1)
+config :lor, LorSpectator.Sessions, backend: :ets
 
-config :lor, Lor.Lol.Ddragon.Cache,
-  backend: :ets,
-  gc_interval: :timer.hours(1)
+config :lor, Lor.Lol.Ddragon.Cache, backend: :ets
 
 # libcluster
 config :libcluster,
