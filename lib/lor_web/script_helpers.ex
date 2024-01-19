@@ -15,7 +15,7 @@ defmodule LorWeb.ScriptHelpers do
   end
 
   def spectator_endpoint("riot", platform_id) do
-    "http://spectator.#{platform_id}.lol.pvp.net:8080"
+    "spectator.#{platform_id}.lol.pvp.net:8080"
   end
 
   @doc """
