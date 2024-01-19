@@ -69,85 +69,11 @@
     </div>
   </div>
 
-  <%= if @show_modal? do %>
-    <PC.modal max_width="md" title="Spectate" close_modal_target={@myself}>
-      <PC.tabs role="tablist" class="justify-center mb-4">
-        <PC.tab
-          id={"windows-replay-#{@participant.id}"}
-          role="tab"
-          aria-selected={if(@modal_state == "windows", do: "true", else: "false")}
-          aria-controls={"tabpanel-windows-#{@participant.id}"}
-          tabindex={if(@modal_state == "windows", do: "1", else: "2")}
-          is_active={@modal_state == "windows"}
-          phx-click={show_windows(@participant.id)}
-          phx-target={@myself}
-        >
-          <.icon name="svg-microsoft" class="w-6 h-6 mr-2" />
-          <span>Windows</span>
-        </PC.tab>
-        <PC.tab
-          id={"mac-replay-#{@participant.id}"}
-          role="tab"
-          aria-selected={if(@modal_state == "mac", do: "true", else: "false")}
-          aria-controls={"tabpanel-mac-#{@participant.id}"}
-          tabindex={if(@modal_state == "mac", do: "1", else: "2")}
-          is_active={@modal_state == "mac"}
-          phx-click={show_mac(@participant.id)}
-          phx-target={@myself}
-        >
-          <.icon name="svg-apple" class="w-6 h-6 mr-2" />
-          <span>Mac</span>
-        </PC.tab>
-      </PC.tabs>
-
-      <div
-        id={"tabpanel-windows-#{@participant.id}"}
-        class={[if(@modal_state == "mac", do: "hidden")]}
-      >
-        <PC.p>
-          Your download will begin in a moment. If it doesn't,
-          <.link
-            href={~p"/script/spectate?#{spectate_params(@participant.match.replay)}"}
-            class="underline"
-          >
-            restart the download
-          </.link>
-        </PC.p>
-
-        <img
-          src="https://s-lol-web.op.gg/images/spectate_message.gif?ver=1.0?v=1702977255104"
-          class="w-full"
-          alt="spectate message"
-        />
-
-        <div
-          id={"script-hook-#{@participant.id}"}
-          phx-hook="ScriptHook"
-          data-url={url(~p"/script/spectate?#{spectate_params(@participant.match.replay)}")}
-        />
-      </div>
-
-      <div
-        id={"tabpanel-mac-#{@participant.id}"}
-        class={[if(@modal_state == "windows", do: "hidden")]}
-      >
-        <div class="flex items-center">
-          <span class="mr-2">Run the Terminal and copy and paste the command</span>
-          <PC.button
-            size="xs"
-            with_icon
-            phx-click={JS.dispatch("lor:clipcopy")}
-            data-copy={@mac_script}
-          >
-            <.icon name="hero-clipboard-solid" class="w-4 h-4 mr-1" /> Copy
-          </PC.button>
-        </div>
-        <textarea class="mt-2 pc-text-input text-xs resize-none" readonly rows="10"><%= @mac_script %></textarea>
-      </div>
-
-      <div class="flex justify-end mt-2">
-        <PC.button label="close" phx-click={PetalComponents.Modal.hide_modal()} />
-      </div>
-    </PC.modal>
-  <% end %>
+  <.live_component
+    :if={@show_modal?}
+    module={LorWeb.SpectateModalComponent}
+    id={@participant.id}
+    participant={@participant}
+    close_modal_target={@myself}
+  />
 </div>

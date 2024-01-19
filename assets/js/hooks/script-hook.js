@@ -1,8 +1,10 @@
 const ScriptHook = {
   deadViewCompatible: true,
   mounted () {
-    // launch download
-    window.location.href = this.el.dataset.url
+    // launch download after 500 ms
+    setTimeout(() => {
+      window.location.href = this.el.dataset.url
+    }, 500)
   }
 }
 

@@ -68,28 +68,6 @@ defmodule LorWeb.ReplayLive.MatchCardComponent do
     {:noreply, socket}
   end
 
-  def handle_event("windows", _, socket) do
-    socket =
-      if socket.assigns.modal_state == "mac" do
-        assign(socket, modal_state: "windows")
-      else
-        socket
-      end
-
-    {:noreply, socket}
-  end
-
-  def handle_event("mac", _, socket) do
-    socket =
-      if socket.assigns.modal_state == "windows" do
-        assign(socket, modal_state: "mac")
-      else
-        socket
-      end
-
-    {:noreply, socket}
-  end
-
   defp load_match(match) do
     participants_query =
       Lor.Lol.Participant
@@ -222,10 +200,6 @@ defmodule LorWeb.ReplayLive.MatchCardComponent do
     """
   end
 
-  defp spectate_params(replay) do
-    Map.take(replay, [:platform_id, :game_id, :encryption_key])
-  end
-
   defp show_post_game(participant_id) do
     JS.hide(to: "#tabpanel-replay-#{participant_id}")
     |> JS.show(to: "#tabpanel-post-game-#{participant_id}")
@@ -236,17 +210,5 @@ defmodule LorWeb.ReplayLive.MatchCardComponent do
     JS.hide(to: "#tabpanel-post-game-#{participant_id}")
     |> JS.show(to: "#tabpanel-replay-#{participant_id}")
     |> JS.push("replay")
-  end
-
-  defp show_windows(participant_id) do
-    JS.hide(to: "#tabpanel-mac-#{participant_id}")
-    |> JS.show(to: "#tabpanel-windows-#{participant_id}")
-    |> JS.push("windows")
-  end
-
-  defp show_mac(participant_id) do
-    JS.hide(to: "#tabpanel-windows-#{participant_id}")
-    |> JS.show(to: "#tabpanel-mac-#{participant_id}")
-    |> JS.push("mac")
   end
 end
