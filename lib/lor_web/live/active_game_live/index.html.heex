@@ -35,10 +35,14 @@
           <div class="text-center">
             <span><%= summoner_pro.riot_id %></span>
           </div>
-          <div class="text-center">Grand Master Lv. 446</div>
+          <div class="text-center">Lv. <%= summoner_pro.summoner_level %></div>
         </div>
         <div class="w-full flex items-center justify-between">
-          <div class="flex space-x-1">
+          <div
+            id={"live-time-container-#{active_game.id}-#{summoner_pro.puuid}"}
+            phx-update="ignore"
+            class="flex space-x-1"
+          >
             <.icon class="w-6 h-6 text-blue-500" name="hero-video-camera-solid" />
             <div
               id={"live-time-#{active_game.id}-#{summoner_pro.puuid}"}
@@ -86,11 +90,21 @@
           </div>
 
           <div class="flex space-x-2">
-            <PC.button class="grow">Spectate</PC.button>
+            <PC.button phx-click="show-modal" phx-value-id={active_game.id} class="grow">
+              Spectate
+            </PC.button>
             <PC.button class="grow" variant="outline">Live Game</PC.button>
           </div>
         </div>
       </div>
     </div>
   <% end %>
+
+  <.live_component
+    :if={@show_modal?}
+    module={LorWeb.SpectateModalComponent}
+    id={if(@active_game, do: @active_game.id)}
+    spectate_params={spectate_params(@active_game)}
+    close_modal_target={nil}
+  />
 </div>

@@ -28,7 +28,8 @@ defmodule Lor.Lol.Observer.Client do
 
   defp url(platform_id) when is_atom(platform_id) do
     platform_id = to_string(platform_id)
-    # "http://spectator-consumer.#{platform_id}.lol.pvp.net:8080"
+    # old endpoint pre patch 14.1
+    # "http://spectator-consumer.#{platform_id}.lol.pvp.net:80"
     "http://spectator.#{platform_id}.lol.pvp.net:8080"
   end
 

@@ -2,26 +2,26 @@
   <PC.modal max_width="md" title="Spectate" close_modal_target={@close_modal_target}>
     <PC.tabs role="tablist" class="justify-center mb-4">
       <PC.tab
-        id={"windows-replay-#{@participant.id}"}
+        id={"windows-replay-#{@id}"}
         role="tab"
         aria-selected={if(@state == "windows", do: "true", else: "false")}
-        aria-controls={"tabpanel-windows-#{@participant.id}"}
+        aria-controls={"tabpanel-windows-#{@id}"}
         tabindex={if(@state == "windows", do: "1", else: "2")}
         is_active={@state == "windows"}
-        phx-click={show_windows(@participant.id)}
+        phx-click={show_windows(@id)}
         phx-target={@myself}
       >
         <.icon name="svg-microsoft" class="w-6 h-6 mr-2" />
         <span>Windows</span>
       </PC.tab>
       <PC.tab
-        id={"mac-replay-#{@participant.id}"}
+        id={"mac-replay-#{@id}"}
         role="tab"
         aria-selected={if(@state == "mac", do: "true", else: "false")}
-        aria-controls={"tabpanel-mac-#{@participant.id}"}
+        aria-controls={"tabpanel-mac-#{@id}"}
         tabindex={if(@state == "mac", do: "1", else: "2")}
         is_active={@state == "mac"}
-        phx-click={show_mac(@participant.id)}
+        phx-click={show_mac(@id)}
         phx-target={@myself}
       >
         <.icon name="svg-apple" class="w-6 h-6 mr-2" />
@@ -29,14 +29,10 @@
       </PC.tab>
     </PC.tabs>
 
-    <div id={"tabpanel-windows-#{@participant.id}"} class={[if(@state == "mac", do: "hidden")]}>
+    <div id={"tabpanel-windows-#{@id}"} class={[if(@state == "mac", do: "hidden")]}>
       <PC.p>
         Your download will begin in a moment. If it doesn't,
-        <.link
-          href={~p"/script/spectate?#{spectate_params(@participant.match.replay)}"}
-          target="_blank"
-          class="underline"
-        >
+        <.link href={~p"/script/spectate?#{@spectate_params}"} target="_blank" class="underline">
           restart the download
         </.link>
       </PC.p>
@@ -48,13 +44,13 @@
       />
 
       <div
-        id={"script-hook-#{@participant.id}"}
+        id={"script-hook-#{@id}"}
         phx-hook="ScriptHook"
-        data-url={url(~p"/script/spectate?#{spectate_params(@participant.match.replay)}")}
+        data-url={url(~p"/script/spectate?#{@spectate_params}")}
       />
     </div>
 
-    <div id={"tabpanel-mac-#{@participant.id}"} class={[if(@state == "windows", do: "hidden")]}>
+    <div id={"tabpanel-mac-#{@id}"} class={[if(@state == "windows", do: "hidden")]}>
       <div class="flex items-center">
         <span class="mr-2">Run the Terminal and copy and paste the command</span>
         <PC.button

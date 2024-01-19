@@ -3,6 +3,7 @@ defmodule LorWeb.ScriptController do
 
   def spectate(conn, params) do
     types = [
+      endpoint: {:string, required: true},
       platform_id: {:string, required: true},
       game_id: {:string, required: true},
       encryption_key: {:string, required: true}
@@ -18,10 +19,11 @@ defmodule LorWeb.ScriptController do
     |> put_resp_header("content-disposition", "attachment; filename=\"#{file_name}\"")
     |> render("spectate.bat",
       layout: false,
-      spectator_endpoint: LorWeb.ScriptHelpers.spectator_endpoint(),
+      spectator_endpoint:
+        LorWeb.ScriptHelpers.spectator_endpoint(args.endpoint, args.platform_id),
       encryption_key: encryption_key,
       game_id: args.game_id,
-      platform_id: platform_id
+      platform_id: LorWeb.ScriptHelpers.get_platform_id(:windows, args.endpoint, args.platform_id)
     )
   end
 end

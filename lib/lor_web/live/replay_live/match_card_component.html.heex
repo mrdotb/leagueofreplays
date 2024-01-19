@@ -73,7 +73,7 @@
     :if={@show_modal?}
     module={LorWeb.SpectateModalComponent}
     id={@participant.id}
-    participant={@participant}
+    spectate_params={spectate_params(@participant.match.replay)}
     close_modal_target={@myself}
   />
 </div>

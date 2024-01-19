@@ -114,7 +114,7 @@ if exist "League of Legends.exe" (
 goto notfound
 
 :start
-@start "" "League of Legends.exe" "spectator <%= @spectator_endpoint %> <%= @encryption_key %> <%= @game_id %> <%= @platform_id %>-%RANDOM%%RANDOM%" -UseRads -GameBaseDir=.. "-Locale=%locale%" -SkipBuild -EnableCrashpad=true -EnableLNP
+@start "" "League of Legends.exe" "spectator <%= @spectator_endpoint %> <%= @encryption_key %> <%= @game_id %> <%= @platform_id %>" -UseRads -GameBaseDir=.. "-Locale=%locale%" -SkipBuild -EnableCrashpad=true -EnableLNP
 goto exit
 
 :Trim

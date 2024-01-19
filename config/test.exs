@@ -4,20 +4,6 @@ import Config
 config :ash, :disable_async?, true
 config :ash, :missed_notifications, :ignore
 
-# Replay schedulers
-config :lor,
-  replay_schedulers: %{
-    active?: false,
-    featured: %{
-      active?: false,
-      platform_ids: []
-    },
-    pro: %{
-      active?: false,
-      platform_ids: []
-    }
-  }
-
 # S3
 config :lor, Lor.S3.Api, Lor.S3Dummy
 
@@ -65,7 +51,9 @@ config :lor, Lor.Repo,
   hostname: "localhost",
   database: "lor_test#{System.get_env("MIX_TEST_PARTITION")}",
   pool: Ecto.Adapters.SQL.Sandbox,
-  pool_size: 10
+  pool_size: 10,
+  stacktrace: true,
+  show_sensitive_data_on_connection_error: true
 
 # We don't run a web server during test. If one is required,
 # you can enable the server option below.
@@ -83,7 +71,7 @@ config :lor, LorSpectator.Endpoint,
 # Replays schedulers
 config :lor,
   replay_schedulers: %{
-    active?: true,
+    active?: false,
     featured: %{
       active?: false,
       platform_ids: [:kr]

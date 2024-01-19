@@ -2,6 +2,7 @@ defmodule LorWeb.ReplayLive.MatchCardComponent do
   @moduledoc false
   use LorWeb, :live_component
 
+  @impl true
   def update(assigns, socket) do
     socket =
       socket
@@ -9,12 +10,11 @@ defmodule LorWeb.ReplayLive.MatchCardComponent do
       |> assign(:match, AsyncResult.loading())
       |> assign(:state, "replay")
       |> assign(:show_modal?, false)
-      |> assign(:modal_state, "windows")
-      |> assign(:mac_script, LorWeb.ScriptHelpers.mac_script(assigns.participant.match.replay))
 
     {:ok, socket}
   end
 
+  @impl true
   def handle_event("replay", _params, socket) do
     socket =
       if socket.assigns.state != "replay" do
@@ -198,6 +198,12 @@ defmodule LorWeb.ReplayLive.MatchCardComponent do
       <% end %>
     </div>
     """
+  end
+
+  defp spectate_params(replay) do
+    replay
+    |> Map.take([:platform_id, :game_id, :encryption_key])
+    |> Map.put(:endpoint, "lor")
   end
 
   defp show_post_game(participant_id) do
