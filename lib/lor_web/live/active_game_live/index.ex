@@ -8,11 +8,21 @@ defmodule LorWeb.ActiveGameLive.Index do
       socket
       |> assign(:form, to_form(%{}))
       |> assign(:active_games, list_active_games())
-      |> assign(:active_game, list_active_games() |> List.first())
+      |> assign(:active_game, nil)
       |> assign(:spectate_modal?, false)
-      |> assign(:live_game_modal?, true)
+      |> assign(:live_game_modal?, false)
 
     {:ok, socket}
+  end
+
+  @impl true
+  def handle_params(_params, _url, socket) do
+    if connected?(socket) do
+      LorWeb.Endpoint.subscribe("active_game:created")
+      LorWeb.Endpoint.subscribe("active_game:destroyed")
+    end
+
+    {:noreply, socket}
   end
 
   @impl true
@@ -31,7 +41,7 @@ defmodule LorWeb.ActiveGameLive.Index do
         |> assign(modal_key, true)
         |> assign(:active_game, active_game)
       else
-        put_flash(socket, :info, "Could not open #{modal} for this game")
+        put_flash(socket, :error, "Could not open #{modal} for this game")
       end
 
     {:noreply, socket}
@@ -43,6 +53,34 @@ defmodule LorWeb.ActiveGameLive.Index do
       |> assign(:spectate_modal?, false)
       |> assign(:live_game_modal?, false)
       |> assign(:active_game, nil)
+
+    {:noreply, socket}
+  end
+
+  @impl true
+  def handle_info(
+        %{topic: "active_game:destroyed", event: "destroy", payload: %{data: active_game}},
+        socket
+      ) do
+    socket =
+      socket
+      |> update(:active_games, fn active_games ->
+        Enum.reject(active_games, &(&1.id == active_game.id))
+      end)
+      |> put_flash(:info, "Game terminated #{active_game.id}")
+
+    {:noreply, socket}
+  end
+
+  def handle_info(
+        %{topic: "active_game:created", event: "create", payload: %{data: active_game}},
+        socket
+      ) do
+    socket =
+      update(socket, :active_games, fn active_games ->
+        game = Ash.Query.load(active_game, [:pro_participants])
+        [game | active_games]
+      end)
 
     {:noreply, socket}
   end

@@ -10,11 +10,11 @@ defmodule Lor.Lol.ActiveGame do
   end
 
   pub_sub do
-    module :lor_pubsub
+    module LorWeb.Endpoint
     prefix "active_game"
 
-    publish :create, ["created", :active_game_id]
-    publish :destroy, ["destroyed", :active_game_id]
+    publish :create, "created"
+    publish :destroy, "destroyed"
   end
 
   code_interface do
