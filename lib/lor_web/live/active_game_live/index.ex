@@ -8,24 +8,31 @@ defmodule LorWeb.ActiveGameLive.Index do
       socket
       |> assign(:form, to_form(%{}))
       |> assign(:active_games, list_active_games())
-      |> assign(:active_game, nil)
-      |> assign(:show_modal?, false)
+      |> assign(:active_game, list_active_games() |> List.first())
+      |> assign(:spectate_modal?, false)
+      |> assign(:live_game_modal?, true)
 
     {:ok, socket}
   end
 
   @impl true
-  def handle_event("show-modal", %{"id" => id}, socket) do
-    active_game =
-      socket.assigns.active_games
-      |> Enum.find(fn active_game ->
-        active_game.id == id
-      end)
+  def handle_event("show-modal", %{"modal" => modal, "id" => id}, socket) do
+    active_game = Enum.find(socket.assigns.active_games, &(&1.id == id))
+
+    modal_key =
+      case modal do
+        "spectate" -> :spectate_modal?
+        "live-game" -> :live_game_modal?
+      end
 
     socket =
-      socket
-      |> assign(:show_modal?, true)
-      |> assign(:active_game, active_game)
+      if is_struct(active_game) do
+        socket
+        |> assign(modal_key, true)
+        |> assign(:active_game, active_game)
+      else
+        put_flash(socket, :info, "Could not open #{modal} for this game")
+      end
 
     {:noreply, socket}
   end
@@ -33,7 +40,8 @@ defmodule LorWeb.ActiveGameLive.Index do
   def handle_event("close_modal", _, socket) do
     socket =
       socket
-      |> assign(:show_modal?, false)
+      |> assign(:spectate_modal?, false)
+      |> assign(:live_game_modal?, false)
       |> assign(:active_game, nil)
 
     {:noreply, socket}

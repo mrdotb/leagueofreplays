@@ -22,7 +22,7 @@
   </.form>
 </div>
 
-<div class="mt-4 grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
+<div class="mt-4 grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
   <%= for active_game <- @active_games, {summoner_pro, participant} <- active_game.pro_participants do %>
     <div class="rounded-lg bg-white border dark:bg-gray-800 dark:border-gray-700">
       <div class="p-4 flex flex-col items-center space-y-2">
@@ -90,10 +90,23 @@
           </div>
 
           <div class="flex space-x-2">
-            <PC.button phx-click="show-modal" phx-value-id={active_game.id} class="grow">
+            <PC.button
+              phx-click="show-modal"
+              phx-value-modal="spectate"
+              phx-value-id={active_game.id}
+              class="grow"
+            >
               Spectate
             </PC.button>
-            <PC.button class="grow" variant="outline">Live Game</PC.button>
+            <PC.button
+              phx-click="show-modal"
+              phx-value-modal="live-game"
+              phx-value-id={active_game.id}
+              class="grow"
+              variant="outline"
+            >
+              Live Game
+            </PC.button>
           </div>
         </div>
       </div>
@@ -101,10 +114,42 @@
   <% end %>
 
   <.live_component
-    :if={@show_modal?}
+    :if={@spectate_modal?}
     module={LorWeb.SpectateModalComponent}
     id={if(@active_game, do: @active_game.id)}
     spectate_params={spectate_params(@active_game)}
     close_modal_target={nil}
   />
+
+  <PC.modal :if={@live_game_modal?} max_width="xl" title={@active_game.game_mode}>
+    <%= for {participant, index} <- Enum.with_index(@active_game.participants, 1) do %>
+      <div :if={index in [1, 6]} class="grid-live-game-header py-1">
+        <div :if={index == 1} class="text-blue-500">Blue Team</div>
+        <div :if={index == 6} class="text-red-500">Red Team</div>
+        <div class="text-center">Summoners</div>
+        <div class="hidden">Ban</div>
+      </div>
+      <div class="grid-live-game space-y-0.5">
+        <div class="flex space-x-1">
+          <LOLC.champion
+            assets_version="13.24.1"
+            champion_key={participant.champion_id}
+            class="w-8 h-8 rounded-full overflow-hidden"
+          />
+          <div class="flex items-center">
+            <span class="truncate">
+              <%= participant.name %>
+            </span>
+          </div>
+        </div>
+        <div class="flex justify-center items-center space-x-1 justify-center">
+          <LOLC.summoner
+            :for={summoner_key <- participant.summoners}
+            assets_version="13.24.1"
+            summoner_key={summoner_key}
+          />
+        </div>
+      </div>
+    <% end %>
+  </PC.modal>
 </div>

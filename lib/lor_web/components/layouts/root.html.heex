@@ -4,11 +4,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="csrf-token" content={get_csrf_token()} />
-    <.live_title suffix=" · Phoenix Framework">
+    <.live_title suffix=" · League of Replays">
       <%= assigns[:page_title] || "Lor" %>
     </.live_title>
     <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
     <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}>
+    </script>
+    <script defer data-domain="leagueofreplays.co" src="http://plausible.mrdotb.com/js/script.js">
     </script>
     <.color_scheme_switch_js />
   </head>

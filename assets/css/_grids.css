@@ -69,6 +69,18 @@
   }
 }
 
+.grid-live-game-header {
+  display: grid;
+  grid-gap: 0px;
+  grid-template-columns: 30% 60% 10%;
+}
+
+.grid-live-game {
+  display: grid;
+  grid-gap: 0px;
+  grid-template-columns: 30% 60% 10%;
+}
+
 /* @media (min-width: theme('screens.sm')) { */
 /*   .grid-participants-header { */
 /*     display: grid; */

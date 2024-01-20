@@ -47,6 +47,7 @@ defmodule LorWeb.LolComponents do
 
   attr :assets_version, :string, required: true
   attr :summoner_key, :integer, required: true
+  attr :class, :string, default: "", doc: "CSS class"
 
   def summoner(assigns) do
     img = Lor.Lol.Ddragon.get_summoner_image(assigns.assets_version, assigns.summoner_key)
