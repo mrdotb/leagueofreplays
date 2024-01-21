@@ -22,10 +22,10 @@
     </div>
   </div>
 </div>
-<div class="flex mt-2">
+<div class="flex mt-2 space-x-1">
   <PC.button
     :if={@prev_page}
-    class="pc-pagination__item__previous"
+    color="light"
     link_type="live_patch"
     to={~p"/replays?before=#{@prev_page}"}
   >
@@ -34,7 +34,7 @@
 
   <PC.button
     :if={@next_page}
-    class="pc-pagination__item__next"
+    color="light"
     link_type="live_patch"
     to={~p"/replays?after=#{@next_page}"}
   >
