@@ -3,22 +3,22 @@
   <:sidebar_block>
     <div class="w-full">
       <PC.vertical_menu
-        current_page={:home}
+        current_page={@current_page}
         menu_items={[
           %{
-            name: :active_game,
+            name: "/",
             label: "Live Game",
             path: ~p"/",
             icon: :play
           },
           %{
-            name: :data,
+            name: "/replays",
             label: "Replays",
             path: ~p"/replays",
             icon: :circle_stack
           },
           %{
-            name: :player,
+            name: "/players",
             label: "Players",
             path: ~p"/players",
             icon: :user

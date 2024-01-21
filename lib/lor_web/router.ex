@@ -20,13 +20,15 @@ defmodule LorWeb.Router do
 
   import AshAdmin.Router
 
-  scope "/", LorWeb do
-    pipe_through :browser
+  live_session :default, on_mount: [LorWeb.Hooks.ActivePage] do
+    scope "/", LorWeb do
+      pipe_through :browser
 
-    live "/", ActiveGameLive.Index, :index
-    live "/replays", ReplayLive.Index, :index
-    live "/players", PlayerLive.Index, :index
-    get "/script/spectate", ScriptController, :spectate
+      live "/", ActiveGameLive.Index, :index
+      live "/replays", ReplayLive.Index, :index
+      live "/players", PlayerLive.Index, :index
+      get "/script/spectate", ScriptController, :spectate
+    end
   end
 
   scope "/" do
