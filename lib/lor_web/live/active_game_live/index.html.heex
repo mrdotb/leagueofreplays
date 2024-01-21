@@ -22,7 +22,17 @@
   </.form>
 </div>
 
-<div class="mt-4 grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
+<div :if={length(@active_games) == 0} class="mt-4 flex justify-center items-center">
+  <div class="flex flex-col items-center">
+    <.icon name="hero-exclamation-circle" class="w-12 h-12" />
+    <p>There are currently no available games to spectate.</p>
+  </div>
+</div>
+
+<div
+  :if={length(@active_games) > 0}
+  class="mt-4 grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2"
+>
   <%= for active_game <- @active_games, {summoner_pro, participant} <- active_game.pro_participants do %>
     <div class="rounded-lg bg-white border dark:bg-gray-800 dark:border-gray-700">
       <div class="p-4 flex flex-col items-center space-y-2">
