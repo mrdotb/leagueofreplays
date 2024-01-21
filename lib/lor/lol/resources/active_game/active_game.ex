@@ -13,7 +13,7 @@ defmodule Lor.Lol.ActiveGame do
     module LorWeb.Endpoint
     prefix "active_game"
 
-    publish :create, "created"
+    publish :create_from_api, "created"
     publish :destroy, "destroyed"
   end
 

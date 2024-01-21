@@ -73,14 +73,16 @@ defmodule LorWeb.ActiveGameLive.Index do
   end
 
   def handle_info(
-        %{topic: "active_game:created", event: "create", payload: %{data: active_game}},
+        %{topic: "active_game:created", event: "create_from_api", payload: %{data: active_game}},
         socket
       ) do
     socket =
-      update(socket, :active_games, fn active_games ->
-        game = Ash.Query.load(active_game, [:pro_participants])
+      socket
+      |> update(:active_games, fn active_games ->
+        game = Lor.Lol.load!(active_game, [:pro_participants])
         [game | active_games]
       end)
+      |> put_flash(:info, "Game started #{active_game.id}")
 
     {:noreply, socket}
   end
