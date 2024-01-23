@@ -69,30 +69,26 @@
       <div class="border-t border-gray-200 dark:border-gray-700">
         <div class="px-2 py-4 space-y-4">
           <div class="flex justify-center space-x-3">
-            <div class="w-12 h-12 bg-gray-900 overflow-hidden rounded-full flex items-end">
+            <.link
+              navigate={~p"/player/#{summoner_pro.player.normalized_name}"}
+              class="w-12 h-12 bg-gray-900 overflow-hidden rounded-full flex items-end"
+            >
               <img
+                :if={summoner_pro.player.picture}
                 class="-ml-1 w-14 max-w-none"
-                src={if(summoner_pro.player.picture, do: summoner_pro.player.picture.url)}
+                src={summoner_pro.player.picture.url}
               />
-            </div>
+            </.link>
             <div>
-              <div class="font-medium uppercase"><%= summoner_pro.player.official_name %></div>
-              <div class="flex items-center space-x-1">
-                <div
-                  :if={
-                    is_struct(summoner_pro.player.current_team) and
-                      is_struct(summoner_pro.player.current_team.logo)
-                  }
-                  class="w-6 h-6"
-                >
-                  <img
-                    class="w-full"
-                    src={
-                      if(summoner_pro.player.current_team.logo,
-                        do: summoner_pro.player.current_team.logo.url
-                      )
-                    }
-                  />
+              <.link
+                navigate={~p"/player/#{summoner_pro.player.normalized_name}"}
+                class="font-medium uppercase hover:underline"
+              >
+                <%= summoner_pro.player.official_name %>
+              </.link>
+              <div :if={summoner_pro.player.current_team} class="flex items-center space-x-1">
+                <div :if={summoner_pro.player.current_team.logo} class="flex items-center w-6 h-6">
+                  <img class="w-full" src={summoner_pro.player.current_team.logo.url} />
                 </div>
                 <div><%= summoner_pro.player.current_team.name %></div>
               </div>
