@@ -1,6 +1,34 @@
-<PC.h2>Replays</PC.h2>
+<div class="flex space-x-4">
+  <div class="w-28 bg-gray-100 dark:bg-gray-700 rounded">
+    <img
+      :if={@player.picture}
+      class="w-full"
+      src={@player.picture.url}
+      alt={"Picture of #{@player.official_name}"}
+    />
+  </div>
+  <div>
+    <PC.h2><%= @player.official_name %></PC.h2>
 
-<div class="flex flex-col">
+    <div :if={@player.current_team} class="flex items-center space-x-1">
+      <div :if={@player.current_team.logo} class="w-10">
+        <img class="w-full" src={@player.current_team.logo.url} />
+      </div>
+      <div class="text-xl"><%= @player.current_team.name %></div>
+    </div>
+  </div>
+</div>
+
+<div class="max-w-4xl mb-10 mt-8 border-t border-slate-200 dark:border-slate-50/[0.06] dark:bg-slate-900/75 lg:border-slate-900/10" />
+
+<div :if={length(@participants) == 0} class="mt-4 flex justify-center items-center">
+  <div class="flex flex-col items-center">
+    <.icon name="hero-exclamation-circle" class="w-12 h-12" />
+    <p>There are currently no replays for <%= @player.official_name %></p>
+  </div>
+</div>
+
+<div :if={length(@participants) > 0} class="flex flex-col">
   <div class="max-w-4xl flex flex-col items-center space-y-1">
     <div class="border-l-8 border-transparent w-full grid-participants-header px-1 py-2 text-sm">
       <div class="[grid-area:creation]"></div>
@@ -28,7 +56,7 @@
     :if={@prev_page}
     color="light"
     link_type="live_patch"
-    to={~p"/replays?before=#{@prev_page}"}
+    to={~p"/player/#{@player.normalized_name}?before=#{@prev_page}"}
   >
     <.icon class="w-6" name="hero-chevron-left" />
   </PC.button>
@@ -37,7 +65,7 @@
     :if={@next_page}
     color="light"
     link_type="live_patch"
-    to={~p"/replays?after=#{@next_page}"}
+    to={~p"/player/#{@player.normalized_name}?after=#{@next_page}"}
   >
     <.icon class="w-6" name="hero-chevron-right" />
   </PC.button>

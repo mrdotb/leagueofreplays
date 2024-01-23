@@ -10,10 +10,12 @@
 
   <PC.tr :for={player <- @players} id={player.id}>
     <PC.td>
-      <PC.user_inner_td
-        avatar_assigns={if(player.picture, do: %{src: player.picture.url}, else: nil)}
-        label={player.official_name}
-      />
+      <.link navigate={~p"/player/#{player.normalized_name}"}>
+        <PC.user_inner_td
+          avatar_assigns={if(player.picture, do: %{src: player.picture.url}, else: nil)}
+          label={player.official_name}
+        />
+      </.link>
     </PC.td>
     <PC.td>
       <PC.user_inner_td

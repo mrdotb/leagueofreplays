@@ -26,13 +26,24 @@ defmodule Lor.Pros.Player do
   code_interface do
     define_for Lor.Pros
 
+    define :by_normalized_name, args: [:normalized_name]
+    define :by_normalized_names, args: [:normalized_names]
     define :list, action: :list, args: [:filter]
     define :create_from_ugg, args: [:player_data, :current_team_id, :picture_id]
-    define :by_normalized_names, args: [:normalized_names]
   end
 
   actions do
     defaults [:read]
+
+    read :by_normalized_name do
+      get? true
+
+      argument :normalized_name, :string do
+        allow_nil? false
+      end
+
+      filter expr(normalized_name == ^arg(:normalized_name))
+    end
 
     read :by_normalized_names do
       argument :normalized_names, {:array, :string} do

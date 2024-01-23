@@ -1,4 +1,4 @@
-defmodule LorWeb.ReplayLive.MatchCardComponent do
+defmodule LorWeb.ProParticipantCardComponent do
   @moduledoc false
   use LorWeb, :live_component
 
@@ -98,12 +98,16 @@ defmodule LorWeb.ReplayLive.MatchCardComponent do
         <.time_ago id={@participant.id} datetime={@participant.match.game_start} />
       </div>
 
-      <LOLC.player
+      <.link
         :if={@participant.summoner.player}
-        class="[grid-area:player]"
-        picture={@participant.summoner.player.picture}
-        name={@participant.summoner.player.official_name}
-      />
+        navigate={~p"/player/#{@participant.summoner.player.normalized_name}"}
+      >
+        <LOLC.player
+          class="[grid-area:player]"
+          picture={@participant.summoner.player.picture}
+          name={@participant.summoner.player.official_name}
+        />
+      </.link>
 
       <LOLC.versus
         :if={@participant.opponent_participant}

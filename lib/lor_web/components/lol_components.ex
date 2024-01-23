@@ -23,9 +23,9 @@ defmodule LorWeb.LolComponents do
         size="md"
         src={if(@picture, do: @picture.url, else: false)}
       />
-      <.link class="hover:underline">
+      <span class="hover:underline">
         <%= @name %>
-      </.link>
+      </span>
     </div>
     """
   end
