@@ -31,10 +31,13 @@ defmodule Lor.Lol.Replay do
     define :get_by_game_id_and_platform_id,
       action: :by_game_id_and_platform_id,
       args: [:platform_id, :game_id]
+
+    define :list_by_game_version, action: :list_by_game_version, args: [:game_version]
+    define :destroy
   end
 
   actions do
-    defaults [:read, :create, :destroy]
+    defaults [:read, :create]
 
     read :by_id do
       get? true
@@ -53,6 +56,17 @@ defmodule Lor.Lol.Replay do
       prepare Lor.Lol.Replay.Preparations.FilterByGameIdAndPlatformId
     end
 
+    read :list_by_game_version do
+      argument :game_version, :string, allow_nil?: false
+
+      pagination do
+        keyset? true
+        default_limit 10
+      end
+
+      prepare Lor.Lol.Replay.Preparations.FilterByGameVersion
+    end
+
     update :finish do
       accept [:first_chunk_id, :last_chunk_id, :first_key_frame_id, :last_key_frame_id]
 
@@ -67,6 +81,12 @@ defmodule Lor.Lol.Replay do
     update :update_with_match do
       argument :match_id, :uuid, allow_nil?: false
       change manage_relationship(:match_id, :match, type: :append)
+    end
+
+    destroy :destroy do
+      primary? true
+
+      change Lor.Lol.Replay.Changes.Destroy
     end
   end
 
