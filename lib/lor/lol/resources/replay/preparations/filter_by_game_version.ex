@@ -9,5 +9,6 @@ defmodule Lor.Lol.Replay.Preparations.FilterByGameVersion do
     |> Ash.Query.load([:match, key_frames: :data, chunks: :data])
     |> Ash.Query.filter(match.game_version == ^game_version)
     |> Ash.Query.sort(inserted_at: :desc)
+    |> Ash.Query.limit(1)
   end
 end

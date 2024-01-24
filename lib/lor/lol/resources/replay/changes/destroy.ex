@@ -14,8 +14,8 @@ defmodule Lor.Lol.Replay.Changes.Destroy do
       Lor.S3.Object.destroy(chunk.data)
     end
 
-    for keyframe <- changeset.data.keyframes do
-      Lor.S3.Object.destroy(keyframe.data)
+    for key_frame <- changeset.data.key_frames do
+      Lor.S3.Object.destroy(key_frame.data)
     end
 
     changeset

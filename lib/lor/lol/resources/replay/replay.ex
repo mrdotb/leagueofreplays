@@ -32,7 +32,7 @@ defmodule Lor.Lol.Replay do
       action: :by_game_id_and_platform_id,
       args: [:platform_id, :game_id]
 
-    define :list_by_game_version, action: :list_by_game_version, args: [:game_version]
+    define :get_by_game_version, action: :get_by_game_version, args: [:game_version]
     define :destroy
   end
 
@@ -56,13 +56,10 @@ defmodule Lor.Lol.Replay do
       prepare Lor.Lol.Replay.Preparations.FilterByGameIdAndPlatformId
     end
 
-    read :list_by_game_version do
-      argument :game_version, :string, allow_nil?: false
+    read :get_by_game_version do
+      get? true
 
-      pagination do
-        keyset? true
-        default_limit 10
-      end
+      argument :game_version, :string, allow_nil?: false
 
       prepare Lor.Lol.Replay.Preparations.FilterByGameVersion
     end
