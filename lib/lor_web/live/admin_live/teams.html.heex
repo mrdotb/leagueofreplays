@@ -11,7 +11,7 @@
     />
   </.form>
 
-  <PC.button with_icon link_type="live_patch" to={~p"/admin/team/new"} color="primary">
+  <PC.button with_icon link_type="live_patch" to={~p"/admin/teams/new"} color="primary">
     <.icon name="hero-plus" class="w-5 h-5" /> Create Team
   </PC.button>
 </div>
@@ -45,7 +45,7 @@
       <%= team.players_count %>
     </PC.td>
     <PC.td>
-      <PC.button link_type="live_patch" to={~p"/admin/team/edit/#{team.id}"} size="xs">
+      <PC.button link_type="live_patch" to={~p"/admin/teams/edit/#{team.id}"} size="xs">
         Edit
       </PC.button>
       <PC.button
@@ -63,7 +63,7 @@
 <.offset_pagination
   :if={length(@teams) > 0}
   link_type="live_patch"
-  path={~p"/admin/teams?page=:page"}
+  path={~p"/admin/teams?page=:page&search=#{@search}"}
   active_page={@active_page}
   offset={@page.offset}
   limit={@page.limit}

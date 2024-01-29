@@ -1,4 +1,4 @@
-defmodule LorWeb.AdminLive.Team do
+defmodule LorWeb.AdminLive.Teams do
   @moduledoc false
   use LorWeb, :live_view_admin
 
@@ -62,7 +62,7 @@ defmodule LorWeb.AdminLive.Team do
   end
 
   def handle_event("search", %{"search" => search}, socket) do
-    socket = push_patch(socket, to: ~p"/admin/teams?search=#{search}")
+    socket = push_patch(socket, to: ~p"/admin/teams?page=1&search=#{search}")
     {:noreply, socket}
   end
 

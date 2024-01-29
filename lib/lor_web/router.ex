@@ -36,12 +36,12 @@ defmodule LorWeb.Router do
       pipe_through :admin
 
       live "/", AdminLive.Index, :index
-      live "/teams", AdminLive.Team, :index
-      live "/team/new", AdminLive.Team, :new
-      live "/team/edit/:team_id", AdminLive.Team, :edit
-      live "/players", AdminLive.Player, :index
-      live "/player/new", AdminLive.Player, :new
-      live "/player/edit/:player_id", AdminLive.Player, :edit
+      live "/teams", AdminLive.Teams, :index
+      live "/teams/new", AdminLive.Teams, :new
+      live "/teams/edit/:team_id", AdminLive.Teams, :edit
+      live "/players", AdminLive.Players, :index
+      live "/players/new", AdminLive.Players, :new
+      live "/players/edit/:player_id", AdminLive.Players, :edit
     end
   end
 
