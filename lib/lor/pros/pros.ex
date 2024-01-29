@@ -1,10 +1,5 @@
 defmodule Lor.Pros do
-  use Ash.Api,
-    extensions: [AshAdmin.Api]
-
-  admin do
-    show?(true)
-  end
+  use Ash.Api
 
   resources do
     resource Lor.Pros.Team

@@ -58,6 +58,15 @@ defmodule LorWeb do
     end
   end
 
+  def live_view_admin do
+    quote do
+      use Phoenix.LiveView,
+        layout: {LorWeb.Layouts, :admin}
+
+      unquote(html_helpers())
+    end
+  end
+
   def live_component do
     quote do
       use Phoenix.LiveComponent

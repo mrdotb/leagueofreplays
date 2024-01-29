@@ -2,6 +2,7 @@ defmodule LorWeb.PetalComponents do
   @moduledoc """
   Namespaced PetalComponents
   """
+  use Phoenix.Component
 
   defdelegate a(assigns), to: PetalComponents.Link
   defdelegate accordion(assigns), to: PetalComponents.Accordion
@@ -14,6 +15,7 @@ defmodule LorWeb.PetalComponents do
   defdelegate container(assigns), to: PetalComponents.Container
   defdelegate dropdown(assigns), to: PetalComponents.Dropdown
   defdelegate field(assigns), to: PetalComponents.Field
+  defdelegate field_label(assigns), to: PetalComponents.Field
   defdelegate form_label(assigns), to: PetalComponents.Form
   defdelegate h1(assigns), to: PetalComponents.Typography
   defdelegate h2(assigns), to: PetalComponents.Typography

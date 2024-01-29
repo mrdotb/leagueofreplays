@@ -1,0 +1,58 @@
+<.flash_group flash={@flash} />
+<.skeleton>
+  <:sidebar_block>
+    <div class="w-full">
+      <PC.vertical_menu
+        current_page={@current_page}
+        js_lib="live_view_js"
+        menu_items={[
+          %{
+            name: "/admin",
+            label: "Admin",
+            path: ~p"/admin",
+            icon: :chart_pie
+          },
+          %{
+            name: "/teams",
+            label: "Teams",
+            path: ~p"/admin/teams",
+            icon: :users
+          },
+          %{
+            name: "/players",
+            label: "Players",
+            path: ~p"/admin",
+            icon: :user,
+            menu_items: [
+              %{
+                name: "/admin/players",
+                label: "List",
+                path: ~p"/admin/players/new",
+                icon: :list_bullet
+              },
+              %{
+                name: "/admin/players/new",
+                label: "Create player",
+                path: ~p"/admin/players/new",
+                icon: :plus
+              },
+              %{
+                name: "/admin/teams/new",
+                label: "Create team",
+                path: ~p"/admin/players/new",
+                icon: :plus
+              },
+              %{
+                name: "/admin/teams/new",
+                label: "Create Summoner",
+                path: ~p"/admin/players/new",
+                icon: :plus
+              }
+            ]
+          }
+        ]}
+      />
+    </div>
+  </:sidebar_block>
+  <%= @inner_content %>
+</.skeleton>

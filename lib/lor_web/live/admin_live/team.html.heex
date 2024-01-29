@@ -1,0 +1,91 @@
+<PC.h2>Teams</PC.h2>
+
+<div class="flex justify-between items-center mb-4">
+  <.form for={@form} phx-change="search" phx-submit="search">
+    <PC.field
+      wrapper_class="!mb-0"
+      label_class="hidden"
+      type="search"
+      placeholder="Search Team..."
+      field={@form[:search]}
+    />
+  </.form>
+
+  <PC.button with_icon link_type="live_patch" to={~p"/admin/team/new"} color="primary">
+    <.icon name="hero-plus" class="w-5 h-5" /> Create Team
+  </PC.button>
+</div>
+
+<div :if={length(@teams) == 0} class="mt-4 flex justify-center items-center">
+  <div class="flex flex-col items-center">
+    <.icon name="hero-exclamation-circle" class="w-12 h-12" />
+    <p>Could not find any teams.</p>
+  </div>
+</div>
+
+<PC.table :if={length(@teams) > 0}>
+  <PC.tr>
+    <PC.th>Name</PC.th>
+    <PC.th>Short name</PC.th>
+    <PC.th>Players</PC.th>
+    <PC.th>Actions</PC.th>
+  </PC.tr>
+
+  <PC.tr :for={team <- @teams} id={team.id}>
+    <PC.td>
+      <PC.user_inner_td
+        avatar_assigns={if(team.logo, do: %{src: team.logo.url}, else: nil)}
+        label={team.name}
+      />
+    </PC.td>
+    <PC.td>
+      <%= team.short_name %>
+    </PC.td>
+    <PC.td>
+      <%= team.players_count %>
+    </PC.td>
+    <PC.td>
+      <PC.button link_type="live_patch" to={~p"/admin/team/edit/#{team.id}"} size="xs">
+        Edit
+      </PC.button>
+      <PC.button
+        color="danger"
+        size="xs"
+        phx-click={JS.push("delete", value: %{id: team.id})}
+        data-confirm="Are you sure?"
+      >
+        Delete
+      </PC.button>
+    </PC.td>
+  </PC.tr>
+</PC.table>
+
+<.offset_pagination
+  :if={length(@teams) > 0}
+  link_type="live_patch"
+  path={~p"/admin/teams?page=:page"}
+  active_page={@active_page}
+  total_pages={@pages}
+  offset={@page.offset}
+  limit={@page.limit}
+  count={@page.count}
+  total_pages={@pages}
+  model_name="teams"
+/>
+
+<PC.modal :if={@live_action == :new} max_width="xl" title="Create Team">
+  <.live_component
+    module={LorWeb.AdminLive.TeamFormComponent}
+    id="team-form-new"
+    live_action={@live_action}
+  />
+</PC.modal>
+
+<PC.modal :if={@live_action == :edit} max_width="xl" title="Edit Team">
+  <.live_component
+    module={LorWeb.AdminLive.TeamFormComponent}
+    id="team-form-edit"
+    live_action={@live_action}
+    team_id={@team_id}
+  />
+</PC.modal>

@@ -11,12 +11,19 @@ defmodule Lor.S3.Object do
   code_interface do
     define_for Lor.S3
     define :read_all, action: :read
+    define :get, action: :get, args: [:id]
     define :destroy
     define :upload, args: [:body, :set_url?]
   end
 
   actions do
     defaults [:read]
+
+    read :get do
+      get? true
+      argument :id, :uuid, allow_nil?: false
+      filter expr(id == ^arg(:id))
+    end
 
     create :upload do
       accept [:bucket, :key, :file_name, :content_type, :metadata]

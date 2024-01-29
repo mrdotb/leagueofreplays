@@ -16,7 +16,9 @@ defmodule LorWeb.CoreComponents do
   """
   use Phoenix.Component
 
+  alias LorWeb.PetalComponents, as: PC
   alias Phoenix.LiveView.JS
+
   import LorWeb.Gettext
 
   @doc """
@@ -619,6 +621,207 @@ defmodule LorWeb.CoreComponents do
     ~H"""
     <time id={@id} phx-hook="TimeAgoHook" datetime={@datetime}></time>
     """
+  end
+
+  attr :path, :string, required: true
+  attr :link_type, :string, default: "a", values: ["a", "live_patch", "live_redirect", "button"]
+  attr :offset, :integer, required: true
+  attr :limit, :integer, required: true
+  attr :count, :integer, required: true
+  attr :active_page, :integer, required: true
+  attr :total_pages, :integer, required: true
+  attr :model_name, :string, default: "rows"
+
+  def offset_pagination(%{limit: limit, offset: offset, count: count} = assigns) do
+    from = offset + 1
+    to = if(limit + offset > count, do: count, else: limit + offset)
+
+    assigns =
+      assigns
+      |> assign(:from, from)
+      |> assign(:to, to)
+
+    ~H"""
+    <div class="mt-4 flex justify-between items-center">
+      <div class="text-sm">
+        <div>
+          Showing <%= @from %>-<%= @to %> of <%= @count %> <%= @model_name %>
+        </div>
+      </div>
+      <PC.pagination
+        link_type={@link_type}
+        path={@path}
+        current_page={@active_page}
+        total_pages={@total_pages}
+      />
+    </div>
+    """
+  end
+
+  attr :id, :string, required: true
+  attr :label, :string
+  attr :wrapper_class, :string, default: nil, doc: "the wrapper div classes"
+
+  attr :upload, Phoenix.LiveView.UploadConfig,
+    required: true,
+    doc: "The `Phoenix.LiveView.UploadConfig` struct"
+
+  attr :accept, :string,
+    doc:
+      "the optional override for the accept attribute. Defaults to :accept specified by allow_upload"
+
+  attr :upload_target, :string,
+    default: nil,
+    doc:
+      "upload_target allows you to target a specific live_component for the cancel upload and delete entry event. eg: upload_target={@myself}"
+
+  attr :old_entries, :list,
+    default: [],
+    doc: "If the form is used to edit you can pass the old entries"
+
+  slot :guide
+
+  def live_images_input(assigns) do
+    ~H"""
+    <div id={@id} phx-hook="LiveImagesInputHook" class={@wrapper_class}>
+      <PC.field_label :if={@label}><%= @label %></PC.field_label>
+
+      <.live_file_input class="hidden" upload={@upload} />
+
+      <div
+        class="flex flex-col px-6 py-6 border-2 border-dashed rounded-md"
+        {accept_drag_and_drop(@upload, @old_entries)}
+      >
+        <div class={[
+          if(empty_entries?(@upload.entries, @old_entries), do: "!block"),
+          "hidden space-y-1 text-center"
+        ]}>
+          <.icon name="svg-image-plus-outline" class="mx-auto h-12 w-12" />
+          <div class="flex justify-center text-sm">
+            <p>Drag and drop an image, or</p>
+            <label
+              class="ml-1 relative cursor-pointer rounded-md font-medium text-primary hover:text-primary-focus focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-primary"
+              for={@upload.ref}
+            >
+              <span class="underline">Upload</span>
+            </label>
+          </div>
+          <p class="text-xs">
+            <%= max_size_msg(@upload.max_file_size) %>
+            <%= render_slot(@guide) %>
+          </p>
+        </div>
+
+        <div class="uploaded-images-container pb-2 flex overflow-auto space-x-2">
+          <.image_entry
+            :for={entry <- @upload.entries}
+            entry_type={:new}
+            entry={entry}
+            upload_target={@upload_target}
+          />
+
+          <.image_entry
+            :for={entry <- @old_entries}
+            entry_type={:old}
+            entry={entry}
+            upload_target={@upload_target}
+          />
+          <label
+            for={@upload.ref}
+            class={[
+              if(upload_more?(@upload, @old_entries), do: "flex"),
+              "flex-none hidden w-32 h-32 rounded-md border border-dashed justify-center items-center cursor-pointer"
+            ]}
+          >
+            <.icon name="svg-image-plus-outline" class="w-12 h-12" />
+          </label>
+        </div>
+        <div id={"img-preview-#{@id}"} phx-update="ignore">
+          <div class="hidden overflow-hidden mx-auto h-64 flex justify-center items-center rounded-md">
+            <img class="image-preview max-w-full max-h-full" draggable="false" />
+          </div>
+        </div>
+      </div>
+    </div>
+    """
+  end
+
+  attr :entry, :any, required: true
+  attr :upload_target, :string
+  attr :entry_type, :atom, values: [:new, :old]
+
+  defp image_entry(%{entry_type: :new} = assigns) do
+    ~H"""
+    <div class="uploaded-image-container relative flex-none relative w-32 h-32 rounded-md transition-all duration-75 hover:p-1 hover:border-2">
+      <PC.icon_button
+        type="button"
+        class="absolute top-0 right-0"
+        size="md"
+        color="danger"
+        phx-click="cancel_upload"
+        phx-value-ref={@entry.ref}
+        phx-target={@upload_target}
+      >
+        <.icon name="hero-trash-mini" class="w-5 h-5 text-red-500" />
+      </PC.icon_button>
+      <button type="button" class="w-full h-full">
+        <.live_img_preview
+          class="show-image rounded-md object-cover w-full h-full"
+          entry={@entry}
+          draggable="false"
+        />
+      </button>
+    </div>
+    """
+  end
+
+  defp image_entry(%{entry_type: :old} = assigns) do
+    ~H"""
+    <div class="uploaded-image-container relative flex-none relative w-32 h-32 rounded-md transition-all duration-75 hover:p-1 hover:border-2">
+      <PC.icon_button
+        type="button"
+        class="absolute top-0 right-0"
+        size="md"
+        color="danger"
+        phx-click="delete_entry"
+        phx-value-ref={@entry.ref}
+        phx-target={@upload_target}
+      >
+        <.icon name="hero-trash-mini" class="w-5 h-5 text-red-500" />
+      </PC.icon_button>
+      <button type="button" class="w-full h-full">
+        <img
+          class="show-image rounded-md object-cover w-full h-full"
+          src={@entry.url}
+          draggable="false"
+        />
+      </button>
+    </div>
+    """
+  end
+
+  defp accept_drag_and_drop(upload, old_entries) do
+    if empty_entries?(upload.entries, old_entries) and upload_more?(upload, old_entries) do
+      %{"phx-drop-target": upload.ref}
+    else
+      %{}
+    end
+  end
+
+  defp empty_entries?(entries, old_entries) do
+    entries_length = length(entries) + length(old_entries)
+    entries_length == 0
+  end
+
+  defp upload_more?(upload, old_entries) do
+    entries_length = length(upload.entries) + length(old_entries)
+    entries_length > 1 and entries_length < upload.max_entries
+  end
+
+  defp max_size_msg(byte_size) do
+    mb = div(byte_size, 1_000_000)
+
+    "Max #{mb} MB."
   end
 
   ## JS Commands

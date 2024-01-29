@@ -19,6 +19,7 @@
     </PC.td>
     <PC.td>
       <PC.user_inner_td
+        :if={player.current_team}
         avatar_assigns={
           if(player.current_team.logo, do: %{src: player.current_team.logo.url}, else: nil)
         }

@@ -14,7 +14,7 @@ defmodule Lor.Pros.Team do
     migration_types name: :citext
 
     references do
-      reference :logo, on_delete: :delete
+      reference :logo, on_delete: :nothing
     end
   end
 
@@ -24,12 +24,21 @@ defmodule Lor.Pros.Team do
 
   code_interface do
     define_for Lor.Pros
+    define :get, action: :get, args: [:id]
     define :create_from_ugg, args: [:team_data, :logo_id]
     define :by_names, args: [:names]
+    define :list, action: :list, args: [:filter]
+    define :destroy
   end
 
   actions do
     defaults [:read]
+
+    read :get do
+      get? true
+      argument :id, :uuid, allow_nil?: false
+      filter expr(id == ^arg(:id))
+    end
 
     read :by_names do
       argument :names, {:array, :string} do
@@ -37,6 +46,29 @@ defmodule Lor.Pros.Team do
       end
 
       filter expr(name in ^arg(:names))
+    end
+
+    read :list do
+      argument :filter, :map, allow_nil?: true
+
+      pagination do
+        offset? true
+        countable :by_default
+        max_page_size 20
+      end
+
+      prepare Lor.Pros.Team.Preparations.FilterSortTeam
+    end
+
+    create :create do
+      primary? true
+      accept [:name, :short_name]
+
+      argument :logo_id, :uuid do
+        allow_nil? true
+      end
+
+      change manage_relationship(:logo_id, :logo, type: :append)
     end
 
     create :create_from_ugg do
@@ -49,6 +81,25 @@ defmodule Lor.Pros.Team do
       argument :logo_id, :uuid
 
       change Lor.Pros.Team.Changes.CreateFromUGG
+    end
+
+    update :update do
+      primary? true
+
+      accept [:name, :short_name]
+
+      argument :logo_id, :uuid do
+        allow_nil? true
+      end
+
+      change manage_relationship(:logo_id, :logo, type: :append_and_remove)
+      change Lor.Pros.Team.Changes.Update
+    end
+
+    destroy :destroy do
+      primary? true
+
+      change Lor.Pros.Team.Changes.Destroy
     end
   end
 
@@ -66,6 +117,10 @@ defmodule Lor.Pros.Team do
 
     create_timestamp :inserted_at
     update_timestamp :updated_at
+  end
+
+  calculations do
+    calculate :players_count, :integer, expr(count(players))
   end
 
   relationships do

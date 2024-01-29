@@ -65,6 +65,23 @@ defmodule Lor.Pros.Player do
       prepare Lor.Pros.Player.Preparations.FilterSortPlayer
     end
 
+    create :create do
+      primary? true
+      accept [:official_name, :main_role]
+
+      argument :current_team_id, :uuid do
+        allow_nil? true
+      end
+
+      argument :picture_id, :uuid do
+        allow_nil? true
+      end
+
+      change manage_relationship(:current_team_id, :current_team, type: :append)
+      change manage_relationship(:picture_id, :picture, type: :append)
+      change Lor.Pros.Player.Changes.NormalizeName
+    end
+
     create :create_from_ugg do
       accept []
 

@@ -40,7 +40,6 @@ defmodule Lor.MixProject do
   defp deps do
     [
       {:ash, "~> 2.17"},
-      {:ash_admin, "~> 0.10.0"},
       {:ash_oban, "~> 0.1.12"},
       {:ash_phoenix, "~> 1.2"},
       {:ash_postgres, "~> 1.3"},
@@ -54,10 +53,10 @@ defmodule Lor.MixProject do
       {:jason, "~> 1.2"},
       {:libcluster, "~> 3.3"},
       {:nebulex, "~> 2.5"},
-      {:petal_components, "~> 1.6"},
+      {:petal_components, "~> 1.9"},
       {:phoenix, "~> 1.7.10"},
       {:phoenix_ecto, "~> 4.4"},
-      {:phoenix_html, "~> 3.3"},
+      {:phoenix_html, "~> 4.0"},
       {:phoenix_live_dashboard, "~> 0.8.2"},
       {:phoenix_live_view, "~> 0.20.2"},
       {:plug_cowboy, "~> 2.5"},

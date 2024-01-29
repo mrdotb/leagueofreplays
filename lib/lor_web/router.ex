@@ -10,15 +10,14 @@ defmodule LorWeb.Router do
     plug :put_secure_browser_headers
   end
 
+  pipeline :admin do
+    plug LorWeb.BasicAuthPlug, :admin_dashboard
+    plug :browser
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
   end
-
-  pipeline :protected do
-    plug LorWeb.BasicAuthPlug, :admin_dashboard
-  end
-
-  import AshAdmin.Router
 
   live_session :default, on_mount: [LorWeb.Hooks.ActivePage] do
     scope "/", LorWeb do
@@ -32,13 +31,17 @@ defmodule LorWeb.Router do
     end
   end
 
-  scope "/" do
-    pipe_through [
-      :browser,
-      :protected
-    ]
+  live_session :admin, on_mount: [LorWeb.Hooks.ActivePage] do
+    scope "/admin", LorWeb do
+      pipe_through :admin
 
-    ash_admin("/admin")
+      live "/", AdminLive.Index, :index
+      live "/teams", AdminLive.Team, :index
+      live "/team/new", AdminLive.Team, :new
+      live "/team/edit/:team_id", AdminLive.Team, :edit
+      live "/players", PlayerLive.New, :index
+      live "/players/new", PlayerLive.New, :index
+    end
   end
 
   # Other scopes may use custom stacks.
