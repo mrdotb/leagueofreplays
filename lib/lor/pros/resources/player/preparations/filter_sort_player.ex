@@ -15,8 +15,6 @@ defmodule Lor.Pros.Player.Preparations.FilterSortPlayer do
   end
 
   defp filter_by_normalized_name(query) do
-    IO.inspect(query)
-
     case Ash.Changeset.get_argument(query, :filter) do
       %{normalized_name: ""} ->
         query
@@ -24,6 +22,9 @@ defmodule Lor.Pros.Player.Preparations.FilterSortPlayer do
       %{normalized_name: normalized_name} ->
         normalized_name = normalized_name <> "%"
         Ash.Query.filter(query, ilike(normalized_name, ^normalized_name))
+
+      _ ->
+        query
     end
   end
 end
