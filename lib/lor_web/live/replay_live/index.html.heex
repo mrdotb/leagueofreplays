@@ -1,15 +1,15 @@
 <PC.h2>Replays</PC.h2>
 
 <div class="flex flex-col">
-  <div class="max-w-4xl flex flex-col items-center space-y-1">
-    <div class="border-l-8 border-transparent w-full grid-participants-header px-1 py-2 text-sm">
+  <div class="flex max-w-4xl flex-col items-center space-y-1">
+    <div class="grid-participants-header w-full border-l-8 border-transparent px-1 py-2 text-sm">
       <div class="[grid-area:creation]"></div>
       <div class="[grid-area:player]">Player</div>
-      <div class="[grid-area:versus] flex justify-center">Matchup</div>
-      <div class="[grid-area:kda] flex justify-center">KDA</div>
-      <div class="[grid-area:summoners] flex justify-center">Summoners</div>
-      <div class="[grid-area:build] flex md:hidden lg:flex justify-center">Build</div>
-      <div class="[grid-area:ellipsis] hidden lg:flex"></div>
+      <div class="flex justify-center [grid-area:versus]">Matchup</div>
+      <div class="flex justify-center [grid-area:kda]">KDA</div>
+      <div class="flex justify-center [grid-area:summoners]">Summoners</div>
+      <div class="flex justify-center [grid-area:build] md:hidden lg:flex">Build</div>
+      <div class="hidden [grid-area:ellipsis] lg:flex"></div>
     </div>
 
     <div id="participants" class="w-full space-y-1">
@@ -23,7 +23,7 @@
   </div>
 </div>
 
-<div class="flex mt-2 space-x-1">
+<div class="mt-2 flex space-x-1">
   <PC.button
     :if={@prev_page}
     color="light"

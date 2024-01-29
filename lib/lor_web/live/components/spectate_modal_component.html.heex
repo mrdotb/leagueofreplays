@@ -62,10 +62,10 @@
           <.icon name="hero-clipboard-solid" class="w-4 h-4 mr-1" /> Copy
         </PC.button>
       </div>
-      <textarea class="mt-2 pc-text-input text-xs resize-none" readonly rows="10"><%= @mac_script %></textarea>
+      <textarea class="pc-text-input mt-2 resize-none text-xs" readonly rows="10"><%= @mac_script %></textarea>
     </div>
 
-    <div class="flex justify-end mt-2">
+    <div class="mt-2 flex justify-end">
       <PC.button label="close" phx-click={PetalComponents.Modal.hide_modal()} />
     </div>
   </PC.modal>

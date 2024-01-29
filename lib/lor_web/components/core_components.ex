@@ -117,10 +117,10 @@ defmodule LorWeb.CoreComponents do
       phx-click={JS.push("lv:clear-flash", value: %{key: @kind}) |> hide("##{@id}")}
       role="alert"
       class={[
-        "fixed top-2 right-2 mr-2 w-80 sm:w-96 z-50 rounded-lg p-3 ring-1",
-        @kind == :info && "bg-blue-50 text-blue-800 ring-blue-500 fill-blue-900",
-        @kind == :success && "bg-emerald-50 text-emerald-800 ring-emerald-500 fill-cyan-900",
-        @kind == :error && "bg-rose-50 text-rose-900 shadow-md ring-rose-500 fill-rose-900"
+        "fixed top-2 right-2 z-50 mr-2 w-80 rounded-lg p-3 ring-1 sm:w-96",
+        @kind == :info && "bg-blue-50 fill-blue-900 text-blue-800 ring-blue-500",
+        @kind == :success && "bg-emerald-50 fill-cyan-900 text-emerald-800 ring-emerald-500",
+        @kind == :error && "bg-rose-50 fill-rose-900 text-rose-900 shadow-md ring-rose-500"
       ]}
       {@rest}
     >
@@ -235,7 +235,7 @@ defmodule LorWeb.CoreComponents do
     <button
       type={@type}
       class={[
-        "phx-submit-loading:opacity-75 rounded-lg bg-zinc-900 hover:bg-zinc-700 py-2 px-3",
+        "rounded-lg bg-zinc-900 px-3 py-2 hover:bg-zinc-700 phx-submit-loading:opacity-75",
         "text-sm font-semibold leading-6 text-white active:text-white/80",
         @class
       ]}
@@ -480,9 +480,9 @@ defmodule LorWeb.CoreComponents do
     ~H"""
     <div class="overflow-y-auto px-4 sm:overflow-visible sm:px-0">
       <table class="w-[40rem] mt-11 sm:w-full">
-        <thead class="text-sm text-left leading-6 text-zinc-500">
+        <thead class="text-left text-sm leading-6 text-zinc-500">
           <tr>
-            <th :for={col <- @col} class="p-0 pb-4 pr-6 font-normal"><%= col[:label] %></th>
+            <th :for={col <- @col} class="p-0 pr-6 pb-4 font-normal"><%= col[:label] %></th>
             <th :if={@action != []} class="relative p-0 pb-4">
               <span class="sr-only"><%= gettext("Actions") %></span>
             </th>
@@ -642,7 +642,7 @@ defmodule LorWeb.CoreComponents do
       |> assign(:to, to)
 
     ~H"""
-    <div class="mt-4 flex justify-between items-center">
+    <div class="mt-4 flex items-center justify-between">
       <div class="text-sm">
         <div>
           Showing <%= @from %>-<%= @to %> of <%= @count %> <%= @model_name %>
@@ -689,7 +689,7 @@ defmodule LorWeb.CoreComponents do
       <.live_file_input class="hidden" upload={@upload} />
 
       <div
-        class="flex flex-col px-6 py-6 border-2 border-dashed rounded-md"
+        class="flex flex-col rounded-md border-2 border-dashed px-6 py-6"
         {accept_drag_and_drop(@upload, @old_entries)}
       >
         <div class={[
@@ -700,7 +700,7 @@ defmodule LorWeb.CoreComponents do
           <div class="flex justify-center text-sm">
             <p>Drag and drop an image, or</p>
             <label
-              class="ml-1 relative cursor-pointer rounded-md font-medium text-primary hover:text-primary-focus focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-primary"
+              class="text-primary relative ml-1 cursor-pointer rounded-md font-medium focus-within:ring-primary focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 hover:text-primary-focus"
               for={@upload.ref}
             >
               <span class="underline">Upload</span>
@@ -712,7 +712,7 @@ defmodule LorWeb.CoreComponents do
           </p>
         </div>
 
-        <div class="uploaded-images-container pb-2 flex overflow-auto space-x-2">
+        <div class="uploaded-images-container flex space-x-2 overflow-auto pb-2">
           <.image_entry
             :for={entry <- @upload.entries}
             entry_type={:new}
@@ -730,15 +730,15 @@ defmodule LorWeb.CoreComponents do
             for={@upload.ref}
             class={[
               if(upload_more?(@upload, @old_entries), do: "flex"),
-              "flex-none hidden w-32 h-32 rounded-md border border-dashed justify-center items-center cursor-pointer"
+              "hidden h-32 w-32 flex-none cursor-pointer items-center justify-center rounded-md border border-dashed"
             ]}
           >
             <.icon name="svg-image-plus-outline" class="w-12 h-12" />
           </label>
         </div>
         <div id={"img-preview-#{@id}"} phx-update="ignore">
-          <div class="hidden overflow-hidden mx-auto h-64 flex justify-center items-center rounded-md">
-            <img class="image-preview max-w-full max-h-full" draggable="false" />
+          <div class="mx-auto flex hidden h-64 items-center justify-center overflow-hidden rounded-md">
+            <img class="image-preview max-h-full max-w-full" draggable="false" />
           </div>
         </div>
       </div>
@@ -752,7 +752,7 @@ defmodule LorWeb.CoreComponents do
 
   defp image_entry(%{entry_type: :new} = assigns) do
     ~H"""
-    <div class="uploaded-image-container relative flex-none relative w-32 h-32 rounded-md transition-all duration-75 hover:p-1 hover:border-2">
+    <div class="uploaded-image-container relative relative h-32 w-32 flex-none rounded-md transition-all duration-75 hover:border-2 hover:p-1">
       <PC.icon_button
         type="button"
         class="absolute top-0 right-0"
@@ -764,7 +764,7 @@ defmodule LorWeb.CoreComponents do
       >
         <.icon name="hero-trash-mini" class="w-5 h-5 text-red-500" />
       </PC.icon_button>
-      <button type="button" class="w-full h-full">
+      <button type="button" class="h-full w-full">
         <.live_img_preview
           class="show-image rounded-md object-cover w-full h-full"
           entry={@entry}
@@ -777,7 +777,7 @@ defmodule LorWeb.CoreComponents do
 
   defp image_entry(%{entry_type: :old} = assigns) do
     ~H"""
-    <div class="uploaded-image-container relative flex-none relative w-32 h-32 rounded-md transition-all duration-75 hover:p-1 hover:border-2">
+    <div class="uploaded-image-container relative relative h-32 w-32 flex-none rounded-md transition-all duration-75 hover:border-2 hover:p-1">
       <PC.icon_button
         type="button"
         class="absolute top-0 right-0"
@@ -789,9 +789,9 @@ defmodule LorWeb.CoreComponents do
       >
         <.icon name="hero-trash-mini" class="w-5 h-5 text-red-500" />
       </PC.icon_button>
-      <button type="button" class="w-full h-full">
+      <button type="button" class="h-full w-full">
         <img
-          class="show-image rounded-md object-cover w-full h-full"
+          class="show-image h-full w-full rounded-md object-cover"
           src={@entry.url}
           draggable="false"
         />

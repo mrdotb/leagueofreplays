@@ -14,10 +14,7 @@ defmodule LorWeb.LolComponents do
 
   def player(assigns) do
     ~H"""
-    <div class={[
-      "flex items-center space-x-2",
-      @class
-    ]}>
+    <div class={["flex items-center space-x-2", @class]}>
       <PC.avatar
         class="bg-gray-100 dark:bg-gray-700"
         size="md"
@@ -54,7 +51,7 @@ defmodule LorWeb.LolComponents do
     assigns = assign(assigns, src: img)
 
     ~H"""
-    <div class="bg-gray-900 w-8 h-8 border border-gray-200 dark:border-gray-700">
+    <div class="h-8 w-8 border border-gray-200 bg-gray-900 dark:border-gray-700">
       <img src={@src} class="w-full" />
     </div>
     """
@@ -68,7 +65,7 @@ defmodule LorWeb.LolComponents do
     assigns = assign(assigns, src: img)
 
     ~H"""
-    <div class="bg-gray-900 w-8 h-8 border border-gray-200 dark:border-gray-700">
+    <div class="h-8 w-8 border border-gray-200 bg-gray-900 dark:border-gray-700">
       <img src={@src} class="w-full" />
     </div>
     """
@@ -81,10 +78,7 @@ defmodule LorWeb.LolComponents do
 
   def versus(assigns) do
     ~H"""
-    <div class={[
-      "flex items-center space-x-1 justify-center",
-      @class
-    ]}>
+    <div class={["flex items-center justify-center space-x-1", @class]}>
       <.champion
         class="w-8 h-8 rounded-full overflow-hidden"
         assets_version={@assets_version}
@@ -107,10 +101,7 @@ defmodule LorWeb.LolComponents do
 
   def kda(assigns) do
     ~H"""
-    <div class={[
-      "flex items-center justify-center",
-      @class
-    ]}>
+    <div class={["flex items-center justify-center", @class]}>
       <span><%= @kills %></span>
       / <span class="text-red-400"><%= @deaths %></span>
       / <span><%= @assists %></span>
@@ -124,7 +115,7 @@ defmodule LorWeb.LolComponents do
 
   def summoners(assigns) do
     ~H"""
-    <div class={["flex items-center space-x-1 justify-center", @class]}>
+    <div class={["flex items-center justify-center space-x-1", @class]}>
       <.summoner
         :for={summoner_key <- @summoners}
         assets_version={@assets_version}

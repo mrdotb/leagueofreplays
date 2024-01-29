@@ -23,11 +23,11 @@ defmodule Lor.Lol.MatchReactorTest do
           %{region: :ASIA, platform_id: :kr, match_id: "KR_6821747606"}
         )
 
-
-      {:error, [%{errors: _errors}]} = Reactor.run(
-        Lor.Lol.MatchReactor,
-        %{region: :ASIA, platform_id: :kr, match_id: "KR_6821747606"}
-      )
+      {:error, [%{errors: _errors}]} =
+        Reactor.run(
+          Lor.Lol.MatchReactor,
+          %{region: :ASIA, platform_id: :kr, match_id: "KR_6821747606"}
+        )
     end
   end
 end

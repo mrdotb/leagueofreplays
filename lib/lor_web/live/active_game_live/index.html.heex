@@ -1,6 +1,6 @@
 <PC.h2>Live Game</PC.h2>
 
-<div class="hidden rounded-lg bg-white border dark:bg-gray-800 dark:border-gray-700">
+<div class="hidden rounded-lg border bg-white dark:border-gray-700 dark:bg-gray-800">
   <.form for={@form} class="p-4 flex space-x-2">
     <PC.field wrapper_class="!mb-0 flex items-center" field={@form[:live]} type="switch" />
     <PC.field
@@ -22,7 +22,7 @@
   </.form>
 </div>
 
-<div :if={length(@active_games) == 0} class="mt-4 flex justify-center items-center">
+<div :if={length(@active_games) == 0} class="mt-4 flex items-center justify-center">
   <div class="flex flex-col items-center">
     <.icon name="hero-exclamation-circle" class="w-12 h-12" />
     <p>There are currently no available games to spectate.</p>
@@ -31,11 +31,11 @@
 
 <div
   :if={length(@active_games) > 0}
-  class="mt-4 grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2"
+  class="mt-4 grid gap-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
 >
   <%= for active_game <- @active_games, {summoner_pro, participant} <- active_game.pro_participants do %>
-    <div class="rounded-lg bg-white border dark:bg-gray-800 dark:border-gray-700">
-      <div class="p-4 flex flex-col items-center space-y-2">
+    <div class="rounded-lg border bg-white dark:border-gray-700 dark:bg-gray-800">
+      <div class="flex flex-col items-center space-y-2 p-4">
         <LOLC.champion
           class="w-14 h-14 rounded-lg overflow-hidden"
           champion_key={participant.champion_id}
@@ -47,7 +47,7 @@
           </div>
           <div class="text-center">Lv. <%= summoner_pro.summoner_level %></div>
         </div>
-        <div class="w-full flex items-center justify-between">
+        <div class="flex w-full items-center justify-between">
           <div
             id={"live-time-container-#{active_game.id}-#{summoner_pro.puuid}"}
             phx-update="ignore"
@@ -67,7 +67,7 @@
         </div>
       </div>
       <div class="border-t border-gray-200 dark:border-gray-700">
-        <div class="px-2 py-4 space-y-4">
+        <div class="space-y-4 px-2 py-4">
           <div class="flex justify-center space-x-3">
             <.link
               navigate={~p"/player/#{summoner_pro.player.normalized_name}"}
@@ -87,7 +87,7 @@
                 <%= summoner_pro.player.official_name %>
               </.link>
               <div :if={summoner_pro.player.current_team} class="flex items-center space-x-1">
-                <div :if={summoner_pro.player.current_team.logo} class="flex items-center w-6 h-6">
+                <div :if={summoner_pro.player.current_team.logo} class="flex h-6 w-6 items-center">
                   <img class="w-full" src={summoner_pro.player.current_team.logo.url} />
                 </div>
                 <div><%= summoner_pro.player.current_team.name %></div>
@@ -148,7 +148,7 @@
             </span>
           </div>
         </div>
-        <div class="flex justify-center items-center space-x-1 justify-center">
+        <div class="flex items-center justify-center justify-center space-x-1">
           <LOLC.summoner
             :for={summoner_key <- participant.summoners}
             assets_version="13.24.1"

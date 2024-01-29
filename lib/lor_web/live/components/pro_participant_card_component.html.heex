@@ -1,5 +1,5 @@
 <div class={[
-  "border-l-8 border border-gray-200 w-full bg-white text-gray-800 rounded-lg overflow-hidden dark:bg-gray-800 dark:text-gray-300 dark:border-gray-700",
+  "w-full overflow-hidden rounded-lg border border-l-8 border-gray-200 bg-white text-gray-800 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300",
   if(true,
     do: "border-l-blue-400 dark:border-l-blue-400",
     else: "border-l-red-400 dark:border-l-red-400"
@@ -42,7 +42,7 @@
     </PC.tabs>
 
     <div id={"tabpanel-replay-#{@participant.id}"} role="tabpanel" aria-labelledby="Replay">
-      <div class="py-4 flex justify-center">
+      <div class="flex justify-center py-4">
         <PC.button phx-click="show-modal" phx-target={@myself}>
           Spectate
         </PC.button>
@@ -57,7 +57,7 @@
     >
       <.async_result :let={match} assign={@match}>
         <:loading>
-          <div class="py-2 flex justify-center items-center">
+          <div class="flex items-center justify-center py-2">
             <PC.spinner size="lg" />
           </div>
         </:loading>

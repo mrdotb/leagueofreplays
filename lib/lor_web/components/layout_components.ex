@@ -32,7 +32,7 @@ defmodule LorWeb.LayoutComponents do
                 <.link navigate={~p"/"}>
                   <div class="flex items-center">
                     <img class="h-16" src={~p"/images/logo.svg"} />
-                    <h1 class="hidden lg:inline ml-2 font-bold text-3xl">LOR</h1>
+                    <h1 class="ml-2 hidden text-3xl font-bold lg:inline">LOR</h1>
                   </div>
                 </.link>
               </div>
@@ -92,7 +92,7 @@ defmodule LorWeb.LayoutComponents do
               <!-- Sidebar -->
               <aside
                 id="sidebar"
-                class="hidden fixed left-0 top-0 bottom-0 w-64 h-screen border-r border-slate-200 md:left-auto md:shrink-0 z-30 md:!opacity-100 md:!block dark:border-slate-800 dark:bg-slate-900"
+                class="fixed top-0 bottom-0 left-0 z-30 hidden h-screen w-64 border-r border-slate-200 dark:border-slate-800 dark:bg-slate-900 md:!opacity-100 md:!block md:left-auto md:shrink-0"
                 phx-click-away={hide_sidebar()}
               >
                 <!-- Sidebar Gradient bg on light scheme only -->

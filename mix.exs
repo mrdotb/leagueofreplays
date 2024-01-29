@@ -66,10 +66,11 @@ defmodule Lor.MixProject do
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 1.0"},
       {:tesla, "~> 1.8"},
+      {:esbuild, "~> 0.8", runtime: Mix.env() == :dev},
       {:exvcr, "~> 0.11", only: :test},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
-      {:esbuild, "~> 0.8", runtime: Mix.env() == :dev},
-      {:tailwind, "~> 0.2.0", runtime: Mix.env() == :dev}
+      {:tailwind, "~> 0.2.0", runtime: Mix.env() == :dev},
+      {:tailwind_formatter, "~> 0.4.0", only: [:dev, :test], runtime: false}
     ]
   end
 

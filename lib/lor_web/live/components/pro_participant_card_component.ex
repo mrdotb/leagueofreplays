@@ -92,9 +92,9 @@ defmodule LorWeb.ProParticipantCardComponent do
       role="button"
       tabIndex="0"
       phx-click={@click}
-      class="grid-participants px-1 py-2 w-full hover:bg-gray-50 dark:hover:bg-gray-900"
+      class="grid-participants w-full px-1 py-2 hover:bg-gray-50 dark:hover:bg-gray-900"
     >
-      <div class="[grid-area:creation] flex items-center justify-center ">
+      <div class="flex items-center justify-center [grid-area:creation] ">
         <.time_ago id={@participant.id} datetime={@participant.match.game_start} />
       </div>
 
@@ -136,7 +136,7 @@ defmodule LorWeb.ProParticipantCardComponent do
         items={@participant.items}
       />
 
-      <div class="[grid-area:ellipsis] hidden lg:flex items-center">
+      <div class="hidden items-center [grid-area:ellipsis] lg:flex">
         <.icon name="hero-ellipsis-horizontal" class="w-6 h-6" />
       </div>
     </div>
@@ -148,19 +148,19 @@ defmodule LorWeb.ProParticipantCardComponent do
     <div :if={@match}>
       <%= for {participant, index} <- Enum.with_index(@match.participants, 1) do %>
         <div :if={index in [1, 6]} class="grid-team-participants-header px-1 py-1">
-          <div class="[grid-area:side] flex space-x-1">
+          <div class="flex space-x-1 [grid-area:side]">
             <div class="text-red-400">Victory</div>
             <span :if={index == 1}>Blue side</span>
             <span :if={index == 6}>Red side</span>
           </div>
           <div class="[grid-area:summoners]">Summoners</div>
-          <div class="[grid-area:kda] text-center">KDA</div>
-          <div class="[grid-area:gold] text-center">Gold earned</div>
-          <div class="[grid-area:build] text-center">Build</div>
+          <div class="text-center [grid-area:kda]">KDA</div>
+          <div class="text-center [grid-area:gold]">Gold earned</div>
+          <div class="text-center [grid-area:build]">Build</div>
         </div>
 
         <div class="grid-team-participants px-1 py-1">
-          <div class="[grid-area:summoner-champion] flex items-center space-x-1">
+          <div class="flex items-center space-x-1 [grid-area:summoner-champion]">
             <LOLC.champion
               class="w-8 h-8 rounded-full overflow-hidden"
               assets_version={@match.assets_version}
@@ -187,7 +187,7 @@ defmodule LorWeb.ProParticipantCardComponent do
             assists={participant.assists}
           />
 
-          <div class="[grid-area:gold] text-center">
+          <div class="text-center [grid-area:gold]">
             <span class="text-yellow-600 dark:text-yellow-400">
               <%= participant.gold_earned %>
             </span>

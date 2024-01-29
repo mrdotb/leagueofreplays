@@ -1,6 +1,6 @@
 <PC.h2>Teams</PC.h2>
 
-<div class="flex justify-between items-center mb-4">
+<div class="mb-4 flex items-center justify-between">
   <.form for={@form} phx-change="search" phx-submit="search">
     <PC.field
       wrapper_class="!mb-0"
@@ -16,7 +16,7 @@
   </PC.button>
 </div>
 
-<div :if={length(@teams) == 0} class="mt-4 flex justify-center items-center">
+<div :if={length(@teams) == 0} class="mt-4 flex items-center justify-center">
   <div class="flex flex-col items-center">
     <.icon name="hero-exclamation-circle" class="w-12 h-12" />
     <p>Could not find any teams.</p>
