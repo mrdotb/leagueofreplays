@@ -1,4 +1,4 @@
-defmodule Lor.Pros.Team.Changes.Destroy do
+defmodule Lor.Pros.Player.Changes.Destroy do
   @moduledoc """
   Handle the destroy of a player.
   The player picture aka a s3 object should be destroyed.
