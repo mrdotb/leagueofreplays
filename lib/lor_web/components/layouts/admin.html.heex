@@ -13,42 +13,16 @@
             icon: :chart_pie
           },
           %{
-            name: "/teams",
+            name: "/admin/teams",
             label: "Teams",
             path: ~p"/admin/teams",
             icon: :users
           },
           %{
-            name: "/players",
+            name: "/admin/players",
             label: "Players",
-            path: ~p"/admin",
-            icon: :user,
-            menu_items: [
-              %{
-                name: "/admin/players",
-                label: "List",
-                path: ~p"/admin/players/new",
-                icon: :list_bullet
-              },
-              %{
-                name: "/admin/players/new",
-                label: "Create player",
-                path: ~p"/admin/players/new",
-                icon: :plus
-              },
-              %{
-                name: "/admin/teams/new",
-                label: "Create team",
-                path: ~p"/admin/players/new",
-                icon: :plus
-              },
-              %{
-                name: "/admin/teams/new",
-                label: "Create Summoner",
-                path: ~p"/admin/players/new",
-                icon: :plus
-              }
-            ]
+            path: ~p"/admin/players",
+            icon: :user
           }
         ]}
       />

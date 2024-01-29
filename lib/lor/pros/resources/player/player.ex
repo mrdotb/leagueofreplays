@@ -25,7 +25,7 @@ defmodule Lor.Pros.Player do
 
   code_interface do
     define_for Lor.Pros
-
+    define :get, action: :get, args: [:id]
     define :by_normalized_name, args: [:normalized_name]
     define :by_normalized_names, args: [:normalized_names]
     define :list, action: :list, args: [:filter]
@@ -34,6 +34,12 @@ defmodule Lor.Pros.Player do
 
   actions do
     defaults [:read]
+
+    read :get do
+      get? true
+      argument :id, :uuid, allow_nil?: false
+      filter expr(id == ^arg(:id))
+    end
 
     read :by_normalized_name do
       get? true
@@ -59,7 +65,7 @@ defmodule Lor.Pros.Player do
       pagination do
         offset? true
         countable :by_default
-        max_page_size 50
+        max_page_size 20
       end
 
       prepare Lor.Pros.Player.Preparations.FilterSortPlayer
@@ -93,6 +99,31 @@ defmodule Lor.Pros.Player do
       argument :picture_id, :uuid
 
       change Lor.Pros.Player.Changes.CreateFromUGG
+    end
+
+    update :update do
+      primary? true
+
+      accept [:official_name, :liquidpedia_url, :main_role]
+
+      argument :current_team_id, :uuid do
+        allow_nil? true
+      end
+
+      argument :picture_id, :uuid do
+        allow_nil? true
+      end
+
+      change manage_relationship(:current_team_id, :current_team, type: :append_and_remove)
+      change manage_relationship(:picture_id, :picture, type: :append_and_remove)
+      change Lor.Pros.Player.Changes.NormalizeName
+      change Lor.Pros.Player.Changes.Update
+    end
+
+    destroy :destroy do
+      primary? true
+
+      change Lor.Pros.Player.Changes.Destroy
     end
   end
 

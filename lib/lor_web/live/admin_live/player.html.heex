@@ -1,0 +1,95 @@
+<PC.h2>Players</PC.h2>
+
+<div class="flex justify-between items-center mb-4">
+  <.form for={@form} phx-change="search" phx-submit="search">
+    <PC.field
+      wrapper_class="!mb-0"
+      label_class="hidden"
+      type="search"
+      placeholder="Search Player..."
+      field={@form[:search]}
+    />
+  </.form>
+
+  <PC.button with_icon link_type="live_patch" to={~p"/admin/player/new"} color="primary">
+    <.icon name="hero-plus" class="w-5 h-5" /> Create Player
+  </PC.button>
+</div>
+
+<div :if={length(@players) == 0} class="mt-4 flex justify-center items-center">
+  <div class="flex flex-col items-center">
+    <.icon name="hero-exclamation-circle" class="w-12 h-12" />
+    <p>Could not find any Players.</p>
+  </div>
+</div>
+
+<PC.table :if={length(@players) > 0}>
+  <PC.tr>
+    <PC.th>Name</PC.th>
+    <PC.th>Team</PC.th>
+    <PC.th>Main Role</PC.th>
+    <PC.th>Actions</PC.th>
+  </PC.tr>
+
+  <PC.tr :for={player <- @players} id={player.id}>
+    <PC.td>
+      <PC.user_inner_td
+        avatar_assigns={if(player.picture, do: %{src: player.picture.url}, else: nil)}
+        label={player.official_name}
+      />
+    </PC.td>
+    <PC.td>
+      <PC.user_inner_td
+        :if={player.current_team}
+        avatar_assigns={
+          if(player.current_team.logo, do: %{src: player.current_team.logo.url}, else: nil)
+        }
+        label={player.current_team.name}
+      />
+    </PC.td>
+    <PC.td class="whitespace-nowrap"><%= player.main_role %></PC.td>
+    <PC.td>
+      <PC.button link_type="live_patch" to={~p"/admin/player/edit/#{player.id}"} size="xs">
+        Edit
+      </PC.button>
+      <PC.button
+        color="danger"
+        size="xs"
+        phx-click={JS.push("delete", value: %{id: player.id})}
+        data-confirm="Are you sure?"
+      >
+        Delete
+      </PC.button>
+    </PC.td>
+  </PC.tr>
+</PC.table>
+
+<.offset_pagination
+  :if={length(@players) > 0}
+  link_type="live_patch"
+  path={~p"/admin/players?page=:page"}
+  active_page={@active_page}
+  total_pages={@pages}
+  offset={@page.offset}
+  limit={@page.limit}
+  count={@page.count}
+  total_pages={@pages}
+  model_name="players"
+/>
+
+<PC.modal :if={@live_action == :new} max_width="xl" title="Create Player">
+  <.live_component
+    module={LorWeb.AdminLive.PlayerFormComponent}
+    id="player-form-new"
+    live_action={@live_action}
+  />
+</PC.modal>
+
+<PC.modal :if={@live_action == :edit} max_width="xl" title="Edit Player">
+  <.live_component
+    module={LorWeb.AdminLive.PlayerFormComponent}
+    id="player-form-edit"
+    live_action={@live_action}
+    player_id={@player_id}
+  />
+</PC.modal>

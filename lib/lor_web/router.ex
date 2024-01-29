@@ -39,8 +39,9 @@ defmodule LorWeb.Router do
       live "/teams", AdminLive.Team, :index
       live "/team/new", AdminLive.Team, :new
       live "/team/edit/:team_id", AdminLive.Team, :edit
-      live "/players", PlayerLive.New, :index
-      live "/players/new", PlayerLive.New, :index
+      live "/players", AdminLive.Player, :index
+      live "/player/new", AdminLive.Player, :new
+      live "/player/edit/:player_id", AdminLive.Player, :edit
     end
   end
 
