@@ -17,7 +17,11 @@ defmodule Lor.Lol.MatchWorker do
         match = result.result
         Lor.Lol.Replay.update_with_match(replay, match.id)
 
-      {:error, _error} = error ->
+      # reactor error are too heavy pattern match only the ash errors
+      {:error, [%{errors: errors}]} ->
+        {:error, errors}
+
+      error ->
         error
     end
   end
