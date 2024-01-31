@@ -21,17 +21,28 @@ defmodule Lor.Lol.Summoner do
 
   code_interface do
     define_for Lor.Lol
+    define :get, action: :get, args: [:id]
     define :create_from_api, args: [:platform_id, :summoner_data, :account_data, :player_id]
     define :read_all, action: :read
+    define :list, args: [:filter], action: :list
 
     define :by_puuids, args: [:puuids]
     define :by_names_and_platform_id, args: [:names, :platform_id]
     define :by_platform_id, args: [:platform_id]
     define :list_pro_by_platform_id, action: :pro_by_platform_id, args: [:platform_id]
+    define :list_by_player_id, args: [:player_id]
+    define :detach
+    define :attach, args: [:player_id]
   end
 
   actions do
     defaults [:read]
+
+    read :get do
+      get? true
+      argument :id, :uuid, allow_nil?: false
+      filter expr(id == ^arg(:id))
+    end
 
     read :by_puuids do
       argument :puuids, {:array, :string} do
@@ -69,6 +80,20 @@ defmodule Lor.Lol.Summoner do
       filter expr(platform_id == ^arg(:platform_id) and not is_nil(player_id))
     end
 
+    read :list do
+      argument :filter, :map, allow_nil?: true
+
+      prepare Lor.Lol.Summoner.Preparations.FilterSortSummoner
+    end
+
+    read :list_by_player_id do
+      argument :player_id, :uuid do
+        allow_nil? false
+      end
+
+      filter expr(player_id == ^arg(:player_id))
+    end
+
     create :create_from_api do
       accept [:platform_id]
 
@@ -83,6 +108,21 @@ defmodule Lor.Lol.Summoner do
       argument :player_id, :uuid
 
       change Lor.Lol.Summoner.Changes.CreateFromApi
+    end
+
+    update :detach do
+      accept []
+      change set_attribute(:player_id, nil)
+    end
+
+    update :attach do
+      accept []
+
+      argument :player_id, :uuid do
+        allow_nil? false
+      end
+
+      change manage_relationship(:player_id, :player, type: :append)
     end
   end
 

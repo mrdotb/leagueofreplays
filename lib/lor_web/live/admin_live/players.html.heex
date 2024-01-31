@@ -49,6 +49,14 @@
     </PC.td>
     <PC.td class="whitespace-nowrap"><%= player.main_role %></PC.td>
     <PC.td>
+      <PC.button
+        color="info"
+        link_type="live_patch"
+        to={~p"/admin/players/#{player.id}/summoners"}
+        size="xs"
+      >
+        Show Summoners
+      </PC.button>
       <PC.button link_type="live_patch" to={~p"/admin/players/edit/#{player.id}"} size="xs">
         Edit
       </PC.button>

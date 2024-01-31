@@ -32,6 +32,9 @@ defmodule Lor.Lol.Ddragon.Warmer do
 
   @impl true
   def handle_info(:cache, state) do
+    last_game_version = get_last_game_version()
+    Lor.Lol.Ddragon.Cache.put_all([last_game_version])
+
     champion_keys = get_champion_keys()
     Lor.Lol.Ddragon.Cache.put_all(champion_keys)
 
@@ -92,5 +95,12 @@ defmodule Lor.Lol.Ddragon.Warmer do
       value = data["image"]["full"]
       {{:summoner, key}, value}
     end)
+  end
+
+  defp get_last_game_version do
+    with {:ok, %{body: versions}} <- Lor.Lol.Ddragon.Client.fetch_versions(),
+         last_game_version <- List.first(versions) do
+      {:last_game_version, last_game_version}
+    end
   end
 end

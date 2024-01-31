@@ -136,4 +136,16 @@ defmodule LorWeb.LolComponents do
     </div>
     """
   end
+
+  attr :assets_version, :string, required: true
+  attr :icon_key, :integer, required: true
+  attr :class, :string, default: "", doc: "CSS class"
+
+  def profile_icon(assigns) do
+    ~H"""
+    <div class={["border border-gray-200 bg-gray-900 dark:border-gray-700", @class]}>
+      <img class="w-full" src={Lor.Lol.Ddragon.get_profile_icon(@assets_version, @icon_key)} />
+    </div>
+    """
+  end
 end

@@ -1,0 +1,63 @@
+<PC.h2>Summoners</PC.h2>
+
+<div class="mb-4 flex items-center justify-end">
+  <PC.button
+    with_icon
+    link_type="live_patch"
+    to={~p"/admin/players/#{@player_id}/summoners/attach"}
+    color="primary"
+  >
+    <.icon name="hero-plus" class="w-5 h-5" /> Attach Summoner
+  </PC.button>
+</div>
+
+<div :if={length(@summoners) == 0} class="mt-4 flex items-center justify-center">
+  <div class="flex flex-col items-center">
+    <.icon name="hero-exclamation-circle" class="w-12 h-12" />
+    <p>Could not find any Summoners.</p>
+  </div>
+</div>
+
+<PC.table :if={length(@summoners) > 0}>
+  <PC.tr>
+    <PC.th>Name</PC.th>
+    <PC.th>Platform</PC.th>
+    <PC.th>Riot ID</PC.th>
+    <PC.th>Actions</PC.th>
+  </PC.tr>
+
+  <PC.tr :for={summoner <- @summoners} id={summoner.id}>
+    <PC.td class="flex items-center space-x-2">
+      <LOLC.profile_icon
+        assets_version={@game_version}
+        icon_key={summoner.profile_icon_id}
+        class="w-16 h-16 rounded-md overflow-hidden"
+      />
+      <span><%= summoner.name %></span>
+    </PC.td>
+    <PC.td>
+      <%= summoner.platform_id %>
+    </PC.td>
+    <PC.td>
+      <%= summoner.riot_id %>
+    </PC.td>
+    <PC.td>
+      <PC.button
+        color="danger"
+        size="xs"
+        phx-click={JS.push("detach", value: %{id: summoner.id})}
+        data-confirm="Detach this summoner from this player ?"
+      >
+        Detach
+      </PC.button>
+    </PC.td>
+  </PC.tr>
+</PC.table>
+
+<PC.modal :if={@live_action == :attach} max_width="xl" title="Manage Summoner">
+  <.live_component
+    module={LorWeb.AdminLive.SummonerFormComponent}
+    id="summoner-form-attach"
+    player_id={@player_id}
+  />
+</PC.modal>

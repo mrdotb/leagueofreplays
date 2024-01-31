@@ -14,4 +14,13 @@ defmodule Lor.TimeHelpers do
     now = DateTime.utc_now()
     DateTime.diff(now, date_time, :minute) < minutes
   end
+
+  @doc """
+  Convert a unix timestamp to datetime.
+  """
+  def unix_timestamp_to_datetime(unix_timestamp) do
+    unix_timestamp
+    |> DateTime.from_unix!(:millisecond)
+    |> DateTime.truncate(:second)
+  end
 end

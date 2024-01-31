@@ -72,4 +72,24 @@ defmodule Lor.Lol.Ddragon do
         %{}
     end
   end
+
+  @doc """
+  Get a profile icon
+  """
+  def get_profile_icon(game_version, icon_key) do
+    "#{@ddragon_cdn}/#{game_version}/img/profileicon/#{icon_key}.png"
+  end
+
+  @doc """
+  Get last game version
+  """
+  def get_last_game_version do
+    case Lor.Lol.Ddragon.Cache.get(:last_game_version) do
+      game_version when is_binary(game_version) ->
+        game_version
+
+      nil ->
+        "14.2.1"
+    end
+  end
 end
