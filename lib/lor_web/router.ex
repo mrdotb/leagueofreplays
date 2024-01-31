@@ -1,6 +1,8 @@
 defmodule LorWeb.Router do
   use LorWeb, :router
 
+  import Phoenix.LiveDashboard.Router
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -45,6 +47,12 @@ defmodule LorWeb.Router do
       live "/players/:player_id/summoners", AdminLive.Summoners, :index
       live "/players/:player_id/summoners/attach", AdminLive.Summoners, :attach
     end
+  end
+
+  scope "/admin" do
+    pipe_through :admin
+
+    live_dashboard "/dashboard"
   end
 
   # Other scopes may use custom stacks.
