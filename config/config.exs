@@ -42,21 +42,6 @@ config :tesla, :adapter, {Tesla.Adapter.Finch, name: Lor.Finch}
 
 config :lor, Lor.S3.Api, Lor.S3.Minio
 
-config :lor, Oban,
-  repo: Lor.Repo,
-  plugins: [
-    {Oban.Plugins.Pruner, max_age: 3600 * 2},
-    {Oban.Plugins.Lifeline, rescue_after: :timer.hours(1)},
-    {
-      Oban.Plugins.Cron,
-      crontab: [
-        {"@daily", Lor.Pros.ProWorker, args: %{"platform_id" => :kr}},
-        {"@daily", Lor.Pros.ProWorker, args: %{"platform_id" => :euw1}},
-        {"@daily", Lor.Pros.ProWorker, args: %{"platform_id" => :na1}}
-      ]
-    }
-  ]
-
 config :lor,
   ecto_repos: [Lor.Repo],
   generators: [timestamp_type: :utc_datetime]

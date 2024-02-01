@@ -57,6 +57,10 @@ if config_env() == :prod do
     port: 443,
     proto: "https"
 
+  s3_bucket_pictures = System.get_env("S3_BUCKET_PICTURES") || "pictures"
+  s3_bucket_replays = System.get_env("S3_BUCKET_REPLAYS") || "replays"
+  s3_bucket_original = System.get_env("S3_BUCKET_ORIGINAL") || "original"
+
   s3_replay_url =
     System.get_env("S3_REPLAY_URL") ||
       raise """
@@ -65,9 +69,9 @@ if config_env() == :prod do
 
   config :lor, :s3, %{
     buckets: %{
-      pictures: "lor-pictures",
-      replays: "lor-replays",
-      original: "lor-original"
+      pictures: s3_bucket_pictures,
+      replays: s3_bucket_replays,
+      original: s3_bucket_original
     },
     urls: %{
       replays: s3_replay_url
@@ -122,12 +126,7 @@ if config_env() == :prod do
       environment variable SECRET_KEY_BASE is missing.
       """
 
-  host =
-    System.get_env("PHX_HOST") ||
-      raise """
-      environment variable PHX_HOST is missing.
-      """
-
+  host = System.get_env("PHX_HOST") || "localhost"
   port = String.to_integer(System.get_env("PHX_PORT") || "4000")
 
   config :lor, LorWeb.Endpoint,
@@ -141,15 +140,14 @@ if config_env() == :prod do
     secret_key_base: secret_key_base
 
   admin_password =
-    System.get_env("ADMIN_PASSWORD") ||
-      raise """
-      environment variable ADMIN_PASSWORD is missing.
-      """
+    System.get_env("ADMIN_PASSWORD") || nil
 
-  config :lor, :admin_dashboard,
-    enable?: true,
-    username: "admin",
-    password: admin_password
+  if is_binary(admin_password) do
+    config :lor, :admin_dashboard,
+      enable?: true,
+      username: "admin",
+      password: admin_password
+  end
 
   ddragon_cache? = if System.get_env("DDRAGON_CACHE") in ~w(true 1), do: true, else: false
 
@@ -162,21 +160,13 @@ if config_env() == :prod do
 
   spectator_server = if System.get_env("SPECTATOR_SERVER") in ~w(true 1), do: true, else: false
 
-  spectator_host =
-    System.get_env("SPECTATOR_HOST") ||
-      raise """
-      environment variable SPECTATOR_HOST is missing.
-      """
+  spectator_host = System.get_env("SPECTATOR_HOST") || "localhost"
 
-  spectator_port =
-    System.get_env("SPECTATOR_PORT") ||
-      raise """
-      environment variable SPECTATOR_PORT is missing.
-      """
+  spectator_port = String.to_integer(System.get_env("SPECTATOR_PORT") || "3000")
 
   config :lor, LorSpectator.Endpoint,
     server: spectator_server,
-    url: [scheme: "http", host: spectator_host, port: 80, path: "/"],
+    url: [scheme: "http", host: spectator_host, port: spectator_port, path: "/"],
     http: [
       ip: {0, 0, 0, 0, 0, 0, 0, 0},
       port: spectator_port
@@ -187,24 +177,53 @@ if config_env() == :prod do
   scheduler? = if System.get_env("SCHEDULER") in ~w(true 1), do: true, else: false
   pro_scheduler? = if System.get_env("PRO_SCHEDULER") in ~w(true 1), do: true, else: false
 
+  scheduler_platform_ids =
+    System.get_env("SCHEDULER_PLATFORMS")
+    |> Kernel.||("")
+    |> String.split(",")
+    |> Enum.map(fn platform_id ->
+      {:ok, platform_id} = Lor.Lol.PlatformIds.match(platform_id)
+      platform_id
+    end)
+
   config :lor,
     replay_schedulers: %{
       active?: scheduler?,
       featured: %{
         active?: false,
-        platform_ids: [:kr]
+        platform_ids: []
       },
       pro: %{
         active?: pro_scheduler?,
-        platform_ids: [:kr]
+        platform_ids: scheduler_platform_ids
       }
     }
 
   # Oban
 
-  oban_queue? = if System.get_env("OBAN_QUEUE") in ~w(true 1), do: true, else: false
+  queue_count = String.to_integer(System.get_env("QUEUE_COUNT") || "10")
 
-  if oban_queue? do
-    config :lor, Oban, queues: [default: 10]
-  end
+  queue_pro_platform_ids =
+    System.get_env("QUEUE_PRO_PLATFORMS")
+    |> Kernel.||("")
+    |> String.split(",")
+    |> Enum.map(fn platform_id ->
+      {:ok, platform_id} = Lor.Lol.PlatformIds.match(platform_id)
+      platform_id
+    end)
+
+  config :lor, Oban,
+    repo: Lor.Repo,
+    queues: [default: queue_count],
+    plugins: [
+      {Oban.Plugins.Pruner, max_age: 3600 * 2},
+      {Oban.Plugins.Lifeline, rescue_after: :timer.hours(1)},
+      {
+        Oban.Plugins.Cron,
+        crontab:
+          for platform_id <- queue_pro_platform_ids do
+            {"@daily", Lor.Pros.ProWorker, args: %{"platform_id" => platform_id}}
+          end
+      }
+    ]
 end

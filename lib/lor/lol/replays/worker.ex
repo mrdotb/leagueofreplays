@@ -263,8 +263,23 @@ defmodule Lor.Lol.Replays.Worker do
 
   def terminate(:normal, %{error: error} = state) do
     Logger.info(
-      "Replays worker error terminate error: #{inspect(error)} state: #{inspect(state, pretty: true)}"
+      "Replays worker error terminate error: #{inspect(error)} state: #{inspect(state)}"
     )
+
+    Lor.Lol.Replay.error(state.replay)
+
+    Process.send(state.manager_pid, {:terminating, state}, [])
+
+    # Gracefully stop the GenServer process
+    :normal
+  end
+
+  def terminate(other, state) do
+    Logger.info(
+      "Replays worker terminate other #{inspect(other)} state: #{inspect(state)}"
+    )
+
+    Lor.Lol.Replay.error(state.replay)
 
     Process.send(state.manager_pid, {:terminating, state}, [])
 

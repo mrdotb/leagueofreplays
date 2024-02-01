@@ -1,46 +1,108 @@
-# League of Replays
-
 <p align="center">
   <a href="https://plausible.io/">
     <img src="https://raw.githubusercontent.com/mrdotb/leagueofreplays/main/priv/static/images/logo.svg" width="140px" alt="League of Replays" />
   </a>
+
+
+  <h3 align="center">League of Replays</h3>
+
+  <p align="center">
+    Record and replay league of legends game.
+    <br />
+    <a href="https://github.com/mrdotb/leagueofreplays/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/mrdotb/leagueofreplays/issues">Request Feature</a>
+  </p>
 </p>
 
-## Environment Variables for deployment
+### Built With
 
-| Variable Name      | Description                                         | Required | Default Value |
-|--------------------|-----------------------------------------------------|----------|---------------|
-| `DATABASE_URL`     | URL to the PostgreSQL database                      | Yes      |               |
-| `ECTO_IPV6`        | If database host is IPv6                            | No       |               |
-| `POOL_SIZE`        | PostgreSQL pool size                                | No       | 10            |
-| `RIOT_TOKEN`       | Token to access Riot API                            | Yes      |               |
-| `S3_ACCESS_KEY`    | S3 access key                                       | Yes      |               |
-| `S3_SECRET_KEY`    | S3 secret key                                       | Yes      |               |
-| `S3_ENDPOINT`      | S3 endpoint                                         | Yes      |               |
-| `S3_BUCKET`        | S3 base URL                                         | Yes      |               |
-| `S3_REPLAY_URL`    | S3 replay URL useful if the bucket is behind a CDN  | Yes      |               |
-| `RELEASE_COOKIE`   | The erlang cookie for cluster                       | No       |               |
-| `LIBCLUSTER`       | Libcluster enabled                                  | No       | false         |
-| `K8_NODE_BASENAME` | Libcluster K8s strategy node basename               | No       |               |
-| `K8_SELECTOR`      | Libcluster K8s selector                             | No       |               |
-| `K8_NAMESPACE`     | Libcluster K8s namespace                            | No       |               |
-| `PHX_SERVER`       | Web server enabled?                                 | No       | false         |
-| `SECRET_KEY_BASE`  | Web server secret key base for sessions and cookies | Yes      |               |
-| `PHX_PORT`         | Web server port                                     | No       | 4000          |
-| `PHX_HOST`         | Web server host                                     | Yes      |               |
-| `ADMIN_PASSWORD`   | Web server admin password                           | Yes      |               |
-| `SPECTATOR_SERVER` | Spectator server enabled?                           | Yes      |               |
-| `SPECTATOR_HOST`   | Spectator server host                               | Yes      |               |
-| `SPECTATOR_PORT`   | Spectator server port                               | Yes      |               |
-| `SCHEDULER`        | Scheduler enabled?                                  | No       | false         |
-| `PRO_SCHEDULER`    | Pro scheduler enabled?                              | No       | false         |
-| `OBAN_QUEUE`       | Oban queue enabled?                                 | No       | false         |
-| `DDRAGON_CACHE`    | Ddragon cache enabled?                              | No       | false         |
+Leagueofreplay is proudly powered by Phoenix and Elixir.
 
-## Testing
+* [![Phoenix][Phoenix]][Phoenix-url]
+* [![Elixir][Elixir]][Elixir-url]
+* [![Tailwind][Tailwind]][Tailwind-url]
 
-Remove large binary from vcr_cassettes using jq
+## Getting Started
 
-```bash
-cat test/fixture/vcr_cassettes/ugg.json | jq '.[] |= (if .response.binary == true then .response.body = "g20AAAAA" else . end)'
+This is an example of how you may give instructions on setting up your project locally.
+To get a local copy up and running follow these simple example steps.
+
+### Prerequisites
+
+To run leagueofreplays on your local environment you need to have:
+* Postgres
+* Elixir
+* Erlang
+* NodeJS
+
+### Using Docker Compose
+
+A Docker Compose [reference file](https://github.com/mrdotb/leagueofreplays/blob/main/docker-compose.yml) is provided in the repository. You can use it to run leagueofreplays with Docker Compose.
+
+```sh
+git clone https://github.com/mrdotb/leagueofreplays.git
+cd leagueofreplays
+cp .env.sample .env
 ```
+
+```sh
+docker compose --env-file .env up
+```
+
+### How to Dev ?
+
+This project use asdf with the following [`tool-versions`](https://github.com/mrdotb/leagueofreplays/blob/main/.tool-versions).
+
+Install [asdf](https://asdf-vm.com/guide/getting-started.html) and the differents plugins.
+
+```sh
+asdf plugin add erlang https://github.com/asdf-vm/asdf-erlang.git
+asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git
+asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+```
+
+Install [docker](https://docs.docker.com/engine/install/) and [docker compose](https://docs.docker.com/compose/install/)
+
+Clone the repo
+
+```sh
+git clone https://github.com/mrdotb/leagueofreplays.git
+```
+
+Then you can use install the elixir / erlang / nodejs version.
+
+```sh
+asdf install
+```
+Run postgres and minio
+
+```sh
+docker compose -f docker-compose.dev.yml up
+```
+
+Install project deps
+
+```sh
+npm i --prefix assets
+mix deps.get
+```
+
+Run project
+```sh
+iex -S mix phx.server
+```
+
+### Configuration
+
+You can find all configuration options [here]().
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[Elixir]: https://img.shields.io/badge/elixir-4B275F?style=for-the-badge&logo=elixir&logoColor=white
+[Elixir-url]: https://elixir-lang.org/
+[Tailwind]: https://img.shields.io/badge/tailwind-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white
+[Tailwind-url]: https://tailwindcss.com/
+[Phoenix]: https://img.shields.io/badge/phoenix-f35424?style=for-the-badge&logo=&logoColor=white
+[Phoenix-url]: https://www.phoenixframework.org/
