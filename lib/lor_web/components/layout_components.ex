@@ -11,6 +11,7 @@ defmodule LorWeb.LayoutComponents do
   alias LorWeb.PetalComponents, as: PC
   alias Phoenix.LiveView.JS
 
+  attr :game_version, :string, required: true
   slot :inner_block
   slot :sidebar_block
 
@@ -100,11 +101,17 @@ defmodule LorWeb.LayoutComponents do
                   class="-left-[9999px] pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-slate-50 to-white dark:hidden"
                   aria-hidden="true"
                 />
-                <div class="fixed top-0 bottom-0 mt-16 w-64 overflow-y-auto px-4 sm:px-6 md:pr-8 md:pl-0">
+                <div class="fixed top-0 bottom-0 mt-16 flex w-64 flex-col justify-between overflow-y-auto px-4 sm:px-6 md:pr-8 md:pl-0">
                   <div class="pt-8 pb-8 md:pt-12">
                     <nav>
                       <%= render_slot(@sidebar_block) %>
                     </nav>
+                  </div>
+
+                  <div>
+                    <div class="px-2 py-4 text-center text-lg">
+                      <span>Patch: <%= @game_version %></span>
+                    </div>
                   </div>
                 </div>
               </aside>

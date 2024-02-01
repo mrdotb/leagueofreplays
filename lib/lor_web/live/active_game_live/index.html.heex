@@ -39,7 +39,7 @@
         <LOLC.champion
           class="w-14 h-14 rounded-lg overflow-hidden"
           champion_key={participant.champion_id}
-          assets_version="13.24.1"
+          assets_version={@game_version}
         />
         <div>
           <div class="text-center">
@@ -138,7 +138,7 @@
       <div class="grid-live-game space-y-0.5">
         <div class="flex space-x-1">
           <LOLC.champion
-            assets_version="13.24.1"
+            assets_version={@game_version}
             champion_key={participant.champion_id}
             class="w-8 h-8 rounded-full overflow-hidden"
           />
@@ -151,7 +151,7 @@
         <div class="flex items-center justify-center justify-center space-x-1">
           <LOLC.summoner
             :for={summoner_key <- participant.summoners}
-            assets_version="13.24.1"
+            assets_version={@game_version}
             summoner_key={summoner_key}
           />
         </div>

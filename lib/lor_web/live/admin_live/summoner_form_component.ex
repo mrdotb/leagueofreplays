@@ -8,7 +8,6 @@ defmodule LorWeb.AdminLive.SummonerFormComponent do
       socket
       |> assign(assigns)
       |> assign(:form, to_form(%{}, as: "search"))
-      |> assign(:game_version, Lor.Lol.Ddragon.get_last_game_version())
       |> assign(:platform_id, nil)
       |> assign(:platform_ids, Lor.Lol.PlatformIds.values())
       |> assign(:request, AsyncResult.ok(nil))

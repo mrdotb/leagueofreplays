@@ -21,22 +21,23 @@ defmodule LorWeb.Router do
     plug :accepts, ["json"]
   end
 
-  live_session :default, on_mount: [LorWeb.Hooks.ActivePage] do
-    scope "/", LorWeb do
-      pipe_through :browser
+  scope "/", LorWeb do
+    pipe_through :browser
 
+    live_session :default, on_mount: [LorWeb.Hooks.ActivePage, LorWeb.Hooks.GameVersion] do
       live "/", ActiveGameLive.Index, :index
       live "/replays", ReplayLive.Index, :index
       live "/players", PlayerLive.Index, :index
       live "/player/:name", PlayerLive.Show, :index
-      get "/script/spectate", ScriptController, :spectate
     end
+
+    get "/script/spectate", ScriptController, :spectate
   end
 
-  live_session :admin, on_mount: [LorWeb.Hooks.ActivePage] do
-    scope "/admin", LorWeb do
-      pipe_through :admin
+  scope "/admin", LorWeb do
+    pipe_through :admin
 
+    live_session :admin, on_mount: [LorWeb.Hooks.ActivePage, LorWeb.Hooks.GameVersion] do
       live "/", AdminLive.Index, :index
       live "/teams", AdminLive.Teams, :index
       live "/teams/new", AdminLive.Teams, :new
@@ -47,10 +48,6 @@ defmodule LorWeb.Router do
       live "/players/:player_id/summoners", AdminLive.Summoners, :index
       live "/players/:player_id/summoners/attach", AdminLive.Summoners, :attach
     end
-  end
-
-  scope "/admin" do
-    pipe_through :admin
 
     live_dashboard "/dashboard"
   end

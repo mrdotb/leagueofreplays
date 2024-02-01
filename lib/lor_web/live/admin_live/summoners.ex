@@ -6,7 +6,6 @@ defmodule LorWeb.AdminLive.Summoners do
   def mount(_params, _session, socket) do
     socket =
       socket
-      |> assign(:game_version, Lor.Lol.Ddragon.get_last_game_version())
       |> assign(:summoners, [])
 
     {:ok, socket}

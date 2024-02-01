@@ -6,11 +6,11 @@ defmodule LorWeb.ActiveGameLive.Index do
   def mount(_params, _session, socket) do
     socket =
       socket
-      |> assign(:form, to_form(%{}))
-      |> assign(:active_games, list_active_games())
       |> assign(:active_game, nil)
-      |> assign(:spectate_modal?, false)
+      |> assign(:active_games, list_active_games())
+      |> assign(:form, to_form(%{}))
       |> assign(:live_game_modal?, false)
+      |> assign(:spectate_modal?, false)
 
     {:ok, socket}
   end
