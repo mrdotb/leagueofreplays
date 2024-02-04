@@ -275,9 +275,7 @@ defmodule Lor.Lol.Replays.Worker do
   end
 
   def terminate(other, state) do
-    Logger.info(
-      "Replays worker terminate other #{inspect(other)} state: #{inspect(state)}"
-    )
+    Logger.info("Replays worker terminate other #{inspect(other)} state: #{inspect(state)}")
 
     Lor.Lol.Replay.error(state.replay)
 

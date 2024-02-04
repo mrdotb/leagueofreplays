@@ -3,6 +3,18 @@ import Config
 if config_env() == :prod do
   # Common
 
+  # helpers
+
+  platform_ids_from_env = fn env ->
+    System.get_env(env)
+    |> Kernel.||("")
+    |> String.split(",", trim: true)
+    |> Enum.map(fn platform_id ->
+      {:ok, platform_id} = Lor.Lol.PlatformIds.match(platform_id)
+      platform_id
+    end)
+  end
+
   ## Postgres
 
   database_url =
@@ -177,14 +189,7 @@ if config_env() == :prod do
   scheduler? = if System.get_env("SCHEDULER") in ~w(true 1), do: true, else: false
   pro_scheduler? = if System.get_env("PRO_SCHEDULER") in ~w(true 1), do: true, else: false
 
-  scheduler_platform_ids =
-    System.get_env("SCHEDULER_PLATFORMS")
-    |> Kernel.||("")
-    |> String.split(",")
-    |> Enum.map(fn platform_id ->
-      {:ok, platform_id} = Lor.Lol.PlatformIds.match(platform_id)
-      platform_id
-    end)
+  scheduler_platform_ids = platform_ids_from_env.("SCHEDULER_PLATFORMS")
 
   config :lor,
     replay_schedulers: %{
@@ -202,15 +207,7 @@ if config_env() == :prod do
   # Oban
 
   queue_count = String.to_integer(System.get_env("QUEUE_COUNT") || "10")
-
-  queue_pro_platform_ids =
-    System.get_env("QUEUE_PRO_PLATFORMS")
-    |> Kernel.||("")
-    |> String.split(",")
-    |> Enum.map(fn platform_id ->
-      {:ok, platform_id} = Lor.Lol.PlatformIds.match(platform_id)
-      platform_id
-    end)
+  queue_pro_platform_ids = platform_ids_from_env.("QUEUE_PRO_PLATFORMS")
 
   config :lor, Oban,
     repo: Lor.Repo,
