@@ -10,7 +10,6 @@ defmodule Lor.Application do
     children = [
       Lor.Repo,
       {Phoenix.PubSub, name: :lor_pubsub},
-      {Finch, name: Lor.Finch},
       {Oban, AshOban.config([Lor.Lol, Lor.Pros, Lor.S3], Application.fetch_env!(:lor, Oban))},
       LorSpectator.Supervisor,
       LorWeb.Telemetry,

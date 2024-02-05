@@ -38,7 +38,7 @@ config :lor,
     }
   }
 
-config :tesla, :adapter, {Tesla.Adapter.Finch, name: Lor.Finch}
+config :tesla, adapter: Tesla.Adapter.Hackney
 
 config :lor, Lor.S3.Api, Lor.S3.Minio
 

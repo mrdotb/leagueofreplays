@@ -1,6 +1,6 @@
 defmodule Lor.Lol.ReplayTest do
   use Lor.DataCase, async: true
-  use ExVCR.Mock, adapter: ExVCR.Adapter.Finch
+  use ExVCR.Mock, adapter: ExVCR.Adapter.Hackney
 
   setup_all context do
     params = %{

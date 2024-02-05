@@ -1,6 +1,6 @@
 defmodule Lor.Lol.MatchWorkerTest do
   use Lor.DataCase, async: true
-  use ExVCR.Mock, adapter: ExVCR.Adapter.Finch
+  use ExVCR.Mock, adapter: ExVCR.Adapter.Hackney
 
   test "job will set a foreign key on replay to the created match" do
     use_cassette "faker_ranked_match" do

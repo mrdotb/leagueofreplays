@@ -45,7 +45,6 @@ defmodule Lor.MixProject do
       {:ash_state_machine, "~> 0.2.2"},
       {:aws, "~> 0.13.0"},
       {:ecto_sql, "~> 3.10"},
-      {:finch, "~> 0.13"},
       {:floki, ">= 0.30.0"},
       {:gettext, "~> 0.20"},
       {:hackney, "~> 1.18"},

@@ -1,6 +1,6 @@
 defmodule Lor.Lol.MatchReactorTest do
   use Lor.DataCase, async: true
-  use ExVCR.Mock, adapter: ExVCR.Adapter.Finch
+  use ExVCR.Mock, adapter: ExVCR.Adapter.Hackney
 
   test "successfull" do
     use_cassette "faker_ranked_match" do

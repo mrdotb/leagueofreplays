@@ -1,6 +1,6 @@
 defmodule Lor.Pros.UGGReactorTest do
   use Lor.DataCase, async: true
-  use ExVCR.Mock, adapter: ExVCR.Adapter.Finch
+  use ExVCR.Mock, adapter: ExVCR.Adapter.Hackney
 
   test "successfull" do
     use_cassette "ugg_riot_br1" do
