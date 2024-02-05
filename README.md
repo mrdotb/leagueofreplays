@@ -95,7 +95,11 @@ iex -S mix phx.server
 
 ### Configuration
 
-You can find all configuration options [here]().
+You can find the env configuration [here](https://github.com/mrdotb/leagueofreplays/blob/main/doc/env.md).
+
+### Inspirations
+
+Thanks to [lol-replay](https://github.com/1lann/lol-replay), [UGG](https://u.gg) and [league of graphs](https://www.leagueofgraphs.com/)
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
