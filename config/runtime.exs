@@ -15,6 +15,16 @@ if config_env() == :prod do
     end)
   end
 
+  oban_queues = fn ->
+    System.get_env("OBAN_QUEUES")
+    |> Kernel.||("")
+    |> String.split(" ", trim: true)
+    |> Enum.map(&String.split(&1, ",", trim: true))
+    |> Keyword.new(fn [queue, limit] ->
+      {String.to_existing_atom(queue), String.to_integer(limit)}
+    end)
+  end
+
   ## Postgres
 
   database_url =
@@ -206,12 +216,11 @@ if config_env() == :prod do
 
   # Oban
 
-  queue_count = String.to_integer(System.get_env("QUEUE_COUNT") || "10")
   queue_pro_platform_ids = platform_ids_from_env.("QUEUE_PRO_PLATFORMS")
 
   config :lor, Oban,
     repo: Lor.Repo,
-    queues: [default: queue_count],
+    queues: oban_queues.(),
     plugins: [
       {Oban.Plugins.Pruner, max_age: 3600 * 2},
       {Oban.Plugins.Lifeline, rescue_after: :timer.hours(1)},
