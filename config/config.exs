@@ -46,6 +46,9 @@ config :lor,
   ecto_repos: [Lor.Repo],
   generators: [timestamp_type: :utc_datetime]
 
+# Oban config
+config :lor, Oban, repo: Lor.Repo
+
 # Configures the web endpoint
 config :lor, LorWeb.Endpoint,
   url: [host: "localhost"],
