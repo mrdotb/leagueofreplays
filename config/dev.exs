@@ -32,6 +32,7 @@ config :lor, LorWeb.Endpoint,
 
 config :lor, LorSpectator.Endpoint,
   server: true,
+  url: [host: "localhost", port: 3000, scheme: "http"],
   http: [ip: {0, 0, 0, 0}, port: 3000],
   check_origin: false,
   debug_errors: false

@@ -188,7 +188,7 @@ if config_env() == :prod do
 
   config :lor, LorSpectator.Endpoint,
     server: spectator_server,
-    url: [scheme: "http", host: spectator_host, port: spectator_port, path: "/"],
+    url: [host: spectator_host, port: 80, scheme: "http"],
     http: [
       ip: {0, 0, 0, 0, 0, 0, 0, 0},
       port: spectator_port
