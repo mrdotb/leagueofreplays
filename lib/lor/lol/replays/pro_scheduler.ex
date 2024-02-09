@@ -7,7 +7,9 @@ defmodule Lor.Lol.Replays.ProScheduler do
 
   require Logger
 
-  defstruct ~w(platform_id summoners)a
+  defstruct ~w(platform_id)a
+
+  @interval :timer.minutes(1)
 
   # Public API
 
@@ -20,23 +22,24 @@ defmodule Lor.Lol.Replays.ProScheduler do
 
   @impl GenServer
   def init(platform_id) do
-    Logger.info("Start Scheduler for platform_id: #{platform_id}")
+    Logger.info("Start Pro Scheduler for platform_id: #{platform_id}")
 
     state = %__MODULE__{platform_id: platform_id}
 
-    {:ok, state, {:continue, :fetch_summoners}}
-  end
-
-  @impl GenServer
-  def handle_continue(:fetch_summoners, state) do
-    summoners = Lor.Lol.Summoner.list_pro_by_platform_id!(state.platform_id)
     send(self(), :fetch_active_games)
-    {:noreply, %{state | summoners: summoners}}
+
+    {:ok, state}
   end
 
   @impl GenServer
   def handle_info(:fetch_active_games, state) do
-    for summoner <- state.summoners do
+    Logger.info("Pro Scheduler fetch active games platform_id: #{state.platform_id}")
+
+    active_puuids = Lor.Lol.ActiveGame.list_active_puuids!(state.platform_id)
+    summoners = Lor.Lol.Summoner.list_pro_by_platform_id!(state.platform_id)
+    summoners = Enum.reject(summoners, &(&1.puuid in active_puuids))
+
+    for summoner <- summoners do
       with {:ok, game} <-
              Lor.Lol.Rest.fetch_active_game_by_summoners(
                state.platform_id,
@@ -47,7 +50,7 @@ defmodule Lor.Lol.Replays.ProScheduler do
       end
     end
 
-    send(self(), :fetch_active_games)
+    Process.send_after(self(), :fetch_active_games, @interval)
     {:noreply, state}
   end
 end

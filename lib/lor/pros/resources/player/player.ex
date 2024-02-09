@@ -73,7 +73,7 @@ defmodule Lor.Pros.Player do
 
     create :create do
       primary? true
-      accept [:official_name, :main_role]
+      accept [:official_name, :record, :liquidpedia_url, :main_role]
 
       argument :current_team_id, :uuid do
         allow_nil? true
@@ -104,7 +104,7 @@ defmodule Lor.Pros.Player do
     update :update do
       primary? true
 
-      accept [:official_name, :liquidpedia_url, :main_role]
+      accept [:official_name, :record, :liquidpedia_url, :main_role]
 
       argument :current_team_id, :uuid do
         allow_nil? true
@@ -134,6 +134,7 @@ defmodule Lor.Pros.Player do
     attribute :official_name, :string, allow_nil?: false
     attribute :liquidpedia_url, :string
     attribute :main_role, :string
+    attribute :record, :boolean, allow_nil?: false, default: false
 
     create_timestamp :inserted_at
     update_timestamp :updated_at

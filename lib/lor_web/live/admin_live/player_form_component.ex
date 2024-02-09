@@ -169,6 +169,8 @@ defmodule LorWeb.AdminLive.PlayerFormComponent do
           label="Name"
         />
 
+        <PC.field field={@form[:record]} type="switch" phx-debounce="blur" label="Record replay" />
+
         <PC.field
           field={@form[:liquidpedia_url]}
           type="url"

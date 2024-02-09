@@ -7,12 +7,16 @@ defmodule LorWeb.AdminLive.SummonerFormComponent do
     socket =
       socket
       |> assign(assigns)
+      |> assign(:account_request, AsyncResult.ok(nil))
       |> assign(:form, to_form(%{}, as: "search"))
+      |> assign(:game_name, "")
       |> assign(:platform_id, nil)
       |> assign(:platform_ids, Lor.Lol.PlatformIds.values())
-      |> assign(:request, AsyncResult.ok(nil))
+      |> assign(:search, "")
       |> assign(:state, "local")
+      |> assign(:summoner_request, AsyncResult.ok(nil))
       |> assign(:summoners, [])
+      |> assign(:tag_line, "")
 
     {:ok, socket}
   end
@@ -20,7 +24,7 @@ defmodule LorWeb.AdminLive.SummonerFormComponent do
   @impl true
   def handle_event(
         "search",
-        %{"search" => %{"platform_id" => platform_id, "search" => search}},
+        %{"search" => %{"platform_id" => platform_id} = params},
         socket
       ) do
     platform_id = get_platform_id(platform_id)
@@ -28,7 +32,9 @@ defmodule LorWeb.AdminLive.SummonerFormComponent do
     socket =
       socket
       |> assign(:platform_id, platform_id)
-      |> assign(:search, search)
+      |> assign(:search, params["search"])
+      |> assign(:game_name, params["game_name"])
+      |> assign(:tag_line, params["tag_line"])
       |> assign_search()
 
     {:noreply, socket}
@@ -43,43 +49,58 @@ defmodule LorWeb.AdminLive.SummonerFormComponent do
       socket
       |> assign_search()
 
-    {:noreply, socket}
+    {:noreply, put_flash!(socket, :success, "Summoner attached to player successfully!")}
   end
 
-  def handle_event("create-and-attach", _, socket) do
+  def handle_event("create-and-attach-from-summoner", _, socket) do
     platform_id = socket.assigns.platform_id
     region = Lor.Lol.PlatformIds.fetch_region!(platform_id)
-    summoner_data = socket.assigns.request.result
+    summoner_data = socket.assigns.summoner_request.result
     player_id = socket.assigns.player_id
     puuid = summoner_data["puuid"]
 
     with {:ok, account_data} <- Lor.Lol.Rest.fetch_account_by_puuid(region, puuid),
          {:ok, _summoner} <-
            Lor.Lol.Summoner.create_from_api(platform_id, summoner_data, account_data, player_id) do
-      # TODO display success or failure
-      nil
+      put_flash!(socket, :success, "Summoner created and attached to the player successfully!")
+    else
+      {:error, %{errors: [%{field: :account_id}]}} ->
+        put_flash!(socket, :error, "The summoner already exist attach it using local")
+
+      _error ->
+        put_flash!(socket, :error, "Unknow error")
     end
 
     {:noreply, socket}
   end
 
-  def handle_event("local", _params, socket) do
-    socket =
-      if socket.assigns.state == "api" do
-        assign(socket, state: "local")
-      else
-        socket
-      end
+  def handle_event("create-and-attach-from-account", _, socket) do
+    platform_id = socket.assigns.platform_id
+    account_data = socket.assigns.account_request.result
+    player_id = socket.assigns.player_id
+    puuid = account_data["puuid"]
+
+    with {:ok, summoner_data} <- Lor.Lol.Rest.fetch_summoner_by_puuid(platform_id, puuid),
+         {:ok, _summoner} <-
+           Lor.Lol.Summoner.create_from_api(platform_id, summoner_data, account_data, player_id) do
+      put_flash!(socket, :success, "Summoner created and attached to the player successfully!")
+    else
+      {:error, %{errors: [%{field: :account_id}]}} ->
+        put_flash!(socket, :error, "The summoner already exist attach it using local")
+
+      _error ->
+        put_flash!(socket, :error, "Unknow error")
+    end
 
     {:noreply, socket}
   end
 
-  def handle_event("api", _params, socket) do
+  def handle_event("state", %{"state" => state}, socket) do
     socket =
-      if socket.assigns.state == "local" do
-        assign(socket, state: "api")
-      else
+      if socket.assigns.state == state do
         socket
+      else
+        assign(socket, :state, state)
       end
 
     {:noreply, socket}
@@ -93,15 +114,45 @@ defmodule LorWeb.AdminLive.SummonerFormComponent do
   end
 
   defp assign_search(
-         %{assigns: %{state: "api", platform_id: platform_id, search: search}} = socket
+         %{assigns: %{state: "summoner-api", platform_id: platform_id, search: search}} = socket
        ) do
     if platform_id != nil and search != "" do
       socket
-      |> assign(:request, AsyncResult.loading())
-      |> assign_async(:request, fn ->
+      |> assign(:summoner_request, AsyncResult.loading())
+      |> assign_async(:summoner_request, fn ->
         case Lor.Lol.Rest.fetch_summoner_by_name(platform_id, search) do
           {:ok, data} ->
-            {:ok, %{request: data}}
+            {:ok, %{summoner_request: data}}
+
+          {:error, error} ->
+            {:error, error}
+        end
+      end)
+    else
+      socket
+    end
+  end
+
+  defp assign_search(
+         %{
+           assigns: %{
+             state: "account-api",
+             platform_id: platform_id,
+             game_name: game_name,
+             tag_line: tag_line
+           }
+         } = socket
+       ) do
+    if Enum.all?([platform_id, game_name, tag_line], &(not is_nil(&1) and &1 != "")) do
+      socket
+      |> assign(:account_request, AsyncResult.loading())
+      |> assign_async(:account_request, fn ->
+        region = Lor.Lol.PlatformIds.fetch_region!(platform_id)
+
+        case Lor.Lol.Rest.fetch_account_by_game_name_and_tag_line(region, game_name, tag_line)
+             |> IO.inspect() do
+          {:ok, data} ->
+            {:ok, %{account_request: data}}
 
           {:error, error} ->
             {:error, error}
@@ -126,7 +177,7 @@ defmodule LorWeb.AdminLive.SummonerFormComponent do
   defp list_summoners!(_platform_id, ""), do: []
 
   defp list_summoners!(platform_id, search) when is_atom(platform_id) and is_binary(search) do
-    filter = %{platform_id: platform_id, name: search}
+    filter = %{platform_id: platform_id, search: search}
 
     filter
     |> Lor.Lol.Summoner.list!()
@@ -134,15 +185,24 @@ defmodule LorWeb.AdminLive.SummonerFormComponent do
   end
 
   defp show_local(id) do
-    JS.hide(to: "#tabpanel-api-#{id}")
+    JS.hide(to: "#tabpanel-summoner-api-#{id}")
+    |> JS.hide(to: "#tabpanel-account-api-#{id}")
     |> JS.show(to: "#tabpanel-local-#{id}")
-    |> JS.push("local")
+    |> JS.push("state", value: %{state: "local"})
   end
 
-  defp show_api(id) do
+  defp show_summoner_api(id) do
     JS.hide(to: "#tabpanel-local-#{id}")
-    |> JS.show(to: "#tabpanel-api-#{id}")
-    |> JS.push("api")
+    |> JS.hide(to: "#tabpanel-account-api-#{id}")
+    |> JS.show(to: "#tabpanel-summoner-api#{id}")
+    |> JS.push("state", value: %{state: "summoner-api"})
+  end
+
+  defp show_account_api(id) do
+    JS.hide(to: "#tabpanel-local-#{id}")
+    |> JS.hide(to: "#tabpanel-summoner-api-#{id}")
+    |> JS.show(to: "#tabpanel-account-api#{id}")
+    |> JS.push("state", value: %{state: "account-api"})
   end
 
   @impl true
@@ -166,15 +226,28 @@ defmodule LorWeb.AdminLive.SummonerFormComponent do
         <PC.tab
           id="summoner-api-search"
           role="tab"
-          aria-selected={if(@state == "api", do: "true", else: "false")}
-          aria-controls={"tabpanel-api-#{@id}"}
-          tabindex={if(@state == "api", do: "1", else: "2")}
-          is_active={@state == "api"}
-          phx-click={show_api(@id)}
+          aria-selected={if(@state == "summoner-api", do: "true", else: "false")}
+          aria-controls={"tabpanel-summoner-api-#{@id}"}
+          tabindex={if(@state == "summoner-api", do: "1", else: "2")}
+          is_active={@state == "summoner-api"}
+          phx-click={show_summoner_api(@id)}
           phx-target={@myself}
         >
           <.icon name="hero-globe-alt" class="w-6 h-6 mr-2" />
-          <span>Riot Api</span>
+          <span>Riot Summoner Name</span>
+        </PC.tab>
+        <PC.tab
+          id="account-api-search"
+          role="tab"
+          aria-selected={if(@state == "account-api", do: "true", else: "false")}
+          aria-controls={"tabpanel-account-api-#{@id}"}
+          tabindex={if(@state == "account-api", do: "1", else: "2")}
+          is_active={@state == "account-api"}
+          phx-click={show_account_api(@id)}
+          phx-target={@myself}
+        >
+          <.icon name="hero-globe-alt" class="w-6 h-6 mr-2" />
+          <span>Riot Account</span>
         </PC.tab>
       </PC.tabs>
 
@@ -188,6 +261,7 @@ defmodule LorWeb.AdminLive.SummonerFormComponent do
         />
 
         <PC.field
+          :if={@state in ["local", "summoner-api"]}
           wrapper_class={[if(is_nil(@platform_id), do: "hidden")]}
           required
           field={@form[:search]}
@@ -195,9 +269,30 @@ defmodule LorWeb.AdminLive.SummonerFormComponent do
           phx-debounce="500"
           label="Search summoner"
         />
+
+        <div
+          :if={@state == "account-api"}
+          class={[if(is_nil(@platform_id), do: "hidden", else: "flex"), "space-x-2"]}
+        >
+          <PC.field
+            wrapper_class="grow"
+            required
+            field={@form[:game_name]}
+            placeholder="Hide on bush"
+            label="Game name"
+          />
+
+          <PC.field
+            wrapper_class="grow"
+            required
+            field={@form[:tag_line]}
+            placeholder="#KR1"
+            label="Tag line"
+          />
+        </div>
       </.form>
 
-      <div id={"tabpanel-local-#{@id}"} class={[if(@state == "api", do: "hidden")]}>
+      <div id={"tabpanel-local-#{@id}"} class={[if(@state == "local", do: "block", else: "hidden")]}>
         <div
           :if={length(@summoners) == 0 and @platform_id != nil and @search != ""}
           class="mt-4 flex items-center justify-center"
@@ -241,8 +336,11 @@ defmodule LorWeb.AdminLive.SummonerFormComponent do
         </PC.table>
       </div>
 
-      <div id={"tabpanel-api-#{@id}"} class={[if(@state == "local", do: "hidden")]}>
-        <.async_result :let={request} assign={@request}>
+      <div
+        id={"tabpanel-summoner-api-#{@id}"}
+        class={[if(@state == "summoner-api", do: "block", else: "hidden")]}
+      >
+        <.async_result :let={request} assign={@summoner_request}>
           <:loading>
             <div class="flex items-center justify-center py-2">
               <PC.spinner size="md" />
@@ -274,7 +372,47 @@ defmodule LorWeb.AdminLive.SummonerFormComponent do
                 <%= Lor.TimeHelpers.unix_timestamp_to_datetime(request["revisionDate"]) %>
               </PC.td>
               <PC.td>
-                <PC.button size="xs" phx-click="create-and-attach" phx-target={@myself}>
+                <PC.button size="xs" phx-click="create-and-attach-from-summoner" phx-target={@myself}>
+                  Create and Attach
+                </PC.button>
+              </PC.td>
+            </PC.tr>
+          </PC.table>
+        </.async_result>
+      </div>
+
+      <div
+        id={"tabpanel-account-api-#{@id}"}
+        class={[if(@state == "account-api", do: "block", else: "hidden")]}
+      >
+        <.async_result :let={request} assign={@account_request}>
+          <:loading>
+            <div class="flex items-center justify-center py-2">
+              <PC.spinner size="md" />
+            </div>
+          </:loading>
+
+          <:failed :let={_reason}>Could not find this account on riot api.</:failed>
+
+          <PC.table :if={is_map(request)}>
+            <PC.tr>
+              <PC.th>Name</PC.th>
+              <PC.th>Tag line</PC.th>
+              <PC.th>Puuid</PC.th>
+              <PC.th>Actions</PC.th>
+            </PC.tr>
+            <PC.tr>
+              <PC.td>
+                <%= request["gameName"] %>
+              </PC.td>
+              <PC.td>
+                <%= request["tagLine"] %>
+              </PC.td>
+              <PC.td>
+                <%= request["puuid"] %>
+              </PC.td>
+              <PC.td>
+                <PC.button size="xs" phx-click="create-and-attach-from-account" phx-target={@myself}>
                   Create and Attach
                 </PC.button>
               </PC.td>

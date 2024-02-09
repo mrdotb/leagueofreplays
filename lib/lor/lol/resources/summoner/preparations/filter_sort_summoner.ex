@@ -5,7 +5,7 @@ defmodule Lor.Lol.Summoner.Preparations.FilterSortSummoner do
   def prepare(query, _opts, _context) do
     query
     |> filter_by_platform_id()
-    |> filter_by_name()
+    |> filter_by_search()
   end
 
   defp filter_by_platform_id(query) do
@@ -18,14 +18,14 @@ defmodule Lor.Lol.Summoner.Preparations.FilterSortSummoner do
     end
   end
 
-  defp filter_by_name(query) do
+  defp filter_by_search(query) do
     case Ash.Changeset.get_argument(query, :filter) do
-      %{name: ""} ->
+      %{search: ""} ->
         query
 
-      %{name: name} ->
-        name = name <> "%"
-        Ash.Query.filter(query, ilike(name, ^name))
+      %{search: search} ->
+        search = search <> "%"
+        Ash.Query.filter(query, ilike(search, ^search) or ilike(riot_id, ^search))
 
       _ ->
         query

@@ -263,6 +263,25 @@ defmodule Lor.Lol.Rest.Client do
   end
 
   @doc """
+  Given a client a game_name and tag line fetch the account.
+  """
+  def fetch_account_by_game_name_and_tag_line(client, game_name, tag_line) do
+    path = "/riot/account/v1/accounts/by-riot-id/#{game_name}/#{tag_line}"
+
+    case Tesla.get!(client, path) do
+      %{status: 200, body: body} ->
+        {:ok, body}
+
+      %{status: 404} ->
+        {:error, :not_found}
+
+      other ->
+        Logger.error(other)
+        {:error, :unknow_error}
+    end
+  end
+
+  @doc """
   Given a platform_id client get the featured game we can spectate.
   """
   def fetch_featured_game(client) do

@@ -1,1 +1,15 @@
-<PC.h2>TODO</PC.h2>
+<PC.h2>Create Pros and Team jobs</PC.h2>
+
+<PC.p>Based on UGG private api.</PC.p>
+
+<.form for={@form} phx-submit="submit">
+  <PC.field
+    required
+    type="select"
+    field={@form[:platform_id]}
+    options={@platform_ids}
+    prompt="Select platform"
+  />
+
+  <PC.button type="submit" label="Run job" />
+</.form>

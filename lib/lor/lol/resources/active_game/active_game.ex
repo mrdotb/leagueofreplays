@@ -3,6 +3,8 @@ defmodule Lor.Lol.ActiveGame do
     data_layer: AshPostgres.DataLayer,
     notifiers: [Ash.Notifier.PubSub]
 
+  import Ecto.Query
+
   postgres do
     table "lol_active_games"
 
@@ -21,6 +23,7 @@ defmodule Lor.Lol.ActiveGame do
     define_for Lor.Lol
     define :get, action: :by_id, args: [:id]
     define :list, action: :list, args: [:filter]
+    define :list_active_puuids, action: :list_active_puuids, args: [:platform_id]
     define :create_from_api, args: [:active_game]
     define :destroy
   end
@@ -38,7 +41,22 @@ defmodule Lor.Lol.ActiveGame do
     read :list do
       argument :filter, :map, allow_nil?: true
 
-      prepare Lor.Lol.ActiveGame.Changes.FilterSort
+      prepare Lor.Lol.ActiveGame.Preparations.FilterSort
+    end
+
+    action :list_active_puuids, :map do
+      argument :platform_id, Lor.Lol.PlatformIds do
+        allow_nil? false
+      end
+
+      run fn input, _context ->
+        query =
+          from active_game in Lor.Lol.ActiveGame,
+            where: active_game.platform_id == ^input.arguments.platform_id,
+            select: fragment("UNNEST(participants)->>'puuid'")
+
+        {:ok, Lor.Repo.all(query)}
+      end
     end
 
     create :create_from_api do

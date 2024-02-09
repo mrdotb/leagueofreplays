@@ -117,7 +117,7 @@ defmodule LorWeb.CoreComponents do
       phx-click={JS.push("lv:clear-flash", value: %{key: @kind}) |> hide("##{@id}")}
       role="alert"
       class={[
-        "fixed top-2 right-2 z-50 mr-2 w-80 rounded-lg p-3 ring-1 sm:w-96",
+        "z-[100] fixed top-2 right-2 mr-2 w-80 rounded-lg p-3 ring-1 sm:w-96",
         @kind == :info && "bg-blue-50 fill-blue-900 text-blue-800 ring-blue-500",
         @kind == :success && "bg-emerald-50 fill-cyan-900 text-emerald-800 ring-emerald-500",
         @kind == :error && "bg-rose-50 fill-rose-900 text-rose-900 shadow-md ring-rose-500"

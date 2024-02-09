@@ -27,7 +27,7 @@
   <PC.tr>
     <PC.th>Name</PC.th>
     <PC.th>Team</PC.th>
-    <PC.th>Main Role</PC.th>
+    <PC.th>Record</PC.th>
     <PC.th>Actions</PC.th>
   </PC.tr>
 
@@ -47,7 +47,10 @@
         label={player.current_team.name}
       />
     </PC.td>
-    <PC.td class="whitespace-nowrap"><%= player.main_role %></PC.td>
+    <PC.td>
+      <PC.badge :if={player.record} color="success" label="Active" />
+      <PC.badge :if={not player.record} color="gray" label="Inactive" />
+    </PC.td>
     <PC.td>
       <PC.button
         color="info"

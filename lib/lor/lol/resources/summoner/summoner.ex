@@ -77,7 +77,10 @@ defmodule Lor.Lol.Summoner do
         allow_nil? false
       end
 
-      filter expr(platform_id == ^arg(:platform_id) and not is_nil(player_id))
+      filter expr(
+               platform_id == ^arg(:platform_id) and not is_nil(player_id) and
+                 player.record == true
+             )
     end
 
     read :list do

@@ -54,6 +54,8 @@ defmodule LorWeb do
       use Phoenix.LiveView,
         layout: {LorWeb.Layouts, :app}
 
+      on_mount LorWeb.Flash
+
       unquote(html_helpers())
     end
   end
@@ -63,6 +65,8 @@ defmodule LorWeb do
       use Phoenix.LiveView,
         layout: {LorWeb.Layouts, :admin}
 
+      on_mount LorWeb.Flash
+
       unquote(html_helpers())
     end
   end
@@ -70,6 +74,8 @@ defmodule LorWeb do
   def live_component do
     quote do
       use Phoenix.LiveComponent
+
+      import LorWeb.Flash, only: [put_flash!: 3]
 
       unquote(html_helpers())
     end

@@ -1,4 +1,4 @@
-defmodule Lor.Lol.ActiveGame.Changes.FilterSort do
+defmodule Lor.Lol.ActiveGame.Preparations.FilterSort do
   use Ash.Resource.Preparation
   require Ash.Query
 

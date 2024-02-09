@@ -54,6 +54,11 @@ defmodule Lor.Lol.Rest do
     GenServer.call(pid, {:fetch_account_by_puuid, puuid}, @timeout)
   end
 
+  def fetch_account_by_game_name_and_tag_line(region, game_name, tag_line) do
+    pid = get_pid(region)
+    GenServer.call(pid, {:fetch_account_by_game_name_and_tag_line, game_name, tag_line}, @timeout)
+  end
+
   def fetch_featured_game(platform_id) do
     pid = get_pid(platform_id)
     GenServer.call(pid, :fetch_featured_game, @timeout)
@@ -102,6 +107,11 @@ defmodule Lor.Lol.Rest do
 
   def handle_call({:fetch_account_by_puuid, puuid}, _from, client) do
     res = Lor.Lol.Rest.Client.fetch_account_by_puuid(client, puuid)
+    {:reply, res, client}
+  end
+
+  def handle_call({:fetch_account_by_game_name_and_tag_line, game_name, tag_line}, _from, client) do
+    res = Lor.Lol.Rest.Client.fetch_account_by_game_name_and_tag_line(client, game_name, tag_line)
     {:reply, res, client}
   end
 

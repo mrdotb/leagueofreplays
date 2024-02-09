@@ -5,7 +5,7 @@
     <PC.th>Name</PC.th>
     <PC.th>Team</PC.th>
     <PC.th>Main Role</PC.th>
-    <PC.th>Status</PC.th>
+    <PC.th>Record</PC.th>
   </PC.tr>
 
   <PC.tr :for={player <- @players} id={player.id}>
@@ -28,7 +28,8 @@
     </PC.td>
     <PC.td class="whitespace-nowrap"><%= player.main_role %></PC.td>
     <PC.td>
-      <PC.badge color="success" label="Active" />
+      <PC.badge :if={player.record} color="success" label="Active" />
+      <PC.badge :if={not player.record} color="gray" label="Inactive" />
     </PC.td>
   </PC.tr>
 </PC.table>
