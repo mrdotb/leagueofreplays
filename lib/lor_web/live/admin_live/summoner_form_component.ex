@@ -149,8 +149,7 @@ defmodule LorWeb.AdminLive.SummonerFormComponent do
       |> assign_async(:account_request, fn ->
         region = Lor.Lol.PlatformIds.fetch_region!(platform_id)
 
-        case Lor.Lol.Rest.fetch_account_by_game_name_and_tag_line(region, game_name, tag_line)
-             |> IO.inspect() do
+        case Lor.Lol.Rest.fetch_account_by_game_name_and_tag_line(region, game_name, tag_line) do
           {:ok, data} ->
             {:ok, %{account_request: data}}
 

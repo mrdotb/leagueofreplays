@@ -25,7 +25,7 @@ defmodule Lor.Lol.Summoner.Preparations.FilterSortSummoner do
 
       %{search: search} ->
         search = search <> "%"
-        Ash.Query.filter(query, ilike(search, ^search) or ilike(riot_id, ^search))
+        Ash.Query.filter(query, ilike(name, ^search) or ilike(riot_id, ^search))
 
       _ ->
         query
