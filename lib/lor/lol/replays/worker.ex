@@ -370,7 +370,7 @@ defmodule Lor.Lol.Replays.Worker do
       status == :downloaded and id > 2
     end)
     |> Enum.map(fn {id, _} -> id end)
-    |> Enum.min()
+    |> Enum.min(fn -> nil end)
   end
 
   defp get_last_chunk_id(chunk_statuses) do
@@ -379,7 +379,7 @@ defmodule Lor.Lol.Replays.Worker do
       status == :downloaded
     end)
     |> Enum.map(fn {id, _} -> id end)
-    |> Enum.max()
+    |> Enum.max(fn -> nil end)
   end
 
   defp get_first_key_frame_id(key_frame_statuses) do
@@ -388,7 +388,7 @@ defmodule Lor.Lol.Replays.Worker do
       status == :downloaded
     end)
     |> Enum.map(fn {id, _} -> id end)
-    |> Enum.min()
+    |> Enum.min(fn -> nil end)
   end
 
   defp get_last_key_frame_id(key_frame_statuses) do
@@ -397,7 +397,7 @@ defmodule Lor.Lol.Replays.Worker do
       status == :downloaded
     end)
     |> Enum.map(fn {id, _} -> id end)
-    |> Enum.max()
+    |> Enum.max(fn -> nil end)
   end
 
   defp restore_chunk_statuses(chunks) do

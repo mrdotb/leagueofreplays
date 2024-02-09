@@ -13,14 +13,13 @@ defmodule Lor.Lol.Observer.Client do
          max_retries: 3,
          max_delay: 500,
          should_retry: fn
-           {:ok, %{status: 404}} -> true
            {:ok, _} -> false
            {:error, _} -> true
          end
        ]},
-      {Tesla.Middleware.BaseUrl, url(opts)}
+      {Tesla.Middleware.BaseUrl, url(opts)},
       # Logger
-      # Tesla.Middleware.Logger
+      {Tesla.Middleware.Logger, debug: false}
     ]
 
     Tesla.client(middlewares)
