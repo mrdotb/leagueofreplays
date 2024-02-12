@@ -11,8 +11,8 @@ defmodule Lor.Pros.ProWorker do
       {:ok, _result} ->
         :ok
 
-      {:error, _error} ->
-        :error
+      {:error, error} ->
+        {:error, error}
     end
   end
 end

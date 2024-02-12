@@ -45,12 +45,12 @@ services:
         mc admin policy attach minio readwrite --user ${S3_ACCESS_KEY};
         exit 0;
   app:
-    # image: ghcr.io/mrdotb/leagueofreplays:latest
-    build: .
+    image: ghcr.io/mrdotb/leagueofreplays:latest
+    # build: .
     command: sh -c "/app/bin/migrate && /app/bin/server"
     ports:
-      - "4000:4000"
-      - "3000:3000"
+      - "${PORT}:${PORT}"
+      - "${SPECTATOR_PORT}:${SPECTATOR_PORT}"
     environment:
       RIOT_TOKEN: ${RIOT_TOKEN}
       OBAN_QUEUES: ${OBAN_QUEUES}
@@ -59,13 +59,19 @@ services:
       DATABASE_URL: "postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}"
       S3_ACCESS_KEY: ${S3_ACCESS_KEY}
       S3_SECRET_KEY: ${S3_SECRET_KEY}
-      S3_ENDPOINT: http://minio:9000
-      S3_REPLAY_URL: http://localhost:9000/replays
+      S3_ENDPOINT: minio
+      S3_PORT: 9000
+      S3_PROTO: "http"
+      S3_REPLAYS_URL: http://localhost:9000/replays
+      S3_PICTURES_URL: http://localhost:9000/pictures
       SECRET_KEY_BASE: ${SECRET_KEY_BASE}
       PHX_SERVER: true
       PHX_PORT: ${PORT}
+      PHX_PUB_PORT: ${PORT}
+      PHX_PUB_SCHEME: "http"
       SPECTATOR_SERVER: true
       SPECTATOR_PORT: ${SPECTATOR_PORT}
+      SPECTATOR_PUB_PORT: ${SPECTATOR_PORT}
       SCHEDULER: ${SCHEDULER}
       PRO_SCHEDULER: ${PRO_SCHEDULER}
       DDRAGON_CACHE: ${DDRAGON_CACHE}

@@ -7,10 +7,8 @@ defmodule Lor.S3.Minio do
 
   require Logger
 
-  defp get_config, do: Application.get_env(:lor, __MODULE__)
-
   defp create_client do
-    config = get_config()
+    config = Application.get_env(:lor, __MODULE__)
     access_key = config[:access_key]
     secret_key = config[:secret_key]
     endpoint = config[:endpoint]
@@ -63,13 +61,10 @@ defmodule Lor.S3.Minio do
 
   @impl true
   def url(bucket, key) do
-    config = get_config()
+    urls = Application.get_env(:lor, :s3)[:urls]
+    bucket = String.to_existing_atom(bucket)
+    base_url = Map.fetch!(urls, bucket)
 
-    to_string(%URI{
-      host: config[:endpoint],
-      scheme: config[:proto],
-      port: config[:port],
-      path: "/#{bucket}/#{key}"
-    })
+    "#{base_url}/#{key}"
   end
 end

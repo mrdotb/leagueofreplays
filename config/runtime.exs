@@ -72,21 +72,30 @@ if config_env() == :prod do
       environment variable S3_ENDPOINT is missing.
       """
 
+  s3_port = String.to_integer(System.get_env("S3_PORT") || "9000")
+  s3_proto = System.get_env("S3_PROTO") || "http"
+
   config :lor, Lor.S3.Minio,
     access_key: access_key,
     secret_key: secret_key,
     endpoint: s3_endpoint,
-    port: 443,
-    proto: "https"
+    port: s3_port,
+    proto: s3_proto
 
   s3_bucket_pictures = System.get_env("S3_BUCKET_PICTURES") || "pictures"
   s3_bucket_replays = System.get_env("S3_BUCKET_REPLAYS") || "replays"
   s3_bucket_original = System.get_env("S3_BUCKET_ORIGINAL") || "original"
 
-  s3_replay_url =
-    System.get_env("S3_REPLAY_URL") ||
+  s3_pictures_url =
+    System.get_env("S3_PICTURES_URL") ||
       raise """
-      environment variable S3_REPLAY_URL is missing.
+      environment variable S3_PICTURES_URL is missing.
+      """
+
+  s3_replays_url =
+    System.get_env("S3_REPLAYS_URL") ||
+      raise """
+      environment variable S3_REPLAYS_URL is missing.
       """
 
   config :lor, :s3, %{
@@ -96,7 +105,8 @@ if config_env() == :prod do
       original: s3_bucket_original
     },
     urls: %{
-      replays: s3_replay_url
+      pictures: s3_pictures_url,
+      replays: s3_replays_url
     }
   }
 
@@ -149,11 +159,13 @@ if config_env() == :prod do
       """
 
   host = System.get_env("PHX_HOST") || "localhost"
+  public_port = String.to_integer(System.get_env("PHX_PUB_PORT") || "443")
+  public_scheme = System.get_env("PHX_PUB_SCHEME") || "https"
   port = String.to_integer(System.get_env("PHX_PORT") || "4000")
 
   config :lor, LorWeb.Endpoint,
     server: phx_server,
-    url: [host: host, port: 443, scheme: "https"],
+    url: [host: host, port: public_port, scheme: public_scheme],
     http: [
       # Enable IPv6 and bind on all interfaces.
       ip: {0, 0, 0, 0, 0, 0, 0, 0},
@@ -183,13 +195,15 @@ if config_env() == :prod do
   spectator_server = if System.get_env("SPECTATOR_SERVER") in ~w(true 1), do: true, else: false
 
   spectator_host = System.get_env("SPECTATOR_HOST") || "localhost"
-
+  spectator_public_port = String.to_integer(System.get_env("SPECTATOR_PUB_PORT") || "80")
   spectator_port = String.to_integer(System.get_env("SPECTATOR_PORT") || "3000")
 
   config :lor, LorSpectator.Endpoint,
     server: spectator_server,
-    url: [host: spectator_host, port: 80, scheme: "http"],
+    # Client api only support http scheme
+    url: [host: spectator_host, port: spectator_public_port, scheme: "http"],
     http: [
+      # Enable IPv6 and bind on all interfaces.
       ip: {0, 0, 0, 0, 0, 0, 0, 0},
       port: spectator_port
     ]

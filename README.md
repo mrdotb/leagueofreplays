@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://plausible.io/">
+  <a href="https://leagueofreplays.co/">
     <img src="https://raw.githubusercontent.com/mrdotb/leagueofreplays/main/priv/static/images/logo.svg" width="140px" alt="League of Replays" />
   </a>
 
