@@ -9,6 +9,8 @@
   <p align="center">
     Record and replay league of legends game.
     <br />
+    <a href="https://youtu.be/vXCb2LyK_gg">Youtube demo</a>
+    .
     <a href="https://github.com/mrdotb/leagueofreplays/issues">Report Bug</a>
     ·
     <a href="https://github.com/mrdotb/leagueofreplays/issues">Request Feature</a>
@@ -45,6 +47,9 @@ git clone https://github.com/mrdotb/leagueofreplays.git
 cd leagueofreplays
 cp .env.sample .env
 ```
+
+Get your riot token on [developer.riotgames.com](https://developer.riotgames.com/).
+Add the token to the `.env` file on `RIOT_TOKEN`
 
 ```sh
 docker compose --env-file .env up
