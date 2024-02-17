@@ -1,6 +1,26 @@
 <PC.h2>Replays</PC.h2>
 
-<div class="flex flex-col">
+<div class="mb-4 flex items-center justify-between">
+  <.form for={@form} phx-change="search" phx-submit="search">
+    <PC.field
+      wrapper_class="!mb-0"
+      label_class="hidden"
+      type="search"
+      placeholder="Search Player..."
+      field={@form[:player_search]}
+      phx-debounce="400"
+    />
+  </.form>
+</div>
+
+<div :if={length(@participants) == 0} class="mt-4 flex items-center justify-center">
+  <div class="flex flex-col items-center">
+    <.icon name="hero-exclamation-circle" class="w-12 h-12" />
+    <p>Could not find any Players.</p>
+  </div>
+</div>
+
+<div :if={length(@participants) > 0} class="flex flex-col">
   <div class="flex max-w-4xl flex-col items-center space-y-1">
     <div class="grid-participants-header w-full border-l-8 border-transparent px-1 py-2 text-sm">
       <div class="[grid-area:creation]"></div>
@@ -23,7 +43,7 @@
   </div>
 </div>
 
-<div class="mt-2 flex space-x-1">
+<div :if={length(@participants) > 0} class="mt-2 flex space-x-1">
   <PC.button
     :if={@prev_page}
     color="light"

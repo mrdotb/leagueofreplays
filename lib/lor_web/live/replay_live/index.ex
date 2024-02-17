@@ -12,6 +12,8 @@ defmodule LorWeb.ReplayLive.Index do
       |> assign(:next_page, nil)
       |> assign(:prev_page, nil)
       |> assign(:participants, [])
+      |> assign(:form, to_form(%{}))
+      |> assign(:player_search, "")
 
     {:ok, socket}
   end
@@ -26,6 +28,7 @@ defmodule LorWeb.ReplayLive.Index do
       socket
       |> assign_page_after(params)
       |> assign_page_before(params)
+      |> assign_player_search(params)
 
     page = list_participants(socket)
 
@@ -33,6 +36,12 @@ defmodule LorWeb.ReplayLive.Index do
     |> assign_next_page(page)
     |> assign_prev_page(page)
     |> assign(:participants, page.results)
+  end
+
+  @impl true
+  def handle_event("search", %{"player_search" => search}, socket) do
+    socket = push_patch(socket, to: ~p"/replays?player_search=#{search}")
+    {:noreply, socket}
   end
 
   defp assign_next_page(socket, page) do
@@ -73,20 +82,41 @@ defmodule LorWeb.ReplayLive.Index do
 
   defp assign_page_before(socket, _), do: socket
 
-  defp list_participants(%{assigns: %{page_limit: page_limit, page_after: nil, page_before: nil}}) do
-    page = [limit: page_limit]
-    Lor.Lol.Participant.list_replays!(%{}, page: page)
+  defp assign_player_search(socket, %{"player_search" => search}) do
+    assign(socket, :player_search, search)
   end
 
-  defp list_participants(%{assigns: %{page_limit: page_limit, page_after: page_after}})
+  defp assign_player_search(socket, _), do: socket
+
+  defp list_participants(%{
+         assigns: %{
+           player_search: player_search,
+           page_limit: page_limit,
+           page_after: nil,
+           page_before: nil
+         }
+       }) do
+    page = [limit: page_limit]
+    Lor.Lol.Participant.list_replays!(%{player_search: player_search}, page: page)
+  end
+
+  defp list_participants(%{
+         assigns: %{player_search: player_search, page_limit: page_limit, page_after: page_after}
+       })
        when is_binary(page_after) do
     page = [limit: page_limit, after: page_after]
-    Lor.Lol.Participant.list_replays!(%{}, page: page)
+    Lor.Lol.Participant.list_replays!(%{player_search: player_search}, page: page)
   end
 
-  defp list_participants(%{assigns: %{page_limit: page_limit, page_before: page_before}})
+  defp list_participants(%{
+         assigns: %{
+           player_search: player_search,
+           page_limit: page_limit,
+           page_before: page_before
+         }
+       })
        when is_binary(page_before) do
     page = [limit: page_limit, before: page_before]
-    Lor.Lol.Participant.list_replays!(%{}, page: page)
+    Lor.Lol.Participant.list_replays!(%{player_search: player_search}, page: page)
   end
 end

@@ -20,8 +20,7 @@ defmodule Lor.Pros.Player.Preparations.FilterSortPlayer do
         query
 
       %{normalized_name: normalized_name} ->
-        normalized_name = normalized_name <> "%"
-        Ash.Query.filter(query, ilike(normalized_name, ^normalized_name))
+        Ash.Query.filter(query, trigram_similarity(normalized_name, ^normalized_name) > 0.4)
 
       _ ->
         query

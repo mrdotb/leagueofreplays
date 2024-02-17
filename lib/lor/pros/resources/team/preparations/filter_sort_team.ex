@@ -15,8 +15,7 @@ defmodule Lor.Pros.Team.Preparations.FilterSortTeam do
         query
 
       %{name: name} ->
-        name = name <> "%"
-        Ash.Query.filter(query, ilike(name, ^name))
+        Ash.Query.filter(query, trigram_similarity(name, ^name) > 0.4)
     end
   end
 end
