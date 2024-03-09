@@ -10,7 +10,21 @@
             name: "/admin",
             label: "Jobs",
             path: ~p"/admin",
-            icon: :queue_list
+            icon: :queue_list,
+            menu_items: [
+              %{
+                name: "/admin",
+                label: "Pros",
+                path: ~p"/admin",
+                icon: :user
+              },
+              %{
+                name: "/admin/delete-replays",
+                label: "Delete Replays",
+                path: ~p"/admin/delete-replays",
+                icon: :trash
+              }
+            ]
           },
           %{
             name: "/admin/teams",

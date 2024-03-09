@@ -39,6 +39,7 @@ defmodule LorWeb.Router do
 
     live_session :admin, on_mount: [LorWeb.Hooks.ActivePage, LorWeb.Hooks.GameVersion] do
       live "/", AdminLive.Index, :index
+      live "/delete-replays", AdminLive.DeleteReplays, :index
       live "/teams", AdminLive.Teams, :index
       live "/teams/new", AdminLive.Teams, :new
       live "/teams/edit/:team_id", AdminLive.Teams, :edit

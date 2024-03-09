@@ -1,0 +1,13 @@
+<PC.h2>Delete Replays</PC.h2>
+
+<.form for={@form} phx-submit="submit">
+  <PC.field
+    required
+    type="select"
+    field={@form[:game_version]}
+    options={@game_versions}
+    prompt="Select patch"
+  />
+
+  <PC.button type="submit" label="Run job" />
+</.form>

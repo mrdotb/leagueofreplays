@@ -34,6 +34,7 @@ defmodule Lor.Lol.Replay do
 
     define :get_by_game_version, action: :get_by_game_version, args: [:game_version]
     define :get_by_state, action: :get_by_state, args: [:state]
+    define :list_game_version
     define :destroy
   end
 
@@ -63,6 +64,10 @@ defmodule Lor.Lol.Replay do
       argument :game_version, :string, allow_nil?: false
 
       prepare Lor.Lol.Replay.Preparations.FilterByGameVersion
+    end
+
+    action :list_game_version, {:array, :string} do
+      run Lor.Lol.Replay.Actions.ListGameVersions
     end
 
     read :get_by_state do
