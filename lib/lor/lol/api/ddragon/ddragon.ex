@@ -89,7 +89,7 @@ defmodule Lor.Lol.Ddragon do
         game_version
 
       nil ->
-        "14.2.1"
+        ""
     end
   end
 end
