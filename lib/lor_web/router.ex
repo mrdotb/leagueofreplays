@@ -53,10 +53,14 @@ defmodule LorWeb.Router do
     live_dashboard "/dashboard"
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", LorWeb do
-  #   pipe_through :api
-  # end
+  forward "/api/swaggerui",
+          OpenApiSpex.Plug.SwaggerUI,
+          path: "/api/lol/open_api",
+          title: "LOR's JSON-API - Swagger UI",
+          default_model_expand_depth: 4
+
+  forward "/api/lol", Lor.Lol.Router
+  # forward "/api/pros", Lor.Pros.Router
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
   if Application.compile_env(:lor, :dev_routes) do

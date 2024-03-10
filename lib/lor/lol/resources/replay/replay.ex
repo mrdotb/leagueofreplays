@@ -1,7 +1,9 @@
 defmodule Lor.Lol.Replay do
   use Ash.Resource,
     data_layer: AshPostgres.DataLayer,
-    extensions: [AshStateMachine]
+    extensions: [
+      AshStateMachine
+    ]
 
   postgres do
     table "lol_replays"
@@ -66,16 +68,16 @@ defmodule Lor.Lol.Replay do
       prepare Lor.Lol.Replay.Preparations.FilterByGameVersion
     end
 
-    action :list_game_version, {:array, :string} do
-      run Lor.Lol.Replay.Actions.ListGameVersions
-    end
-
     read :get_by_state do
       get? true
 
       argument :state, :string, allow_nil?: false
 
       prepare Lor.Lol.Replay.Preparations.FilterByState
+    end
+
+    action :list_game_version, {:array, :string} do
+      run Lor.Lol.Replay.Actions.ListGameVersions
     end
 
     update :finish do
@@ -114,7 +116,10 @@ defmodule Lor.Lol.Replay do
       description "Key used to decrypt the spectator grid game data for playback"
     end
 
-    attribute :first_chunk_id, :integer
+    attribute :first_chunk_id, :integer do
+      description "Chunk availability starts at 3; chunks 1 and 2 are always available."
+    end
+
     attribute :first_key_frame_id, :integer
     attribute :last_chunk_id, :integer
     attribute :last_key_frame_id, :integer
@@ -137,6 +142,10 @@ defmodule Lor.Lol.Replay do
       transition(:finish, from: :recording, to: :finished)
       transition(:error, from: :recording, to: :errored)
     end
+  end
+
+  calculations do
+    calculate :complete, :boolean, expr(first_chunk_id == 3 and first_key_frame_id == 1)
   end
 
   relationships do

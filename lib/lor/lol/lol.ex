@@ -1,5 +1,8 @@
 defmodule Lor.Lol do
-  use Ash.Api
+  use Ash.Api,
+    extensions: [
+      AshJsonApi.Api
+    ]
 
   resources do
     resource Lor.Lol.Match

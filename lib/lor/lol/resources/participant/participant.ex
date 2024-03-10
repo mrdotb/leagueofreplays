@@ -1,6 +1,7 @@
 defmodule Lor.Lol.Participant do
   use Ash.Resource,
-    data_layer: AshPostgres.DataLayer
+    data_layer: AshPostgres.DataLayer,
+    extensions: [AshJsonApi.Resource]
 
   postgres do
     table "lol_participants"
@@ -19,6 +20,26 @@ defmodule Lor.Lol.Participant do
     define :update_opponent_participant, args: [:participants, :participant]
     define :read_all, action: :read
     define :list_replays, action: :list_replays, args: [:filter]
+    define :list_replayable, action: :list_replayable
+  end
+
+  json_api do
+    type "participants"
+
+    includes(
+      match: [:replay],
+      opponent_participant: [summoner: [:player]],
+      summoner: [
+        player: [:current_team]
+      ]
+    )
+
+    routes do
+      base("/participants")
+
+      index :list_replayable, route: "list_replayable"
+      get(:read)
+    end
   end
 
   actions do
@@ -29,10 +50,21 @@ defmodule Lor.Lol.Participant do
 
       pagination do
         keyset? true
-        default_limit 20
+        default_limit 10
       end
 
       prepare Lor.Lol.Participant.Preparations.FilterSortReplay
+    end
+
+    read :list_replayable do
+      # argument :filter, :map, allow_nil?: true
+
+      pagination do
+        keyset? true
+        default_limit 20
+      end
+
+      prepare Lor.Lol.Participant.Preparations.FilterReplayable
     end
 
     create :create_from_api do
@@ -92,6 +124,17 @@ defmodule Lor.Lol.Participant do
                   "ARRAY_POSITION(ARRAY['TOP', 'JUNGLE', 'MIDDLE', 'TOP', 'UTILITY'], ?)",
                   team_position
                 )
+              )
+
+    calculate :kda,
+              :float,
+              expr(
+                fragment("""
+                CASE
+                  WHEN deaths = 0 THEN (kills + assists)::float
+                  ELSE (kills + assists)::float / deaths
+                END
+                """)
               )
   end
 

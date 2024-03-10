@@ -39,10 +39,12 @@ defmodule Lor.MixProject do
   defp deps do
     [
       {:ash, "~> 2.17"},
+      {:ash_json_api, "~> 0.34.2"},
       {:ash_oban, "~> 0.1.12"},
       {:ash_phoenix, "~> 1.2"},
       {:ash_postgres, "~> 1.3"},
       {:ash_state_machine, "~> 0.2.2"},
+      {:open_api_spex, "~> 3.16"},
       {:aws, "~> 0.13.0"},
       {:ecto_sql, "~> 3.10"},
       {:floki, ">= 0.30.0"},

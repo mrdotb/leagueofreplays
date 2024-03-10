@@ -71,6 +71,14 @@ config :mime, :suffixes, %{
   "bat" => ["bin"]
 }
 
+config :mime, :types, %{
+  "application/vnd.api+json" => ["json"]
+}
+
+config :mime, :extensions, %{
+  "json" => "application/vnd.api+json"
+}
+
 # Configures the mailer
 #
 # By default it uses the "Local" adapter which stores the emails
