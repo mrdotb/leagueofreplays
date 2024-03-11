@@ -4,6 +4,11 @@ defmodule Lor.Lol do
       AshJsonApi.Api
     ]
 
+  json_api do
+    prefix "/api/lol"
+    router(Lor.Lol.Router)
+  end
+
   resources do
     resource Lor.Lol.Match
     resource Lor.Lol.Summoner

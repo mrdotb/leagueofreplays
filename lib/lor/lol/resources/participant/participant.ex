@@ -24,7 +24,7 @@ defmodule Lor.Lol.Participant do
   end
 
   json_api do
-    type "participants"
+    type "participant"
 
     includes(
       match: [:replay],
@@ -50,18 +50,16 @@ defmodule Lor.Lol.Participant do
 
       pagination do
         keyset? true
-        default_limit 10
+        default_limit 20
       end
 
       prepare Lor.Lol.Participant.Preparations.FilterSortReplay
     end
 
     read :list_replayable do
-      # argument :filter, :map, allow_nil?: true
-
       pagination do
         keyset? true
-        default_limit 20
+        default_limit 10
       end
 
       prepare Lor.Lol.Participant.Preparations.FilterReplayable
