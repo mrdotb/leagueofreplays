@@ -3,6 +3,8 @@ defmodule Lor.Lol.Participant.Preparations.FilterReplayable do
   require Ash.Query
 
   def prepare(query, _, _) do
+    kda = Ash.Changeset.get_argument(query, :kda)
+
     query
     |> Ash.Query.load([
       :kda,
@@ -15,7 +17,7 @@ defmodule Lor.Lol.Participant.Preparations.FilterReplayable do
     |> Ash.Query.filter(not is_nil(summoner.player))
     |> Ash.Query.filter(not is_nil(match.replay))
     |> Ash.Query.filter(match.replay.complete == true)
-    |> Ash.Query.filter(kda > 1.5)
+    |> Ash.Query.filter(kda > ^kda)
     |> Ash.Query.sort(inserted_at: :desc)
   end
 end

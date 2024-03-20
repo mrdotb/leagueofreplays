@@ -20,7 +20,7 @@ defmodule Lor.Lol.Participant do
     define :update_opponent_participant, args: [:participants, :participant]
     define :read_all, action: :read
     define :list_replays, action: :list_replays, args: [:filter]
-    define :list_replayable, action: :list_replayable
+    define :list_replayable, action: :list_replayable, args: [:kda]
   end
 
   json_api do
@@ -37,7 +37,7 @@ defmodule Lor.Lol.Participant do
     routes do
       base("/participants")
 
-      index :list_replayable, route: "list_replayable"
+      index :list_replayable, route: "list_replayable/:kda"
       get(:read)
     end
   end
@@ -57,6 +57,8 @@ defmodule Lor.Lol.Participant do
     end
 
     read :list_replayable do
+      argument :kda, :float, allow_nil?: false
+
       pagination do
         keyset? true
         default_limit 10
@@ -127,12 +129,11 @@ defmodule Lor.Lol.Participant do
     calculate :kda,
               :float,
               expr(
-                fragment("""
-                CASE
-                  WHEN deaths = 0 THEN (kills + assists)::float
-                  ELSE (kills + assists)::float / deaths
-                END
-                """)
+                if deaths == 0 do
+                  kills + assists
+                else
+                  (kills + assists) / deaths
+                end
               )
   end
 
