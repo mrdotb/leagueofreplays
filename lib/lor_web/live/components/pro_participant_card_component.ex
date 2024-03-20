@@ -36,8 +36,10 @@ defmodule LorWeb.ProParticipantCardComponent do
 
     socket =
       if is_nil(socket.assigns.match.result) do
+        match = socket.assigns.participant.match
+
         assign_async(socket, :match, fn ->
-          load_match(socket.assigns.participant.match)
+          load_match(match)
         end)
       else
         socket
