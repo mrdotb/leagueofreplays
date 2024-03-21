@@ -78,6 +78,7 @@ services:
       SCHEDULER: ${SCHEDULER}
       PRO_SCHEDULER: ${PRO_SCHEDULER}
       DDRAGON_CACHE: ${DDRAGON_CACHE}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD}
     depends_on:
       postgres:
         condition: service_healthy

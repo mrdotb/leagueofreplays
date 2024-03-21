@@ -22,23 +22,16 @@
 Leagueofreplay is proudly powered by Phoenix and Elixir.
 
 * [![Phoenix][Phoenix]][Phoenix-url]
+* [![Ash][Ash]][Ash-url]
 * [![Elixir][Elixir]][Elixir-url]
 * [![Tailwind][Tailwind]][Tailwind-url]
 
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
+Watching the [youtube demo](https://youtu.be/vXCb2LyK_gg) is a good way to understand how the project works and how you can setup it locally.
 To get a local copy up and running follow these simple example steps.
 
-### Prerequisites
-
-To run leagueofreplays on your local environment you need to have:
-* Postgres
-* Elixir
-* Erlang
-* NodeJS
-
-### Using Docker Compose
+### Running locally using Docker Compose
 
 A Docker Compose [reference file](https://github.com/mrdotb/leagueofreplays/blob/main/docker-compose.yml) is provided in the repository. You can use it to run leagueofreplays with Docker Compose.
 
@@ -55,7 +48,41 @@ Add the token to the `.env` file on `RIOT_TOKEN`
 docker compose --env-file .env up
 ```
 
+You can now access the leagueofreplays on [localhost:4000](http://localhost:4000)
+The admin is on [localhost:4000/admin](http://localhost:4000/admin)
+
+### Running on a server using Docker Compose
+
+Follow the step to run the project locally.
+
+If you use a firewall you have to expose the port 4000, 3000 and 9000.
+
+**Be careful if you are not using a firewall these ports will be exposed to the world 5432, 9000, 9090, 3000, 4000.**
+
+Edit `.env`
+
+```sh
+HOST=your_domain
+POSTGRES_PASSWORD= # a hard password
+MINIO_ROOT_PASSWORD= # a hard password
+S3_ACCESS_KEY= # cat /dev/urandom | tr -dc '[:alnum:]' | head -c 16
+S3_SECRET_KEY= # cat /dev/urandom | tr -dc '[:alnum:]' | head -c 32
+SECRET_KEY_BASE= # cat /dev/urandom | tr -dc '[:alnum:]' | head -c 32
+ADMIN_PASSWORD= # cat /dev/urandom | tr -dc '[:alnum:]' | head -c 16
+```
+
+You can now access the leagueofreplays on `your_domain:4000`
+The admin is on `http://your_domain:4000/admin` the login is admin and the password is the value your put in `ADMIN_PASSWORD`.
+
 ### How to Dev ?
+
+#### Prerequisites
+
+To run leagueofreplays on your local environment you need to have:
+* Postgres
+* Elixir
+* Erlang
+* NodeJS
 
 This project use asdf with the following [`tool-versions`](https://github.com/mrdotb/leagueofreplays/blob/main/.tool-versions).
 
@@ -115,3 +142,5 @@ Thanks to [lol-replay](https://github.com/1lann/lol-replay), [UGG](https://u.gg)
 [Tailwind-url]: https://tailwindcss.com/
 [Phoenix]: https://img.shields.io/badge/phoenix-f35424?style=for-the-badge&logo=&logoColor=white
 [Phoenix-url]: https://www.phoenixframework.org/
+[Ash]: https://img.shields.io/badge/ash-ff5757?style=for-the-badge&logoColor=white
+[Ash-url]: https://ash-hq.org/

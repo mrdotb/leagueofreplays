@@ -176,7 +176,7 @@ if config_env() == :prod do
   admin_password =
     System.get_env("ADMIN_PASSWORD") || nil
 
-  if is_binary(admin_password) do
+  if is_binary(admin_password) and admin_password != "" do
     config :lor, :admin_dashboard,
       enable?: true,
       username: "admin",
