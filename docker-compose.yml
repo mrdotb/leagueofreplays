@@ -45,6 +45,7 @@ services:
         mc admin policy attach minio readwrite --user ${S3_ACCESS_KEY};
         exit 0;
   app:
+    # If you are using an arm architecture, comment the image line and uncomment the build line
     image: ghcr.io/mrdotb/leagueofreplays:latest
     # build: .
     command: sh -c "/app/bin/migrate && /app/bin/server"
