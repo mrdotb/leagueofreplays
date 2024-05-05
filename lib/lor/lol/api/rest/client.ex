@@ -228,7 +228,7 @@ defmodule Lor.Lol.Rest.Client do
   the active game.
   """
   def fetch_active_game_by_summoners(client, encrypted_summoner_id) do
-    path = "/lol/spectator/v4/active-games/by-summoner/#{encrypted_summoner_id}"
+    path = "/lol/spectator/v5/active-games/by-summoner/#{encrypted_summoner_id}"
 
     case Tesla.get!(client, path) do
       %{status: 200, body: body} ->
@@ -285,7 +285,7 @@ defmodule Lor.Lol.Rest.Client do
   Given a platform_id client get the featured game we can spectate.
   """
   def fetch_featured_game(client) do
-    path = "/lol/spectator/v4/featured-games"
+    path = "/lol/spectator/v5/featured-games"
 
     case Tesla.get!(client, path) do
       %{status: 200, body: body} ->

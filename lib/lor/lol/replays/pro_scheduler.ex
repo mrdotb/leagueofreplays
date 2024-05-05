@@ -43,7 +43,7 @@ defmodule Lor.Lol.Replays.ProScheduler do
       with {:ok, game} <-
              Lor.Lol.Rest.fetch_active_game_by_summoners(
                state.platform_id,
-               summoner.encrypted_id
+               summoner.puuid
              ),
            true <- game["gameMode"] != "TFT" do
         Lor.Lol.Replays.Manager.add(game)
