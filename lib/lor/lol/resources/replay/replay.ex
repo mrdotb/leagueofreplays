@@ -3,7 +3,8 @@ defmodule Lor.Lol.Replay do
     data_layer: AshPostgres.DataLayer,
     extensions: [
       AshStateMachine
-    ]
+    ],
+    domain: Lor.Lol
 
   postgres do
     table "lol_replays"
@@ -21,7 +22,7 @@ defmodule Lor.Lol.Replay do
   end
 
   code_interface do
-    define_for Lor.Lol
+    domain Lor.Lol
     define :read_all, action: :read
     define :create
     define :finish, action: :finish
@@ -155,7 +156,6 @@ defmodule Lor.Lol.Replay do
     belongs_to :match, Lor.Lol.Match do
       attribute_type :uuid
       allow_nil? true
-      attribute_writable? true
     end
   end
 end

@@ -21,7 +21,7 @@ defmodule LorWeb.AdminLive.PlayerFormComponent do
   defp assign_form(%{assigns: %{live_action: :new}} = socket) do
     form =
       AshPhoenix.Form.for_create(Lor.Pros.Player, :create,
-        api: Lor.Pros,
+        domain: Lor.Pros,
         as: "player"
       )
       |> to_form()
@@ -37,7 +37,7 @@ defmodule LorWeb.AdminLive.PlayerFormComponent do
 
     form =
       AshPhoenix.Form.for_update(player, :update,
-        api: Lor.Pros,
+        domain: Lor.Pros,
         as: "player"
       )
       |> to_form()

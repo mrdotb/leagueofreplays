@@ -1,6 +1,7 @@
 defmodule Lor.S3.Object do
   use Ash.Resource,
-    data_layer: AshPostgres.DataLayer
+    data_layer: AshPostgres.DataLayer,
+    domain: Lor.S3
 
   postgres do
     table "s3_objects"
@@ -9,7 +10,7 @@ defmodule Lor.S3.Object do
   end
 
   code_interface do
-    define_for Lor.S3
+    domain Lor.S3
     define :read_all, action: :read
     define :get, action: :get, args: [:id]
     define :destroy

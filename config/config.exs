@@ -10,7 +10,7 @@ import Config
 config :lor, :admin_dashboard, enable?: false
 
 config :lor,
-  ash_apis: [
+  ash_domains: [
     Lor.Lol,
     Lor.Pros,
     Lor.S3

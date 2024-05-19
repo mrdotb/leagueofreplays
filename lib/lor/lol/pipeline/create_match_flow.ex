@@ -13,7 +13,7 @@ defmodule Lor.Lol.CreateMatchFlow do
   use Ash.Flow
 
   flow do
-    api Lor.Lol
+    domain Lor.Lol
 
     argument :platform_id, Lor.Lol.PlatformIds do
       allow_nil? false
@@ -39,7 +39,7 @@ defmodule Lor.Lol.CreateMatchFlow do
       allow_nil? false
     end
 
-    returns :create_match
+    returns(:create_match)
   end
 
   steps do
@@ -47,40 +47,40 @@ defmodule Lor.Lol.CreateMatchFlow do
       touches_resources [Lor.Lol.Match, Lor.Lol.Summoner, Lor.Lol.Participant]
 
       create :create_match, Lor.Lol.Match, :create_from_api do
-        input %{
+        input(%{
           match_data: arg(:match_data),
           s3_object_id: path(arg(:s3_object), :id)
-        }
+        })
       end
 
       map :create_summoners, arg(:summoners_data) do
         create :create_summoner, Lor.Lol.Summoner, :create_from_api do
-          input %{
+          input(%{
             platform_id: arg(:platform_id),
             account_data: path(element(:create_summoners), :account_data),
             summoner_data: path(element(:create_summoners), :summoner_data)
-          }
+          })
         end
       end
 
       map :create_participants, path(arg(:match_data), ["info", "participants"]) do
         create :create_participant, Lor.Lol.Participant, :create_from_api do
-          input %{
+          input(%{
             match_id: path(result(:create_match), :id),
             created_summoners: result(:create_summoners),
             existing_summoners: arg(:existing_summoners),
             participant_data: element(:create_participants)
-          }
+          })
         end
       end
 
       map :update_opponent_participants, result(:create_participants) do
         update :update_opponent, Lor.Lol.Participant, :update_opponent_participant do
-          record element(:update_opponent_participants)
+          record(element(:update_opponent_participants))
 
-          input %{
+          input(%{
             participants: result(:create_participants)
-          }
+          })
         end
       end
     end

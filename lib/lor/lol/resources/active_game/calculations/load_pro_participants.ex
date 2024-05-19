@@ -1,5 +1,5 @@
 defmodule Lor.Lol.ActiveGame.Calculations.LoadProParticipants do
-  use Ash.Calculation
+  use Ash.Resource.Calculation
   require Ash.Query
 
   @impl true

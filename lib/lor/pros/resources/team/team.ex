@@ -4,7 +4,8 @@ defmodule Lor.Pros.Team do
   It's based on the UGG schema
   """
   use Ash.Resource,
-    data_layer: AshPostgres.DataLayer
+    data_layer: AshPostgres.DataLayer,
+    domain: Lor.Pros
 
   postgres do
     table "pro_teams"
@@ -23,7 +24,7 @@ defmodule Lor.Pros.Team do
   end
 
   code_interface do
-    define_for Lor.Pros
+    domain Lor.Pros
     define :get, action: :get, args: [:id]
     define :create_from_ugg, args: [:team_data, :logo_id]
     define :by_names, args: [:names]
@@ -129,9 +130,8 @@ defmodule Lor.Pros.Team do
     end
 
     belongs_to :logo, Lor.S3.Object do
-      api Lor.S3
+      domain Lor.S3
       attribute_type :uuid
-      attribute_writable? true
     end
   end
 end

@@ -1,6 +1,7 @@
 defmodule Lor.Lol.Chunk do
   use Ash.Resource,
-    data_layer: AshPostgres.DataLayer
+    data_layer: AshPostgres.DataLayer,
+    domain: Lor.Lol
 
   postgres do
     table "lol_replay_chunks"
@@ -20,7 +21,7 @@ defmodule Lor.Lol.Chunk do
   end
 
   code_interface do
-    define_for Lor.Lol
+    domain Lor.Lol
     define :read_all, action: :read
     define :create
   end
@@ -38,13 +39,11 @@ defmodule Lor.Lol.Chunk do
   relationships do
     belongs_to :replay, Lor.Lol.Replay do
       attribute_type :uuid
-      attribute_writable? true
     end
 
     belongs_to :data, Lor.S3.Object do
-      api Lor.S3
+      domain Lor.S3
       attribute_type :uuid
-      attribute_writable? true
     end
   end
 end

@@ -1,7 +1,8 @@
 defmodule Lor.Lol.ActiveGame do
   use Ash.Resource,
     data_layer: AshPostgres.DataLayer,
-    notifiers: [Ash.Notifier.PubSub]
+    notifiers: [Ash.Notifier.PubSub],
+    domain: Lor.Lol
 
   import Ecto.Query
 
@@ -20,7 +21,7 @@ defmodule Lor.Lol.ActiveGame do
   end
 
   code_interface do
-    define_for Lor.Lol
+    domain Lor.Lol
     define :get, action: :by_id, args: [:id]
     define :list, action: :list, args: [:filter]
     define :list_active_puuids, action: :list_active_puuids, args: [:platform_id]

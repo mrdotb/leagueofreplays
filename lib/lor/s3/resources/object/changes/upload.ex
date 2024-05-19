@@ -6,11 +6,11 @@ defmodule Lor.S3.Object.Changes.Upload do
 
   def change(changeset, _, _) do
     changeset
-    |> Ash.Changeset.before_transaction(&handle_before_transaction/1)
-    |> Ash.Changeset.after_transaction(&handle_after_transaction/2)
+    |> Ash.Changeset.before_transaction(&handle_before_transaction/2)
+    |> Ash.Changeset.after_transaction(&handle_after_transaction/3)
   end
 
-  defp handle_before_transaction(changeset) do
+  defp handle_before_transaction(changeset, _context) do
     body = Ash.Changeset.get_argument(changeset, :body)
     bucket = changeset.attributes.bucket
     key = changeset.attributes.key
@@ -42,7 +42,8 @@ defmodule Lor.S3.Object.Changes.Upload do
   # the insert try to delete the object
   defp handle_after_transaction(
          _changeset,
-         {:error, %{context: %{upload_successful?: true}} = changeset} = error_result
+         {:error, %{context: %{upload_successful?: true}} = changeset} = error_result,
+         _context
        ) do
     bucket = changeset.attributes.bucket
     key = changeset.attributes.key
@@ -50,7 +51,7 @@ defmodule Lor.S3.Object.Changes.Upload do
     error_result
   end
 
-  defp handle_after_transaction(_changeset, success_or_error_result) do
+  defp handle_after_transaction(_changeset, success_or_error_result, _context) do
     success_or_error_result
   end
 end

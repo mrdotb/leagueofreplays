@@ -1,13 +1,8 @@
 defmodule Lor.Lol do
-  use Ash.Api,
+  use Ash.Domain,
     extensions: [
-      AshJsonApi.Api
+      AshJsonApi.Domain
     ]
-
-  json_api do
-    prefix "/api/lol"
-    router(Lor.Lol.Router)
-  end
 
   resources do
     resource Lor.Lol.Match

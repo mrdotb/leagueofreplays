@@ -20,7 +20,7 @@ defmodule LorWeb.AdminLive.TeamFormComponent do
   defp assign_form(%{assigns: %{live_action: :new}} = socket) do
     form =
       AshPhoenix.Form.for_create(Lor.Pros.Team, :create,
-        api: Lor.Pros,
+        domain: Lor.Pros,
         as: "team"
       )
       |> to_form()
@@ -36,7 +36,7 @@ defmodule LorWeb.AdminLive.TeamFormComponent do
 
     form =
       AshPhoenix.Form.for_update(team, :update,
-        api: Lor.Pros,
+        domain: Lor.Pros,
         as: "team"
       )
       |> to_form()

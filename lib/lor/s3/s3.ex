@@ -1,5 +1,5 @@
 defmodule Lor.S3 do
-  use Ash.Api
+  use Ash.Domain
 
   resources do
     resource Lor.S3.Object

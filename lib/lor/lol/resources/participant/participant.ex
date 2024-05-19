@@ -1,7 +1,8 @@
 defmodule Lor.Lol.Participant do
   use Ash.Resource,
     data_layer: AshPostgres.DataLayer,
-    extensions: [AshJsonApi.Resource]
+    extensions: [AshJsonApi.Resource],
+    domain: Lor.Lol
 
   postgres do
     table "lol_participants"
@@ -15,7 +16,7 @@ defmodule Lor.Lol.Participant do
   end
 
   code_interface do
-    define_for Lor.Lol
+    domain Lor.Lol
     define :create_from_api, args: [:match_id, :participant_data]
     define :update_opponent_participant, args: [:participants, :participant]
     define :read_all, action: :read
@@ -141,18 +142,15 @@ defmodule Lor.Lol.Participant do
     belongs_to :match, Lor.Lol.Match do
       allow_nil? false
       attribute_type :uuid
-      attribute_writable? true
     end
 
     belongs_to :summoner, Lor.Lol.Summoner do
       allow_nil? false
       attribute_type :uuid
-      attribute_writable? true
     end
 
     belongs_to :opponent_participant, Lor.Lol.Participant do
       attribute_type :uuid
-      attribute_writable? true
     end
   end
 end

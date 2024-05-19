@@ -4,9 +4,9 @@ defmodule Lor.Lol.MatchReactor do
   """
   use Reactor
 
-  input :region
-  input :platform_id
-  input :match_id
+  input(:region)
+  input(:platform_id)
+  input(:match_id)
 
   step :fetch_match, Lor.Lol.FetchMatchStep do
     argument :region, input(:region)
