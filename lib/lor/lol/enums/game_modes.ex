@@ -24,6 +24,7 @@ defmodule Lor.Lol.GameModes do
       :gamemodex,
       :odyssey,
       :nexusblitz,
-      :ultbook
+      :ultbook,
+      :cherry
     ]
 end

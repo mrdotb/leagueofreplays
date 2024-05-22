@@ -27,7 +27,7 @@ defmodule Lor.Lol.Participant do
     type "participant"
 
     includes(
-      match: [:replay],
+      match: [replay: [:complete]],
       opponent_participant: [summoner: [:player]],
       summoner: [
         player: [:current_team]
