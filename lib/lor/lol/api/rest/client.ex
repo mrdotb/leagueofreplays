@@ -40,7 +40,7 @@ defmodule Lor.Lol.Rest.Client do
       # parse the JSON response automatically
       Tesla.Middleware.JSON,
       # Logger
-      Tesla.Middleware.Logger
+      {Tesla.Middleware.Logger, debug: false}
     ]
 
     Tesla.client(middlewares)
