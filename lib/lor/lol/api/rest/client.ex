@@ -48,8 +48,8 @@ defmodule Lor.Lol.Rest.Client do
 
   def log_level(env) do
     case env.status do
-      404 -> :warn
-      429 -> :warn
+      404 -> :debug
+      429 -> :debug
       _ -> :default
     end
   end
