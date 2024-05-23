@@ -40,10 +40,18 @@ defmodule Lor.Lol.Rest.Client do
       # parse the JSON response automatically
       Tesla.Middleware.JSON,
       # Logger
-      {Tesla.Middleware.Logger, debug: false}
+      {Tesla.Middleware.Logger, log_level: &log_level/1}
     ]
 
     Tesla.client(middlewares)
+  end
+
+  def log_level(env) do
+    case env.status do
+      404 -> :warn
+      429 -> :warn
+      _ -> :default
+    end
   end
 
   # Depending on the endpoint we need to put a region or a platform_id

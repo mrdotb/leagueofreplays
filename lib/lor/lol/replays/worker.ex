@@ -266,7 +266,9 @@ defmodule Lor.Lol.Replays.Worker do
       "Replays worker error terminate error: #{inspect(error)} state: #{inspect(state)}"
     )
 
-    Lor.Lol.Replay.error(state.replay)
+    if state.replay do
+      Lor.Lol.Replay.error(state.replay)
+    end
 
     Process.send(state.manager_pid, {:terminating, state}, [])
 
@@ -277,7 +279,9 @@ defmodule Lor.Lol.Replays.Worker do
   def terminate(other, state) do
     Logger.info("Replays worker terminate other #{inspect(other)} state: #{inspect(state)}")
 
-    Lor.Lol.Replay.error(state.replay)
+    if state.replay do
+      Lor.Lol.Replay.error(state.replay)
+    end
 
     Process.send(state.manager_pid, {:terminating, state}, [])
 
