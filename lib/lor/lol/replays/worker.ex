@@ -9,9 +9,9 @@ defmodule Lor.Lol.Replays.Worker do
   defstruct ~w(
     id manager_pid platform_id game_id replay_id
     encryption_key replay
-    client version current_chunk_id last_chunk_info
-    chunk_statuses key_frame_statuses tasks
-    error
+    client version current_chunk_id current_key_frame_id
+    last_chunk_info chunk_statuses key_frame_statuses
+    tasks error skip_previous_download?
   )a
 
   def start_link(args, opts \\ []) do
@@ -31,9 +31,11 @@ defmodule Lor.Lol.Replays.Worker do
       game_id: args.game_id,
       encryption_key: args.encryption_key,
       current_chunk_id: 1,
+      current_key_frame_id: 1,
       chunk_statuses: %{},
       key_frame_statuses: %{},
-      tasks: MapSet.new()
+      tasks: MapSet.new(),
+      skip_previous_download?: false
     }
 
     # Makes the process call terminate/2 upon exit.
@@ -54,6 +56,7 @@ defmodule Lor.Lol.Replays.Worker do
          {:ok, metadata} <-
            Lor.Lol.Observer.fetch_game_meta_data(state.platform_id, state.game_id),
          {:ok, replay} <- Lor.Lol.Replay.create(Map.put(params, :game_meta_data, metadata)) do
+      Logger.info("metadata #{inspect(metadata)}")
       send(self(), :record_media_data)
       state = %{state | version: version, replay: replay, replay_id: replay.id}
       {:noreply, state}
@@ -101,6 +104,7 @@ defmodule Lor.Lol.Replays.Worker do
 
     case Lor.Lol.Observer.fetch_last_chunk_info(state.platform_id, state.game_id) do
       {:ok, chunk_info} ->
+        Logger.info("Received chunk info: #{inspect(chunk_info)}")
         handle_chunk_info(chunk_info, state)
 
       {:error, :not_found} ->
@@ -109,21 +113,42 @@ defmodule Lor.Lol.Replays.Worker do
     end
   end
 
-  def handle_info({:process_previous_media_data, chunk_id, key_frame_id}, state) do
-    for chunk_id <- 1..(chunk_id - 1), chunk_id > 0 do
-      send(self(), {:fetch_and_store_game_data_chunk, chunk_id})
-    end
+  def handle_info({:process_previous_chunks, chunk_id}, state) do
+    # chunk 1 can always be downloaded
+    send(self(), {:fetch_and_store_game_data_chunk, 1})
 
-    for key_frame_id <- 1..(key_frame_id - 1), key_frame_id > 0 do
-      send(self(), {:fetch_and_store_key_frame, key_frame_id})
+    # Try to download 3 chunks > 1
+    for(cid <- (chunk_id - 1)..1, do: cid)
+    |> Enum.take(3)
+    |> Enum.filter(&(&1 > 1))
+    |> Enum.each(fn cid ->
+      send(self(), {:fetch_and_store_game_data_chunk, cid})
+    end)
+
+    {:noreply, state}
+  end
+
+  def handle_info({:process_previous_key_frames, key_frame_id}, state) do
+    kid = key_frame_id - 1
+    # Try to download 1 key_frame before
+    if kid - 1 > 0 do
+      send(self(), {:fetch_and_store_key_frame, kid})
     end
 
     {:noreply, state}
   end
 
   def handle_info({:process_media_data, chunk_id, key_frame_id}, state) do
-    send(self(), {:fetch_and_store_game_data_chunk, chunk_id})
-    send(self(), {:fetch_and_store_key_frame, key_frame_id})
+    # chunk_id == 0 need to be skipped
+    if chunk_id > 0 do
+      send(self(), {:fetch_and_store_game_data_chunk, chunk_id})
+    end
+
+    # key_frame_id == 0 need to be skipped
+    if key_frame_id > 0 do
+      send(self(), {:fetch_and_store_key_frame, key_frame_id})
+    end
+
     {:noreply, state}
   end
 
@@ -289,6 +314,45 @@ defmodule Lor.Lol.Replays.Worker do
     :normal
   end
 
+  defp handle_chunk_info(
+         %{
+           "chunkId" => 2,
+           "nextAvailableChunk" => 0,
+           "keyFrameId" => 0,
+           "nextChunkId" => 0,
+           "startGameChunkId" => 2,
+           "endGameChunkId" => 0
+         },
+         state
+       ) do
+    Logger.debug("Spectate mode not initialised part 1 retry in 10 sec")
+    Process.send_after(self(), :record_media_data, 10_000)
+    {:noreply, %{state | skip_previous_download?: true}}
+  end
+
+  defp handle_chunk_info(
+         %{
+           "chunkId" => 0,
+           "availableSince" => 0,
+           "nextAvailableChunk" => next_available_chunk,
+           "keyFrameId" => 0,
+           "nextChunkId" => 0,
+           "endStartupChunkId" => 0,
+           "startGameChunkId" => 0,
+           "endGameChunkId" => 0,
+           "duration" => 0
+         },
+         state
+       )
+       when next_available_chunk > 0 do
+    Logger.debug(
+      "Spectate mode not initialised part 2 yet retry in #{next_available_chunk / 1000} sec"
+    )
+
+    Process.send_after(self(), :record_media_data, next_available_chunk)
+    {:noreply, state}
+  end
+
   defp handle_chunk_info(%{"chunkId" => 0, "keyFrameId" => 0}, state) do
     Logger.debug("Game not started yet retry in 20 sec...")
     Process.send_after(self(), :record_media_data, 20_000)
@@ -300,13 +364,20 @@ defmodule Lor.Lol.Replays.Worker do
     key_frame_id = chunk_info["keyFrameId"]
     end_game_chunk_id = chunk_info["endGameChunkId"]
 
-    if chunk_id > state.current_chunk_id do
+    if not state.skip_previous_download? and chunk_id > state.current_chunk_id do
       Logger.debug("""
         Gap detected between chunk_id and current_chunk_id.
-        Try to download previous media data
       """)
 
-      send(self(), {:process_previous_media_data, chunk_id, key_frame_id})
+      send(self(), {:process_previous_chunks, chunk_id})
+    end
+
+    if not state.skip_previous_download? and key_frame_id - state.current_key_frame_id > 2 do
+      Logger.debug("""
+        Gap detected between key_frame_id and current_key_frame_id.
+      """)
+
+      send(self(), {:process_previous_key_frames, key_frame_id})
     end
 
     send(self(), {:process_media_data, chunk_id, key_frame_id})
@@ -331,6 +402,7 @@ defmodule Lor.Lol.Replays.Worker do
 
   defp handle_next_chunk(chunk_info, state) do
     chunk_id = chunk_info["chunkId"]
+    key_frame_id = chunk_info["keyFrameId"]
     Logger.debug("Increment current_chunk and wait...")
 
     time =
@@ -344,6 +416,7 @@ defmodule Lor.Lol.Replays.Worker do
     state = %{
       state
       | current_chunk_id: chunk_id + 1,
+        current_key_frame_id: key_frame_id,
         last_chunk_info: chunk_info
     }
 
