@@ -1,0 +1,33 @@
+<PC.h2>Summoners</PC.h2>
+
+<div :if={length(@summoners) == 0} class="mt-4 flex items-center justify-center">
+  <div class="flex flex-col items-center">
+    <.icon name="hero-exclamation-circle" class="w-12 h-12" />
+    <p>Could not find any Summoners.</p>
+  </div>
+</div>
+
+<PC.table :if={length(@summoners) > 0}>
+  <PC.tr>
+    <PC.th>Name</PC.th>
+    <PC.th>Platform</PC.th>
+    <PC.th>Riot ID</PC.th>
+  </PC.tr>
+
+  <PC.tr :for={summoner <- @summoners} id={summoner.id}>
+    <PC.td class="flex items-center space-x-2">
+      <LOLC.profile_icon
+        assets_version={@game_version}
+        icon_key={summoner.profile_icon_id}
+        class="w-16 h-16 rounded-md overflow-hidden"
+      />
+      <span><%= summoner.name %></span>
+    </PC.td>
+    <PC.td>
+      <%= summoner.platform_id %>
+    </PC.td>
+    <PC.td>
+      <%= summoner.riot_id %>
+    </PC.td>
+  </PC.tr>
+</PC.table>

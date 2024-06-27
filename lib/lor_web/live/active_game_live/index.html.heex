@@ -25,7 +25,10 @@
 <div :if={length(@active_games) == 0} class="mt-4 flex items-center justify-center">
   <div class="flex flex-col items-center">
     <.icon name="hero-exclamation-circle" class="w-12 h-12" />
-    <p>No games are are recorded right... now check the <PC.button size="xs" link_type="a" navigate={~p"/replays"}>Replays</PC.button></p>
+    <p>
+      No games are are recorded right... now check the
+      <PC.button size="xs" link_type="a" navigate={~p"/replays"}>Replays</PC.button>
+    </p>
   </div>
 </div>
 

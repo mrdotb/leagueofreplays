@@ -11,6 +11,9 @@ defmodule LorWeb.PlayerLive.Index do
       |> assign(:pages, 0)
       |> assign(:active_page, 1)
       |> assign(:players, [])
+      |> assign(:search, "")
+      |> assign(:record, true)
+      |> assign(:form, to_form(%{"record" => true}))
 
     {:ok, socket}
   end
@@ -25,6 +28,8 @@ defmodule LorWeb.PlayerLive.Index do
       socket
       |> assign_active_page(params)
       |> assign_page_offset(params)
+      |> assign_search(params)
+      |> assign_record(params)
 
     page = list_players(socket)
 
@@ -34,9 +39,22 @@ defmodule LorWeb.PlayerLive.Index do
     |> assign(:players, page.results)
   end
 
-  defp list_players(%{assigns: %{page_offset: page_offset, page_limit: page_limit}}) do
+  @impl true
+  def handle_event("search", %{"search" => search, "record" => record}, socket) do
+    socket = push_patch(socket, to: ~p"/players?page=1&search=#{search}&record=#{record}")
+    {:noreply, socket}
+  end
+
+  defp list_players(%{
+         assigns: %{
+           page_offset: page_offset,
+           page_limit: page_limit,
+           search: search,
+           record: record
+         }
+       }) do
     page = [offset: page_offset, limit: page_limit, count: true]
-    Lor.Pros.Player.list!(%{}, page: page)
+    Lor.Pros.Player.list!(%{record: record, normalized_name: search}, page: page)
   end
 
   defp assign_active_page(socket, %{"page" => page_params}) do
@@ -56,5 +74,16 @@ defmodule LorWeb.PlayerLive.Index do
     assign(socket, :page_offset, page_offset)
   end
 
-  # defp assign_page_offset(socket, _params), do: socket
+  defp assign_search(socket, %{"search" => search}) do
+    assign(socket, :search, search)
+  end
+
+  defp assign_search(socket, _), do: socket
+
+  defp assign_record(socket, %{"record" => record}) do
+    record = if(record === "false", do: false, else: true)
+    assign(socket, :record, record)
+  end
+
+  defp assign_record(socket, _), do: socket
 end

@@ -11,6 +11,7 @@ defmodule Lor.Pros.Player.Preparations.FilterSortPlayer do
       current_team: :logo
     ])
     |> filter_by_normalized_name()
+    |> filter_by_record()
     |> Ash.Query.sort(current_team_name: :asc, normalized_name: :asc)
   end
 
@@ -21,6 +22,19 @@ defmodule Lor.Pros.Player.Preparations.FilterSortPlayer do
 
       %{normalized_name: normalized_name} ->
         Ash.Query.filter(query, trigram_similarity(normalized_name, ^normalized_name) > 0.4)
+
+      _ ->
+        query
+    end
+  end
+
+  defp filter_by_record(query) do
+    case Ash.Changeset.get_argument(query, :filter) do
+      %{record: true} ->
+        Ash.Query.filter(query, record == true)
+
+      %{record: false} ->
+        Ash.Query.filter(query, record == false)
 
       _ ->
         query

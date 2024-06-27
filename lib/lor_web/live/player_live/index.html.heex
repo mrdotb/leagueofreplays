@@ -1,16 +1,36 @@
 <PC.h2>Players</PC.h2>
 
+<div class="mb-4 flex">
+  <.form for={@form} phx-change="search" phx-submit="search" class="flex space-x-4">
+    <PC.field
+      wrapper_class="!mb-0"
+      label_class="hidden"
+      type="search"
+      placeholder="Search Player..."
+      field={@form[:search]}
+      phx-debounce="200"
+    />
+    <PC.field
+      wrapper_class="!mb-0 flex items-center"
+      type="checkbox"
+      label="Recording ?"
+      field={@form[:record]}
+    />
+  </.form>
+</div>
+
 <PC.table>
   <PC.tr>
     <PC.th>Name</PC.th>
     <PC.th>Team</PC.th>
     <PC.th>Main Role</PC.th>
     <PC.th>Record</PC.th>
+    <PC.th>Actions</PC.th>
   </PC.tr>
 
   <PC.tr :for={player <- @players} id={player.id}>
     <PC.td>
-      <.link navigate={~p"/player/#{player.normalized_name}"}>
+      <.link navigate={~p"/players/#{player.normalized_name}"}>
         <PC.user_inner_td
           avatar_assigns={if(player.picture, do: %{src: player.picture.url}, else: nil)}
           label={player.official_name}
@@ -31,10 +51,21 @@
       <PC.badge :if={player.record} color="success" label="Active" />
       <PC.badge :if={not player.record} color="gray" label="Inactive" />
     </PC.td>
+    <PC.td>
+      <PC.button
+        color="info"
+        link_type="live_patch"
+        to={~p"/players/#{player.id}/summoners"}
+        size="xs"
+      >
+        Show Summoners
+      </PC.button>
+    </PC.td>
   </PC.tr>
 </PC.table>
 
 <PC.pagination
+  :if={@pages > 1}
   class="mt-2"
   link_type="live_patch"
   path={~p"/players?page=:page"}

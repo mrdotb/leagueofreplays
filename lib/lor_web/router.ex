@@ -28,7 +28,8 @@ defmodule LorWeb.Router do
       live "/", ActiveGameLive.Index, :index
       live "/replays", ReplayLive.Index, :index
       live "/players", PlayerLive.Index, :index
-      live "/player/:name", PlayerLive.Show, :index
+      live "/players/:name", PlayerLive.Show, :index
+      live "/players/:player_id/summoners", SummonerLive.Index, :index
     end
 
     get "/script/spectate", ScriptController, :spectate
