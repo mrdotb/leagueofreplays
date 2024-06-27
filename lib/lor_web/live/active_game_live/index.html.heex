@@ -73,7 +73,7 @@
         <div class="space-y-4 px-2 py-4">
           <div class="flex justify-center space-x-3">
             <.link
-              navigate={~p"/player/#{summoner_pro.player.normalized_name}"}
+              navigate={~p"/players/#{summoner_pro.player.normalized_name}"}
               class="w-12 h-12 bg-gray-900 overflow-hidden rounded-full flex items-end"
             >
               <img
@@ -84,7 +84,7 @@
             </.link>
             <div>
               <.link
-                navigate={~p"/player/#{summoner_pro.player.normalized_name}"}
+                navigate={~p"/players/#{summoner_pro.player.normalized_name}"}
                 class="font-medium uppercase hover:underline"
               >
                 <%= summoner_pro.player.official_name %>

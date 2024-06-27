@@ -56,7 +56,7 @@
     :if={@prev_page}
     color="light"
     link_type="live_patch"
-    to={~p"/player/#{@player.normalized_name}?before=#{@prev_page}"}
+    to={~p"/players/#{@player.normalized_name}?before=#{@prev_page}"}
   >
     <.icon class="w-6" name="hero-chevron-left" />
   </PC.button>
@@ -65,7 +65,7 @@
     :if={@next_page}
     color="light"
     link_type="live_patch"
-    to={~p"/player/#{@player.normalized_name}?after=#{@next_page}"}
+    to={~p"/players/#{@player.normalized_name}?after=#{@next_page}"}
   >
     <.icon class="w-6" name="hero-chevron-right" />
   </PC.button>

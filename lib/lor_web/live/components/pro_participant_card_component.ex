@@ -102,7 +102,7 @@ defmodule LorWeb.ProParticipantCardComponent do
 
       <.link
         :if={@participant.summoner.player}
-        navigate={~p"/player/#{@participant.summoner.player.normalized_name}"}
+        navigate={~p"/players/#{@participant.summoner.player.normalized_name}"}
       >
         <LOLC.player
           class="[grid-area:player]"
