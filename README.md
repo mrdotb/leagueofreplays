@@ -67,7 +67,7 @@ POSTGRES_PASSWORD= # a hard password
 MINIO_ROOT_PASSWORD= # a hard password
 S3_ACCESS_KEY= # cat /dev/urandom | tr -dc '[:alnum:]' | head -c 16
 S3_SECRET_KEY= # cat /dev/urandom | tr -dc '[:alnum:]' | head -c 32
-SECRET_KEY_BASE= # cat /dev/urandom | tr -dc '[:alnum:]' | head -c 32
+SECRET_KEY_BASE= # cat /dev/urandom | tr -dc '[:alnum:]' | head -c 64
 ADMIN_PASSWORD= # cat /dev/urandom | tr -dc '[:alnum:]' | head -c 16
 ```
 
