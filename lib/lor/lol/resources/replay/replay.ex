@@ -117,7 +117,7 @@ defmodule Lor.Lol.Replay do
     end
 
     attribute :first_chunk_id, :integer do
-      description "Chunk availability starts at 2; chunks 1 is always available."
+      description "Chunk availability starts at 3; chunks 1 and 2 is always available."
     end
 
     attribute :first_key_frame_id, :integer
@@ -145,7 +145,7 @@ defmodule Lor.Lol.Replay do
   end
 
   calculations do
-    calculate :complete, :boolean, expr(first_chunk_id == 2 and first_key_frame_id == 1)
+    calculate :complete, :boolean, expr(first_chunk_id == 3 and first_key_frame_id == 1)
   end
 
   relationships do
