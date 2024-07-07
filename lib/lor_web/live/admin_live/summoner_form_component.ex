@@ -74,7 +74,7 @@ defmodule LorWeb.AdminLive.SummonerFormComponent do
 
   def handle_event("create-and-attach-from-summoner", _, socket) do
     platform_id = socket.assigns.platform_id
-    region = Lor.Lol.PlatformIds.fetch_region!(platform_id)
+    region = Lor.Lol.PlatformIds.fetch_region!(platform_id, :account)
     summoner_data = socket.assigns.summoner_request.result
     player_id = socket.assigns.player_id
     puuid = summoner_data["puuid"]
@@ -167,7 +167,7 @@ defmodule LorWeb.AdminLive.SummonerFormComponent do
       socket
       |> assign(:account_request, AsyncResult.loading())
       |> assign_async(:account_request, fn ->
-        region = Lor.Lol.PlatformIds.fetch_region!(platform_id)
+        region = Lor.Lol.PlatformIds.fetch_region!(platform_id, :account)
 
         case Lor.Lol.Rest.fetch_account_by_game_name_and_tag_line(region, game_name, tag_line) do
           {:ok, data} ->

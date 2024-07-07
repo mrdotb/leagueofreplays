@@ -23,7 +23,8 @@ defmodule Lor.Lol.PlatformIds do
       :vn2
     ]
 
-  @platform_ids_routing_map %{
+  # https://developer.riotgames.com/apis#match-v5
+  @platform_ids_match_routing_map %{
     na1: :AMERICAS,
     br1: :AMERICAS,
     la1: :AMERICAS,
@@ -43,6 +44,32 @@ defmodule Lor.Lol.PlatformIds do
     oc1: :SEA
   }
 
-  def get_region(platform_id), do: Map.get(@platform_ids_routing_map, platform_id)
-  def fetch_region!(platform_id), do: Map.fetch!(@platform_ids_routing_map, platform_id)
+  # https://developer.riotgames.com/apis#account-v1
+  @platform_ids_account_routing_map %{
+    na1: :AMERICAS,
+    br1: :AMERICAS,
+    la1: :AMERICAS,
+    la2: :AMERICAS,
+    kr: :ASIA,
+    jp1: :ASIA,
+    tw2: :ASIA,
+    th2: :ASIA,
+    vn2: :ASIA,
+    sg2: :ASIA,
+    ph2: :ASIA,
+    eun1: :EUROPE,
+    euw1: :EUROPE,
+    eu1: :EUROPE,
+    tr1: :EUROPE,
+    ru: :EUROPE,
+    oc1: :ASIA
+  }
+
+  def fetch_region!(platform_id, :match) do
+    Map.fetch!(@platform_ids_match_routing_map, platform_id)
+  end
+
+  def fetch_region!(platform_id, :account) do
+    Map.fetch!(@platform_ids_account_routing_map, platform_id)
+  end
 end

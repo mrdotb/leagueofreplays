@@ -39,7 +39,7 @@ defmodule Lor.Pros.CreateSummonersStep do
     if not MapSet.member?(existing_summoners_set, ugg_pro["current_ign"]) do
       # ugg name is wrong their region_id is platform_id
       platform_id = String.to_existing_atom(ugg_pro["region_id"])
-      region = Lor.Lol.PlatformIds.fetch_region!(platform_id)
+      region = Lor.Lol.PlatformIds.fetch_region!(platform_id, :account)
 
       with {:ok, summoner_data} <-
              Lor.Lol.Rest.fetch_summoner_by_name(platform_id, ugg_pro["current_ign"]),

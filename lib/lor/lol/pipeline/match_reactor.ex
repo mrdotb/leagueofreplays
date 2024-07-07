@@ -4,12 +4,13 @@ defmodule Lor.Lol.MatchReactor do
   """
   use Reactor
 
-  input :region
+  input :region_account
+  input :region_match
   input :platform_id
   input :match_id
 
   step :fetch_match, Lor.Lol.FetchMatchStep do
-    argument :region, input(:region)
+    argument :region, input(:region_match)
     argument :match_id, input(:match_id)
   end
 
@@ -19,7 +20,7 @@ defmodule Lor.Lol.MatchReactor do
 
   step :fetch_summoners, Lor.Lol.FetchSummonersStep do
     argument :platform_id, input(:platform_id)
-    argument :region, input(:region)
+    argument :region, input(:region_account)
     argument :match_data, result(:fetch_match)
   end
 

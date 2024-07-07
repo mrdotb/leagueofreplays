@@ -7,7 +7,12 @@ defmodule Lor.Lol.MatchReactorTest do
       {:ok, result} =
         Reactor.run(
           Lor.Lol.MatchReactor,
-          %{region: :ASIA, platform_id: :kr, match_id: "KR_6821747606"}
+          %{
+            region_account: :ASIA,
+            region_match: :ASIA,
+            platform_id: :kr,
+            match_id: "KR_6821747606"
+          }
         )
 
       assert result.valid?
@@ -20,13 +25,23 @@ defmodule Lor.Lol.MatchReactorTest do
       {:ok, _result} =
         Reactor.run(
           Lor.Lol.MatchReactor,
-          %{region: :ASIA, platform_id: :kr, match_id: "KR_6821747606"}
+          %{
+            region_account: :ASIA,
+            region_match: :ASIA,
+            platform_id: :kr,
+            match_id: "KR_6821747606"
+          }
         )
 
       {:error, [%{errors: _errors}]} =
         Reactor.run(
           Lor.Lol.MatchReactor,
-          %{region: :ASIA, platform_id: :kr, match_id: "KR_6821747606"}
+          %{
+            region_account: :ASIA,
+            region_match: :ASIA,
+            platform_id: :kr,
+            match_id: "KR_6821747606"
+          }
         )
     end
   end
