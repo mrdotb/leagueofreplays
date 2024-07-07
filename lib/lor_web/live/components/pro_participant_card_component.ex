@@ -172,7 +172,7 @@ defmodule LorWeb.ProParticipantCardComponent do
               <%= participant.summoner.player.official_name %>
             </.link>
             <span :if={is_nil(participant.summoner.player_id)}>
-              <%= participant.summoner.name %>
+              <%= participant.summoner.riot_id %>
             </span>
           </div>
 
