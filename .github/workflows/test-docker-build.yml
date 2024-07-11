@@ -1,0 +1,41 @@
+name: Test Docker Build
+
+on:
+  pull_request:
+    paths:
+      - Dockerfile
+  workflow_call:
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  # ignore the push event trigger if a PR is open for the current branch
+  prevent_duplicate_checks:
+    runs-on: ubuntu-latest
+
+    permissions:
+      pull-requests: read
+
+    steps:
+      # note: probably don't use that action it has a few known bugs I probably will never fix.
+      # Instead take a look at: https://github.com/fkirc/skip-duplicate-actions
+      - uses: insurgent-lab/is-in-pr-action@129df59687402c4a9c81a9a9e88d7448cdbba541 # v0.2.0
+        id: isInPR
+    outputs:
+      should-run: ${{ !(steps.isInPR.outputs.result == 'true' && github.event_name == 'push') }}
+
+  test-docker-build:
+    name: Test Docker Build
+    runs-on: ubuntu-latest
+
+    needs: prevent_duplicate_checks
+    if: ${{ needs.prevent_duplicate_checks.outputs.should-run == 'true' }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+
+      - name: Verify base image existence
+        run: docker build --target base .
