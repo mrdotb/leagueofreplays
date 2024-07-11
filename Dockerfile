@@ -22,7 +22,9 @@ ARG DEBIAN_VERSION=bullseye-20231009-slim
 ARG BUILDER_IMAGE="hexpm/elixir:${ELIXIR_VERSION}-erlang-${OTP_VERSION}-debian-${DEBIAN_VERSION}"
 ARG RUNNER_IMAGE="debian:${DEBIAN_VERSION}"
 
-FROM ${BUILDER_IMAGE} as builder
+# separate base from build stage to test base image existence
+FROM ${BUILDER_IMAGE} as base
+FROM base as builder
 
 # install build dependencies
 RUN apt-get update -y && apt-get install -y build-essential git \
