@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   postgres:
-    image: postgres:16-alpine
+    image: postgres:16-alpine@sha256:de3d7b6e4b5b3fe899e997579d6dfe95a99539d154abe03f0b6839133ed05065
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
@@ -13,7 +13,7 @@ services:
     restart: "no"
 
   minio:
-    image: minio/minio:RELEASE.2024-01-31T20-20-33Z
+    image: minio/minio:RELEASE.2024-01-31T20-20-33Z@sha256:4092433a77e510826874b36f369696df43407a763d7f901a61d74e83e6fd95bc
     ports:
       - "9001:9000"
       - "9090:9090"
@@ -26,7 +26,7 @@ services:
     restart: "no"
 
   createbuckets:
-    image: minio/mc
+    image: minio/mc@sha256:4e9d0db36751327b00177a1150e605bbfc451d09f54095d584b9f4615be41f87
     depends_on:
       - minio
     entrypoint:

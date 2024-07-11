@@ -13,11 +13,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Check Out Repo
-      uses: actions/checkout@v4
+      uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
 
     - name: Docker meta
       id: meta
-      uses: docker/metadata-action@v5
+      uses: docker/metadata-action@8e5442c4ef9f78752691e2d8f8d19755c6f78e81 # v5
       with:
         images: ghcr.io/mrdotb/leagueofreplays
         tags: |
@@ -26,14 +26,14 @@ jobs:
           type=semver,pattern={{major}},prefix=v
 
     - name: Log in to GitHub Container Registry
-      uses: docker/login-action@v3
+      uses: docker/login-action@0d4c9c5ea7693da7b068278f7b52bda2a190a446 # v3
       with:
         registry: ghcr.io
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Build and Push Docker image to GHCR
-      uses: docker/build-push-action@v5
+      uses: docker/build-push-action@ca052bb54ab0790a636c9b5f226502c73d547a25 # v5
       with:
         context: .
         push: true
