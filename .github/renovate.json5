@@ -67,14 +67,7 @@
       "matchManagers": ["mix"],
       "semanticCommitType": "build",
       "semanticCommitScope": "deps"
-    },
-
-    {
-      "matchManagers": ["docker-compose"],
-      "matchPackageNames": ["postgres"],
-      "semanticCommitType": "chore",
-      "semanticCommitScope": "docker"
-    },
+    }
   ]
 }
 
