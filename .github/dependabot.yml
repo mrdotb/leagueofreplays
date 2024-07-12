@@ -1,0 +1,23 @@
+# Please see the documentation for all configuration options:
+# https://help.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
+
+version: 2
+updates:
+  - package-ecosystem: "mix"
+    directory: "/"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    commit-message:
+      prefix: "deps"
+    open-pull-requests-limit: 10
+    allow:
+      - dependency-name: "hexpm/elixir"
+        versioning-strategy: increase
+      - dependency-name: "erlang/otp"
+        versioning-strategy: increase
+      - dependency-name: "debian"
+        versioning-strategy: increase
