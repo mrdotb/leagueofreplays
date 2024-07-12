@@ -16,8 +16,5 @@ updates:
     open-pull-requests-limit: 10
     allow:
       - dependency-name: "hexpm/elixir"
-        versioning-strategy: increase
       - dependency-name: "erlang/otp"
-        versioning-strategy: increase
       - dependency-name: "debian"
-        versioning-strategy: increase
