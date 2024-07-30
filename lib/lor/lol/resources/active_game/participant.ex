@@ -3,10 +3,10 @@ defmodule Lor.Lol.ActiveGame.Participant do
     data_layer: :embedded
 
   attributes do
-    attribute :name, :string
-    attribute :puuid, :string
-    attribute :summoners, {:array, :integer}
-    attribute :team_id, :integer
-    attribute :champion_id, :integer
+    attribute :name, :string, public?: true
+    attribute :puuid, :string, public?: true
+    attribute :summoners, {:array, :integer}, public?: true
+    attribute :team_id, :integer, public?: true
+    attribute :champion_id, :integer, public?: true
   end
 end

@@ -1,6 +1,7 @@
 defmodule Lor.Lol.Replay do
   use Ash.Resource,
     data_layer: AshPostgres.DataLayer,
+    domain: Lor.Lol,
     extensions: [
       AshStateMachine
     ]
@@ -21,7 +22,7 @@ defmodule Lor.Lol.Replay do
   end
 
   code_interface do
-    define_for Lor.Lol
+    domain Lor.Lol
     define :read_all, action: :read
     define :create
     define :finish, action: :finish
@@ -41,7 +42,20 @@ defmodule Lor.Lol.Replay do
   end
 
   actions do
-    defaults [:read, :create]
+    defaults [:read]
+
+    create :create do
+      accept [
+        :game_meta_data,
+        :game_id,
+        :platform_id,
+        :encryption_key,
+        :first_chunk_id,
+        :first_key_frame_id,
+        :last_chunk_id,
+        :last_key_frame_id
+      ]
+    end
 
     read :by_id do
       get? true
@@ -82,6 +96,7 @@ defmodule Lor.Lol.Replay do
 
     update :finish do
       accept [:first_chunk_id, :last_chunk_id, :first_key_frame_id, :last_key_frame_id]
+      require_atomic? false
 
       change transition_state(:finished)
       change Lor.Lol.Replay.Changes.CreateMatchJob
@@ -92,11 +107,13 @@ defmodule Lor.Lol.Replay do
     end
 
     update :update_with_match do
+      require_atomic? false
       argument :match_id, :uuid, allow_nil?: false
       change manage_relationship(:match_id, :match, type: :append)
     end
 
     destroy :destroy do
+      require_atomic? false
       primary? true
 
       change Lor.Lol.Replay.Changes.Destroy

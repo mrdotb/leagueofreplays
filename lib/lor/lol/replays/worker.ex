@@ -75,7 +75,7 @@ defmodule Lor.Lol.Replays.Worker do
              to_string(state.platform_id),
              to_string(state.game_id)
            ),
-         {:ok, replay_loaded} <- Lor.Lol.load(replay, [:key_frames, :chunks]) do
+         {:ok, replay_loaded} <- Ash.load(replay, [:key_frames, :chunks]) do
       send(self(), :record_media_data)
       chunk_statuses = restore_chunk_statuses(replay_loaded.chunks)
       key_frame_statuses = restore_key_frame_statuses(replay_loaded.key_frames)

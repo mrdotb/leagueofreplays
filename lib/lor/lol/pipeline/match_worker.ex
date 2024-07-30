@@ -22,7 +22,7 @@ defmodule Lor.Lol.MatchWorker do
 
     case Reactor.run(Lor.Lol.MatchReactor, args) do
       {:ok, result} ->
-        match = result.result
+        match = result.create_match
         Lor.Lol.Replay.update_with_match(replay, match.id)
 
       # reactor error are too heavy pattern match only the ash errors

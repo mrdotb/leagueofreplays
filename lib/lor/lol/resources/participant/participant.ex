@@ -1,6 +1,7 @@
 defmodule Lor.Lol.Participant do
   use Ash.Resource,
     data_layer: AshPostgres.DataLayer,
+    domain: Lor.Lol,
     extensions: [AshJsonApi.Resource]
 
   postgres do
@@ -15,9 +16,9 @@ defmodule Lor.Lol.Participant do
   end
 
   code_interface do
-    define_for Lor.Lol
-    define :create_from_api, args: [:match_id, :participant_data]
-    define :update_opponent_participant, args: [:participants, :participant]
+    domain Lor.Lol
+    define :create_from_api, args: [:participant_data, :existing_summoners, :created_summoners]
+    define :update_opponent_participant, args: [:participants]
     define :read_all, action: :read
     define :list_replays, action: :list_replays, args: [:filter]
     define :list_replayable, action: :list_replayable, args: [:kda]
@@ -27,7 +28,7 @@ defmodule Lor.Lol.Participant do
     type "participant"
 
     includes(
-      match: [replay: [:complete]],
+      match: [:replay],
       opponent_participant: [summoner: [:player]],
       summoner: [
         player: [:current_team]
@@ -91,6 +92,7 @@ defmodule Lor.Lol.Participant do
 
     update :update_opponent_participant do
       accept []
+      require_atomic? false
 
       argument :participants, {:array, :map} do
         allow_nil? false
@@ -140,12 +142,14 @@ defmodule Lor.Lol.Participant do
   relationships do
     belongs_to :match, Lor.Lol.Match do
       allow_nil? false
+      public? true
       attribute_type :uuid
       attribute_writable? true
     end
 
     belongs_to :summoner, Lor.Lol.Summoner do
       allow_nil? false
+      public? true
       attribute_type :uuid
       attribute_writable? true
     end
@@ -153,6 +157,7 @@ defmodule Lor.Lol.Participant do
     belongs_to :opponent_participant, Lor.Lol.Participant do
       attribute_type :uuid
       attribute_writable? true
+      public? true
     end
   end
 end

@@ -4,6 +4,7 @@ defmodule Lor.Lol.Match do
   https://developer.riotgames.com/apis#match-v5/GET_getMatch
   """
   use Ash.Resource,
+    domain: Lor.Lol,
     data_layer: AshPostgres.DataLayer
 
   postgres do
@@ -18,7 +19,7 @@ defmodule Lor.Lol.Match do
   end
 
   code_interface do
-    define_for Lor.Lol
+    domain Lor.Lol
     define :read_all, action: :read
     define :get, action: :by_id, args: [:id]
     define :create_from_api, args: [:match_data, :s3_object_id]
@@ -119,11 +120,13 @@ defmodule Lor.Lol.Match do
     has_many :participants, Lor.Lol.Participant
 
     belongs_to :original_data, Lor.S3.Object do
-      api Lor.S3
+      domain Lor.S3
       attribute_type :uuid
       attribute_writable? true
     end
 
-    has_one :replay, Lor.Lol.Replay
+    has_one :replay, Lor.Lol.Replay do
+      public? true
+    end
   end
 end

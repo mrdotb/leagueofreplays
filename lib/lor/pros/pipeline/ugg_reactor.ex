@@ -4,7 +4,7 @@ defmodule Lor.Pros.UGGReactor do
   """
   use Reactor
 
-  input :platform_id
+  input(:platform_id)
 
   step :fetch_ugg_pros, Lor.Pros.FetchUGGProsStep do
     argument :platform_id, input(:platform_id)

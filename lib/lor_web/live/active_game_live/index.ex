@@ -79,7 +79,7 @@ defmodule LorWeb.ActiveGameLive.Index do
     socket =
       socket
       |> update(:active_games, fn active_games ->
-        game = Lor.Lol.load!(active_game, [:pro_participants])
+        game = Ash.load!(active_game, [:pro_participants])
         [game | active_games]
       end)
       |> put_flash(:info, "Game started #{active_game.id}")

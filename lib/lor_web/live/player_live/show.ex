@@ -39,7 +39,7 @@ defmodule LorWeb.PlayerLive.Show do
   defp get_player!(%{"name" => name}) do
     name
     |> Lor.Pros.Player.by_normalized_name!()
-    |> Lor.Pros.load!([:picture, current_team: :logo])
+    |> Ash.load!([:picture, current_team: :logo])
   end
 
   defp assign_next_page(socket, page) do

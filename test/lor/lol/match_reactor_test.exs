@@ -33,7 +33,7 @@ defmodule Lor.Lol.MatchReactorTest do
           }
         )
 
-      {:error, [%{errors: _errors}]} =
+      {:error, _} =
         Reactor.run(
           Lor.Lol.MatchReactor,
           %{

@@ -2,12 +2,12 @@ defmodule Lor.Lol.MatchReactor do
   @moduledoc """
   Pipeline to collect and create a match.
   """
-  use Reactor
+  use Ash.Reactor
 
-  input :region_account
-  input :region_match
-  input :platform_id
-  input :match_id
+  input(:region_account)
+  input(:region_match)
+  input(:platform_id)
+  input(:match_id)
 
   step :fetch_match, Lor.Lol.FetchMatchStep do
     argument :region, input(:region_match)

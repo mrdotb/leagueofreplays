@@ -79,7 +79,7 @@ defmodule LorWeb.ProParticipantCardComponent do
         {:team_position_order, :asc}
       ])
 
-    case Lor.Lol.load(match, participants: participants_query) do
+    case Ash.load(match, participants: participants_query) do
       {:ok, match} ->
         {:ok, %{match: match}}
 

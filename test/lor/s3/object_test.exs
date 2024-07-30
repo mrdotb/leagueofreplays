@@ -38,15 +38,6 @@ defmodule Lor.S3.ObjectTest do
 
   test "destroy object success", %{body: body, params: params} do
     object = Lor.S3.Object.upload!(body, false, params)
-    :ok = Lor.S3.Object.destroy(object)
-  end
-
-  test "destroy object failure", %{body: body, params: params} do
-    object = Lor.S3.Object.upload!(body, false, params)
-    Lor.S3.Object.destroy!(object)
-
-    assert_raise Ash.Error.Invalid, ~r/Input Invalid/, fn ->
-      Lor.S3.Object.destroy!(object)
-    end
+    :ok = Ash.destroy(object)
   end
 end

@@ -1,5 +1,5 @@
 defmodule Lor.Lol.ActiveGame.Calculations.LoadProParticipants do
-  use Ash.Calculation
+  use Ash.Resource.Calculation
   require Ash.Query
 
   @impl true
@@ -31,7 +31,7 @@ defmodule Lor.Lol.ActiveGame.Calculations.LoadProParticipants do
         ]
       )
       |> Ash.Query.filter(not is_nil(player))
-      |> Lor.Lol.read!()
+      |> Ash.read!()
       |> Map.new(fn summoner -> {summoner.puuid, summoner} end)
 
     calculates =

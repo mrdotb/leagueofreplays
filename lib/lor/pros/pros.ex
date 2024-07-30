@@ -1,5 +1,5 @@
 defmodule Lor.Pros do
-  use Ash.Api
+  use Ash.Domain
 
   resources do
     resource Lor.Pros.Team

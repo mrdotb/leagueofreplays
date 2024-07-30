@@ -1,5 +1,5 @@
 defmodule LorSpectator.ControllerTest do
-  use LorSpectator.ConnCase
+  use LorSpectator.ConnCase, async: true
 
   test "GET /version", %{conn: conn} do
     conn = get(conn, ~p"/observer-mode/rest/consumer/version")

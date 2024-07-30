@@ -1,6 +1,7 @@
 defmodule Lor.Lol.Summoner do
   use Ash.Resource,
-    data_layer: AshPostgres.DataLayer
+    data_layer: AshPostgres.DataLayer,
+    domain: Lor.Lol
 
   postgres do
     table "lol_summoners"
@@ -20,7 +21,7 @@ defmodule Lor.Lol.Summoner do
   end
 
   code_interface do
-    define_for Lor.Lol
+    domain Lor.Lol
     define :get, action: :get, args: [:id]
     define :create_from_api, args: [:platform_id, :summoner_data, :account_data, :player_id]
     define :read_all, action: :read
@@ -120,6 +121,7 @@ defmodule Lor.Lol.Summoner do
 
     update :attach do
       accept []
+      require_atomic? false
 
       argument :player_id, :uuid do
         allow_nil? false
@@ -188,7 +190,8 @@ defmodule Lor.Lol.Summoner do
 
   relationships do
     belongs_to :player, Lor.Pros.Player do
-      api Lor.Pros
+      domain Lor.Pros
+      public? true
       attribute_type :uuid
       attribute_writable? true
     end

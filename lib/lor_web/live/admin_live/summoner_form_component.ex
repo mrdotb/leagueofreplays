@@ -200,7 +200,7 @@ defmodule LorWeb.AdminLive.SummonerFormComponent do
 
     filter
     |> Lor.Lol.Summoner.list!()
-    |> Lor.Lol.load!(:player)
+    |> Ash.load!(:player)
   end
 
   defp show_local(_id) do

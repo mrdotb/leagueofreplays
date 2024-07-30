@@ -1,6 +1,7 @@
 defmodule Lor.Lol.KeyFrame do
   use Ash.Resource,
-    data_layer: AshPostgres.DataLayer
+    data_layer: AshPostgres.DataLayer,
+    domain: Lor.Lol
 
   postgres do
     table "lol_replay_key_frames"
@@ -20,13 +21,21 @@ defmodule Lor.Lol.KeyFrame do
   end
 
   code_interface do
-    define_for Lor.Lol
+    domain Lor.Lol
     define :read_all, action: :read
     define :create
   end
 
   actions do
-    defaults [:read, :create]
+    defaults [:read]
+
+    create :create do
+      accept [
+        :number,
+        :replay_id,
+        :data_id
+      ]
+    end
   end
 
   attributes do
@@ -42,7 +51,7 @@ defmodule Lor.Lol.KeyFrame do
     end
 
     belongs_to :data, Lor.S3.Object do
-      api Lor.S3
+      domain Lor.S3
       attribute_type :uuid
       attribute_writable? true
     end

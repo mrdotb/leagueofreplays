@@ -21,7 +21,7 @@ defmodule LorWeb.AdminLive.PlayerFormComponent do
   defp assign_form(%{assigns: %{live_action: :new}} = socket) do
     form =
       AshPhoenix.Form.for_create(Lor.Pros.Player, :create,
-        api: Lor.Pros,
+        domain: Lor.Pros,
         as: "player"
       )
       |> to_form()
@@ -37,7 +37,7 @@ defmodule LorWeb.AdminLive.PlayerFormComponent do
 
     form =
       AshPhoenix.Form.for_update(player, :update,
-        api: Lor.Pros,
+        domain: Lor.Pros,
         as: "player"
       )
       |> to_form()
@@ -141,7 +141,7 @@ defmodule LorWeb.AdminLive.PlayerFormComponent do
   defp get_player!(player_id) do
     player_id
     |> Lor.Pros.Player.get!()
-    |> Lor.Pros.load!([:picture])
+    |> Ash.load!([:picture])
   end
 
   defp get_team_options do
@@ -153,7 +153,7 @@ defmodule LorWeb.AdminLive.PlayerFormComponent do
   defp list_teams do
     Lor.Pros.Team
     |> Ash.Query.sort([:name])
-    |> Lor.Pros.read!()
+    |> Ash.read!()
   end
 
   @impl true

@@ -4,7 +4,8 @@ defmodule Lor.Pros.Player do
   It's based on the UGG schema
   """
   use Ash.Resource,
-    data_layer: AshPostgres.DataLayer
+    data_layer: AshPostgres.DataLayer,
+    domain: Lor.Pros
 
   postgres do
     table "pro_players"
@@ -24,7 +25,7 @@ defmodule Lor.Pros.Player do
   end
 
   code_interface do
-    define_for Lor.Pros
+    domain Lor.Pros
     define :get, action: :get, args: [:id]
     define :by_normalized_name, args: [:normalized_name]
     define :by_normalized_names, args: [:normalized_names]
@@ -103,6 +104,7 @@ defmodule Lor.Pros.Player do
 
     update :update do
       primary? true
+      require_atomic? false
 
       accept [:official_name, :record, :liquidpedia_url, :main_role]
 
@@ -121,6 +123,7 @@ defmodule Lor.Pros.Player do
     end
 
     destroy :destroy do
+      require_atomic? false
       primary? true
 
       change Lor.Pros.Player.Changes.Destroy
@@ -147,17 +150,18 @@ defmodule Lor.Pros.Player do
   relationships do
     belongs_to :current_team, Lor.Pros.Team do
       attribute_type :uuid
+      public? true
       attribute_writable? true
     end
 
     belongs_to :picture, Lor.S3.Object do
-      api Lor.S3
+      domain Lor.S3
       attribute_type :uuid
       attribute_writable? true
     end
 
     has_many :summoners, Lor.Lol.Summoner do
-      api Lor.Lol
+      domain Lor.Lol
     end
   end
 end

@@ -55,7 +55,7 @@ defmodule LorWeb.AdminLive.Players do
   def handle_event("delete", %{"id" => id}, socket) do
     id
     |> Lor.Pros.Player.get!()
-    |> Lor.Pros.destroy!()
+    |> Ash.destroy!()
 
     socket = push_patch(socket, to: ~p"/admin/players")
     {:noreply, socket}

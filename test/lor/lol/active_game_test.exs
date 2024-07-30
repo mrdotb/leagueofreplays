@@ -56,7 +56,7 @@ defmodule Lor.Lol.ActiveGameTest do
     Lor.Lol.Summoner.create_from_api!(:kr, summoner_data, account_data, player.id)
 
     active_game = Lor.Lol.ActiveGame.create_from_api!(active_game_data)
-    active_game = Lor.Lol.load!(active_game, [:pro_participants])
+    active_game = Ash.load!(active_game, [:pro_participants])
     assert [{_pro_summoner, _participant}] = active_game.pro_participants
   end
 end

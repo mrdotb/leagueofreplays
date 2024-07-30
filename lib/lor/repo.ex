@@ -3,6 +3,6 @@ defmodule Lor.Repo do
 
   # Installs Postgres extensions that ash commonly uses
   def installed_extensions do
-    ["uuid-ossp", "citext", "pg_trgm"]
+    ["uuid-ossp", "citext", "pg_trgm", "ash-functions"]
   end
 end

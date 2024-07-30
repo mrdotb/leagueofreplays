@@ -1,5 +1,5 @@
 defmodule LorWeb.ScriptControllerTest do
-  use LorWeb.ConnCase
+  use LorWeb.ConnCase, async: true
 
   test "GET /script/spectate success", %{conn: conn} do
     params = [
