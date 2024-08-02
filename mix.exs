@@ -45,7 +45,7 @@ defmodule Lor.MixProject do
       {:ash_postgres, "~> 2.1.17"},
       {:ash_state_machine, "~> 0.2.5"},
       {:open_api_spex, "~> 3.16"},
-      {:aws, "~> 0.13.0"},
+      {:aws, "~> 1.0.2"},
       {:ecto_sql, "~> 3.10"},
       {:floki, ">= 0.30.0"},
       {:gettext, "~> 0.20"},
