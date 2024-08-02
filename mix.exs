@@ -65,7 +65,7 @@ defmodule Lor.MixProject do
       {:swoosh, "~> 1.16.10"},
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 1.1"},
-      {:tesla, "~> 1.11.2"},
+      {:tesla, "~> 1.11"},
       {:esbuild, "~> 0.8", runtime: Mix.env() == :dev},
       {:exvcr, "~> 0.11", only: :test},
       {:phoenix_live_reload, "~> 1.5.3", only: :dev},
