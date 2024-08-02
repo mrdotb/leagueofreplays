@@ -2,7 +2,7 @@ import Config
 
 # Ash
 config :ash, :disable_async?, true
-config :ash, :missed_notifications, :ignore
+config :ash, :missed_notifications, :raise
 
 # S3
 config :lor, Lor.S3.Api, Lor.S3Dummy

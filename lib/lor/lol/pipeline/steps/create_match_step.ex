@@ -24,16 +24,32 @@ defmodule Lor.Lol.CreateMatchStep do
     Ash.DataLayer.transaction(
       ressources,
       fn ->
-        with {:ok, create_match} <- Lor.Lol.Match.create_from_api(match_data, s3_object.id),
-             {:ok, created_summoners} <- create_summoners(summoners_to_create, platform_id),
-             {:ok, participants} <-
+        with {:ok, create_match, match_notification} <-
+               Lor.Lol.Match.create_from_api(match_data, s3_object.id,
+                 return_notifications?: true
+               ),
+             {:ok, created_summoners, summoner_notifications} <-
+               create_summoners(summoners_to_create, platform_id),
+             {:ok, participants, created_participant_notifications} <-
                create_participants(
                  match_data,
                  create_match,
                  created_summoners,
                  existing_summoners
                ),
-             {:ok, updated_participants} <- update_opponent_participants(participants) do
+             {:ok, updated_participants, updated_participant_notifications} <-
+               update_opponent_participants(participants) do
+          # Collect and send notifications manually
+          notifications =
+            List.flatten([
+              match_notification,
+              summoner_notifications,
+              created_participant_notifications,
+              updated_participant_notifications
+            ])
+
+          Ash.Notifier.notify(notifications)
+
           %{
             valid?: true,
             complete?: true,
@@ -49,19 +65,20 @@ defmodule Lor.Lol.CreateMatchStep do
   end
 
   defp create_summoners(summoners_to_create, platform_id) do
-    Enum.reduce_while(summoners_to_create, {:ok, []}, fn %{
-                                                           summoner_data: summoner_data,
-                                                           account_data: account_data
-                                                         },
-                                                         {:ok, acc} ->
+    Enum.reduce_while(summoners_to_create, {:ok, [], []}, fn %{
+                                                               summoner_data: summoner_data,
+                                                               account_data: account_data
+                                                             },
+                                                             {:ok, summoners, notifications} ->
       case Lor.Lol.Summoner.create_from_api(
              platform_id,
              summoner_data,
              account_data,
-             nil
+             nil,
+             return_notifications?: true
            ) do
-        {:ok, summoner} ->
-          {:cont, {:ok, [summoner | acc]}}
+        {:ok, summoner, notification} ->
+          {:cont, {:ok, [summoner | summoners], [notification | notifications]}}
 
         {:error, error} ->
           {:halt, {:error, error}}
@@ -70,16 +87,18 @@ defmodule Lor.Lol.CreateMatchStep do
   end
 
   defp create_participants(match_data, create_match, created_summoners, existing_summoners) do
-    Enum.reduce_while(match_data["info"]["participants"], {:ok, []}, fn participant_data,
-                                                                        {:ok, acc} ->
+    Enum.reduce_while(match_data["info"]["participants"], {:ok, [], []}, fn participant_data,
+                                                                            {:ok, participants,
+                                                                             notifications} ->
       case Lor.Lol.Participant.create_from_api(
              participant_data,
              existing_summoners,
              created_summoners,
-             %{match_id: create_match.id}
+             %{match_id: create_match.id},
+             return_notifications?: true
            ) do
-        {:ok, participant} ->
-          {:cont, {:ok, [participant | acc]}}
+        {:ok, participant, notification} ->
+          {:cont, {:ok, [participant | participants], [notification | notifications]}}
 
         {:error, error} ->
           {:halt, {:error, error}}
@@ -88,10 +107,13 @@ defmodule Lor.Lol.CreateMatchStep do
   end
 
   defp update_opponent_participants(participants) do
-    Enum.reduce_while(participants, {:ok, []}, fn participant, {:ok, acc} ->
-      case Lor.Lol.Participant.update_opponent_participant(participant, participants) do
-        {:ok, updated_participant} ->
-          {:cont, {:ok, [updated_participant | acc]}}
+    Enum.reduce_while(participants, {:ok, [], []}, fn participant,
+                                                      {:ok, participants, notifications} ->
+      case Lor.Lol.Participant.update_opponent_participant(participant, participants,
+             return_notifications?: true
+           ) do
+        {:ok, updated_participant, notification} ->
+          {:cont, {:ok, [updated_participant | participants], [notification | notifications]}}
 
         {:error, error} ->
           {:halt, {:error, error}}
