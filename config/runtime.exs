@@ -280,7 +280,7 @@ if config_env() == :prod do
         }
       ]
 
-    config :lor, Ttr.Discord.Client, token: discord_token
+    config :lor, Lor.Discord.Client, token: discord_token
 
     config :logger, :discord_logger,
       channel_info: discord_info_channel_id,
