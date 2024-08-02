@@ -246,4 +246,51 @@ if config_env() == :prod do
           end
       }
     ]
+
+  # Discord Logger
+
+  discord_logger? = if System.get_env("DISCORD_LOGGER") in ~w(true 1), do: true, else: false
+
+  if discord_logger? do
+    discord_token =
+      System.get_env("DISCORD_TOKEN") ||
+        raise """
+        environment variable DISCORD_TOKEN is missing.
+        """
+
+    discord_info_channel_id =
+      System.get_env("DISCORD_INFO_CHANNEL_ID") ||
+        raise """
+        environment variable DISCORD_INFO_CHANNEL_ID is missing.
+        """
+
+    discord_error_channel_id =
+      System.get_env("DISCORD_ERROR_CHANNEL_ID") ||
+        raise """
+        environment variable DISCORD_ERROR_CHANNEL_ID is missing.
+        """
+
+    config :logger,
+      level: :info,
+      backends: [
+        :console,
+        {
+          Lor.Discord.Logger,
+          :discord_logger
+        }
+      ]
+
+    config :lor, Ttr.Discord.Client, token: discord_token
+
+    config :logger, :discord_logger,
+      channel_info: discord_info_channel_id,
+      channel_error: discord_error_channel_id,
+      level: :info,
+      info_format: "`$time $message`",
+      error_format: """
+      `$time $metadata[module] $metadata[function] $metadata[file]:$metadata[line]`
+      $message
+      """,
+      metadata: [:application, :module, :function, :file, :line]
+  end
 end
