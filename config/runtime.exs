@@ -258,39 +258,25 @@ if config_env() == :prod do
         environment variable DISCORD_TOKEN is missing.
         """
 
-    discord_info_channel_id =
-      System.get_env("DISCORD_INFO_CHANNEL_ID") ||
+    discord_guild_id =
+      System.get_env("DISCORD_GUILD_ID") ||
         raise """
-        environment variable DISCORD_INFO_CHANNEL_ID is missing.
+        environment variable DISCORD_GUILD_ID
         """
 
-    discord_error_channel_id =
-      System.get_env("DISCORD_ERROR_CHANNEL_ID") ||
-        raise """
-        environment variable DISCORD_ERROR_CHANNEL_ID is missing.
-        """
-
-    config :logger,
-      level: :info,
-      backends: [
-        :console,
-        {
-          Lor.Discord.Logger,
-          :discord_logger
-        }
-      ]
-
-    config :lor, Lor.Discord.Client, token: discord_token
-
-    config :logger, :discord_logger,
-      channel_info: discord_info_channel_id,
-      channel_error: discord_error_channel_id,
-      level: :info,
-      info_format: "`$time $message`",
-      error_format: """
-      `$time $metadata[module] $metadata[function] $metadata[file]:$metadata[line]`
-      $message
-      """,
-      metadata: [:application, :module, :function, :file, :line]
+    config :disco_log,
+      otp_app: :lor,
+      token: discord_token,
+      guild_id: discord_guild_id,
+      category_id: "1278017079970238465",
+      occurrences_channel_id: "1278017081471668295",
+      occurrences_channel_tags: %{
+        "plug" => "1278017081471668296",
+        "live_view" => "1278017081471668297",
+        "oban" => "1278017081471668298"
+      },
+      info_channel_id: "1278017082377900094",
+      error_channel_id: "1278017083757822036",
+      metatada: [:extra]
   end
 end

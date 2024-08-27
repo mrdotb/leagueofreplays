@@ -19,7 +19,7 @@ defmodule Lor.Lol.Ddragon.Warmer do
 
   @impl true
   def init(_opts) do
-    Logger.info("Start Ddragon Warmer")
+    Logger.debug("Start Ddragon Warmer")
 
     send(self(), :cache)
     {:ok, [], {:continue, :start}}

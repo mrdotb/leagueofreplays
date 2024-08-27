@@ -13,18 +13,18 @@
 #
 
 # dependabot: dependency-name=hexpm/elixir versioning-strategy=increase
-ARG ELIXIR_VERSION=1.16.0
+ARG ELIXIR_VERSION=1.17.2
 # dependabot: dependency-name=erlang/otp versioning-strategy=increase
-ARG OTP_VERSION=26.2.1
+ARG OTP_VERSION=27.0.1
 # dependabot: dependency-name=debian versioning-strategy=increase
-ARG DEBIAN_VERSION=bullseye-20231009-slim
+ARG DEBIAN_VERSION=bullseye-20240812-slim
 
 ARG BUILDER_IMAGE="hexpm/elixir:${ELIXIR_VERSION}-erlang-${OTP_VERSION}-debian-${DEBIAN_VERSION}"
 ARG RUNNER_IMAGE="debian:${DEBIAN_VERSION}"
 
 # separate base from build stage to test base image existence
-FROM ${BUILDER_IMAGE} as base
-FROM base as builder
+FROM ${BUILDER_IMAGE} AS base
+FROM base AS builder
 
 # install build dependencies
 RUN apt-get update -y && apt-get install -y build-essential git \
@@ -80,9 +80,9 @@ RUN apt-get update -y && \
 # Set the locale
 RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && locale-gen
 
-ENV LANG en_US.UTF-8
-ENV LANGUAGE en_US:en
-ENV LC_ALL en_US.UTF-8
+ENV LANG=en_US.UTF-8
+ENV LANGUAGE=en_US:en
+ENV LC_ALL=en_US.UTF-8
 
 WORKDIR "/app"
 RUN chown nobody /app
@@ -95,7 +95,7 @@ COPY --from=builder --chown=nobody:root /app/_build/${MIX_ENV}/rel/lor ./
 
 USER nobody
 
-ENV RLIMIT_NOFILE 100000
+ENV RLIMIT_NOFILE=100000
 COPY limits.sh /app/limits.sh
 ENTRYPOINT ["/usr/bin/tini", "-s", "-g", "--", "/app/limits.sh"]
 

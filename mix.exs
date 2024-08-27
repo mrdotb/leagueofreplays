@@ -66,6 +66,7 @@ defmodule Lor.MixProject do
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 1.1"},
       {:tesla, "~> 1.11"},
+      {:disco_log, github: "mrdotb/disco-log"},
       {:esbuild, "~> 0.8", runtime: Mix.env() == :dev},
       {:exvcr, "~> 0.11", only: :test},
       {:phoenix_live_reload, "~> 1.5.3", only: :dev},
