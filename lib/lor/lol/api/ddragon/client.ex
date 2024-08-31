@@ -11,6 +11,7 @@ defmodule Lor.Lol.Ddragon.Client do
   plug Tesla.Middleware.BaseUrl, "https://ddragon.leagueoflegends.com"
   plug Tesla.Middleware.JSON
   plug Tesla.Middleware.Logger
+  plug Tesla.Middleware.Telemetry
 
   def fetch_champions(patch) do
     get("/cdn/#{patch}/data/#{@local}/champion.json")

@@ -19,7 +19,8 @@ defmodule Lor.Lol.Observer.Client do
        ]},
       {Tesla.Middleware.BaseUrl, url(opts)},
       # Logger
-      {Tesla.Middleware.Logger, debug: false}
+      {Tesla.Middleware.Logger, debug: false},
+      Tesla.Middleware.Telemetry
     ]
 
     Tesla.client(middlewares)
