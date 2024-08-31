@@ -1,5 +1,6 @@
 defmodule Lor.Pros.ProWorker do
-  use Oban.Worker
+  use Oban.Worker,
+    max_attempts: 2
 
   require Logger
 
