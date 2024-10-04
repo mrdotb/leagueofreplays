@@ -114,9 +114,12 @@ if exist "League of Legends.exe" (
 goto notfound
 
 :start
+net start vgc
+net start vgk
 @start "" "League of Legends.exe" "spectator <%= @spectator_endpoint %> <%= @encryption_key %> <%= @game_id %> <%= @platform_id %>" -UseRads -GameBaseDir=.. "-Locale=%locale%" -SkipBuild -EnableCrashpad=true -EnableLNP
+net stop vgc
+net stop vgk
 goto exit
-
 :Trim
 SetLocal EnableDelayedExpansion
 set Params=%*
