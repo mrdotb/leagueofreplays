@@ -6,15 +6,7 @@ updates:
   - package-ecosystem: "mix"
     directory: "/"
     schedule:
-      interval: "daily"
-  - package-ecosystem: "docker"
-    directory: "/"
-    schedule:
-      interval: "daily"
+      interval: "weekly"
     commit-message:
-      prefix: "deps"
-    open-pull-requests-limit: 10
-    allow:
-      - dependency-name: "hexpm/elixir"
-      - dependency-name: "erlang/otp"
-      - dependency-name: "debian"
+      prefix: "build"
+      include: "scope"
