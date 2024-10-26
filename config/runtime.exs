@@ -251,32 +251,31 @@ if config_env() == :prod do
 
   discord_logger? = if System.get_env("DISCORD_LOGGER") in ~w(true 1), do: true, else: false
 
-  if discord_logger? do
-    discord_token =
-      System.get_env("DISCORD_TOKEN") ||
-        raise """
-        environment variable DISCORD_TOKEN is missing.
-        """
+  discord_token =
+    System.get_env("DISCORD_TOKEN") ||
+      raise """
+      environment variable DISCORD_TOKEN is missing.
+      """
 
-    discord_guild_id =
-      System.get_env("DISCORD_GUILD_ID") ||
-        raise """
-        environment variable DISCORD_GUILD_ID
-        """
+  discord_guild_id =
+    System.get_env("DISCORD_GUILD_ID") ||
+      raise """
+      environment variable DISCORD_GUILD_ID
+      """
 
-    config :disco_log,
-      otp_app: :lor,
-      token: discord_token,
-      guild_id: discord_guild_id,
-      category_id: "1278017079970238465",
-      occurrences_channel_id: "1278017081471668295",
-      occurrences_channel_tags: %{
-        "plug" => "1278017081471668296",
-        "live_view" => "1278017081471668297",
-        "oban" => "1278017081471668298"
-      },
-      info_channel_id: "1278017082377900094",
-      error_channel_id: "1278017083757822036",
-      metatada: [:extra]
-  end
+  config :disco_log,
+    otp_app: :lor,
+    enable: discord_logger?,
+    token: discord_token,
+    guild_id: discord_guild_id,
+    category_id: "1278017079970238465",
+    occurrences_channel_id: "1278017081471668295",
+    occurrences_channel_tags: %{
+      "plug" => "1278017081471668296",
+      "live_view" => "1278017081471668297",
+      "oban" => "1278017081471668298"
+    },
+    info_channel_id: "1278017082377900094",
+    error_channel_id: "1278017083757822036",
+    metatada: [:extra]
 end

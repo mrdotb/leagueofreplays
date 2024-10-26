@@ -61,9 +61,11 @@ defmodule Lor.S3.Minio do
 
   @impl true
   def url(bucket, key) do
-    urls = Application.get_env(:lor, :s3)[:urls]
-    bucket = String.to_existing_atom(bucket)
-    base_url = Map.fetch!(urls, bucket)
+    s3_config = Application.get_env(:lor, :s3)
+    {bucket_key, _} =
+      Enum.find(s3_config.buckets, fn {_bucket_key, bucket_value} -> bucket_value == bucket end)
+    urls = s3_config.urls
+    base_url = Map.fetch!(urls, bucket_key)
 
     "#{base_url}/#{key}"
   end

@@ -40,6 +40,12 @@ config :exvcr,
   filter_request_headers: ["X-Riot-Token"],
   response_headers_blacklist: []
 
+
+# Discord
+config :disco_log,
+  otp_app: :lor,
+  enable: false
+
 # Configure your database
 #
 # The MIX_TEST_PARTITION environment variable can be used
