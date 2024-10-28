@@ -62,7 +62,7 @@ defmodule Lor.MixProject do
       {:plug_cowboy, "~> 2.5"},
       {:postgrex, ">= 0.0.0"},
       {:reactor, "~> 0.9.0"},
-      {:swoosh, "~> 1.16.10"},
+      {:swoosh, "~> 1.17.2"},
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 1.1"},
       {:tesla, "~> 1.11"},
