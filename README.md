@@ -1,3 +1,6 @@
+Archived the 4 January 2025.
+It will continue as a closed source.
+
 <p align="center">
   <a href="https://leagueofreplays.co/">
     <img src="https://raw.githubusercontent.com/mrdotb/leagueofreplays/main/priv/static/images/logo.svg" width="140px" alt="League of Replays" />
